@@ -14,6 +14,8 @@ val dataClassAccessors by lazy(PUBLICATION) {
     )
 }
 
+fun DataClass.propMap() = dataClassAccessors
+
 operator fun DataClass.iterator(): Iterator<Pair<String, Any?>> = listOf(
     "id" to id,
     "data" to data,
@@ -21,10 +23,10 @@ operator fun DataClass.iterator(): Iterator<Pair<String, Any?>> = listOf(
     "nonNull" to nonNull,
 ).iterator()
 
-operator fun DataClass.get(name: String): Any? = dataClassAccessors[name]?.get(this)
+operator fun DataClass.get(name: String): Any? = propMap()[name]?.get(this)
 
 operator fun DataClass.set(name: String, value: Any?) {
-    val prop = dataClassAccessors[name]
+    val prop = propMap()[name]
     if (prop is KMutableProperty1) {
         prop.set(this, value)
     } else throw IllegalArgumentException("No setter for $name")
