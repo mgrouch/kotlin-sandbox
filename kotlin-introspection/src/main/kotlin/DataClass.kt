@@ -1,15 +1,18 @@
 import kotlinx.serialization.Serializable
+import kotlin.LazyThreadSafetyMode.PUBLICATION
 import kotlin.reflect.KMutableProperty1
 
 @Serializable
 data class DataClass(var id: Long?, var data: String?, val readOnly: String?, var nonNull: Int = 0)
 
-val dataClassAccessors = mapOf(
-    "id" to DataClass::id,
-    "data" to DataClass::data,
-    "readOnly" to DataClass::readOnly,
-    "nonNull" to DataClass::nonNull,
-)
+val dataClassAccessors by lazy(PUBLICATION) {
+    mapOf(
+        "id" to DataClass::id,
+        "data" to DataClass::data,
+        "readOnly" to DataClass::readOnly,
+        "nonNull" to DataClass::nonNull,
+    )
+}
 
 operator fun DataClass.iterator(): Iterator<Pair<String, Any?>> = listOf(
     "id" to id,
@@ -24,6 +27,5 @@ operator fun DataClass.set(name: String, value: Any?) {
     val prop = dataClassAccessors[name]
     if (prop is KMutableProperty1) {
         prop.set(this, value)
-    }
-    else throw IllegalArgumentException("No setter for $name")
+    } else throw IllegalArgumentException("No setter for $name")
 }
