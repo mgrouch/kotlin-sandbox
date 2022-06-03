@@ -26,7 +26,7 @@ val kvisionVersion: String by System.getProperties()
 val webDir = file("src/main/web")
 
 kotlin {
-	js {
+	js(LEGACY) {
 		browser {
 			runTask {
 				outputFileName = "main.bundle.js"
@@ -57,11 +57,17 @@ kotlin {
 		implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
 		implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
 		implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
-		implementation("io.kvision:kvision-state:$kvisionVersion")
 	}
 	sourceSets["test"].dependencies {
 		implementation(kotlin("test-js"))
 		implementation("io.kvision:kvision-testutils:$kvisionVersion")
 	}
 	sourceSets["main"].resources.srcDir(webDir)
+}
+
+
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+	rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpackDevServer.version = "4.8.1"
+	rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpackCli.version = "4.9.2"
+	rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpack.version = "5.72.0"
 }

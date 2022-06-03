@@ -20,6 +20,9 @@ class Showcase : Application() {
             simplePanel {
                 width = 100.perc
                 div(content = "Hello World8!")
+                div(content = "Hello World13!")
+                div(content = "Hello World13!")
+                div(content = "Hello World14!")
             }
         }
     }
