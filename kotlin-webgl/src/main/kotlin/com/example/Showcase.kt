@@ -1,10 +1,14 @@
 package com.example
 
 import io.kvision.*
+import io.kvision.html.canvas
 import io.kvision.html.div
 import io.kvision.panel.root
 import io.kvision.panel.simplePanel
 import io.kvision.utils.perc
+import org.khronos.webgl.WebGLProgram
+import org.w3c.dom.HTMLCanvasElement
+import org.khronos.webgl.WebGLRenderingContext as GL
 
 class Showcase : Application() {
     init {
@@ -19,10 +23,14 @@ class Showcase : Application() {
         root("showcase") {
             simplePanel {
                 width = 100.perc
-                div(content = "Hello World8!")
-                div(content = "Hello World13!")
-                div(content = "Hello World13!")
-                div(content = "Hello World14!")
+                val can = canvas {
+
+                }
+                val element: HTMLCanvasElement = can.getElement() as HTMLCanvasElement
+                val webgl: GL = element.getContext("webgl") as GL
+
+                val shaderProgram: WebGLProgram = webgl.createProgram() ?: throw IllegalStateException("Could not initialize shader program")
+
             }
         }
     }
