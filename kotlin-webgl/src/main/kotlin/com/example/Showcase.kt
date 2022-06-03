@@ -3,7 +3,7 @@ package com.example
 import io.kvision.*
 import io.kvision.html.div
 import io.kvision.panel.root
-import io.kvision.panel.vPanel
+import io.kvision.panel.simplePanel
 import io.kvision.utils.perc
 
 class Showcase : Application() {
@@ -17,9 +17,9 @@ class Showcase : Application() {
 
     override fun start(state: Map<String, Any>) {
         root("showcase") {
-            vPanel {
+            simplePanel {
                 width = 100.perc
-                div(content = "Hello World5!")
+                div(content = "Hello World8!")
             }
         }
     }
