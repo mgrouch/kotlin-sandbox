@@ -21,6 +21,7 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
+val threektJsVersion: String by System.getProperties()
 
 // Custom Properties
 val webDir = file("src/main/web")
@@ -57,6 +58,7 @@ kotlin {
 		implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
 		implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
 		implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
+		implementation("info.laht.threekt:wrapper:$threektJsVersion")
 	}
 	sourceSets["test"].dependencies {
 		implementation(kotlin("test-js"))
