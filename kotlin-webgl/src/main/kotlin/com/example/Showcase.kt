@@ -27,23 +27,13 @@ data class WaterParameters(
     val alpha: Number
 )
 
-class Showcase : Application() {
-    init {
-        require("css/showcase.css")
-    }
-
-    override fun dispose(): Map<String, Any> {
-        return mapOf()
-    }
-
-    val stats = Stats()
-    val scene = Scene()
-
-    private lateinit var light: DirectionalLight
-    private lateinit var camera: PerspectiveCamera
-    lateinit var water: Water
-    lateinit var renderer: WebGLRenderer
-
+class WaterTest {
+    private val stats: Stats = Stats()
+    private val renderer: WebGLRenderer
+    private val scene: Scene = Scene()
+    private val camera: PerspectiveCamera
+    private val controls: OrbitControls
+    private var water: Water
     private val parameters = WaterParameters(
         oceanSide = 2000,
         size = 1.0,
@@ -51,67 +41,55 @@ class Showcase : Application() {
         alpha = 1.0
     )
 
-    override fun start(state: Map<String, Any>) {
-
-        root("showcase") {
-
-            light = DirectionalLight(0xffffff, 0.5).apply {
-                position.set(0, 0, 0)
-            }
-            scene.add(light)
-
-            camera = PerspectiveCamera(75, window.innerWidth.toDouble() / window.innerHeight.toDouble(), 0.1, 1000)
-            camera.position.set(0.0, 50.0, -100.0)
-
-            val renderer = WebGLRenderer(
-                WebGLRendererParams(
-                    antialias = true
-                )
-            ).apply {
-                setClearColor(ColorConstants.skyblue, 1)
-                setSize(window.innerWidth, window.innerHeight)
-            }
-
-            document.getElementById("scene")?.apply {
-                appendChild(renderer.domElement)
-                appendChild(stats.dom)
-            }
-            val controls = OrbitControls(camera, renderer.domElement)
-
-            water = Water(
-                width = parameters.oceanSide * 2,
-                height = parameters.oceanSide * 2,
-                options = WaterOptions(
-                    textureWidth = 512,
-                    textureHeight = 512,
-                    waterNormals = TextureLoader().load("textures/waternormals.jpg", {
-                        it.wrapS = THREE.RepeatWrapping
-                        it.wrapT = THREE.RepeatWrapping
-                    }),
-                    alpha = parameters.alpha,
-                    sunDirection = light.position.clone().normalize(),
-                    waterColor = 0x001e0f,
-                    distortionScale = parameters.distortionScale,
-                    fog = scene.asDynamic().fog != undefined
-                )
-            ).apply {
-                rotation.x = -PI / 2
-                receiveShadows = true
-            }.also(scene::add)
-
-            window.addEventListener("resize", {
-                camera.aspect = window.innerWidth.toDouble() / window.innerHeight
-                camera.updateProjectionMatrix()
-                renderer.setSize(window.innerWidth, window.innerHeight)
-            }, false)
-
-            addAfterInsertHook {
-                animate()
-            }
-
-            renderer.render(scene, camera)
-            stats.update()
+    init {
+        val light = DirectionalLight(0xffffff, 0.5).apply {
+            position.set(0, 0, 0)
+            scene::add
         }
+        camera = PerspectiveCamera(75, window.innerWidth.toDouble() / window.innerHeight.toDouble(), 0.1, 1000)
+        camera.position.set(0.0, 50.0, -100.0)
+
+        renderer = WebGLRenderer(
+            WebGLRendererParams(
+                antialias = true
+            )
+        ).apply {
+            setClearColor(ColorConstants.skyblue, 1)
+            setSize(window.innerWidth, window.innerHeight)
+        }
+
+        document.getElementById("scene")?.apply {
+            appendChild(renderer.domElement)
+            appendChild(stats.dom)
+        }
+        controls = OrbitControls(camera, renderer.domElement)
+
+        water = Water(
+            width = parameters.oceanSide * 2,
+            height = parameters.oceanSide * 2,
+            options = WaterOptions(
+                textureWidth = 512,
+                textureHeight = 512,
+                waterNormals = TextureLoader().load("textures/waternormals.jpg", {
+                    it.wrapS = THREE.RepeatWrapping
+                    it.wrapT = THREE.RepeatWrapping
+                }),
+                alpha = parameters.alpha,
+                sunDirection = light.position.clone().normalize(),
+                waterColor = 0x001e0f,
+                distortionScale = parameters.distortionScale,
+                fog = scene.asDynamic().fog != undefined
+            )
+        ).apply {
+            rotation.x = -PI / 2
+            receiveShadows = true
+        }.also(scene::add)
+
+        window.addEventListener("resize", {
+            camera.aspect = window.innerWidth.toDouble() / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight)
+        }, false)
     }
 
     fun animate() {
@@ -129,6 +107,22 @@ class Showcase : Application() {
     }
 }
 
+class Showcase : Application() {
+    init {
+        require("css/showcase.css")
+    }
+
+    override fun dispose(): Map<String, Any> {
+        return mapOf()
+    }
+
+    override fun start(state: Map<String, Any>) {
+        root("showcase") {
+            WaterTest().animate()
+        }
+    }
+}
+
 fun main() {
     startApplication(
         ::Showcase,
@@ -136,4 +130,5 @@ fun main() {
         FontAwesomeModule,
         CoreModule,
     )
+
 }
