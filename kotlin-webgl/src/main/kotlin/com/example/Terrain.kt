@@ -1,7 +1,6 @@
 package com.example
 
 import info.laht.threekt.cameras.PerspectiveCamera
-import info.laht.threekt.external.ImprovedNoise
 import info.laht.threekt.external.ImprovedNoise.noise
 import info.laht.threekt.external.controls.OrbitControls
 import info.laht.threekt.external.libs.Stats
@@ -19,6 +18,11 @@ import kotlinx.browser.window
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.random.Random
+
+external class ImprovedNoise {
+
+    fun noise(x: Double, y: Double, z: Double): Double
+}
 
 class Terrain {
 
@@ -80,17 +84,17 @@ class Terrain {
     }
 
     fun generateHeight(width: Int, height: Int): IntArray {
+        val perlin = ImprovedNoise()
         val size = width * height
         val data = IntArray(size)
         val z = Random.nextInt(0, 100)
         var quality = 1
-        for (j in 0..3) {
+        for (j in 0 until 4) {
             for (i in 0 until size) {
                 val x = i % width
                 val y = i / width
-                data[i] += abs(
-                    noise(x.toDouble() / quality, y.toDouble() / quality, z.toDouble()) * quality * 1.75
-                ).toInt()
+                val n = perlin.noise(x.toDouble() / quality, y.toDouble() / quality, z.toDouble())
+                data[i] += abs(n * quality * 1.75).toInt()
             }
             quality *= 5
         }

@@ -14,7 +14,7 @@ class Showcase : Application() {
 
     override fun start(state: Map<String, Any>) {
         root("showcase") {
-            WaterSurface().animate()
+            Terrain().animate()
         }
     }
 }
