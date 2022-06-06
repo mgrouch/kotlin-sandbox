@@ -53,4 +53,3 @@ class ImprovedNoise {
 	}
 }
 
-export { ImprovedNoise };
