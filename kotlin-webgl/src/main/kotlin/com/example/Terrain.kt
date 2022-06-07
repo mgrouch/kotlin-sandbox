@@ -2,6 +2,8 @@ package com.example
 
 import info.laht.threekt.THREE.ClampToEdgeWrapping
 import info.laht.threekt.cameras.PerspectiveCamera
+import info.laht.threekt.core.Intersect
+import info.laht.threekt.core.Raycaster
 import info.laht.threekt.external.controls.OrbitControls
 import info.laht.threekt.external.libs.Stats
 import info.laht.threekt.geometries.ConeGeometry
@@ -9,6 +11,7 @@ import info.laht.threekt.geometries.PlaneGeometry
 import info.laht.threekt.materials.MeshBasicMaterial
 import info.laht.threekt.materials.MeshNormalMaterial
 import info.laht.threekt.math.Color
+import info.laht.threekt.math.Vector2
 import info.laht.threekt.math.Vector3
 import info.laht.threekt.objects.Mesh
 import info.laht.threekt.renderers.WebGLRenderer
@@ -22,6 +25,7 @@ import org.khronos.webgl.get
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLCanvasElement
+import org.w3c.dom.events.Event
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.random.Random
@@ -39,6 +43,10 @@ class Terrain {
     private val scene: Scene = Scene()
     private val camera: PerspectiveCamera
     private val controls: OrbitControls
+    private val pointer = Vector2()
+    private val raycaster = Raycaster(Vector3(), Vector3(), 2000, 2000)
+    private val mesh: Mesh
+    private val helper: Mesh
 
     init {
         renderer = WebGLRenderer(WebGLRendererParams(antialias = true)).apply {
@@ -47,7 +55,7 @@ class Terrain {
         }
         camera = PerspectiveCamera(60, (window.innerWidth / window.innerHeight).toDouble(), 10, 20000)
 
-        document.getElementById("scene")?.apply {
+        val container = document.getElementById("scene")?.apply {
             appendChild(renderer.domElement)
             appendChild(stats.dom)
         }
@@ -79,17 +87,17 @@ class Terrain {
         texture.wrapS = ClampToEdgeWrapping
         texture.wrapT = ClampToEdgeWrapping
 
-        val mesh = Mesh(geometry, MeshBasicMaterial().apply { map = texture })
+        mesh = Mesh(geometry, MeshBasicMaterial().apply { map = texture })
         scene.add(mesh)
 
         val geometryHelper = ConeGeometry(20, 100, 3)
         geometryHelper.translate(0, 50, 0)
         geometryHelper.rotateX(PI / 2)
 
-        val helper = Mesh(geometry, MeshNormalMaterial())
+        helper = Mesh(geometry, MeshNormalMaterial())
         scene.add(helper)
 
-        val raycaster = camera.raycast()
+        container?.addEventListener("pointermove", this::onPointerMove)
 
         window.addEventListener("resize", {
             camera.aspect = window.innerWidth.toDouble() / window.innerHeight
@@ -122,11 +130,11 @@ class Terrain {
         val sun = Vector3(1, 1, 1)
         sun.normalize()
 
-        val canvas = document.createElement( "canvas" ) as HTMLCanvasElement
+        val canvas = document.createElement("canvas") as HTMLCanvasElement
         canvas.setAttribute("width", "$width")
         canvas.setAttribute("height", "$height")
 
-        val context = canvas.getContext( "2d" ) as CanvasRenderingContext2D
+        val context = canvas.getContext("2d") as CanvasRenderingContext2D
         context.fillStyle = "#000"
         context.fillRect(0.0, 0.0, width.toDouble(), height.toDouble())
 
@@ -153,15 +161,16 @@ class Terrain {
         context.putImageData(image, 0.0, 0.0)
 
         // Scaled 4x
-        val canvasScaled = document.createElement( "canvas" ) as HTMLCanvasElement
+        val canvasScaled = document.createElement("canvas") as HTMLCanvasElement
         canvasScaled.setAttribute("width", "${width * 4}")
         canvasScaled.setAttribute("height", "${height * 4}")
-        val canvasScaledContext = canvasScaled.getContext( "2d" ) as CanvasRenderingContext2D
+        val canvasScaledContext = canvasScaled.getContext("2d") as CanvasRenderingContext2D
         canvasScaledContext.scale(4.0, 4.0)
-        canvasScaledContext.drawImage( canvas, 0.0, 0.0 )
+        canvasScaledContext.drawImage(canvas, 0.0, 0.0)
 
         val image2 = canvasScaledContext.getImageData(
-            0.0, 0.0, canvasScaled.width.toDouble(), canvasScaled.height.toDouble())
+            0.0, 0.0, canvasScaled.width.toDouble(), canvasScaled.height.toDouble()
+        )
         val imageData2 = image2.data
 
         val data2 = Array<Byte>(imageData.length) { 0 }
@@ -186,5 +195,22 @@ class Terrain {
     fun render() {
         renderer.render(scene, camera)
         stats.update()
+    }
+
+    fun onPointerMove( event: Event ) {
+        pointer.x = (event.asDynamic().clientX / renderer.domElement.asDynamic().clientWidth) * 2 - 1
+        pointer.y = -(event.asDynamic().clientY / renderer.domElement.asDynamic().clientHeight) * 2 + 1
+
+        // See if the ray from the camera into the world hits one of our meshes
+        raycaster.setFromCamera(pointer, camera)
+        val intersects: List<Intersect> = raycaster.intersectObject(mesh, false)
+
+        // Toggle rotation bool for meshes that we clicked
+        if (intersects.size > 0) {
+            helper.position.set(0, 0, 0)
+            val v: Vector3? = intersects[0].face?.normal
+            if (v != null) helper.lookAt(v)
+            helper.position.copy(intersects[0].point)
+        }
     }
 }
