@@ -7,6 +7,7 @@ import info.laht.threekt.external.libs.Stats
 import info.laht.threekt.geometries.ConeGeometry
 import info.laht.threekt.geometries.PlaneGeometry
 import info.laht.threekt.materials.MeshBasicMaterial
+import info.laht.threekt.materials.MeshNormalMaterial
 import info.laht.threekt.math.Color
 import info.laht.threekt.math.Vector3
 import info.laht.threekt.objects.Mesh
@@ -14,9 +15,6 @@ import info.laht.threekt.renderers.WebGLRenderer
 import info.laht.threekt.renderers.WebGLRendererParams
 import info.laht.threekt.scenes.Scene
 import info.laht.threekt.textures.Texture
-import io.kvision.html.Canvas
-import io.kvision.utils.px
-import io.kvision.utils.width
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.khronos.webgl.Uint8ClampedArray
@@ -24,7 +22,6 @@ import org.khronos.webgl.get
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLCanvasElement
-import org.w3c.dom.RenderingContext
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.random.Random
@@ -89,7 +86,7 @@ class Terrain {
         geometryHelper.translate(0, 50, 0)
         geometryHelper.rotateX(PI / 2)
 
-        val helper = Mesh(geometry, MeshBasicMaterial().apply{ color = Color(0xffff00) })
+        val helper = Mesh(geometry, MeshNormalMaterial())
         scene.add(helper)
 
         val raycaster = camera.raycast()
@@ -165,7 +162,7 @@ class Terrain {
 
         val image2 = canvasScaledContext.getImageData(
             0.0, 0.0, canvasScaled.width.toDouble(), canvasScaled.height.toDouble())
-        val imageData2 = image.data
+        val imageData2 = image2.data
 
         val data2 = Array<Byte>(imageData.length) { 0 }
         for (i in 0 until imageData2.length step 4) {
