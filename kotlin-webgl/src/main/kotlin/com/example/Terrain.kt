@@ -135,7 +135,7 @@ class Terrain {
         canvas.setAttribute("height", "$height")
 
         val context = canvas.getContext("2d") as CanvasRenderingContext2D
-        context.fillStyle = "#000"
+        context.fillStyle = "black"
         context.fillRect(0.0, 0.0, width.toDouble(), height.toDouble())
 
         val image = context.getImageData(
@@ -152,13 +152,14 @@ class Terrain {
             vector3.normalize()
 
             val shade = vector3.dot(sun)
-            data1[i] = ((96 + shade * 128) * (0.5 + data[j] * 0.007)).toInt().toByte()
-            data1[i + 1] = ((32 + shade * 96) * (0.5 + data[j] * 0.007)).toInt().toByte()
-            data1[i + 2] = ((shade * 96) * (0.5 + data[j] * 0.007)).toInt().toByte()
+            data1[i] = ((96 + shade * 128) * (0.5 + data[j] * 0.007)).toUInt().toByte()
+            data1[i + 1] = ((32 + shade * 96) * (0.5 + data[j] * 0.007)).toUInt().toByte()
+            data1[i + 2] = ((shade * 96) * (0.5 + data[j] * 0.007)).toUInt().toByte()
             j++
         }
         image.data.set(data1, 0)
         context.putImageData(image, 0.0, 0.0)
+        console.log("${image.data.length}")
 
         // Scaled 4x
         val canvasScaled = document.createElement("canvas") as HTMLCanvasElement
@@ -172,13 +173,14 @@ class Terrain {
             0.0, 0.0, canvasScaled.width.toDouble(), canvasScaled.height.toDouble()
         )
         val imageData2 = image2.data
+        console.log("${image2.data.length}")
 
         val data2 = Array<Byte>(imageData.length) { 0 }
         for (i in 0 until imageData2.length step 4) {
             val v = (Random.nextDouble() * 5)
-            data2[i] = imageData2[i].plus(v).toInt().toByte()
-            data2[i + 1] = imageData2[i + 1].plus(v).toInt().toByte()
-            data2[i + 2] = imageData2[i + 2].plus(v).toInt().toByte()
+            data2[i] = imageData2[i].plus(v).toUInt().toByte()
+            data2[i + 1] = imageData2[i + 1].plus(v).toUInt().toByte()
+            data2[i + 2] = imageData2[i + 2].plus(v).toUInt().toByte()
         }
         image2.data.set(data2, 0)
         canvasScaledContext.putImageData(image2, 0.0, 0.0)
@@ -200,6 +202,8 @@ class Terrain {
     fun onPointerMove( event: Event ) {
         pointer.x = (event.asDynamic().clientX / renderer.domElement.asDynamic().clientWidth) * 2 - 1
         pointer.y = -(event.asDynamic().clientY / renderer.domElement.asDynamic().clientHeight) * 2 + 1
+
+        console.log("x,y ${pointer.x} ${pointer.y}")
 
         // See if the ray from the camera into the world hits one of our meshes
         raycaster.setFromCamera(pointer, camera)
