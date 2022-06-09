@@ -20,7 +20,6 @@ import info.laht.threekt.scenes.Scene
 import info.laht.threekt.textures.Texture
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.khronos.webgl.Uint8ClampedArray
 import org.khronos.webgl.get
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.Element
@@ -139,7 +138,7 @@ class Terrain {
         canvas.height = height
 
         val context = canvas.getContext("2d") as CanvasRenderingContext2D
-        context.fillStyle = "#FF0000"
+        context.fillStyle = "#000000"
         context.fillRect(0.0, 0.0, width.toDouble(), height.toDouble())
 
         val image = context.getImageData(
@@ -159,7 +158,7 @@ class Terrain {
             j++
         }
         context.putImageData(image, 0.0, 0.0)
-        console.log("${image.data.length}  image.data[255]=${image.data[255]}")
+        //console.log("${image.data.length}  image.data[255]=${image.data[255]}")
 
         // Scaled 4x
         val canvasScaled = document.createElement("canvas") as HTMLCanvasElement
@@ -173,7 +172,7 @@ class Terrain {
             0.0, 0.0, canvasScaled.width.toDouble(), canvasScaled.height.toDouble()
         )
         val imageData2 = image2.data
-        console.log("${image2.data.length}")
+        //console.log("${image2.data.length}")
         for (i in 0 until imageData2.length step 4) {
             val v: Byte = (Random.nextDouble() * 5).toInt().toByte()
             imageData2.asDynamic()[i] = imageData2[i].asDynamic()[i] + v
