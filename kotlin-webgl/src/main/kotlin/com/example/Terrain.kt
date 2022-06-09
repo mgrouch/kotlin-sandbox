@@ -88,7 +88,10 @@ class Terrain {
             wrapT = ClampToEdgeWrapping
         }
 
-        mesh = Mesh(geometry, MeshBasicMaterial().apply { map = texture })
+        mesh = Mesh(geometry, MeshBasicMaterial().apply {
+            map = texture
+            wireframe = true
+        })
         scene.add(mesh)
 
         val geometryHelper = ConeGeometry(20, 100, 3)
@@ -136,7 +139,7 @@ class Terrain {
         canvas.height = height
 
         val context = canvas.getContext("2d") as CanvasRenderingContext2D
-        context.fillStyle = "#000"
+        context.fillStyle = "#FF0000"
         context.fillRect(0.0, 0.0, width.toDouble(), height.toDouble())
 
         val image = context.getImageData(
@@ -194,8 +197,8 @@ class Terrain {
     }
 
     fun onPointerMove( event: Event ) {
-        pointer.x = (event.asDynamic().clientX / renderer.domElement.asDynamic().clientWidth) * 2 - 1
-        pointer.y = -(event.asDynamic().clientY / renderer.domElement.asDynamic().clientHeight) * 2 + 1
+        pointer.x = ((event.asDynamic().clientX / renderer.domElement.asDynamic().clientWidth) * 2 - 1) as Double
+        pointer.y = (-(event.asDynamic().clientY / renderer.domElement.asDynamic().clientHeight) * 2 + 1) as Double
 
         //console.log("x,y ${pointer.x} ${pointer.y}")
 
