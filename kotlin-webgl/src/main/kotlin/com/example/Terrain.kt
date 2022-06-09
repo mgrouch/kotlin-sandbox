@@ -83,9 +83,10 @@ class Terrain {
             vertices[i].y = (data[i] * 10).toDouble()
         }
 
-        val texture = Texture(generateTexture(data, worldWidth, worldDepth))
-        texture.wrapS = ClampToEdgeWrapping
-        texture.wrapT = ClampToEdgeWrapping
+        val texture = Texture(generateTexture(data, worldWidth, worldDepth)).apply {
+            wrapS = ClampToEdgeWrapping
+            wrapT = ClampToEdgeWrapping
+        }
 
         mesh = Mesh(geometry, MeshBasicMaterial().apply { map = texture })
         scene.add(mesh)
@@ -131,40 +132,36 @@ class Terrain {
         sun.normalize()
 
         val canvas = document.createElement("canvas") as HTMLCanvasElement
-        canvas.setAttribute("width", "$width")
-        canvas.setAttribute("height", "$height")
+        canvas.width = width
+        canvas.height = height
 
         val context = canvas.getContext("2d") as CanvasRenderingContext2D
-        context.fillStyle = "black"
+        context.fillStyle = "#000"
         context.fillRect(0.0, 0.0, width.toDouble(), height.toDouble())
 
         val image = context.getImageData(
             0.0, 0.0, canvas.width.toDouble(), canvas.height.toDouble()
         )
-        val imageData: Uint8ClampedArray = image.data
-
+        val imageData = image.data
         var j = 0
-        val data1 = Array<Byte>(imageData.length) { 0 }
         for (i in 0 until imageData.length step 4) {
             vector3.x = data[j - 2].toDouble() - data[j + 2]
             vector3.y = 2.0
             vector3.z = data[j - width * 2].toDouble() - data[j + width * 2]
             vector3.normalize()
-
             val shade = vector3.dot(sun)
-            data1[i] = ((96 + shade * 128) * (0.5 + data[j] * 0.007)).toUInt().toByte()
-            data1[i + 1] = ((32 + shade * 96) * (0.5 + data[j] * 0.007)).toUInt().toByte()
-            data1[i + 2] = ((shade * 96) * (0.5 + data[j] * 0.007)).toUInt().toByte()
+            imageData.asDynamic()[i] = ((96 + shade * 128) * (0.5 + data[j] * 0.007))
+            imageData.asDynamic()[i + 1] = ((32 + shade * 96) * (0.5 + data[j] * 0.007))
+            imageData.asDynamic()[i + 2] = ((shade * 96) * (0.5 + data[j] * 0.007))
             j++
         }
-        image.data.set(data1, 0)
         context.putImageData(image, 0.0, 0.0)
-        console.log("${image.data.length}")
+        console.log("${image.data.length}  image.data[255]=${image.data[255]}")
 
         // Scaled 4x
         val canvasScaled = document.createElement("canvas") as HTMLCanvasElement
-        canvasScaled.setAttribute("width", "${width * 4}")
-        canvasScaled.setAttribute("height", "${height * 4}")
+        canvasScaled.width = 4*width
+        canvasScaled.height = 4*height
         val canvasScaledContext = canvasScaled.getContext("2d") as CanvasRenderingContext2D
         canvasScaledContext.scale(4.0, 4.0)
         canvasScaledContext.drawImage(canvas, 0.0, 0.0)
@@ -174,15 +171,12 @@ class Terrain {
         )
         val imageData2 = image2.data
         console.log("${image2.data.length}")
-
-        val data2 = Array<Byte>(imageData.length) { 0 }
         for (i in 0 until imageData2.length step 4) {
-            val v = (Random.nextDouble() * 5)
-            data2[i] = imageData2[i].plus(v).toUInt().toByte()
-            data2[i + 1] = imageData2[i + 1].plus(v).toUInt().toByte()
-            data2[i + 2] = imageData2[i + 2].plus(v).toUInt().toByte()
+            val v: Byte = (Random.nextDouble() * 5).toInt().toByte()
+            imageData2.asDynamic()[i] = imageData2[i].asDynamic()[i] + v
+            imageData2.asDynamic()[i + 1] = imageData2.asDynamic()[i + 1] + v
+            imageData2.asDynamic()[i + 2] = imageData2.asDynamic()[i + 2] + v
         }
-        image2.data.set(data2, 0)
         canvasScaledContext.putImageData(image2, 0.0, 0.0)
         return canvasScaled
     }
@@ -203,7 +197,7 @@ class Terrain {
         pointer.x = (event.asDynamic().clientX / renderer.domElement.asDynamic().clientWidth) * 2 - 1
         pointer.y = -(event.asDynamic().clientY / renderer.domElement.asDynamic().clientHeight) * 2 + 1
 
-        console.log("x,y ${pointer.x} ${pointer.y}")
+        //console.log("x,y ${pointer.x} ${pointer.y}")
 
         // See if the ray from the camera into the world hits one of our meshes
         raycaster.setFromCamera(pointer, camera)
