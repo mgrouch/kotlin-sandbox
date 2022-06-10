@@ -2282,11 +2282,11 @@ object S57val {
         Att.CATCVR to S57key(Conv.E, Catcvr),
     )
 
-    private fun s57Enum(`val`: String?, att: Att?): Enum<*>? { // Convert S57 attribute value string to SCM enumeration
+    private fun s57Enum(value: String?, att: Att?): Enum<*>? { // Convert S57 attribute value string to SCM enumeration
         val s57key: S57key? = keys[att]
         val map = s57key!!.map
         val i = try {
-            `val`!!.toInt()
+            value!!.toInt()
         } catch (e: Exception) {
             return null
         }
@@ -2301,37 +2301,37 @@ object S57val {
     }
 
     fun decodeValue(
-        `val`: String?,
+        value: String?,
         att: Att?
     ): AttVal<*>? { // Convert S57 attribute value string to SCM attribute value
         when (val conv = keys[att]!!.conv) {
-            Conv.A, Conv.S -> return AttVal<String?>(conv, `val`)
+            Conv.A, Conv.S -> return AttVal<String?>(conv, value)
             Conv.E -> {
                 val list = ArrayList<Enum<*>?>()
-                list.add(s57Enum(`val`, att))
+                list.add(s57Enum(value, att))
                 return AttVal<ArrayList<*>?>(Conv.E, list)
             }
             Conv.L -> {
                 val list = ArrayList<Enum<*>?>()
-                for (item in `val`!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                for (item in value!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                     list.add(s57Enum(item, att))
                 }
                 return AttVal<ArrayList<*>?>(Conv.L, list)
             }
             Conv.I -> {
                 return try {
-                    AttVal<Long?>(Conv.I, `val`!!.toLong())
+                    AttVal<Long?>(Conv.I, value!!.toLong())
                 } catch (e: Exception) {
                     return null
                 }
                 return try {
-                    AttVal<Double?>(Conv.F, `val`!!.toDouble())
+                    AttVal<Double?>(Conv.F, value!!.toDouble())
                 } catch (e: Exception) {
                     return null
                 }
             }
             Conv.F -> return try {
-                AttVal<Double?>(Conv.F, `val`!!.toDouble())
+                AttVal<Double?>(Conv.F, value!!.toDouble())
             } catch (e: Exception) {
                 return null
             }

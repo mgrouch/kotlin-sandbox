@@ -1606,8 +1606,9 @@ object S57enc {
     var metas = 0
     var geos = 0
     var edges = 0
-    fun hash(`val`: Long): Long {
-        val bval = ByteBuffer.allocate(java.lang.Long.SIZE).putLong(`val`).array()
+
+    fun hash(value: Long): Long {
+        val bval = ByteBuffer.allocate(java.lang.Long.SIZE).putLong(value).array()
         val crc = CRC32()
         crc.update(bval)
         return crc.value
