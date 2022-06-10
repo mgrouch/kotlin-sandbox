@@ -11,141 +11,137 @@ import kotlin.system.exitProcess
  * @author Malcolm Herring
  */
 object S57dat {
-    private val convs = EnumMap<S57subf, S57conv>(
-        S57subf::class.java
+    private val convs = mapOf(
+        S57subf.I8RN to S57conv(5, 2)                    ,
+        S57subf.RCNM to S57conv(2, 1)                    ,
+        S57subf.RCID to S57conv(10, 4)                   ,
+        S57subf.EXPP to S57conv(1, 1)                    ,
+        S57subf.INTU to S57conv(1, 1)                    ,
+        S57subf.DSNM to S57conv(0, 0)                    ,
+        S57subf.EDTN to S57conv(0, 0)                    ,
+        S57subf.UPDN to S57conv(0, 0)                    ,
+        S57subf.UADT to S57conv(8, 0)                    ,
+        S57subf.ISDT to S57conv(8, 0)                    ,
+        S57subf.STED to S57conv(4, 0)                    ,
+        S57subf.PRSP to S57conv(3, 1)                    ,
+        S57subf.PSDN to S57conv(0, 0)                    ,
+        S57subf.PRED to S57conv(0, 0)                    ,
+        S57subf.PROF to S57conv(2, 1)                    ,
+        S57subf.AGEN to S57conv(2, 2)                    ,
+        S57subf.COMT to S57conv(0, 0)                    ,
+        S57subf.DSTR to S57conv(2, 1)                    ,
+        S57subf.AALL to S57conv(1, 1)                    ,
+        S57subf.NALL to S57conv(1, 1)                    ,
+        S57subf.NOMR to S57conv(0, 4)                    ,
+        S57subf.NOCR to S57conv(0, 4)                    ,
+        S57subf.NOGR to S57conv(0, 4)                    ,
+        S57subf.NOLR to S57conv(0, 4)                    ,
+        S57subf.NOIN to S57conv(0, 4)                    ,
+        S57subf.NOCN to S57conv(0, 4)                    ,
+        S57subf.NOED to S57conv(0, 4)                    ,
+        S57subf.NOFA to S57conv(0, 4)                    ,
+        S57subf.HDAT to S57conv(3, 1)                    ,
+        S57subf.VDAT to S57conv(2, 1)                    ,
+        S57subf.SDAT to S57conv(2, 1)                    ,
+        S57subf.CSCL to S57conv(0, 4)                    ,
+        S57subf.DUNI to S57conv(2, 1)                    ,
+        S57subf.HUNI to S57conv(2, 1)                    ,
+        S57subf.PUNI to S57conv(2, 1)                    ,
+        S57subf.COUN to S57conv(2, 1)                    ,
+        S57subf.COMF to S57conv(0, 4)                    ,
+        S57subf.SOMF to S57conv(0, 4)                    ,
+        S57subf.PROJ to S57conv(3, 1)                    ,
+        S57subf.PRP1 to S57conv(0, -4)                   ,
+        S57subf.PRP2 to S57conv(0, -4)                   ,
+        S57subf.PRP3 to S57conv(0, -4)                   ,
+        S57subf.PRP4 to S57conv(0, -4)                   ,
+        S57subf.FEAS to S57conv(0, -4)                   ,
+        S57subf.FNOR to S57conv(0, -4)                   ,
+        S57subf.FPMF to S57conv(0, 4)                    ,
+        S57subf.RPID to S57conv(1, 1)                    ,
+        S57subf.RYCO to S57conv(0, -4)                   ,
+        S57subf.RXCO to S57conv(0, -4)                   ,
+        S57subf.CURP to S57conv(2, 1)                    ,
+        S57subf.RXVL to S57conv(0, -4)                   ,
+        S57subf.RYVL to S57conv(0, -4)                   ,
+        S57subf.PRCO to S57conv(2, 2)                    ,
+        S57subf.ESDT to S57conv(8, 0)                    ,
+        S57subf.LSDT to S57conv(8, 0)                    ,
+        S57subf.DCRT to S57conv(0, 0)                    ,
+        S57subf.CODT to S57conv(8, 0)                    ,
+        S57subf.PACC to S57conv(0, 4)                    ,
+        S57subf.HACC to S57conv(0, 4)                    ,
+        S57subf.SACC to S57conv(0, 4)                    ,
+        S57subf.FILE to S57conv(0, 0)                    ,
+        S57subf.LFIL to S57conv(0, 0)                    ,
+        S57subf.VOLM to S57conv(0, 0)                    ,
+        S57subf.IMPL to S57conv(3, 0)                    ,
+        S57subf.SLAT to S57conv(0, 0)                    ,
+        S57subf.WLON to S57conv(0, 0)                    ,
+        S57subf.NLAT to S57conv(0, 0)                    ,
+        S57subf.ELON to S57conv(0, 0)                    ,
+        S57subf.CRCS to S57conv(0, 0)                    ,
+        S57subf.NAM1 to S57conv(12, 5)                   ,
+        S57subf.NAM2 to S57conv(12, 5)                   ,
+        S57subf.OORA to S57conv(1, 1)                    ,
+        S57subf.OAAC to S57conv(6, 0)                    ,
+        S57subf.OACO to S57conv(5, 2)                    ,
+        S57subf.OALL to S57conv(0, 0)                    ,
+        S57subf.OATY to S57conv(1, 1)                    ,
+        S57subf.DEFN to S57conv(0, 0)                    ,
+        S57subf.AUTH to S57conv(2, 2)                    ,
+        S57subf.RFTP to S57conv(2, 1)                    ,
+        S57subf.RFVL to S57conv(0, 0)                    ,
+        S57subf.ATLB to S57conv(5, 2)                    ,
+        S57subf.ATDO to S57conv(1, 1)                    ,
+        S57subf.ADMU to S57conv(0, 0)                    ,
+        S57subf.ADFT to S57conv(0, 0)                    ,
+        S57subf.RAVA to S57conv(1, 1)                    ,
+        S57subf.DVAL to S57conv(0, 0)                    ,
+        S57subf.DVSD to S57conv(0, 0)                    ,
+        S57subf.OBLB to S57conv(5, 2)                    ,
+        S57subf.ASET to S57conv(1, 1)                    ,
+        S57subf.PRIM to S57conv(1, 1)                    ,
+        S57subf.GRUP to S57conv(3, 1)                    ,
+        S57subf.OBJL to S57conv(5, 2)                    ,
+        S57subf.RVER to S57conv(3, 2)                    ,
+        S57subf.RUIN to S57conv(1, 1)                    ,
+        S57subf.FIDN to S57conv(10, 4)                   ,
+        S57subf.FIDS to S57conv(5, 2)                    ,
+        S57subf.ATTL to S57conv(5, 2)                    ,
+        S57subf.ATVL to S57conv(0, 0)                    ,
+        S57subf.FFUI to S57conv(1, 1)                    ,
+        S57subf.FFIX to S57conv(0, 2)                    ,
+        S57subf.NFPT to S57conv(0, 2)                    ,
+        S57subf.LNAM to S57conv(17, 8)                   ,
+        S57subf.RIND to S57conv(0, 1)                    ,
+        S57subf.FSUI to S57conv(1, 1)                    ,
+        S57subf.FSIX to S57conv(0, 2)                    ,
+        S57subf.NSPT to S57conv(0, 2)                    ,
+        S57subf.NAME to S57conv(12, 5)                   ,
+        S57subf.ORNT to S57conv(1, 1)                    ,
+        S57subf.USAG to S57conv(1, 1)                    ,
+        S57subf.MASK to S57conv(1, 1)                    ,
+        S57subf.VPUI to S57conv(1, 1)                    ,
+        S57subf.VPIX to S57conv(0, 2)                    ,
+        S57subf.NVPT to S57conv(0, 2)                    ,
+        S57subf.TOPI to S57conv(1, 1)                    ,
+        S57subf.CCUI to S57conv(1, 1)                    ,
+        S57subf.CCIX to S57conv(0, 2)                    ,
+        S57subf.CCNC to S57conv(0, 2)                    ,
+        S57subf.YCOO to S57conv(0, -4)                   ,
+        S57subf.XCOO to S57conv(0, -4)                   ,
+        S57subf.VE3D to S57conv(0, -4)                   ,
+        S57subf.ATYP to S57conv(1, 1)                    ,
+        S57subf.SURF to S57conv(1, 1)                    ,
+        S57subf.ORDR to S57conv(1, 1)                    ,
+        S57subf.RESO to S57conv(0, 4)                    ,
+        S57subf.STPT to S57conv(0, 0)                    ,
+        S57subf.CTPT to S57conv(0, 0)                    ,
+        S57subf.ENPT to S57conv(0, 0)                    ,
+        S57subf.CDPM to S57conv(0, 0)                    ,
+        S57subf.CDPR to S57conv(0, 0)                    ,
     )
-
-    init {
-        convs[S57subf.I8RN] = S57conv(5, 2)
-        convs[S57subf.RCNM] = S57conv(2, 1)
-        convs[S57subf.RCID] = S57conv(10, 4)
-        convs[S57subf.EXPP] = S57conv(1, 1)
-        convs[S57subf.INTU] = S57conv(1, 1)
-        convs[S57subf.DSNM] = S57conv(0, 0)
-        convs[S57subf.EDTN] = S57conv(0, 0)
-        convs[S57subf.UPDN] = S57conv(0, 0)
-        convs[S57subf.UADT] = S57conv(8, 0)
-        convs[S57subf.ISDT] = S57conv(8, 0)
-        convs[S57subf.STED] = S57conv(4, 0)
-        convs[S57subf.PRSP] = S57conv(3, 1)
-        convs[S57subf.PSDN] = S57conv(0, 0)
-        convs[S57subf.PRED] = S57conv(0, 0)
-        convs[S57subf.PROF] = S57conv(2, 1)
-        convs[S57subf.AGEN] = S57conv(2, 2)
-        convs[S57subf.COMT] = S57conv(0, 0)
-        convs[S57subf.DSTR] = S57conv(2, 1)
-        convs[S57subf.AALL] = S57conv(1, 1)
-        convs[S57subf.NALL] = S57conv(1, 1)
-        convs[S57subf.NOMR] = S57conv(0, 4)
-        convs[S57subf.NOCR] = S57conv(0, 4)
-        convs[S57subf.NOGR] = S57conv(0, 4)
-        convs[S57subf.NOLR] = S57conv(0, 4)
-        convs[S57subf.NOIN] = S57conv(0, 4)
-        convs[S57subf.NOCN] = S57conv(0, 4)
-        convs[S57subf.NOED] = S57conv(0, 4)
-        convs[S57subf.NOFA] = S57conv(0, 4)
-        convs[S57subf.HDAT] = S57conv(3, 1)
-        convs[S57subf.VDAT] = S57conv(2, 1)
-        convs[S57subf.SDAT] = S57conv(2, 1)
-        convs[S57subf.CSCL] = S57conv(0, 4)
-        convs[S57subf.DUNI] = S57conv(2, 1)
-        convs[S57subf.HUNI] = S57conv(2, 1)
-        convs[S57subf.PUNI] = S57conv(2, 1)
-        convs[S57subf.COUN] = S57conv(2, 1)
-        convs[S57subf.COMF] = S57conv(0, 4)
-        convs[S57subf.SOMF] = S57conv(0, 4)
-        convs[S57subf.PROJ] = S57conv(3, 1)
-        convs[S57subf.PRP1] = S57conv(0, -4)
-        convs[S57subf.PRP2] = S57conv(0, -4)
-        convs[S57subf.PRP3] = S57conv(0, -4)
-        convs[S57subf.PRP4] = S57conv(0, -4)
-        convs[S57subf.FEAS] = S57conv(0, -4)
-        convs[S57subf.FNOR] = S57conv(0, -4)
-        convs[S57subf.FPMF] = S57conv(0, 4)
-        convs[S57subf.RPID] = S57conv(1, 1)
-        convs[S57subf.RYCO] = S57conv(0, -4)
-        convs[S57subf.RXCO] = S57conv(0, -4)
-        convs[S57subf.CURP] = S57conv(2, 1)
-        convs[S57subf.RXVL] = S57conv(0, -4)
-        convs[S57subf.RYVL] = S57conv(0, -4)
-        convs[S57subf.PRCO] = S57conv(2, 2)
-        convs[S57subf.ESDT] = S57conv(8, 0)
-        convs[S57subf.LSDT] = S57conv(8, 0)
-        convs[S57subf.DCRT] = S57conv(0, 0)
-        convs[S57subf.CODT] = S57conv(8, 0)
-        convs[S57subf.PACC] = S57conv(0, 4)
-        convs[S57subf.HACC] = S57conv(0, 4)
-        convs[S57subf.SACC] = S57conv(0, 4)
-        convs[S57subf.FILE] = S57conv(0, 0)
-        convs[S57subf.LFIL] = S57conv(0, 0)
-        convs[S57subf.VOLM] = S57conv(0, 0)
-        convs[S57subf.IMPL] = S57conv(3, 0)
-        convs[S57subf.SLAT] = S57conv(0, 0)
-        convs[S57subf.WLON] = S57conv(0, 0)
-        convs[S57subf.NLAT] = S57conv(0, 0)
-        convs[S57subf.ELON] = S57conv(0, 0)
-        convs[S57subf.CRCS] = S57conv(0, 0)
-        convs[S57subf.NAM1] = S57conv(12, 5)
-        convs[S57subf.NAM2] = S57conv(12, 5)
-        convs[S57subf.OORA] = S57conv(1, 1)
-        convs[S57subf.OAAC] = S57conv(6, 0)
-        convs[S57subf.OACO] = S57conv(5, 2)
-        convs[S57subf.OALL] = S57conv(0, 0)
-        convs[S57subf.OATY] = S57conv(1, 1)
-        convs[S57subf.DEFN] = S57conv(0, 0)
-        convs[S57subf.AUTH] = S57conv(2, 2)
-        convs[S57subf.RFTP] = S57conv(2, 1)
-        convs[S57subf.RFVL] = S57conv(0, 0)
-        convs[S57subf.ATLB] = S57conv(5, 2)
-        convs[S57subf.ATDO] = S57conv(1, 1)
-        convs[S57subf.ADMU] = S57conv(0, 0)
-        convs[S57subf.ADFT] = S57conv(0, 0)
-        convs[S57subf.RAVA] = S57conv(1, 1)
-        convs[S57subf.DVAL] = S57conv(0, 0)
-        convs[S57subf.DVSD] = S57conv(0, 0)
-        convs[S57subf.OBLB] = S57conv(5, 2)
-        convs[S57subf.ASET] = S57conv(1, 1)
-        convs[S57subf.PRIM] = S57conv(1, 1)
-        convs[S57subf.GRUP] = S57conv(3, 1)
-        convs[S57subf.OBJL] = S57conv(5, 2)
-        convs[S57subf.RVER] = S57conv(3, 2)
-        convs[S57subf.RUIN] = S57conv(1, 1)
-        convs[S57subf.FIDN] = S57conv(10, 4)
-        convs[S57subf.FIDS] = S57conv(5, 2)
-        convs[S57subf.ATTL] = S57conv(5, 2)
-        convs[S57subf.ATVL] = S57conv(0, 0)
-        convs[S57subf.FFUI] = S57conv(1, 1)
-        convs[S57subf.FFIX] = S57conv(0, 2)
-        convs[S57subf.NFPT] = S57conv(0, 2)
-        convs[S57subf.LNAM] = S57conv(17, 8)
-        convs[S57subf.RIND] = S57conv(0, 1)
-        convs[S57subf.FSUI] = S57conv(1, 1)
-        convs[S57subf.FSIX] = S57conv(0, 2)
-        convs[S57subf.NSPT] = S57conv(0, 2)
-        convs[S57subf.NAME] = S57conv(12, 5)
-        convs[S57subf.ORNT] = S57conv(1, 1)
-        convs[S57subf.USAG] = S57conv(1, 1)
-        convs[S57subf.MASK] = S57conv(1, 1)
-        convs[S57subf.VPUI] = S57conv(1, 1)
-        convs[S57subf.VPIX] = S57conv(0, 2)
-        convs[S57subf.NVPT] = S57conv(0, 2)
-        convs[S57subf.TOPI] = S57conv(1, 1)
-        convs[S57subf.CCUI] = S57conv(1, 1)
-        convs[S57subf.CCIX] = S57conv(0, 2)
-        convs[S57subf.CCNC] = S57conv(0, 2)
-        convs[S57subf.YCOO] = S57conv(0, -4)
-        convs[S57subf.XCOO] = S57conv(0, -4)
-        convs[S57subf.VE3D] = S57conv(0, -4)
-        convs[S57subf.ATYP] = S57conv(1, 1)
-        convs[S57subf.SURF] = S57conv(1, 1)
-        convs[S57subf.ORDR] = S57conv(1, 1)
-        convs[S57subf.RESO] = S57conv(0, 4)
-        convs[S57subf.STPT] = S57conv(0, 0)
-        convs[S57subf.CTPT] = S57conv(0, 0)
-        convs[S57subf.ENPT] = S57conv(0, 0)
-        convs[S57subf.CDPM] = S57conv(0, 0)
-        convs[S57subf.CDPR] = S57conv(0, 0)
-    }
 
     private val S57i8ri = ArrayList(listOf(S57subf.I8RN))
     private val S57dsid = ArrayList(
