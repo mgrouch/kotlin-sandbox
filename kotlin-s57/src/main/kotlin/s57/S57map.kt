@@ -794,7 +794,7 @@ class S57map(private val sea: Boolean) {
     }
 
     fun calcLength(geom: Geom?): Double {
-        var node: Snode
+        var node: Snode?
         var lat: Double
         var lon: Double
         var llon: Double
@@ -814,7 +814,7 @@ class S57map(private val sea: Boolean) {
                     node = git.next()
                     if (first) {
                         first = false
-                        lat = node.lat
+                        lat = node!!.lat
                         lon = node.lon
                     } else if (node != null) {
                         llat = lat
@@ -903,8 +903,8 @@ class S57map(private val sea: Boolean) {
                     while (git.hasEdge()) {
                         git.nextEdge()
                         while (git.hasNode()) {
-                            val node: Snode = git.next()
-                            lat = node.lat
+                            val node: Snode? = git.next()
+                            lat = node!!.lat
                             lon = node.lon
                             if (first) {
                                 first = false
