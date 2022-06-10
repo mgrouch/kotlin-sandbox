@@ -1,6 +1,8 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57obj.Obj
+
 /**
  * @author Malcolm Herring
  * @author mgrouch
@@ -496,265 +498,265 @@ object S57att {
         Att.UPDMSG to "message",
     )
 
-    private val Accuracy = mapOf(S57obj.Obj.UNKOBJ to Att.HORACC)
-    private val Addition = mapOf(S57obj.Obj.UNKOBJ to Att.ADDMRK)
-    private val Agency = mapOf(S57obj.Obj.UNKOBJ to Att.AGENCY)
-    private val Anomaly = mapOf(S57obj.Obj.UNKOBJ to Att.VALLMA)
-    private val Authority = mapOf(S57obj.Obj.UNKOBJ to Att.SURATH)
-    private val Availability = mapOf(S57obj.Obj.UNKOBJ to Att.BUNVES)
-    private val Bank = mapOf(S57obj.Obj.UNKOBJ to Att.BNKWTW)
-    private val Callsign = mapOf(S57obj.Obj.UNKOBJ to Att.CALSGN)
+    private val Accuracy = mapOf(Obj.UNKOBJ to Att.HORACC)
+    private val Addition = mapOf(Obj.UNKOBJ to Att.ADDMRK)
+    private val Agency = mapOf(Obj.UNKOBJ to Att.AGENCY)
+    private val Anomaly = mapOf(Obj.UNKOBJ to Att.VALLMA)
+    private val Authority = mapOf(Obj.UNKOBJ to Att.SURATH)
+    private val Availability = mapOf(Obj.UNKOBJ to Att.BUNVES)
+    private val Bank = mapOf(Obj.UNKOBJ to Att.BNKWTW)
+    private val Callsign = mapOf(Obj.UNKOBJ to Att.CALSGN)
 
     private val Category = mapOf(
-        S57obj.Obj.ACHARE to Att.CATACH,
-        S57obj.Obj.ACHBRT to Att.CATACH,
-        S57obj.Obj.AIRARE to Att.CATAIR,
-        S57obj.Obj.BCNCAR to Att.CATCAM,
-        S57obj.Obj.BCNLAT to Att.CATLAM,
-        S57obj.Obj.BCNSPP to Att.CATSPM,
-        S57obj.Obj.BOYLAT to Att.CATLAM,
-        S57obj.Obj.BOYINB to Att.CATINB,
-        S57obj.Obj.BOYSPP to Att.CATSPM,
-        S57obj.Obj.DAYMAR to Att.CATSPM,
-        S57obj.Obj.BRIDGE to Att.CATBRG,
-        S57obj.Obj.BUAARE to Att.CATBUA,
-        S57obj.Obj.BUNSTA to Att.CATBUN,
-        S57obj.Obj.CANALS to Att.CATCAN,
-        S57obj.Obj.CBLARE to Att.CATCBL,
-        S57obj.Obj.CBLOHD to Att.CATCBL,
-        S57obj.Obj.CBLSUB to Att.CATCBL,
-        S57obj.Obj.CHKPNT to Att.CATCHP,
-        S57obj.Obj.COMARE to Att.CATCOM,
-        S57obj.Obj.COALNE to Att.CATCOA,
-        S57obj.Obj.CONVYR to Att.CATCON,
-        S57obj.Obj.CRANES to Att.CATCRN,
-        S57obj.Obj.CTRPNT to Att.CATCTR,
-        S57obj.Obj.DAMCON to Att.CATDAM,
-        S57obj.Obj.DISMAR to Att.CATDIS,
-        S57obj.Obj.DMPGRD to Att.CATDPG,
-        S57obj.Obj.DOCARE to Att.CATDOC,
-        S57obj.Obj.EXCNST to Att.CATEXS,
-        S57obj.Obj.FERYRT to Att.CATFRY,
-        S57obj.Obj.FNCLNE to Att.CATFNC,
-        S57obj.Obj.FOGSIG to Att.CATFOG,
-        S57obj.Obj.FORSTC to Att.CATFOR,
-        S57obj.Obj.FSHFAC to Att.CATFIF,
-        S57obj.Obj.GATCON to Att.CATGAT,
-        S57obj.Obj.HRBFAC to Att.CATHAF,
-        S57obj.Obj.HRBARE to Att.CATHBR,
-        S57obj.Obj.HRBBSN to Att.CATHBR,
-        S57obj.Obj.HULKES to Att.CATHLK,
-        S57obj.Obj.ICEARE to Att.CATICE,
-        S57obj.Obj.LNDRGN to Att.CATLND,
-        S57obj.Obj.LNDMRK to Att.CATLMK,
-        S57obj.Obj.LIGHTS to Att.CATLIT,
-        S57obj.Obj.M_COVR to Att.CATCVR,
-        S57obj.Obj.MARCUL to Att.CATMFA,
-        S57obj.Obj.MIPARE to Att.CATMPA,
-        S57obj.Obj.MORFAC to Att.CATMOR,
-        S57obj.Obj.NAVLNE to Att.CATNAV,
-        S57obj.Obj.NOTMRK to Att.CATNMK,
-        S57obj.Obj.OBSTRN to Att.CATOBS,
-        S57obj.Obj.OFSPLF to Att.CATOFP,
-        S57obj.Obj.OILBAR to Att.CATOLB,
-        S57obj.Obj.OSPARE to Att.CATPRA,
-        S57obj.Obj.PILPNT to Att.CATPLE,
-        S57obj.Obj.PILBOP to Att.CATPIL,
-        S57obj.Obj.PIPARE to Att.CATPIP,
-        S57obj.Obj.PIPOHD to Att.CATPIP,
-        S57obj.Obj.PIPSOL to Att.CATPIP,
-        S57obj.Obj.PRDARE to Att.CATPRA,
-        S57obj.Obj.PYLONS to Att.CATPYL,
-        S57obj.Obj.RADSTA to Att.CATRAS,
-        S57obj.Obj.RCRTCL to Att.CATTRK,
-        S57obj.Obj.RCTLPT to Att.CATTRK,
-        S57obj.Obj.RDOSTA to Att.CATROS,
-        S57obj.Obj.RDOCAL to Att.CATCOM,
-        S57obj.Obj.RECTRC to Att.CATTRK,
-        S57obj.Obj.REFDMP to Att.CATRFD,
-        S57obj.Obj.RESARE to Att.CATREA,
-        S57obj.Obj.RSCSTA to Att.CATRSC,
-        S57obj.Obj.RTPBCN to Att.CATRTB,
-        S57obj.Obj.ROADWY to Att.CATROD,
-        S57obj.Obj.RUNWAY to Att.CATRUN,
-        S57obj.Obj.SEAARE to Att.CATSEA,
-        S57obj.Obj.SILTNK to Att.CATSIL,
-        S57obj.Obj.SISTAT to Att.CATSIT,
-        S57obj.Obj.SISTAW to Att.CATSIW,
-        S57obj.Obj.SLCONS to Att.CATSLC,
-        S57obj.Obj.SLOTOP to Att.CATSLO,
-        S57obj.Obj.SLOGRD to Att.CATSLO,
-        S57obj.Obj.SMCFAC to Att.CATSCF,
-        S57obj.Obj.TERMNL to Att.CATTML,
-        S57obj.Obj.TS_FEB to Att.CAT_TS,
-        S57obj.Obj.TSELNE to Att.CATTSS,
-        S57obj.Obj.TSEZNE to Att.CATTSS,
-        S57obj.Obj.TSSBND to Att.CATTSS,
-        S57obj.Obj.TSSCRS to Att.CATTSS,
-        S57obj.Obj.TSSLPT to Att.CATTSS,
-        S57obj.Obj.TSSRON to Att.CATTSS,
-        S57obj.Obj.TWRTPT to Att.CATTRK,
-        S57obj.Obj.VEGATN to Att.CATVEG,
-        S57obj.Obj.VEHTRF to Att.CATVTR,
-        S57obj.Obj.WATTUR to Att.CATWAT,
-        S57obj.Obj.WEDKLP to Att.CATWED,
-        S57obj.Obj.WRECKS to Att.CATWRK,
-        S57obj.Obj.WTWAXS to Att.CATCCL,
-        S57obj.Obj.WTWARE to Att.CATCCL,
-        S57obj.Obj.WTWGAG to Att.CATGAG,
-        S57obj.Obj.BERTHS to Att.CATBRT,
+        Obj.ACHARE to Att.CATACH,
+        Obj.ACHBRT to Att.CATACH,
+        Obj.AIRARE to Att.CATAIR,
+        Obj.BCNCAR to Att.CATCAM,
+        Obj.BCNLAT to Att.CATLAM,
+        Obj.BCNSPP to Att.CATSPM,
+        Obj.BOYLAT to Att.CATLAM,
+        Obj.BOYINB to Att.CATINB,
+        Obj.BOYSPP to Att.CATSPM,
+        Obj.DAYMAR to Att.CATSPM,
+        Obj.BRIDGE to Att.CATBRG,
+        Obj.BUAARE to Att.CATBUA,
+        Obj.BUNSTA to Att.CATBUN,
+        Obj.CANALS to Att.CATCAN,
+        Obj.CBLARE to Att.CATCBL,
+        Obj.CBLOHD to Att.CATCBL,
+        Obj.CBLSUB to Att.CATCBL,
+        Obj.CHKPNT to Att.CATCHP,
+        Obj.COMARE to Att.CATCOM,
+        Obj.COALNE to Att.CATCOA,
+        Obj.CONVYR to Att.CATCON,
+        Obj.CRANES to Att.CATCRN,
+        Obj.CTRPNT to Att.CATCTR,
+        Obj.DAMCON to Att.CATDAM,
+        Obj.DISMAR to Att.CATDIS,
+        Obj.DMPGRD to Att.CATDPG,
+        Obj.DOCARE to Att.CATDOC,
+        Obj.EXCNST to Att.CATEXS,
+        Obj.FERYRT to Att.CATFRY,
+        Obj.FNCLNE to Att.CATFNC,
+        Obj.FOGSIG to Att.CATFOG,
+        Obj.FORSTC to Att.CATFOR,
+        Obj.FSHFAC to Att.CATFIF,
+        Obj.GATCON to Att.CATGAT,
+        Obj.HRBFAC to Att.CATHAF,
+        Obj.HRBARE to Att.CATHBR,
+        Obj.HRBBSN to Att.CATHBR,
+        Obj.HULKES to Att.CATHLK,
+        Obj.ICEARE to Att.CATICE,
+        Obj.LNDRGN to Att.CATLND,
+        Obj.LNDMRK to Att.CATLMK,
+        Obj.LIGHTS to Att.CATLIT,
+        Obj.M_COVR to Att.CATCVR,
+        Obj.MARCUL to Att.CATMFA,
+        Obj.MIPARE to Att.CATMPA,
+        Obj.MORFAC to Att.CATMOR,
+        Obj.NAVLNE to Att.CATNAV,
+        Obj.NOTMRK to Att.CATNMK,
+        Obj.OBSTRN to Att.CATOBS,
+        Obj.OFSPLF to Att.CATOFP,
+        Obj.OILBAR to Att.CATOLB,
+        Obj.OSPARE to Att.CATPRA,
+        Obj.PILPNT to Att.CATPLE,
+        Obj.PILBOP to Att.CATPIL,
+        Obj.PIPARE to Att.CATPIP,
+        Obj.PIPOHD to Att.CATPIP,
+        Obj.PIPSOL to Att.CATPIP,
+        Obj.PRDARE to Att.CATPRA,
+        Obj.PYLONS to Att.CATPYL,
+        Obj.RADSTA to Att.CATRAS,
+        Obj.RCRTCL to Att.CATTRK,
+        Obj.RCTLPT to Att.CATTRK,
+        Obj.RDOSTA to Att.CATROS,
+        Obj.RDOCAL to Att.CATCOM,
+        Obj.RECTRC to Att.CATTRK,
+        Obj.REFDMP to Att.CATRFD,
+        Obj.RESARE to Att.CATREA,
+        Obj.RSCSTA to Att.CATRSC,
+        Obj.RTPBCN to Att.CATRTB,
+        Obj.ROADWY to Att.CATROD,
+        Obj.RUNWAY to Att.CATRUN,
+        Obj.SEAARE to Att.CATSEA,
+        Obj.SILTNK to Att.CATSIL,
+        Obj.SISTAT to Att.CATSIT,
+        Obj.SISTAW to Att.CATSIW,
+        Obj.SLCONS to Att.CATSLC,
+        Obj.SLOTOP to Att.CATSLO,
+        Obj.SLOGRD to Att.CATSLO,
+        Obj.SMCFAC to Att.CATSCF,
+        Obj.TERMNL to Att.CATTML,
+        Obj.TS_FEB to Att.CAT_TS,
+        Obj.TSELNE to Att.CATTSS,
+        Obj.TSEZNE to Att.CATTSS,
+        Obj.TSSBND to Att.CATTSS,
+        Obj.TSSCRS to Att.CATTSS,
+        Obj.TSSLPT to Att.CATTSS,
+        Obj.TSSRON to Att.CATTSS,
+        Obj.TWRTPT to Att.CATTRK,
+        Obj.VEGATN to Att.CATVEG,
+        Obj.VEHTRF to Att.CATVTR,
+        Obj.WATTUR to Att.CATWAT,
+        Obj.WEDKLP to Att.CATWED,
+        Obj.WRECKS to Att.CATWRK,
+        Obj.WTWAXS to Att.CATCCL,
+        Obj.WTWARE to Att.CATCCL,
+        Obj.WTWGAG to Att.CATGAG,
+        Obj.BERTHS to Att.CATBRT,
     )
 
-    private val Channel = mapOf(S57obj.Obj.UNKOBJ to Att.COMCHA)
-    private val Character = mapOf(S57obj.Obj.UNKOBJ to Att.LITCHR)
-    private val Clearance_height = mapOf(S57obj.Obj.UNKOBJ to Att.VERCLR)
-    private val Clearance_height_closed = mapOf(S57obj.Obj.UNKOBJ to Att.VERCCL)
-    private val Clearance_height_open = mapOf(S57obj.Obj.UNKOBJ to Att.VERCOP)
-    private val Clearance_height_safe = mapOf(S57obj.Obj.UNKOBJ to Att.VERCSA)
-    private val Clearance_width = mapOf(S57obj.Obj.UNKOBJ to Att.HORCLR)
-    private val Colour = mapOf(S57obj.Obj.UNKOBJ to Att.COLOUR)
-    private val Colour_pattern = mapOf(S57obj.Obj.UNKOBJ to Att.COLPAT)
-    private val Communication = mapOf(S57obj.Obj.UNKOBJ to Att.COMCTN)
-    private val Condition = mapOf(S57obj.Obj.UNKOBJ to Att.CONDTN)
-    private val Conspicuity = mapOf(S57obj.Obj.UNKOBJ to Att.CONVIS)
-    private val Construction = mapOf(S57obj.Obj.UNKOBJ to Att.NATCON)
-    private val Danger_class = mapOf(S57obj.Obj.UNKOBJ to Att.CLSDNG)
+    private val Channel = mapOf(Obj.UNKOBJ to Att.COMCHA)
+    private val Character = mapOf(Obj.UNKOBJ to Att.LITCHR)
+    private val Clearance_height = mapOf(Obj.UNKOBJ to Att.VERCLR)
+    private val Clearance_height_closed = mapOf(Obj.UNKOBJ to Att.VERCCL)
+    private val Clearance_height_open = mapOf(Obj.UNKOBJ to Att.VERCOP)
+    private val Clearance_height_safe = mapOf(Obj.UNKOBJ to Att.VERCSA)
+    private val Clearance_width = mapOf(Obj.UNKOBJ to Att.HORCLR)
+    private val Colour = mapOf(Obj.UNKOBJ to Att.COLOUR)
+    private val Colour_pattern = mapOf(Obj.UNKOBJ to Att.COLPAT)
+    private val Communication = mapOf(Obj.UNKOBJ to Att.COMCTN)
+    private val Condition = mapOf(Obj.UNKOBJ to Att.CONDTN)
+    private val Conspicuity = mapOf(Obj.UNKOBJ to Att.CONVIS)
+    private val Construction = mapOf(Obj.UNKOBJ to Att.NATCON)
+    private val Danger_class = mapOf(Obj.UNKOBJ to Att.CLSDNG)
 
     private val Depth = mapOf(
-        S57obj.Obj.UNKOBJ to Att.VALDCO,
-        S57obj.Obj.SOUNDG to Att.VALSOU,
+        Obj.UNKOBJ to Att.VALDCO,
+        Obj.SOUNDG to Att.VALSOU,
     )
 
-    private val Depth_buried = mapOf(S57obj.Obj.UNKOBJ to Att.BURDEP)
-    private val Description = mapOf(S57obj.Obj.UNKOBJ to Att.TXTDSC)
-    private val Distance = mapOf(S57obj.Obj.UNKOBJ to Att.WTWDIS)
-    private val Distance_down = mapOf(S57obj.Obj.UNKOBJ to Att.DISIPD)
-    private val Distance_end = mapOf(S57obj.Obj.UNKOBJ to Att.DISBK2)
-    private val Distance_start = mapOf(S57obj.Obj.UNKOBJ to Att.DISBK1)
-    private val Distance_up = mapOf(S57obj.Obj.UNKOBJ to Att.DISIPU)
-    private val Elevation = mapOf(S57obj.Obj.UNKOBJ to Att.ELEVAT)
-    private val End_date = mapOf(S57obj.Obj.UNKOBJ to Att.DATEND)
-    private val End_time = mapOf(S57obj.Obj.UNKOBJ to Att.TIMEND)
-    private val Estimated_range = mapOf(S57obj.Obj.UNKOBJ to Att.ESTRNG)
-    private val Exhibition = mapOf(S57obj.Obj.UNKOBJ to Att.EXCLIT)
-    private val Exposition = mapOf(S57obj.Obj.UNKOBJ to Att.EXPSOU)
-    private val Factor = mapOf(S57obj.Obj.UNKOBJ to Att.ICEFAC)
-    private val Frequency = mapOf(S57obj.Obj.UNKOBJ to Att.SIGFRQ)
+    private val Depth_buried = mapOf(Obj.UNKOBJ to Att.BURDEP)
+    private val Description = mapOf(Obj.UNKOBJ to Att.TXTDSC)
+    private val Distance = mapOf(Obj.UNKOBJ to Att.WTWDIS)
+    private val Distance_down = mapOf(Obj.UNKOBJ to Att.DISIPD)
+    private val Distance_end = mapOf(Obj.UNKOBJ to Att.DISBK2)
+    private val Distance_start = mapOf(Obj.UNKOBJ to Att.DISBK1)
+    private val Distance_up = mapOf(Obj.UNKOBJ to Att.DISIPU)
+    private val Elevation = mapOf(Obj.UNKOBJ to Att.ELEVAT)
+    private val End_date = mapOf(Obj.UNKOBJ to Att.DATEND)
+    private val End_time = mapOf(Obj.UNKOBJ to Att.TIMEND)
+    private val Estimated_range = mapOf(Obj.UNKOBJ to Att.ESTRNG)
+    private val Exhibition = mapOf(Obj.UNKOBJ to Att.EXCLIT)
+    private val Exposition = mapOf(Obj.UNKOBJ to Att.EXPSOU)
+    private val Factor = mapOf(Obj.UNKOBJ to Att.ICEFAC)
+    private val Frequency = mapOf(Obj.UNKOBJ to Att.SIGFRQ)
 
     private val Function = mapOf(
-        S57obj.Obj.BUISGL to Att.FUNCTN,
-        S57obj.Obj.LNDMRK to Att.FUNCTN,
-        S57obj.Obj.NOTMRK to Att.FNCTNM,
+        Obj.BUISGL to Att.FUNCTN,
+        Obj.LNDMRK to Att.FUNCTN,
+        Obj.NOTMRK to Att.FNCTNM,
     )
-    private val Generation = mapOf(S57obj.Obj.UNKOBJ to Att.SIGGEN)
-    private val Goods = mapOf(S57obj.Obj.UNKOBJ to Att.TRSHGD)
-    private val Gravity_reference = mapOf(S57obj.Obj.UNKOBJ to Att.REFLEV)
-    private val Group = mapOf(S57obj.Obj.UNKOBJ to Att.SIGGRP)
-    private val Height = mapOf(S57obj.Obj.UNKOBJ to Att.HEIGHT)
-    private val High_name = mapOf(S57obj.Obj.UNKOBJ to Att.HIGNAM)
-    private val High_value = mapOf(S57obj.Obj.UNKOBJ to Att.HIGWAT)
-    private val High_velocity = mapOf(S57obj.Obj.UNKOBJ to Att.CURVHW)
-    private val Horizontal_clearance_length = mapOf(S57obj.Obj.UNKOBJ to Att.HORCLL)
-    private val Horizontal_clearance_width = mapOf(S57obj.Obj.UNKOBJ to Att.HORCLW)
-    private val Horizontal_datum = mapOf(S57obj.Obj.UNKOBJ to Att.HORDAT)
-    private val Impact = mapOf(S57obj.Obj.UNKOBJ to Att.DIRIMP)
-    private val Information = mapOf(S57obj.Obj.UNKOBJ to Att.INFORM)
-    private val Jurisdiction = mapOf(S57obj.Obj.UNKOBJ to Att.JRSDTN)
-    private val Length = mapOf(S57obj.Obj.UNKOBJ to Att.HORLEN)
-    private val Local_name = mapOf(S57obj.Obj.UNKOBJ to Att.OTHNAM)
-    private val Local_value = mapOf(S57obj.Obj.UNKOBJ to Att.OTHWAT)
-    private val Low_name = mapOf(S57obj.Obj.UNKOBJ to Att.LOWNAM)
-    private val Low_value = mapOf(S57obj.Obj.UNKOBJ to Att.LOWWAT)
-    private val Low_velocity = mapOf(S57obj.Obj.UNKOBJ to Att.CURVLW)
-    private val Maximum_depth = mapOf(S57obj.Obj.UNKOBJ to Att.DRVAL2)
-    private val Maximum_elevation = mapOf(S57obj.Obj.UNKOBJ to Att.ELEVA2)
-    private val Maximum_load = mapOf(S57obj.Obj.UNKOBJ to Att.LIFCAP)
-    private val Maximum_range = mapOf(S57obj.Obj.UNKOBJ to Att.VALMXR)
-    private val Maximum_sounding = mapOf(S57obj.Obj.UNKOBJ to Att.SDISMX)
-    private val Mean_name = mapOf(S57obj.Obj.UNKOBJ to Att.MEANAM)
-    private val Mean_value = mapOf(S57obj.Obj.UNKOBJ to Att.MEAWAT)
-    private val Mean_velocity = mapOf(S57obj.Obj.UNKOBJ to Att.CURVMW)
-    private val Message = mapOf(S57obj.Obj.UNKOBJ to Att.UPDMSG)
-    private val Minimum_depth = mapOf(S57obj.Obj.UNKOBJ to Att.DRVAL1)
-    private val Minimum_elevation = mapOf(S57obj.Obj.UNKOBJ to Att.ELEVA1)
-    private val Minimum_sounding = mapOf(S57obj.Obj.UNKOBJ to Att.SDISMN)
-    private val Multiple = mapOf(S57obj.Obj.UNKOBJ to Att.MLTYLT)
-    private val Name = mapOf(S57obj.Obj.UNKOBJ to Att.OBJNAM)
-    private val National_information = mapOf(S57obj.Obj.UNKOBJ to Att.NINFOM)
-    private val Nationality = mapOf(S57obj.Obj.UNKOBJ to Att.NATION)
-    private val National_description = mapOf(S57obj.Obj.UNKOBJ to Att.NTXTDS)
-    private val National_name = mapOf(S57obj.Obj.UNKOBJ to Att.NOBJNM)
-    private val National_pilot_district = mapOf(S57obj.Obj.UNKOBJ to Att.NPLDST)
-    private val Nm_date = mapOf(S57obj.Obj.UNKOBJ to Att.NMDATE)
-    private val Other_velocity = mapOf(S57obj.Obj.UNKOBJ to Att.CURVOW)
-    private val Operation = mapOf(S57obj.Obj.UNKOBJ to Att.CATTAB)
-    private val Orientation = mapOf(S57obj.Obj.UNKOBJ to Att.ORIENT)
-    private val Passing_time = mapOf(S57obj.Obj.UNKOBJ to Att.APTREF)
-    private val Period = mapOf(S57obj.Obj.UNKOBJ to Att.SIGPER)
-    private val Period_end = mapOf(S57obj.Obj.UNKOBJ to Att.PEREND)
-    private val Period_start = mapOf(S57obj.Obj.UNKOBJ to Att.PERSTA)
-    private val Pilot_district = mapOf(S57obj.Obj.UNKOBJ to Att.PILDST)
-    private val Position_quality = mapOf(S57obj.Obj.UNKOBJ to Att.QUAPOS)
-    private val Positional_accuracy = mapOf(S57obj.Obj.UNKOBJ to Att.POSACC)
-    private val Producing_country = mapOf(S57obj.Obj.UNKOBJ to Att.PRCTRY)
-    private val Product = mapOf(S57obj.Obj.UNKOBJ to Att.PRODCT)
-    private val Quality = mapOf(S57obj.Obj.UNKOBJ to Att.QUASOU)
-    private val Range = mapOf(S57obj.Obj.UNKOBJ to Att.VALNMR)
-    private val Reference = mapOf(S57obj.Obj.UNKOBJ to Att.PUBREF)
-    private val Reflectivity = mapOf(S57obj.Obj.UNKOBJ to Att.CONRAD)
-    private val Restriction = mapOf(S57obj.Obj.UNKOBJ to Att.RESTRN)
-    private val Schedule = mapOf(S57obj.Obj.UNKOBJ to Att.SCHREF)
+    private val Generation = mapOf(Obj.UNKOBJ to Att.SIGGEN)
+    private val Goods = mapOf(Obj.UNKOBJ to Att.TRSHGD)
+    private val Gravity_reference = mapOf(Obj.UNKOBJ to Att.REFLEV)
+    private val Group = mapOf(Obj.UNKOBJ to Att.SIGGRP)
+    private val Height = mapOf(Obj.UNKOBJ to Att.HEIGHT)
+    private val High_name = mapOf(Obj.UNKOBJ to Att.HIGNAM)
+    private val High_value = mapOf(Obj.UNKOBJ to Att.HIGWAT)
+    private val High_velocity = mapOf(Obj.UNKOBJ to Att.CURVHW)
+    private val Horizontal_clearance_length = mapOf(Obj.UNKOBJ to Att.HORCLL)
+    private val Horizontal_clearance_width = mapOf(Obj.UNKOBJ to Att.HORCLW)
+    private val Horizontal_datum = mapOf(Obj.UNKOBJ to Att.HORDAT)
+    private val Impact = mapOf(Obj.UNKOBJ to Att.DIRIMP)
+    private val Information = mapOf(Obj.UNKOBJ to Att.INFORM)
+    private val Jurisdiction = mapOf(Obj.UNKOBJ to Att.JRSDTN)
+    private val Length = mapOf(Obj.UNKOBJ to Att.HORLEN)
+    private val Local_name = mapOf(Obj.UNKOBJ to Att.OTHNAM)
+    private val Local_value = mapOf(Obj.UNKOBJ to Att.OTHWAT)
+    private val Low_name = mapOf(Obj.UNKOBJ to Att.LOWNAM)
+    private val Low_value = mapOf(Obj.UNKOBJ to Att.LOWWAT)
+    private val Low_velocity = mapOf(Obj.UNKOBJ to Att.CURVLW)
+    private val Maximum_depth = mapOf(Obj.UNKOBJ to Att.DRVAL2)
+    private val Maximum_elevation = mapOf(Obj.UNKOBJ to Att.ELEVA2)
+    private val Maximum_load = mapOf(Obj.UNKOBJ to Att.LIFCAP)
+    private val Maximum_range = mapOf(Obj.UNKOBJ to Att.VALMXR)
+    private val Maximum_sounding = mapOf(Obj.UNKOBJ to Att.SDISMX)
+    private val Mean_name = mapOf(Obj.UNKOBJ to Att.MEANAM)
+    private val Mean_value = mapOf(Obj.UNKOBJ to Att.MEAWAT)
+    private val Mean_velocity = mapOf(Obj.UNKOBJ to Att.CURVMW)
+    private val Message = mapOf(Obj.UNKOBJ to Att.UPDMSG)
+    private val Minimum_depth = mapOf(Obj.UNKOBJ to Att.DRVAL1)
+    private val Minimum_elevation = mapOf(Obj.UNKOBJ to Att.ELEVA1)
+    private val Minimum_sounding = mapOf(Obj.UNKOBJ to Att.SDISMN)
+    private val Multiple = mapOf(Obj.UNKOBJ to Att.MLTYLT)
+    private val Name = mapOf(Obj.UNKOBJ to Att.OBJNAM)
+    private val National_information = mapOf(Obj.UNKOBJ to Att.NINFOM)
+    private val Nationality = mapOf(Obj.UNKOBJ to Att.NATION)
+    private val National_description = mapOf(Obj.UNKOBJ to Att.NTXTDS)
+    private val National_name = mapOf(Obj.UNKOBJ to Att.NOBJNM)
+    private val National_pilot_district = mapOf(Obj.UNKOBJ to Att.NPLDST)
+    private val Nm_date = mapOf(Obj.UNKOBJ to Att.NMDATE)
+    private val Other_velocity = mapOf(Obj.UNKOBJ to Att.CURVOW)
+    private val Operation = mapOf(Obj.UNKOBJ to Att.CATTAB)
+    private val Orientation = mapOf(Obj.UNKOBJ to Att.ORIENT)
+    private val Passing_time = mapOf(Obj.UNKOBJ to Att.APTREF)
+    private val Period = mapOf(Obj.UNKOBJ to Att.SIGPER)
+    private val Period_end = mapOf(Obj.UNKOBJ to Att.PEREND)
+    private val Period_start = mapOf(Obj.UNKOBJ to Att.PERSTA)
+    private val Pilot_district = mapOf(Obj.UNKOBJ to Att.PILDST)
+    private val Position_quality = mapOf(Obj.UNKOBJ to Att.QUAPOS)
+    private val Positional_accuracy = mapOf(Obj.UNKOBJ to Att.POSACC)
+    private val Producing_country = mapOf(Obj.UNKOBJ to Att.PRCTRY)
+    private val Product = mapOf(Obj.UNKOBJ to Att.PRODCT)
+    private val Quality = mapOf(Obj.UNKOBJ to Att.QUASOU)
+    private val Range = mapOf(Obj.UNKOBJ to Att.VALNMR)
+    private val Reference = mapOf(Obj.UNKOBJ to Att.PUBREF)
+    private val Reflectivity = mapOf(Obj.UNKOBJ to Att.CONRAD)
+    private val Restriction = mapOf(Obj.UNKOBJ to Att.RESTRN)
+    private val Schedule = mapOf(Obj.UNKOBJ to Att.SCHREF)
     private val Shape = mapOf(
-        S57obj.Obj.BCNCAR to Att.BCNSHP,
-        S57obj.Obj.BCNISD to Att.BCNSHP,
-        S57obj.Obj.BCNLAT to Att.BCNSHP,
-        S57obj.Obj.BCNSAW to Att.BCNSHP,
-        S57obj.Obj.BCNSPP to Att.BCNSHP,
-        S57obj.Obj.BUISGL to Att.BUISHP,
-        S57obj.Obj.BOYCAR to Att.BOYSHP,
-        S57obj.Obj.BOYISD to Att.BOYSHP,
-        S57obj.Obj.BOYLAT to Att.BOYSHP,
-        S57obj.Obj.BOYSAW to Att.BOYSHP,
-        S57obj.Obj.BOYSPP to Att.BOYSHP,
-        S57obj.Obj.BOYINB to Att.BOYSHP,
-        S57obj.Obj.DAYMAR to Att.TOPSHP,
-        S57obj.Obj.TOPMAR to Att.TOPSHP,
-        S57obj.Obj.MORFAC to Att.BOYSHP,
-        S57obj.Obj.SILTNK to Att.BUISHP,
+        Obj.BCNCAR to Att.BCNSHP,
+        Obj.BCNISD to Att.BCNSHP,
+        Obj.BCNLAT to Att.BCNSHP,
+        Obj.BCNSAW to Att.BCNSHP,
+        Obj.BCNSPP to Att.BCNSHP,
+        Obj.BUISGL to Att.BUISHP,
+        Obj.BOYCAR to Att.BOYSHP,
+        Obj.BOYISD to Att.BOYSHP,
+        Obj.BOYLAT to Att.BOYSHP,
+        Obj.BOYSAW to Att.BOYSHP,
+        Obj.BOYSPP to Att.BOYSHP,
+        Obj.BOYINB to Att.BOYSHP,
+        Obj.DAYMAR to Att.TOPSHP,
+        Obj.TOPMAR to Att.TOPSHP,
+        Obj.MORFAC to Att.BOYSHP,
+        Obj.SILTNK to Att.BUISHP,
     )
-    private val Sector_end = mapOf(S57obj.Obj.UNKOBJ to Att.SECTR2)
-    private val Sector_start = mapOf(S57obj.Obj.UNKOBJ to Att.SECTR1)
-    private val Sequence = mapOf(S57obj.Obj.UNKOBJ to Att.SIGSEQ)
-    private val Shift = mapOf(S57obj.Obj.UNKOBJ to Att.SHIPAM)
-    private val Ship = mapOf(S57obj.Obj.UNKOBJ to Att.SHPTYP)
-    private val Sounding_accuracy = mapOf(S57obj.Obj.UNKOBJ to Att.SOUACC)
-    private val Sounding_name = mapOf(S57obj.Obj.UNKOBJ to Att.SDRLEV)
-    private val Start_date = mapOf(S57obj.Obj.UNKOBJ to Att.DATSTA)
-    private val Start_time = mapOf(S57obj.Obj.UNKOBJ to Att.TIMSTA)
-    private val Status = mapOf(S57obj.Obj.UNKOBJ to Att.STATUS)
-    private val Surface = mapOf(S57obj.Obj.UNKOBJ to Att.NATSUR)
-    private val Surface_qualification = mapOf(S57obj.Obj.UNKOBJ to Att.NATQUA)
-    private val Survey = mapOf(S57obj.Obj.UNKOBJ to Att.SURTYP)
-    private val Survey_end = mapOf(S57obj.Obj.UNKOBJ to Att.SUREND)
-    private val Survey_start = mapOf(S57obj.Obj.UNKOBJ to Att.SURSTA)
-    private val System = mapOf(S57obj.Obj.UNKOBJ to Att.MARSYS)
-    private val Technique = mapOf(S57obj.Obj.UNKOBJ to Att.TECSOU)
-    private val Traffic_flow = mapOf(S57obj.Obj.UNKOBJ to Att.TRAFIC)
-    private val Units = mapOf(S57obj.Obj.UNKOBJ to Att.HUNITS)
-    private val Use = mapOf(S57obj.Obj.UNKOBJ to Att.USESHP)
-    private val Variation = mapOf(S57obj.Obj.UNKOBJ to Att.VALMAG)
-    private val Variation_change = mapOf(S57obj.Obj.UNKOBJ to Att.VALACM)
-    private val Velocity = mapOf(S57obj.Obj.UNKOBJ to Att.CURVEL)
-    private val Vertical_accuracy = mapOf(S57obj.Obj.UNKOBJ to Att.VERACC)
-    private val Vertical_datum = mapOf(S57obj.Obj.UNKOBJ to Att.VERDAT)
-    private val Vertical_length = mapOf(S57obj.Obj.UNKOBJ to Att.VERLEN)
-    private val Vertical_name = mapOf(S57obj.Obj.UNKOBJ to Att.VCRLEV)
-    private val Visibility = mapOf(S57obj.Obj.UNKOBJ to Att.LITVIS)
-    private val Water_level = mapOf(S57obj.Obj.UNKOBJ to Att.WATLEV)
-    private val Wavelength = mapOf(S57obj.Obj.UNKOBJ to Att.RADWAL)
-    private val Width = mapOf(S57obj.Obj.UNKOBJ to Att.HORWID)
+    private val Sector_end = mapOf(Obj.UNKOBJ to Att.SECTR2)
+    private val Sector_start = mapOf(Obj.UNKOBJ to Att.SECTR1)
+    private val Sequence = mapOf(Obj.UNKOBJ to Att.SIGSEQ)
+    private val Shift = mapOf(Obj.UNKOBJ to Att.SHIPAM)
+    private val Ship = mapOf(Obj.UNKOBJ to Att.SHPTYP)
+    private val Sounding_accuracy = mapOf(Obj.UNKOBJ to Att.SOUACC)
+    private val Sounding_name = mapOf(Obj.UNKOBJ to Att.SDRLEV)
+    private val Start_date = mapOf(Obj.UNKOBJ to Att.DATSTA)
+    private val Start_time = mapOf(Obj.UNKOBJ to Att.TIMSTA)
+    private val Status = mapOf(Obj.UNKOBJ to Att.STATUS)
+    private val Surface = mapOf(Obj.UNKOBJ to Att.NATSUR)
+    private val Surface_qualification = mapOf(Obj.UNKOBJ to Att.NATQUA)
+    private val Survey = mapOf(Obj.UNKOBJ to Att.SURTYP)
+    private val Survey_end = mapOf(Obj.UNKOBJ to Att.SUREND)
+    private val Survey_start = mapOf(Obj.UNKOBJ to Att.SURSTA)
+    private val System = mapOf(Obj.UNKOBJ to Att.MARSYS)
+    private val Technique = mapOf(Obj.UNKOBJ to Att.TECSOU)
+    private val Traffic_flow = mapOf(Obj.UNKOBJ to Att.TRAFIC)
+    private val Units = mapOf(Obj.UNKOBJ to Att.HUNITS)
+    private val Use = mapOf(Obj.UNKOBJ to Att.USESHP)
+    private val Variation = mapOf(Obj.UNKOBJ to Att.VALMAG)
+    private val Variation_change = mapOf(Obj.UNKOBJ to Att.VALACM)
+    private val Velocity = mapOf(Obj.UNKOBJ to Att.CURVEL)
+    private val Vertical_accuracy = mapOf(Obj.UNKOBJ to Att.VERACC)
+    private val Vertical_datum = mapOf(Obj.UNKOBJ to Att.VERDAT)
+    private val Vertical_length = mapOf(Obj.UNKOBJ to Att.VERLEN)
+    private val Vertical_name = mapOf(Obj.UNKOBJ to Att.VCRLEV)
+    private val Visibility = mapOf(Obj.UNKOBJ to Att.LITVIS)
+    private val Water_level = mapOf(Obj.UNKOBJ to Att.WATLEV)
+    private val Wavelength = mapOf(Obj.UNKOBJ to Att.RADWAL)
+    private val Width = mapOf(Obj.UNKOBJ to Att.HORWID)
 
-    private val Year = mapOf(S57obj.Obj.UNKOBJ to Att.RYRMGV)
+    private val Year = mapOf(Obj.UNKOBJ to Att.RYRMGV)
     private val StrAtt = mapOf(
         "accuracy" to Accuracy,
         "addition" to Addition,
@@ -908,14 +910,14 @@ object S57att {
         return str ?: ""
     }
 
-    fun enumAttribute(attribute: String?, obj: S57obj.Obj?): Att? { // Convert OSM attribute string to SCM enumeration
+    fun enumAttribute(attribute: String?, obj: Obj?): Att? { // Convert OSM attribute string to SCM enumeration
         if (attribute != null && attribute.isNotEmpty()) {
             val map = StrAtt[attribute]
             if (map != null) {
                 return if (map.containsKey(obj)) {
                     map[obj]
-                } else if (map.containsKey(S57obj.Obj.UNKOBJ)) {
-                    map[S57obj.Obj.UNKOBJ]
+                } else if (map.containsKey(Obj.UNKOBJ)) {
+                    map[Obj.UNKOBJ]
                 } else {
                     Att.UNKATT
                 }
