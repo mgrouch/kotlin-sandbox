@@ -6,6 +6,7 @@ import java.io.BufferedReader
 
 /**
  * @author Malcolm Herring
+ * @author mgrouch
  */
 object S57osm {
     private val OSMtags: HashMap<String?, KeyVal<*>?> = HashMap()
@@ -287,6 +288,5 @@ object S57osm {
         map.tagsDone(map.xref)
     }
 
-    // CHECKSTYLE.OFF: LineLength
     class KeyVal<V>(var obj: Obj?, var att: S57att.Att?, var conv: S57val.Conv?, var `val`: V?)
 }

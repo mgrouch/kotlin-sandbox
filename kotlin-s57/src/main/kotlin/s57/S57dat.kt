@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57obj.Obj
 import java.io.UnsupportedEncodingException
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -9,321 +10,302 @@ import kotlin.system.exitProcess
 
 /**
  * @author Malcolm Herring
+ * @author mgrouch
  */
 object S57dat {
+
     private val convs = mapOf(
-        S57subf.I8RN to S57conv(5, 2)                    ,
-        S57subf.RCNM to S57conv(2, 1)                    ,
-        S57subf.RCID to S57conv(10, 4)                   ,
-        S57subf.EXPP to S57conv(1, 1)                    ,
-        S57subf.INTU to S57conv(1, 1)                    ,
-        S57subf.DSNM to S57conv(0, 0)                    ,
-        S57subf.EDTN to S57conv(0, 0)                    ,
-        S57subf.UPDN to S57conv(0, 0)                    ,
-        S57subf.UADT to S57conv(8, 0)                    ,
-        S57subf.ISDT to S57conv(8, 0)                    ,
-        S57subf.STED to S57conv(4, 0)                    ,
-        S57subf.PRSP to S57conv(3, 1)                    ,
-        S57subf.PSDN to S57conv(0, 0)                    ,
-        S57subf.PRED to S57conv(0, 0)                    ,
-        S57subf.PROF to S57conv(2, 1)                    ,
-        S57subf.AGEN to S57conv(2, 2)                    ,
-        S57subf.COMT to S57conv(0, 0)                    ,
-        S57subf.DSTR to S57conv(2, 1)                    ,
-        S57subf.AALL to S57conv(1, 1)                    ,
-        S57subf.NALL to S57conv(1, 1)                    ,
-        S57subf.NOMR to S57conv(0, 4)                    ,
-        S57subf.NOCR to S57conv(0, 4)                    ,
-        S57subf.NOGR to S57conv(0, 4)                    ,
-        S57subf.NOLR to S57conv(0, 4)                    ,
-        S57subf.NOIN to S57conv(0, 4)                    ,
-        S57subf.NOCN to S57conv(0, 4)                    ,
-        S57subf.NOED to S57conv(0, 4)                    ,
-        S57subf.NOFA to S57conv(0, 4)                    ,
-        S57subf.HDAT to S57conv(3, 1)                    ,
-        S57subf.VDAT to S57conv(2, 1)                    ,
-        S57subf.SDAT to S57conv(2, 1)                    ,
-        S57subf.CSCL to S57conv(0, 4)                    ,
-        S57subf.DUNI to S57conv(2, 1)                    ,
-        S57subf.HUNI to S57conv(2, 1)                    ,
-        S57subf.PUNI to S57conv(2, 1)                    ,
-        S57subf.COUN to S57conv(2, 1)                    ,
-        S57subf.COMF to S57conv(0, 4)                    ,
-        S57subf.SOMF to S57conv(0, 4)                    ,
-        S57subf.PROJ to S57conv(3, 1)                    ,
-        S57subf.PRP1 to S57conv(0, -4)                   ,
-        S57subf.PRP2 to S57conv(0, -4)                   ,
-        S57subf.PRP3 to S57conv(0, -4)                   ,
-        S57subf.PRP4 to S57conv(0, -4)                   ,
-        S57subf.FEAS to S57conv(0, -4)                   ,
-        S57subf.FNOR to S57conv(0, -4)                   ,
-        S57subf.FPMF to S57conv(0, 4)                    ,
-        S57subf.RPID to S57conv(1, 1)                    ,
-        S57subf.RYCO to S57conv(0, -4)                   ,
-        S57subf.RXCO to S57conv(0, -4)                   ,
-        S57subf.CURP to S57conv(2, 1)                    ,
-        S57subf.RXVL to S57conv(0, -4)                   ,
-        S57subf.RYVL to S57conv(0, -4)                   ,
-        S57subf.PRCO to S57conv(2, 2)                    ,
-        S57subf.ESDT to S57conv(8, 0)                    ,
-        S57subf.LSDT to S57conv(8, 0)                    ,
-        S57subf.DCRT to S57conv(0, 0)                    ,
-        S57subf.CODT to S57conv(8, 0)                    ,
-        S57subf.PACC to S57conv(0, 4)                    ,
-        S57subf.HACC to S57conv(0, 4)                    ,
-        S57subf.SACC to S57conv(0, 4)                    ,
-        S57subf.FILE to S57conv(0, 0)                    ,
-        S57subf.LFIL to S57conv(0, 0)                    ,
-        S57subf.VOLM to S57conv(0, 0)                    ,
-        S57subf.IMPL to S57conv(3, 0)                    ,
-        S57subf.SLAT to S57conv(0, 0)                    ,
-        S57subf.WLON to S57conv(0, 0)                    ,
-        S57subf.NLAT to S57conv(0, 0)                    ,
-        S57subf.ELON to S57conv(0, 0)                    ,
-        S57subf.CRCS to S57conv(0, 0)                    ,
-        S57subf.NAM1 to S57conv(12, 5)                   ,
-        S57subf.NAM2 to S57conv(12, 5)                   ,
-        S57subf.OORA to S57conv(1, 1)                    ,
-        S57subf.OAAC to S57conv(6, 0)                    ,
-        S57subf.OACO to S57conv(5, 2)                    ,
-        S57subf.OALL to S57conv(0, 0)                    ,
-        S57subf.OATY to S57conv(1, 1)                    ,
-        S57subf.DEFN to S57conv(0, 0)                    ,
-        S57subf.AUTH to S57conv(2, 2)                    ,
-        S57subf.RFTP to S57conv(2, 1)                    ,
-        S57subf.RFVL to S57conv(0, 0)                    ,
-        S57subf.ATLB to S57conv(5, 2)                    ,
-        S57subf.ATDO to S57conv(1, 1)                    ,
-        S57subf.ADMU to S57conv(0, 0)                    ,
-        S57subf.ADFT to S57conv(0, 0)                    ,
-        S57subf.RAVA to S57conv(1, 1)                    ,
-        S57subf.DVAL to S57conv(0, 0)                    ,
-        S57subf.DVSD to S57conv(0, 0)                    ,
-        S57subf.OBLB to S57conv(5, 2)                    ,
-        S57subf.ASET to S57conv(1, 1)                    ,
-        S57subf.PRIM to S57conv(1, 1)                    ,
-        S57subf.GRUP to S57conv(3, 1)                    ,
-        S57subf.OBJL to S57conv(5, 2)                    ,
-        S57subf.RVER to S57conv(3, 2)                    ,
-        S57subf.RUIN to S57conv(1, 1)                    ,
-        S57subf.FIDN to S57conv(10, 4)                   ,
-        S57subf.FIDS to S57conv(5, 2)                    ,
-        S57subf.ATTL to S57conv(5, 2)                    ,
-        S57subf.ATVL to S57conv(0, 0)                    ,
-        S57subf.FFUI to S57conv(1, 1)                    ,
-        S57subf.FFIX to S57conv(0, 2)                    ,
-        S57subf.NFPT to S57conv(0, 2)                    ,
-        S57subf.LNAM to S57conv(17, 8)                   ,
-        S57subf.RIND to S57conv(0, 1)                    ,
-        S57subf.FSUI to S57conv(1, 1)                    ,
-        S57subf.FSIX to S57conv(0, 2)                    ,
-        S57subf.NSPT to S57conv(0, 2)                    ,
-        S57subf.NAME to S57conv(12, 5)                   ,
-        S57subf.ORNT to S57conv(1, 1)                    ,
-        S57subf.USAG to S57conv(1, 1)                    ,
-        S57subf.MASK to S57conv(1, 1)                    ,
-        S57subf.VPUI to S57conv(1, 1)                    ,
-        S57subf.VPIX to S57conv(0, 2)                    ,
-        S57subf.NVPT to S57conv(0, 2)                    ,
-        S57subf.TOPI to S57conv(1, 1)                    ,
-        S57subf.CCUI to S57conv(1, 1)                    ,
-        S57subf.CCIX to S57conv(0, 2)                    ,
-        S57subf.CCNC to S57conv(0, 2)                    ,
-        S57subf.YCOO to S57conv(0, -4)                   ,
-        S57subf.XCOO to S57conv(0, -4)                   ,
-        S57subf.VE3D to S57conv(0, -4)                   ,
-        S57subf.ATYP to S57conv(1, 1)                    ,
-        S57subf.SURF to S57conv(1, 1)                    ,
-        S57subf.ORDR to S57conv(1, 1)                    ,
-        S57subf.RESO to S57conv(0, 4)                    ,
-        S57subf.STPT to S57conv(0, 0)                    ,
-        S57subf.CTPT to S57conv(0, 0)                    ,
-        S57subf.ENPT to S57conv(0, 0)                    ,
-        S57subf.CDPM to S57conv(0, 0)                    ,
-        S57subf.CDPR to S57conv(0, 0)                    ,
+        S57subf.I8RN to S57conv(5, 2),
+        S57subf.RCNM to S57conv(2, 1),
+        S57subf.RCID to S57conv(10, 4),
+        S57subf.EXPP to S57conv(1, 1),
+        S57subf.INTU to S57conv(1, 1),
+        S57subf.DSNM to S57conv(0, 0),
+        S57subf.EDTN to S57conv(0, 0),
+        S57subf.UPDN to S57conv(0, 0),
+        S57subf.UADT to S57conv(8, 0),
+        S57subf.ISDT to S57conv(8, 0),
+        S57subf.STED to S57conv(4, 0),
+        S57subf.PRSP to S57conv(3, 1),
+        S57subf.PSDN to S57conv(0, 0),
+        S57subf.PRED to S57conv(0, 0),
+        S57subf.PROF to S57conv(2, 1),
+        S57subf.AGEN to S57conv(2, 2),
+        S57subf.COMT to S57conv(0, 0),
+        S57subf.DSTR to S57conv(2, 1),
+        S57subf.AALL to S57conv(1, 1),
+        S57subf.NALL to S57conv(1, 1),
+        S57subf.NOMR to S57conv(0, 4),
+        S57subf.NOCR to S57conv(0, 4),
+        S57subf.NOGR to S57conv(0, 4),
+        S57subf.NOLR to S57conv(0, 4),
+        S57subf.NOIN to S57conv(0, 4),
+        S57subf.NOCN to S57conv(0, 4),
+        S57subf.NOED to S57conv(0, 4),
+        S57subf.NOFA to S57conv(0, 4),
+        S57subf.HDAT to S57conv(3, 1),
+        S57subf.VDAT to S57conv(2, 1),
+        S57subf.SDAT to S57conv(2, 1),
+        S57subf.CSCL to S57conv(0, 4),
+        S57subf.DUNI to S57conv(2, 1),
+        S57subf.HUNI to S57conv(2, 1),
+        S57subf.PUNI to S57conv(2, 1),
+        S57subf.COUN to S57conv(2, 1),
+        S57subf.COMF to S57conv(0, 4),
+        S57subf.SOMF to S57conv(0, 4),
+        S57subf.PROJ to S57conv(3, 1),
+        S57subf.PRP1 to S57conv(0, -4),
+        S57subf.PRP2 to S57conv(0, -4),
+        S57subf.PRP3 to S57conv(0, -4),
+        S57subf.PRP4 to S57conv(0, -4),
+        S57subf.FEAS to S57conv(0, -4),
+        S57subf.FNOR to S57conv(0, -4),
+        S57subf.FPMF to S57conv(0, 4),
+        S57subf.RPID to S57conv(1, 1),
+        S57subf.RYCO to S57conv(0, -4),
+        S57subf.RXCO to S57conv(0, -4),
+        S57subf.CURP to S57conv(2, 1),
+        S57subf.RXVL to S57conv(0, -4),
+        S57subf.RYVL to S57conv(0, -4),
+        S57subf.PRCO to S57conv(2, 2),
+        S57subf.ESDT to S57conv(8, 0),
+        S57subf.LSDT to S57conv(8, 0),
+        S57subf.DCRT to S57conv(0, 0),
+        S57subf.CODT to S57conv(8, 0),
+        S57subf.PACC to S57conv(0, 4),
+        S57subf.HACC to S57conv(0, 4),
+        S57subf.SACC to S57conv(0, 4),
+        S57subf.FILE to S57conv(0, 0),
+        S57subf.LFIL to S57conv(0, 0),
+        S57subf.VOLM to S57conv(0, 0),
+        S57subf.IMPL to S57conv(3, 0),
+        S57subf.SLAT to S57conv(0, 0),
+        S57subf.WLON to S57conv(0, 0),
+        S57subf.NLAT to S57conv(0, 0),
+        S57subf.ELON to S57conv(0, 0),
+        S57subf.CRCS to S57conv(0, 0),
+        S57subf.NAM1 to S57conv(12, 5),
+        S57subf.NAM2 to S57conv(12, 5),
+        S57subf.OORA to S57conv(1, 1),
+        S57subf.OAAC to S57conv(6, 0),
+        S57subf.OACO to S57conv(5, 2),
+        S57subf.OALL to S57conv(0, 0),
+        S57subf.OATY to S57conv(1, 1),
+        S57subf.DEFN to S57conv(0, 0),
+        S57subf.AUTH to S57conv(2, 2),
+        S57subf.RFTP to S57conv(2, 1),
+        S57subf.RFVL to S57conv(0, 0),
+        S57subf.ATLB to S57conv(5, 2),
+        S57subf.ATDO to S57conv(1, 1),
+        S57subf.ADMU to S57conv(0, 0),
+        S57subf.ADFT to S57conv(0, 0),
+        S57subf.RAVA to S57conv(1, 1),
+        S57subf.DVAL to S57conv(0, 0),
+        S57subf.DVSD to S57conv(0, 0),
+        S57subf.OBLB to S57conv(5, 2),
+        S57subf.ASET to S57conv(1, 1),
+        S57subf.PRIM to S57conv(1, 1),
+        S57subf.GRUP to S57conv(3, 1),
+        S57subf.OBJL to S57conv(5, 2),
+        S57subf.RVER to S57conv(3, 2),
+        S57subf.RUIN to S57conv(1, 1),
+        S57subf.FIDN to S57conv(10, 4),
+        S57subf.FIDS to S57conv(5, 2),
+        S57subf.ATTL to S57conv(5, 2),
+        S57subf.ATVL to S57conv(0, 0),
+        S57subf.FFUI to S57conv(1, 1),
+        S57subf.FFIX to S57conv(0, 2),
+        S57subf.NFPT to S57conv(0, 2),
+        S57subf.LNAM to S57conv(17, 8),
+        S57subf.RIND to S57conv(0, 1),
+        S57subf.FSUI to S57conv(1, 1),
+        S57subf.FSIX to S57conv(0, 2),
+        S57subf.NSPT to S57conv(0, 2),
+        S57subf.NAME to S57conv(12, 5),
+        S57subf.ORNT to S57conv(1, 1),
+        S57subf.USAG to S57conv(1, 1),
+        S57subf.MASK to S57conv(1, 1),
+        S57subf.VPUI to S57conv(1, 1),
+        S57subf.VPIX to S57conv(0, 2),
+        S57subf.NVPT to S57conv(0, 2),
+        S57subf.TOPI to S57conv(1, 1),
+        S57subf.CCUI to S57conv(1, 1),
+        S57subf.CCIX to S57conv(0, 2),
+        S57subf.CCNC to S57conv(0, 2),
+        S57subf.YCOO to S57conv(0, -4),
+        S57subf.XCOO to S57conv(0, -4),
+        S57subf.VE3D to S57conv(0, -4),
+        S57subf.ATYP to S57conv(1, 1),
+        S57subf.SURF to S57conv(1, 1),
+        S57subf.ORDR to S57conv(1, 1),
+        S57subf.RESO to S57conv(0, 4),
+        S57subf.STPT to S57conv(0, 0),
+        S57subf.CTPT to S57conv(0, 0),
+        S57subf.ENPT to S57conv(0, 0),
+        S57subf.CDPM to S57conv(0, 0),
+        S57subf.CDPR to S57conv(0, 0),
     )
 
-    private val S57i8ri = ArrayList(listOf(S57subf.I8RN))
-    private val S57dsid = ArrayList(
-        listOf(
-            S57subf.RCNM,
-            S57subf.RCID,
-            S57subf.EXPP,
-            S57subf.INTU,
-            S57subf.DSNM,
-            S57subf.EDTN,
-            S57subf.UPDN,
-            S57subf.UADT,
-            S57subf.ISDT,
-            S57subf.STED,
-            S57subf.PRSP,
-            S57subf.PSDN,
-            S57subf.PRED,
-            S57subf.PROF,
-            S57subf.AGEN,
-            S57subf.COMT
-        )
-    )
-    private val S57dssi = ArrayList(
-        listOf(
-            S57subf.DSTR, S57subf.AALL, S57subf.NALL, S57subf.NOMR, S57subf.NOCR, S57subf.NOGR, S57subf.NOLR,
-            S57subf.NOIN, S57subf.NOCN, S57subf.NOED, S57subf.NOFA
-        )
-    )
-    private val S57dspm = ArrayList(
-        listOf(
-            S57subf.RCNM, S57subf.RCID, S57subf.HDAT, S57subf.VDAT, S57subf.SDAT, S57subf.CSCL, S57subf.DUNI,
-            S57subf.HUNI, S57subf.PUNI, S57subf.COUN, S57subf.COMF, S57subf.SOMF, S57subf.COMT
-        )
-    )
-    private val S57dspr = ArrayList(
-        listOf(
-            S57subf.PROJ, S57subf.PRP1, S57subf.PRP2, S57subf.PRP3, S57subf.PRP4, S57subf.FEAS, S57subf.FNOR,
-            S57subf.FPMF, S57subf.COMT
-        )
-    )
-    private val S57dsrc = ArrayList(
-        listOf(
-            S57subf.RPID, S57subf.RYCO, S57subf.RXCO, S57subf.CURP, S57subf.FPMF, S57subf.RXVL, S57subf.RYVL,
-            S57subf.COMT
-        )
-    )
-    private val S57dsht = ArrayList(
-        listOf(
-            S57subf.RCNM,
-            S57subf.RCID,
-            S57subf.PRCO,
-            S57subf.ESDT,
-            S57subf.LSDT,
-            S57subf.DCRT,
-            S57subf.CODT,
-            S57subf.COMT
-        )
-    )
-    private val S57dsac = ArrayList(
-        listOf(
-            S57subf.RCNM,
-            S57subf.RCID,
-            S57subf.PACC,
-            S57subf.HACC,
-            S57subf.SACC,
-            S57subf.FPMF,
-            S57subf.COMT
-        )
-    )
-    private val S57catd = ArrayList(
-        listOf(
-            S57subf.RCNM, S57subf.RCID, S57subf.FILE, S57subf.LFIL, S57subf.VOLM, S57subf.IMPL, S57subf.SLAT,
-            S57subf.WLON, S57subf.NLAT, S57subf.ELON, S57subf.CRCS, S57subf.COMT
-        )
-    )
-    private val S57catx = ArrayList(listOf(S57subf.RCNM, S57subf.RCID, S57subf.NAM1, S57subf.NAM2, S57subf.COMT))
-    private val S57dddf = ArrayList(
-        listOf(
-            S57subf.RCNM, S57subf.RCID, S57subf.OORA, S57subf.OAAC, S57subf.OACO, S57subf.OALL, S57subf.OATY,
-            S57subf.DEFN, S57subf.AUTH, S57subf.COMT
-        )
-    )
-    private val S57dddr = ArrayList(listOf(S57subf.RFTP, S57subf.RFVL))
-    private val S57dddi = ArrayList(
-        listOf(
-            S57subf.RCNM,
-            S57subf.RCID,
-            S57subf.ATLB,
-            S57subf.ATDO,
-            S57subf.ADMU,
-            S57subf.ADFT,
-            S57subf.AUTH,
-            S57subf.COMT
-        )
-    )
-    private val S57ddom = ArrayList(listOf(S57subf.RAVA, S57subf.DVAL, S57subf.DVSD, S57subf.DEFN, S57subf.AUTH))
-    private val S57ddrf = ArrayList(listOf(S57subf.RFTP, S57subf.RFVL))
-    private val S57ddsi = ArrayList(listOf(S57subf.RCNM, S57subf.RCID, S57subf.OBLB))
-    private val S57ddsc = ArrayList(listOf(S57subf.ATLB, S57subf.ASET, S57subf.AUTH))
-    private val S57frid = ArrayList(
-        listOf(
-            S57subf.RCNM,
-            S57subf.RCID,
-            S57subf.PRIM,
-            S57subf.GRUP,
-            S57subf.OBJL,
-            S57subf.RVER,
-            S57subf.RUIN
-        )
-    )
-    private val S57foid = ArrayList(listOf(S57subf.AGEN, S57subf.FIDN, S57subf.FIDS))
-    private val S57lnam = ArrayList(listOf(S57subf.LNAM))
-    private val S57attf = ArrayList(listOf(S57subf.ATTL, S57subf.ATVL))
-    private val S57natf = ArrayList(listOf(S57subf.ATTL, S57subf.ATVL))
-    private val S57ffpc = ArrayList(listOf(S57subf.FFUI, S57subf.FFIX, S57subf.NFPT))
-    private val S57ffpt = ArrayList(listOf(S57subf.LNAM, S57subf.RIND, S57subf.COMT))
-    private val S57fspc = ArrayList(listOf(S57subf.FSUI, S57subf.FSIX, S57subf.NSPT))
-    private val S57fspt = ArrayList(listOf(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.MASK))
-    private val S57vrid = ArrayList(listOf(S57subf.RCNM, S57subf.RCID, S57subf.RVER, S57subf.RUIN))
-    private val S57attv = ArrayList(listOf(S57subf.ATTL, S57subf.ATVL))
-    private val S57vrpc = ArrayList(listOf(S57subf.VPUI, S57subf.VPIX, S57subf.NVPT))
-    private val S57vrpt = ArrayList(listOf(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.TOPI, S57subf.MASK))
-    private val S57sgcc = ArrayList(listOf(S57subf.CCUI, S57subf.CCIX, S57subf.CCNC))
-    private val S57sg2d = ArrayList(listOf(S57subf.YCOO, S57subf.XCOO))
-    private val S57sg3d = ArrayList(listOf(S57subf.YCOO, S57subf.XCOO, S57subf.VE3D))
-    private val S57arcc = ArrayList(listOf(S57subf.ATYP, S57subf.SURF, S57subf.ORDR, S57subf.RESO, S57subf.FPMF))
-    private val S57ar2d = ArrayList(listOf(S57subf.STPT, S57subf.CTPT, S57subf.ENPT, S57subf.YCOO, S57subf.XCOO))
-    private val S57el2d = ArrayList(
-        listOf(
-            S57subf.STPT,
-            S57subf.CTPT,
-            S57subf.ENPT,
-            S57subf.CDPM,
-            S57subf.CDPR,
-            S57subf.YCOO,
-            S57subf.XCOO
-        )
-    )
-    private val S57ct2d = ArrayList(listOf(S57subf.YCOO, S57subf.XCOO))
-    private val fields = EnumMap<S57field?, ArrayList<S57subf>>(
-        S57field::class.java
+    private val S57i8ri = listOf(S57subf.I8RN)
+
+    private val S57dsid = listOf(
+        S57subf.RCNM,
+        S57subf.RCID,
+        S57subf.EXPP,
+        S57subf.INTU,
+        S57subf.DSNM,
+        S57subf.EDTN,
+        S57subf.UPDN,
+        S57subf.UADT,
+        S57subf.ISDT,
+        S57subf.STED,
+        S57subf.PRSP,
+        S57subf.PSDN,
+        S57subf.PRED,
+        S57subf.PROF,
+        S57subf.AGEN,
+        S57subf.COMT
     )
 
-    init {
-        fields[S57field.I8RI] = S57i8ri
-        fields[S57field.DSID] = S57dsid
-        fields[S57field.DSSI] = S57dssi
-        fields[S57field.DSPM] = S57dspm
-        fields[S57field.DSPR] = S57dspr
-        fields[S57field.DSRC] = S57dsrc
-        fields[S57field.DSHT] = S57dsht
-        fields[S57field.DSAC] = S57dsac
-        fields[S57field.CATD] = S57catd
-        fields[S57field.CATX] = S57catx
-        fields[S57field.DDDF] = S57dddf
-        fields[S57field.DDDR] = S57dddr
-        fields[S57field.DDDI] = S57dddi
-        fields[S57field.DDOM] = S57ddom
-        fields[S57field.DDRF] = S57ddrf
-        fields[S57field.DDSI] = S57ddsi
-        fields[S57field.DDSC] = S57ddsc
-        fields[S57field.FRID] = S57frid
-        fields[S57field.FOID] = S57foid
-        fields[S57field.LNAM] = S57lnam
-        fields[S57field.ATTF] = S57attf
-        fields[S57field.NATF] = S57natf
-        fields[S57field.FFPC] = S57ffpc
-        fields[S57field.FFPT] = S57ffpt
-        fields[S57field.FFPC] = S57fspc
-        fields[S57field.FSPT] = S57fspt
-        fields[S57field.VRID] = S57vrid
-        fields[S57field.ATTV] = S57attv
-        fields[S57field.VRPC] = S57vrpc
-        fields[S57field.VRPT] = S57vrpt
-        fields[S57field.SGCC] = S57sgcc
-        fields[S57field.SG2D] = S57sg2d
-        fields[S57field.SG3D] = S57sg3d
-        fields[S57field.ARCC] = S57arcc
-        fields[S57field.AR2D] = S57ar2d
-        fields[S57field.EL2D] = S57el2d
-        fields[S57field.CT2D] = S57ct2d
-    }
+    private val S57dssi = listOf(
+        S57subf.DSTR, S57subf.AALL, S57subf.NALL, S57subf.NOMR, S57subf.NOCR, S57subf.NOGR, S57subf.NOLR,
+        S57subf.NOIN, S57subf.NOCN, S57subf.NOED, S57subf.NOFA
+    )
+    private val S57dspm = listOf(
+        S57subf.RCNM, S57subf.RCID, S57subf.HDAT, S57subf.VDAT, S57subf.SDAT, S57subf.CSCL, S57subf.DUNI,
+        S57subf.HUNI, S57subf.PUNI, S57subf.COUN, S57subf.COMF, S57subf.SOMF, S57subf.COMT
+    )
+
+    private val S57dspr = listOf(
+        S57subf.PROJ, S57subf.PRP1, S57subf.PRP2, S57subf.PRP3, S57subf.PRP4, S57subf.FEAS, S57subf.FNOR,
+        S57subf.FPMF, S57subf.COMT
+    )
+    private val S57dsrc = listOf(
+        S57subf.RPID, S57subf.RYCO, S57subf.RXCO, S57subf.CURP, S57subf.FPMF, S57subf.RXVL, S57subf.RYVL,
+        S57subf.COMT
+    )
+    private val S57dsht = listOf(
+        S57subf.RCNM,
+        S57subf.RCID,
+        S57subf.PRCO,
+        S57subf.ESDT,
+        S57subf.LSDT,
+        S57subf.DCRT,
+        S57subf.CODT,
+        S57subf.COMT
+    )
+    private val S57dsac = listOf(
+        S57subf.RCNM,
+        S57subf.RCID,
+        S57subf.PACC,
+        S57subf.HACC,
+        S57subf.SACC,
+        S57subf.FPMF,
+        S57subf.COMT
+    )
+    private val S57catd = listOf(
+        S57subf.RCNM, S57subf.RCID, S57subf.FILE, S57subf.LFIL, S57subf.VOLM, S57subf.IMPL, S57subf.SLAT,
+        S57subf.WLON, S57subf.NLAT, S57subf.ELON, S57subf.CRCS, S57subf.COMT
+    )
+    private val S57catx = listOf(S57subf.RCNM, S57subf.RCID, S57subf.NAM1, S57subf.NAM2, S57subf.COMT)
+    private val S57dddf = listOf(
+        S57subf.RCNM, S57subf.RCID, S57subf.OORA, S57subf.OAAC, S57subf.OACO, S57subf.OALL, S57subf.OATY,
+        S57subf.DEFN, S57subf.AUTH, S57subf.COMT
+    )
+
+    private val S57dddr = listOf(S57subf.RFTP, S57subf.RFVL)
+
+    private val S57dddi = listOf(
+        S57subf.RCNM,
+        S57subf.RCID,
+        S57subf.ATLB,
+        S57subf.ATDO,
+        S57subf.ADMU,
+        S57subf.ADFT,
+        S57subf.AUTH,
+        S57subf.COMT
+    )
+
+    private val S57ddom = listOf(S57subf.RAVA, S57subf.DVAL, S57subf.DVSD, S57subf.DEFN, S57subf.AUTH)
+    private val S57ddrf = listOf(S57subf.RFTP, S57subf.RFVL)
+    private val S57ddsi = listOf(S57subf.RCNM, S57subf.RCID, S57subf.OBLB)
+    private val S57ddsc = listOf(S57subf.ATLB, S57subf.ASET, S57subf.AUTH)
+    private val S57frid = listOf(
+        S57subf.RCNM,
+        S57subf.RCID,
+        S57subf.PRIM,
+        S57subf.GRUP,
+        S57subf.OBJL,
+        S57subf.RVER,
+        S57subf.RUIN
+    )
+
+    private val S57foid = listOf(S57subf.AGEN, S57subf.FIDN, S57subf.FIDS)
+    private val S57lnam = listOf(S57subf.LNAM)
+    private val S57attf = listOf(S57subf.ATTL, S57subf.ATVL)
+    private val S57natf = listOf(S57subf.ATTL, S57subf.ATVL)
+    private val S57ffpc = listOf(S57subf.FFUI, S57subf.FFIX, S57subf.NFPT)
+    private val S57ffpt = listOf(S57subf.LNAM, S57subf.RIND, S57subf.COMT)
+    private val S57fspc = listOf(S57subf.FSUI, S57subf.FSIX, S57subf.NSPT)
+    private val S57fspt = listOf(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.MASK)
+    private val S57vrid = listOf(S57subf.RCNM, S57subf.RCID, S57subf.RVER, S57subf.RUIN)
+    private val S57attv = listOf(S57subf.ATTL, S57subf.ATVL)
+    private val S57vrpc = listOf(S57subf.VPUI, S57subf.VPIX, S57subf.NVPT)
+    private val S57vrpt = listOf(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.TOPI, S57subf.MASK)
+    private val S57sgcc = listOf(S57subf.CCUI, S57subf.CCIX, S57subf.CCNC)
+    private val S57sg2d = listOf(S57subf.YCOO, S57subf.XCOO)
+    private val S57sg3d = listOf(S57subf.YCOO, S57subf.XCOO, S57subf.VE3D)
+    private val S57arcc = listOf(S57subf.ATYP, S57subf.SURF, S57subf.ORDR, S57subf.RESO, S57subf.FPMF)
+    private val S57ar2d = listOf(S57subf.STPT, S57subf.CTPT, S57subf.ENPT, S57subf.YCOO, S57subf.XCOO)
+    private val S57el2d = listOf(
+        S57subf.STPT,
+        S57subf.CTPT,
+        S57subf.ENPT,
+        S57subf.CDPM,
+        S57subf.CDPR,
+        S57subf.YCOO,
+        S57subf.XCOO
+    )
+    private val S57ct2d = listOf(S57subf.YCOO, S57subf.XCOO)
+    private val fields = mapOf(
+        S57field.I8RI to S57i8ri,
+        S57field.DSID to S57dsid,
+        S57field.DSSI to S57dssi,
+        S57field.DSPM to S57dspm,
+        S57field.DSPR to S57dspr,
+        S57field.DSRC to S57dsrc,
+        S57field.DSHT to S57dsht,
+        S57field.DSAC to S57dsac,
+        S57field.CATD to S57catd,
+        S57field.CATX to S57catx,
+        S57field.DDDF to S57dddf,
+        S57field.DDDR to S57dddr,
+        S57field.DDDI to S57dddi,
+        S57field.DDOM to S57ddom,
+        S57field.DDRF to S57ddrf,
+        S57field.DDSI to S57ddsi,
+        S57field.DDSC to S57ddsc,
+        S57field.FRID to S57frid,
+        S57field.FOID to S57foid,
+        S57field.LNAM to S57lnam,
+        S57field.ATTF to S57attf,
+        S57field.NATF to S57natf,
+        S57field.FFPC to S57ffpc,
+        S57field.FFPT to S57ffpt,
+        S57field.FFPC to S57fspc,
+        S57field.FSPT to S57fspt,
+        S57field.VRID to S57vrid,
+        S57field.ATTV to S57attv,
+        S57field.VRPC to S57vrpc,
+        S57field.VRPT to S57vrpt,
+        S57field.SGCC to S57sgcc,
+        S57field.SG2D to S57sg2d,
+        S57field.SG3D to S57sg3d,
+        S57field.ARCC to S57arcc,
+        S57field.AR2D to S57ar2d,
+        S57field.EL2D to S57el2d,
+        S57field.CT2D to S57ct2d,
+    )
 
     private val leader = byteArrayOf(
         '0'.code.toByte(),
@@ -593,191 +575,187 @@ object S57dat {
         return fbuf
     }
 
-    private val S57prims = EnumMap<S57obj.Obj?, Prims>(
-        S57obj.Obj::class.java
+    private val S57prims = mapOf(
+        Obj.UNKOBJ to Prims.PLA,
+        Obj.M_COVR to Prims.A,
+        Obj.M_NSYS to Prims.A,
+        Obj.AIRARE to Prims.PA,
+        Obj.ACHBRT to Prims.PA,
+        Obj.ACHARE to Prims.PA,
+        Obj.BCNCAR to Prims.P,
+        Obj.BCNISD to Prims.P,
+        Obj.BCNLAT to Prims.P,
+        Obj.BCNSAW to Prims.P,
+        Obj.BCNSPP to Prims.P,
+        Obj.BERTHS to Prims.PLA,
+        Obj.BRIDGE to Prims.PLA,
+        Obj.BUISGL to Prims.PA,
+        Obj.BUAARE to Prims.PA,
+        Obj.BOYCAR to Prims.P,
+        Obj.BOYINB to Prims.P,
+        Obj.BOYISD to Prims.P,
+        Obj.BOYLAT to Prims.P,
+        Obj.BOYSAW to Prims.P,
+        Obj.BOYSPP to Prims.P,
+        Obj.CBLARE to Prims.A,
+        Obj.CBLOHD to Prims.L,
+        Obj.CBLSUB to Prims.L,
+        Obj.CANALS to Prims.A,
+        Obj.CTSARE to Prims.PA,
+        Obj.CAUSWY to Prims.LA,
+        Obj.CTNARE to Prims.PA,
+        Obj.CHKPNT to Prims.PA,
+        Obj.CGUSTA to Prims.P,
+        Obj.COALNE to Prims.L,
+        Obj.CONZNE to Prims.A,
+        Obj.COSARE to Prims.A,
+        Obj.CTRPNT to Prims.P,
+        Obj.CONVYR to Prims.LA,
+        Obj.CRANES to Prims.PA,
+        Obj.CURENT to Prims.P,
+        Obj.CUSZNE to Prims.A,
+        Obj.DAMCON to Prims.LA,
+        Obj.DAYMAR to Prims.P,
+        Obj.DWRTCL to Prims.L,
+        Obj.DWRTPT to Prims.A,
+        Obj.DEPARE to Prims.A,
+        Obj.DEPCNT to Prims.L,
+        Obj.DISMAR to Prims.P,
+        Obj.DOCARE to Prims.A,
+        Obj.DRGARE to Prims.A,
+        Obj.DRYDOC to Prims.A,
+        Obj.DMPGRD to Prims.PA,
+        Obj.DYKCON to Prims.L,
+        Obj.EXEZNE to Prims.A,
+        Obj.FAIRWY to Prims.A,
+        Obj.FNCLNE to Prims.L,
+        Obj.FERYRT to Prims.LA,
+        Obj.FSHZNE to Prims.A,
+        Obj.FSHFAC to Prims.PLA,
+        Obj.FSHGRD to Prims.A,
+        Obj.FLODOC to Prims.A,
+        Obj.FOGSIG to Prims.P,
+        Obj.FORSTC to Prims.PLA,
+        Obj.FRPARE to Prims.A,
+        Obj.GATCON to Prims.PLA,
+        Obj.GRIDRN to Prims.PA,
+        Obj.HRBARE to Prims.A,
+        Obj.HRBFAC to Prims.PA,
+        Obj.HULKES to Prims.PA,
+        Obj.ICEARE to Prims.A,
+        Obj.ICNARE to Prims.PA,
+        Obj.ISTZNE to Prims.A,
+        Obj.LAKARE to Prims.A,
+        Obj.LNDARE to Prims.PLA,
+        Obj.LNDELV to Prims.PL,
+        Obj.LNDRGN to Prims.PA,
+        Obj.LNDMRK to Prims.PLA,
+        Obj.LIGHTS to Prims.P,
+        Obj.LITFLT to Prims.P,
+        Obj.LITVES to Prims.P,
+        Obj.LOCMAG to Prims.PLA,
+        Obj.LOKBSN to Prims.A,
+        Obj.LOGPON to Prims.PA,
+        Obj.MAGVAR to Prims.PLA,
+        Obj.MARCUL to Prims.PLA,
+        Obj.MIPARE to Prims.PA,
+        Obj.MORFAC to Prims.PLA,
+        Obj.MPAARE to Prims.PA,
+        Obj.NAVLNE to Prims.L,
+        Obj.OBSTRN to Prims.PLA,
+        Obj.OFSPLF to Prims.PA,
+        Obj.OSPARE to Prims.A,
+        Obj.OILBAR to Prims.L,
+        Obj.PILPNT to Prims.P,
+        Obj.PILBOP to Prims.PA,
+        Obj.PIPARE to Prims.PA,
+        Obj.PIPOHD to Prims.L,
+        Obj.PIPSOL to Prims.PL,
+        Obj.PONTON to Prims.LA,
+        Obj.PRCARE to Prims.PA,
+        Obj.PRDARE to Prims.PA,
+        Obj.PYLONS to Prims.PA,
+        Obj.RADLNE to Prims.L,
+        Obj.RADRNG to Prims.A,
+        Obj.RADRFL to Prims.P,
+        Obj.RADSTA to Prims.P,
+        Obj.RTPBCN to Prims.P,
+        Obj.RDOCAL to Prims.PL,
+        Obj.RDOSTA to Prims.P,
+        Obj.RAILWY to Prims.L,
+        Obj.RAPIDS to Prims.PLA,
+        Obj.RCRTCL to Prims.L,
+        Obj.RECTRC to Prims.LA,
+        Obj.RCTLPT to Prims.PA,
+        Obj.RSCSTA to Prims.P,
+        Obj.RESARE to Prims.A,
+        Obj.RETRFL to Prims.P,
+        Obj.RIVERS to Prims.LA,
+        Obj.ROADWY to Prims.PLA,
+        Obj.RUNWAY to Prims.PLA,
+        Obj.SNDWAV to Prims.PLA,
+        Obj.SEAARE to Prims.PA,
+        Obj.SPLARE to Prims.PA,
+        Obj.SBDARE to Prims.PLA,
+        Obj.SLCONS to Prims.PLA,
+        Obj.SISTAT to Prims.P,
+        Obj.SISTAW to Prims.P,
+        Obj.SILTNK to Prims.PA,
+        Obj.SLOTOP to Prims.L,
+        Obj.SLOGRD to Prims.PA,
+        Obj.SMCFAC to Prims.PA,
+        Obj.SOUNDG to Prims.P,
+        Obj.SPRING to Prims.P,
+        Obj.STSLNE to Prims.L,
+        Obj.SUBTLN to Prims.A,
+        Obj.SWPARE to Prims.A,
+        Obj.TESARE to Prims.A,
+        Obj.TS_PRH to Prims.PA,
+        Obj.TS_PNH to Prims.PA,
+        Obj.TS_PAD to Prims.PA,
+        Obj.TS_TIS to Prims.PA,
+        Obj.T_HMON to Prims.PA,
+        Obj.T_NHMN to Prims.PA,
+        Obj.T_TIMS to Prims.PA,
+        Obj.TIDEWY to Prims.LA,
+        Obj.TOPMAR to Prims.P,
+        Obj.TSELNE to Prims.LA,
+        Obj.TSSBND to Prims.L,
+        Obj.TSSCRS to Prims.A,
+        Obj.TSSLPT to Prims.A,
+        Obj.TSSRON to Prims.A,
+        Obj.TSEZNE to Prims.A,
+        Obj.TUNNEL to Prims.LA,
+        Obj.TWRTPT to Prims.A,
+        Obj.UWTROC to Prims.P,
+        Obj.UNSARE to Prims.A,
+        Obj.VEGATN to Prims.PLA,
+        Obj.WATTUR to Prims.PLA,
+        Obj.WATFAL to Prims.PL,
+        Obj.WEDKLP to Prims.PA,
+        Obj.WRECKS to Prims.PA,
+        Obj.TS_FEB to Prims.PA,
+        Obj.NOTMRK to Prims.P,
+        Obj.WTWAXS to Prims.L,
+        Obj.WTWPRF to Prims.L,
+        Obj.BUNSTA to Prims.PA,
+        Obj.COMARE to Prims.A,
+        Obj.HRBBSN to Prims.A,
+        Obj.LKBSPT to Prims.A,
+        Obj.PRTARE to Prims.A,
+        Obj.REFDMP to Prims.P,
+        Obj.TERMNL to Prims.PA,
+        Obj.TRNBSN to Prims.PA,
+        Obj.WTWARE to Prims.A,
+        Obj.WTWGAG to Prims.PA,
+        Obj.TISDGE to Prims.N,
+        Obj.VEHTRF to Prims.PA,
+        Obj.EXCNST to Prims.PA,
+        Obj.LG_SDM to Prims.A,
+        Obj.LG_VSP to Prims.A,
+        Obj.LITMAJ to Prims.P,
+        Obj.LITMIN to Prims.P,
     )
-
-    init {
-        S57prims[S57obj.Obj.UNKOBJ] = Prims.PLA
-        S57prims[S57obj.Obj.M_COVR] = Prims.A
-        S57prims[S57obj.Obj.M_NSYS] = Prims.A
-        S57prims[S57obj.Obj.AIRARE] = Prims.PA
-        S57prims[S57obj.Obj.ACHBRT] = Prims.PA
-        S57prims[S57obj.Obj.ACHARE] = Prims.PA
-        S57prims[S57obj.Obj.BCNCAR] = Prims.P
-        S57prims[S57obj.Obj.BCNISD] = Prims.P
-        S57prims[S57obj.Obj.BCNLAT] = Prims.P
-        S57prims[S57obj.Obj.BCNSAW] = Prims.P
-        S57prims[S57obj.Obj.BCNSPP] = Prims.P
-        S57prims[S57obj.Obj.BERTHS] = Prims.PLA
-        S57prims[S57obj.Obj.BRIDGE] = Prims.PLA
-        S57prims[S57obj.Obj.BUISGL] = Prims.PA
-        S57prims[S57obj.Obj.BUAARE] = Prims.PA
-        S57prims[S57obj.Obj.BOYCAR] = Prims.P
-        S57prims[S57obj.Obj.BOYINB] = Prims.P
-        S57prims[S57obj.Obj.BOYISD] = Prims.P
-        S57prims[S57obj.Obj.BOYLAT] = Prims.P
-        S57prims[S57obj.Obj.BOYSAW] = Prims.P
-        S57prims[S57obj.Obj.BOYSPP] = Prims.P
-        S57prims[S57obj.Obj.CBLARE] = Prims.A
-        S57prims[S57obj.Obj.CBLOHD] = Prims.L
-        S57prims[S57obj.Obj.CBLSUB] = Prims.L
-        S57prims[S57obj.Obj.CANALS] = Prims.A
-        S57prims[S57obj.Obj.CTSARE] = Prims.PA
-        S57prims[S57obj.Obj.CAUSWY] = Prims.LA
-        S57prims[S57obj.Obj.CTNARE] = Prims.PA
-        S57prims[S57obj.Obj.CHKPNT] = Prims.PA
-        S57prims[S57obj.Obj.CGUSTA] = Prims.P
-        S57prims[S57obj.Obj.COALNE] = Prims.L
-        S57prims[S57obj.Obj.CONZNE] = Prims.A
-        S57prims[S57obj.Obj.COSARE] = Prims.A
-        S57prims[S57obj.Obj.CTRPNT] = Prims.P
-        S57prims[S57obj.Obj.CONVYR] = Prims.LA
-        S57prims[S57obj.Obj.CRANES] = Prims.PA
-        S57prims[S57obj.Obj.CURENT] = Prims.P
-        S57prims[S57obj.Obj.CUSZNE] = Prims.A
-        S57prims[S57obj.Obj.DAMCON] = Prims.LA
-        S57prims[S57obj.Obj.DAYMAR] = Prims.P
-        S57prims[S57obj.Obj.DWRTCL] = Prims.L
-        S57prims[S57obj.Obj.DWRTPT] = Prims.A
-        S57prims[S57obj.Obj.DEPARE] = Prims.A
-        S57prims[S57obj.Obj.DEPCNT] = Prims.L
-        S57prims[S57obj.Obj.DISMAR] = Prims.P
-        S57prims[S57obj.Obj.DOCARE] = Prims.A
-        S57prims[S57obj.Obj.DRGARE] = Prims.A
-        S57prims[S57obj.Obj.DRYDOC] = Prims.A
-        S57prims[S57obj.Obj.DMPGRD] = Prims.PA
-        S57prims[S57obj.Obj.DYKCON] = Prims.L
-        S57prims[S57obj.Obj.EXEZNE] = Prims.A
-        S57prims[S57obj.Obj.FAIRWY] = Prims.A
-        S57prims[S57obj.Obj.FNCLNE] = Prims.L
-        S57prims[S57obj.Obj.FERYRT] = Prims.LA
-        S57prims[S57obj.Obj.FSHZNE] = Prims.A
-        S57prims[S57obj.Obj.FSHFAC] = Prims.PLA
-        S57prims[S57obj.Obj.FSHGRD] = Prims.A
-        S57prims[S57obj.Obj.FLODOC] = Prims.A
-        S57prims[S57obj.Obj.FOGSIG] = Prims.P
-        S57prims[S57obj.Obj.FORSTC] = Prims.PLA
-        S57prims[S57obj.Obj.FRPARE] = Prims.A
-        S57prims[S57obj.Obj.GATCON] = Prims.PLA
-        S57prims[S57obj.Obj.GRIDRN] = Prims.PA
-        S57prims[S57obj.Obj.HRBARE] = Prims.A
-        S57prims[S57obj.Obj.HRBFAC] = Prims.PA
-        S57prims[S57obj.Obj.HULKES] = Prims.PA
-        S57prims[S57obj.Obj.ICEARE] = Prims.A
-        S57prims[S57obj.Obj.ICNARE] = Prims.PA
-        S57prims[S57obj.Obj.ISTZNE] = Prims.A
-        S57prims[S57obj.Obj.LAKARE] = Prims.A
-        S57prims[S57obj.Obj.LNDARE] = Prims.PLA
-        S57prims[S57obj.Obj.LNDELV] = Prims.PL
-        S57prims[S57obj.Obj.LNDRGN] = Prims.PA
-        S57prims[S57obj.Obj.LNDMRK] = Prims.PLA
-        S57prims[S57obj.Obj.LIGHTS] = Prims.P
-        S57prims[S57obj.Obj.LITFLT] = Prims.P
-        S57prims[S57obj.Obj.LITVES] = Prims.P
-        S57prims[S57obj.Obj.LOCMAG] = Prims.PLA
-        S57prims[S57obj.Obj.LOKBSN] = Prims.A
-        S57prims[S57obj.Obj.LOGPON] = Prims.PA
-        S57prims[S57obj.Obj.MAGVAR] = Prims.PLA
-        S57prims[S57obj.Obj.MARCUL] = Prims.PLA
-        S57prims[S57obj.Obj.MIPARE] = Prims.PA
-        S57prims[S57obj.Obj.MORFAC] = Prims.PLA
-        S57prims[S57obj.Obj.MPAARE] = Prims.PA
-        S57prims[S57obj.Obj.NAVLNE] = Prims.L
-        S57prims[S57obj.Obj.OBSTRN] = Prims.PLA
-        S57prims[S57obj.Obj.OFSPLF] = Prims.PA
-        S57prims[S57obj.Obj.OSPARE] = Prims.A
-        S57prims[S57obj.Obj.OILBAR] = Prims.L
-        S57prims[S57obj.Obj.PILPNT] = Prims.P
-        S57prims[S57obj.Obj.PILBOP] = Prims.PA
-        S57prims[S57obj.Obj.PIPARE] = Prims.PA
-        S57prims[S57obj.Obj.PIPOHD] = Prims.L
-        S57prims[S57obj.Obj.PIPSOL] = Prims.PL
-        S57prims[S57obj.Obj.PONTON] = Prims.LA
-        S57prims[S57obj.Obj.PRCARE] = Prims.PA
-        S57prims[S57obj.Obj.PRDARE] = Prims.PA
-        S57prims[S57obj.Obj.PYLONS] = Prims.PA
-        S57prims[S57obj.Obj.RADLNE] = Prims.L
-        S57prims[S57obj.Obj.RADRNG] = Prims.A
-        S57prims[S57obj.Obj.RADRFL] = Prims.P
-        S57prims[S57obj.Obj.RADSTA] = Prims.P
-        S57prims[S57obj.Obj.RTPBCN] = Prims.P
-        S57prims[S57obj.Obj.RDOCAL] = Prims.PL
-        S57prims[S57obj.Obj.RDOSTA] = Prims.P
-        S57prims[S57obj.Obj.RAILWY] = Prims.L
-        S57prims[S57obj.Obj.RAPIDS] = Prims.PLA
-        S57prims[S57obj.Obj.RCRTCL] = Prims.L
-        S57prims[S57obj.Obj.RECTRC] = Prims.LA
-        S57prims[S57obj.Obj.RCTLPT] = Prims.PA
-        S57prims[S57obj.Obj.RSCSTA] = Prims.P
-        S57prims[S57obj.Obj.RESARE] = Prims.A
-        S57prims[S57obj.Obj.RETRFL] = Prims.P
-        S57prims[S57obj.Obj.RIVERS] = Prims.LA
-        S57prims[S57obj.Obj.ROADWY] = Prims.PLA
-        S57prims[S57obj.Obj.RUNWAY] = Prims.PLA
-        S57prims[S57obj.Obj.SNDWAV] = Prims.PLA
-        S57prims[S57obj.Obj.SEAARE] = Prims.PA
-        S57prims[S57obj.Obj.SPLARE] = Prims.PA
-        S57prims[S57obj.Obj.SBDARE] = Prims.PLA
-        S57prims[S57obj.Obj.SLCONS] = Prims.PLA
-        S57prims[S57obj.Obj.SISTAT] = Prims.P
-        S57prims[S57obj.Obj.SISTAW] = Prims.P
-        S57prims[S57obj.Obj.SILTNK] = Prims.PA
-        S57prims[S57obj.Obj.SLOTOP] = Prims.L
-        S57prims[S57obj.Obj.SLOGRD] = Prims.PA
-        S57prims[S57obj.Obj.SMCFAC] = Prims.PA
-        S57prims[S57obj.Obj.SOUNDG] = Prims.P
-        S57prims[S57obj.Obj.SPRING] = Prims.P
-        S57prims[S57obj.Obj.STSLNE] = Prims.L
-        S57prims[S57obj.Obj.SUBTLN] = Prims.A
-        S57prims[S57obj.Obj.SWPARE] = Prims.A
-        S57prims[S57obj.Obj.TESARE] = Prims.A
-        S57prims[S57obj.Obj.TS_PRH] = Prims.PA
-        S57prims[S57obj.Obj.TS_PNH] = Prims.PA
-        S57prims[S57obj.Obj.TS_PAD] = Prims.PA
-        S57prims[S57obj.Obj.TS_TIS] = Prims.PA
-        S57prims[S57obj.Obj.T_HMON] = Prims.PA
-        S57prims[S57obj.Obj.T_NHMN] = Prims.PA
-        S57prims[S57obj.Obj.T_TIMS] = Prims.PA
-        S57prims[S57obj.Obj.TIDEWY] = Prims.LA
-        S57prims[S57obj.Obj.TOPMAR] = Prims.P
-        S57prims[S57obj.Obj.TSELNE] = Prims.LA
-        S57prims[S57obj.Obj.TSSBND] = Prims.L
-        S57prims[S57obj.Obj.TSSCRS] = Prims.A
-        S57prims[S57obj.Obj.TSSLPT] = Prims.A
-        S57prims[S57obj.Obj.TSSRON] = Prims.A
-        S57prims[S57obj.Obj.TSEZNE] = Prims.A
-        S57prims[S57obj.Obj.TUNNEL] = Prims.LA
-        S57prims[S57obj.Obj.TWRTPT] = Prims.A
-        S57prims[S57obj.Obj.UWTROC] = Prims.P
-        S57prims[S57obj.Obj.UNSARE] = Prims.A
-        S57prims[S57obj.Obj.VEGATN] = Prims.PLA
-        S57prims[S57obj.Obj.WATTUR] = Prims.PLA
-        S57prims[S57obj.Obj.WATFAL] = Prims.PL
-        S57prims[S57obj.Obj.WEDKLP] = Prims.PA
-        S57prims[S57obj.Obj.WRECKS] = Prims.PA
-        S57prims[S57obj.Obj.TS_FEB] = Prims.PA
-        S57prims[S57obj.Obj.NOTMRK] = Prims.P
-        S57prims[S57obj.Obj.WTWAXS] = Prims.L
-        S57prims[S57obj.Obj.WTWPRF] = Prims.L
-        S57prims[S57obj.Obj.BUNSTA] = Prims.PA
-        S57prims[S57obj.Obj.COMARE] = Prims.A
-        S57prims[S57obj.Obj.HRBBSN] = Prims.A
-        S57prims[S57obj.Obj.LKBSPT] = Prims.A
-        S57prims[S57obj.Obj.PRTARE] = Prims.A
-        S57prims[S57obj.Obj.REFDMP] = Prims.P
-        S57prims[S57obj.Obj.TERMNL] = Prims.PA
-        S57prims[S57obj.Obj.TRNBSN] = Prims.PA
-        S57prims[S57obj.Obj.WTWARE] = Prims.A
-        S57prims[S57obj.Obj.WTWGAG] = Prims.PA
-        S57prims[S57obj.Obj.TISDGE] = Prims.N
-        S57prims[S57obj.Obj.VEHTRF] = Prims.PA
-        S57prims[S57obj.Obj.EXCNST] = Prims.PA
-        S57prims[S57obj.Obj.LG_SDM] = Prims.A
-        S57prims[S57obj.Obj.LG_VSP] = Prims.A
-        S57prims[S57obj.Obj.LITMAJ] = Prims.P
-        S57prims[S57obj.Obj.LITMIN] = Prims.P
-    }
 
     fun S57geoms(map: S57map) {
         for (list in map.features!!.values) {
@@ -805,7 +783,6 @@ object S57dat {
         }
     }
 
-    // CHECKSTYLE.OFF: LineLength
     class S57conv internal constructor(// 0=A(), 1+=A(n)
         var asc: Int, // 0=ASCII, +ve=b1n(unsigned LE), -ve=b2n(signed LE), n>8=b1(n/8)(unsigned BE)
         var bin: Int

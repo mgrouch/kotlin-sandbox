@@ -10,175 +10,175 @@ import s57.S57att.Att
 object S57val {
 
     private val Bcnshp: Map<Any, S57enum> = mapOf(
-        BcnSHP.BCN_UNKN to S57enum(0, "")             ,
-        BcnSHP.BCN_STAK to S57enum(1, "stake")        ,
-        BcnSHP.BCN_WTHY to S57enum(2, "withy")        ,
-        BcnSHP.BCN_TOWR to S57enum(3, "tower")        ,
-        BcnSHP.BCN_LATT to S57enum(4, "lattice")      ,
-        BcnSHP.BCN_PILE to S57enum(5, "pile")         ,
-        BcnSHP.BCN_CARN to S57enum(6, "cairn")        ,
-        BcnSHP.BCN_BUOY to S57enum(7, "buoyant")      ,
-        BcnSHP.BCN_POLE to S57enum(1, "pole")         ,
-        BcnSHP.BCN_PRCH to S57enum(1, "perch")        ,
-        BcnSHP.BCN_POST to S57enum(1, "post")         ,
+        BcnSHP.BCN_UNKN to S57enum(0, ""),
+        BcnSHP.BCN_STAK to S57enum(1, "stake"),
+        BcnSHP.BCN_WTHY to S57enum(2, "withy"),
+        BcnSHP.BCN_TOWR to S57enum(3, "tower"),
+        BcnSHP.BCN_LATT to S57enum(4, "lattice"),
+        BcnSHP.BCN_PILE to S57enum(5, "pile"),
+        BcnSHP.BCN_CARN to S57enum(6, "cairn"),
+        BcnSHP.BCN_BUOY to S57enum(7, "buoyant"),
+        BcnSHP.BCN_POLE to S57enum(1, "pole"),
+        BcnSHP.BCN_PRCH to S57enum(1, "perch"),
+        BcnSHP.BCN_POST to S57enum(1, "post"),
     )
 
     private val Buishp: Map<Any, S57enum> = mapOf(
-        BuiSHP.BUI_UNKN to S57enum(0, "")              ,
-        BuiSHP.BUI_HIRS to S57enum(5, "high-rise")     ,
-        BuiSHP.BUI_PYRD to S57enum(6, "pyramid")       ,
-        BuiSHP.BUI_CYLR to S57enum(7, "cylindrical")   ,
-        BuiSHP.BUI_SPHR to S57enum(8, "spherical")     ,
-        BuiSHP.BUI_CUBE to S57enum(9, "cubic")         ,
+        BuiSHP.BUI_UNKN to S57enum(0, ""),
+        BuiSHP.BUI_HIRS to S57enum(5, "high-rise"),
+        BuiSHP.BUI_PYRD to S57enum(6, "pyramid"),
+        BuiSHP.BUI_CYLR to S57enum(7, "cylindrical"),
+        BuiSHP.BUI_SPHR to S57enum(8, "spherical"),
+        BuiSHP.BUI_CUBE to S57enum(9, "cubic"),
     )
 
     private val Boyshp: Map<Any, S57enum> = mapOf(
-        BoySHP.BOY_UNKN to S57enum(0, "")               ,
-        BoySHP.BOY_CONE to S57enum(1, "conical")        ,
-        BoySHP.BOY_CAN to S57enum(2, "can")             ,
-        BoySHP.BOY_SPHR to S57enum(3, "spherical")      ,
-        BoySHP.BOY_PILR to S57enum(4, "pillar")         ,
-        BoySHP.BOY_SPAR to S57enum(5, "spar")           ,
-        BoySHP.BOY_BARL to S57enum(6, "barrel")         ,
-        BoySHP.BOY_SUPR to S57enum(7, "super-buoy")     ,
-        BoySHP.BOY_ICE to S57enum(8, "ice_buoy")        ,
+        BoySHP.BOY_UNKN to S57enum(0, ""),
+        BoySHP.BOY_CONE to S57enum(1, "conical"),
+        BoySHP.BOY_CAN to S57enum(2, "can"),
+        BoySHP.BOY_SPHR to S57enum(3, "spherical"),
+        BoySHP.BOY_PILR to S57enum(4, "pillar"),
+        BoySHP.BOY_SPAR to S57enum(5, "spar"),
+        BoySHP.BOY_BARL to S57enum(6, "barrel"),
+        BoySHP.BOY_SUPR to S57enum(7, "super-buoy"),
+        BoySHP.BOY_ICE to S57enum(8, "ice_buoy"),
     )
 
     private val Catair: Map<Any, S57enum> = mapOf(
-        CatAIR.AIR_UNKN to S57enum(0, "")                     ,
-        CatAIR.AIR_MILA to S57enum(1, "military")             ,
-        CatAIR.AIR_CIVA to S57enum(2, "civil")                ,
-        CatAIR.AIR_MILH to S57enum(3, "military_heliport")    ,
-        CatAIR.AIR_CIVH to S57enum(4, "civil_heliport")       ,
-        CatAIR.AIR_GLDR to S57enum(5, "glider")               ,
-        CatAIR.AIR_SMLP to S57enum(6, "small_planes")         ,
-        CatAIR.AIR_EMRG to S57enum(8, "emergency")            ,
+        CatAIR.AIR_UNKN to S57enum(0, ""),
+        CatAIR.AIR_MILA to S57enum(1, "military"),
+        CatAIR.AIR_CIVA to S57enum(2, "civil"),
+        CatAIR.AIR_MILH to S57enum(3, "military_heliport"),
+        CatAIR.AIR_CIVH to S57enum(4, "civil_heliport"),
+        CatAIR.AIR_GLDR to S57enum(5, "glider"),
+        CatAIR.AIR_SMLP to S57enum(6, "small_planes"),
+        CatAIR.AIR_EMRG to S57enum(8, "emergency"),
     )
 
     private val Catach: Map<Any, S57enum> = mapOf(
-        CatACH.ACH_UNKN to S57enum(0, "")                          ,
-        CatACH.ACH_UNRD to S57enum(1, "unrestricted")              ,
-        CatACH.ACH_DEEP to S57enum(2, "deep_water")                ,
-        CatACH.ACH_TANK to S57enum(3, "tanker")                    ,
-        CatACH.ACH_EXPL to S57enum(4, "explosives")                ,
-        CatACH.ACH_QUAR to S57enum(5, "quarantine")                ,
-        CatACH.ACH_SEAP to S57enum(6, "seaplane")                  ,
-        CatACH.ACH_SMCF to S57enum(7, "small_craft")               ,
-        CatACH.ACH_SMCM to S57enum(8, "small_craft_mooring")       ,
-        CatACH.ACH_H24P to S57enum(9, "24_hour")                   ,
-        CatACH.ACH_LTPD to S57enum(10, "limited_period")           ,
-        CatACH.ACH_NPSH to S57enum(11, "non_pushing")              ,
-        CatACH.ACH_DRYC to S57enum(12, "dry_cargo")                ,
-        CatACH.ACH_RAFT to S57enum(13, "raft")                     ,
-        CatACH.ACH_WAIT to S57enum(14, "waiting")                  ,
-        CatACH.ACH_REPT to S57enum(15, "reported")                 ,
+        CatACH.ACH_UNKN to S57enum(0, ""),
+        CatACH.ACH_UNRD to S57enum(1, "unrestricted"),
+        CatACH.ACH_DEEP to S57enum(2, "deep_water"),
+        CatACH.ACH_TANK to S57enum(3, "tanker"),
+        CatACH.ACH_EXPL to S57enum(4, "explosives"),
+        CatACH.ACH_QUAR to S57enum(5, "quarantine"),
+        CatACH.ACH_SEAP to S57enum(6, "seaplane"),
+        CatACH.ACH_SMCF to S57enum(7, "small_craft"),
+        CatACH.ACH_SMCM to S57enum(8, "small_craft_mooring"),
+        CatACH.ACH_H24P to S57enum(9, "24_hour"),
+        CatACH.ACH_LTPD to S57enum(10, "limited_period"),
+        CatACH.ACH_NPSH to S57enum(11, "non_pushing"),
+        CatACH.ACH_DRYC to S57enum(12, "dry_cargo"),
+        CatACH.ACH_RAFT to S57enum(13, "raft"),
+        CatACH.ACH_WAIT to S57enum(14, "waiting"),
+        CatACH.ACH_REPT to S57enum(15, "reported"),
     )
 
     private val Catbrg: Map<Any, S57enum> = mapOf(
-        CatBRG.BRG_UNKN to S57enum(0, "")                        ,
-        CatBRG.BRG_FIXD to S57enum(1, "fixed")                   ,
-        CatBRG.BRG_OPEN to S57enum(2, "opening")                 ,
-        CatBRG.BRG_SWNG to S57enum(3, "swing")                   ,
-        CatBRG.BRG_LIFT to S57enum(4, "lifting")                 ,
-        CatBRG.BRG_BASC to S57enum(5, "bascule")                 ,
-        CatBRG.BRG_PONT to S57enum(6, "pontoon")                 ,
-        CatBRG.BRG_DRAW to S57enum(7, "drawbridge")              ,
-        CatBRG.BRG_TRNS to S57enum(8, "transporter")             ,
-        CatBRG.BRG_FOOT to S57enum(9, "footbridge")              ,
-        CatBRG.BRG_VIAD to S57enum(10, "viaduct")                ,
-        CatBRG.BRG_AQUA to S57enum(11, "aqueduct")               ,
-        CatBRG.BRG_SUSP to S57enum(12, "suspension")             ,
+        CatBRG.BRG_UNKN to S57enum(0, ""),
+        CatBRG.BRG_FIXD to S57enum(1, "fixed"),
+        CatBRG.BRG_OPEN to S57enum(2, "opening"),
+        CatBRG.BRG_SWNG to S57enum(3, "swing"),
+        CatBRG.BRG_LIFT to S57enum(4, "lifting"),
+        CatBRG.BRG_BASC to S57enum(5, "bascule"),
+        CatBRG.BRG_PONT to S57enum(6, "pontoon"),
+        CatBRG.BRG_DRAW to S57enum(7, "drawbridge"),
+        CatBRG.BRG_TRNS to S57enum(8, "transporter"),
+        CatBRG.BRG_FOOT to S57enum(9, "footbridge"),
+        CatBRG.BRG_VIAD to S57enum(10, "viaduct"),
+        CatBRG.BRG_AQUA to S57enum(11, "aqueduct"),
+        CatBRG.BRG_SUSP to S57enum(12, "suspension"),
     )
 
     private val Catbua: Map<Any, S57enum> = mapOf(
-        CatBUA.BUA_UNKN to S57enum(0, "")                        ,
-        CatBUA.BUA_URBN to S57enum(1, "urban")                   ,
-        CatBUA.BUA_STTL to S57enum(2, "settlement")              ,
-        CatBUA.BUA_VLLG to S57enum(3, "village")                 ,
-        CatBUA.BUA_TOWN to S57enum(4, "town")                    ,
-        CatBUA.BUA_CITY to S57enum(5, "city")                    ,
-        CatBUA.BUA_HOLV to S57enum(6, "holiday_village")         ,
+        CatBUA.BUA_UNKN to S57enum(0, ""),
+        CatBUA.BUA_URBN to S57enum(1, "urban"),
+        CatBUA.BUA_STTL to S57enum(2, "settlement"),
+        CatBUA.BUA_VLLG to S57enum(3, "village"),
+        CatBUA.BUA_TOWN to S57enum(4, "town"),
+        CatBUA.BUA_CITY to S57enum(5, "city"),
+        CatBUA.BUA_HOLV to S57enum(6, "holiday_village"),
     )
 
     private val Catcbl: Map<Any, S57enum> = mapOf(
-        CatCBL.CBL_UNKN to S57enum(0, "")                      ,
-        CatCBL.CBL_POWR to S57enum(1, "power")                 ,
-        CatCBL.CBL_TRNS to S57enum(3, "transmission")          ,
-        CatCBL.CBL_TELE to S57enum(4, "telephone")             ,
-        CatCBL.CBL_TGPH to S57enum(5, "telegraph")             ,
-        CatCBL.CBL_MOOR to S57enum(6, "mooring")               ,
-        CatCBL.CBL_OPTC to S57enum(7, "optical")               ,
-        CatCBL.CBL_FERY to S57enum(8, "ferry")                 ,
+        CatCBL.CBL_UNKN to S57enum(0, ""),
+        CatCBL.CBL_POWR to S57enum(1, "power"),
+        CatCBL.CBL_TRNS to S57enum(3, "transmission"),
+        CatCBL.CBL_TELE to S57enum(4, "telephone"),
+        CatCBL.CBL_TGPH to S57enum(5, "telegraph"),
+        CatCBL.CBL_MOOR to S57enum(6, "mooring"),
+        CatCBL.CBL_OPTC to S57enum(7, "optical"),
+        CatCBL.CBL_FERY to S57enum(8, "ferry"),
     )
 
     private val Catcan: Map<Any, S57enum> = mapOf(
-        CatCAN.CAN_UNKN to S57enum(0, "")                     ,
-        CatCAN.CAN_TRNS to S57enum(1, "transportation")       ,
-        CatCAN.CAN_DRNG to S57enum(2, "drainage")             ,
-        CatCAN.CAN_IRGN to S57enum(3, "irrigation")           ,
+        CatCAN.CAN_UNKN to S57enum(0, ""),
+        CatCAN.CAN_TRNS to S57enum(1, "transportation"),
+        CatCAN.CAN_DRNG to S57enum(2, "drainage"),
+        CatCAN.CAN_IRGN to S57enum(3, "irrigation"),
     )
 
     private val Catcam: Map<Any, S57enum> = mapOf(
-        CatCAM.CAM_UNKN to S57enum(0, "")                 ,
-        CatCAM.CAM_NORTH to S57enum(1, "north")           ,
-        CatCAM.CAM_EAST to S57enum(2, "east")             ,
-        CatCAM.CAM_SOUTH to S57enum(3, "south")           ,
-        CatCAM.CAM_WEST to S57enum(4, "west")             ,
+        CatCAM.CAM_UNKN to S57enum(0, ""),
+        CatCAM.CAM_NORTH to S57enum(1, "north"),
+        CatCAM.CAM_EAST to S57enum(2, "east"),
+        CatCAM.CAM_SOUTH to S57enum(3, "south"),
+        CatCAM.CAM_WEST to S57enum(4, "west"),
     )
 
     private val Catchp: Map<Any, S57enum> = mapOf(
-        CatCHP.CHP_UNKN to S57enum(0, "")             ,
-        CatCHP.CHP_CSTM to S57enum(1, "customs")      ,
-        CatCHP.CHP_BRDR to S57enum(2, "border")       ,
+        CatCHP.CHP_UNKN to S57enum(0, ""),
+        CatCHP.CHP_CSTM to S57enum(1, "customs"),
+        CatCHP.CHP_BRDR to S57enum(2, "border"),
     )
 
     private val Catcoa: Map<Any, S57enum> = mapOf(
-        CatCOA.COA_UNKN to S57enum(0, "")              ,
-        CatCOA.COA_STEP to S57enum(1, "steep")         ,
-        CatCOA.COA_FLAT to S57enum(2, "flat")          ,
-        CatCOA.COA_SAND to S57enum(3, "sandy")         ,
-        CatCOA.COA_STON to S57enum(4, "stony")         ,
-        CatCOA.COA_SHNG to S57enum(5, "shingly")       ,
-        CatCOA.COA_GLCR to S57enum(6, "glacier")       ,
-        CatCOA.COA_MNGV to S57enum(7, "mangrove")      ,
-        CatCOA.COA_MRSH to S57enum(8, "marshy")        ,
-        CatCOA.COA_CRRF to S57enum(9, "coral_reef")    ,
-        CatCOA.COA_ICE to S57enum(10, "ice")           ,
-        CatCOA.COA_SHEL to S57enum(11, "shelly")       ,
+        CatCOA.COA_UNKN to S57enum(0, ""),
+        CatCOA.COA_STEP to S57enum(1, "steep"),
+        CatCOA.COA_FLAT to S57enum(2, "flat"),
+        CatCOA.COA_SAND to S57enum(3, "sandy"),
+        CatCOA.COA_STON to S57enum(4, "stony"),
+        CatCOA.COA_SHNG to S57enum(5, "shingly"),
+        CatCOA.COA_GLCR to S57enum(6, "glacier"),
+        CatCOA.COA_MNGV to S57enum(7, "mangrove"),
+        CatCOA.COA_MRSH to S57enum(8, "marshy"),
+        CatCOA.COA_CRRF to S57enum(9, "coral_reef"),
+        CatCOA.COA_ICE to S57enum(10, "ice"),
+        CatCOA.COA_SHEL to S57enum(11, "shelly"),
     )
 
     private val Catctr: Map<Any, S57enum> = mapOf(
-        CatCTR.CTR_UNKN to S57enum(0, "")                           ,
-        CatCTR.CTR_TRGN to S57enum(1, "triangulation")              ,
-        CatCTR.CTR_OBSV to S57enum(2, "observation")                ,
-        CatCTR.CTR_FIXD to S57enum(3, "fixed")                      ,
-        CatCTR.CTR_BMRK to S57enum(4, "benchmark")                  ,
-        CatCTR.CTR_BDRY to S57enum(5, "boundary")                   ,
-        CatCTR.CTR_HORM to S57enum(6, "horizontal_main")            ,
-        CatCTR.CTR_HORS to S57enum(7, "horizontal_secondary")       ,
+        CatCTR.CTR_UNKN to S57enum(0, ""),
+        CatCTR.CTR_TRGN to S57enum(1, "triangulation"),
+        CatCTR.CTR_OBSV to S57enum(2, "observation"),
+        CatCTR.CTR_FIXD to S57enum(3, "fixed"),
+        CatCTR.CTR_BMRK to S57enum(4, "benchmark"),
+        CatCTR.CTR_BDRY to S57enum(5, "boundary"),
+        CatCTR.CTR_HORM to S57enum(6, "horizontal_main"),
+        CatCTR.CTR_HORS to S57enum(7, "horizontal_secondary"),
     )
 
     private val Catcon: Map<Any, S57enum> = mapOf(
-        CatCON.CON_UNKN to S57enum(0, "")            ,
-        CatCON.CAT_AERL to S57enum(1, "aerial")      ,
-        CatCON.CAT_BELT to S57enum(2, "belt")        ,
+        CatCON.CON_UNKN to S57enum(0, ""),
+        CatCON.CAT_AERL to S57enum(1, "aerial"),
+        CatCON.CAT_BELT to S57enum(2, "belt"),
     )
 
     private val Catcrn: Map<Any, S57enum> = mapOf(
-        CatCRN.CRN_UNKN to S57enum(0, "")                ,
-        CatCRN.CRN_NONS to S57enum(1, "non-specific")    ,
-        CatCRN.CRN_CONT to S57enum(2, "container")       ,
-        CatCRN.CRN_SHRL to S57enum(3, "sheerlegs")       ,
-        CatCRN.CRN_TRAV to S57enum(4, "travelling")      ,
-        CatCRN.CRN_AFRM to S57enum(5, "a-frame")         ,
-        CatCRN.CRN_GLTH to S57enum(6, "goliath")         ,
+        CatCRN.CRN_UNKN to S57enum(0, ""),
+        CatCRN.CRN_NONS to S57enum(1, "non-specific"),
+        CatCRN.CRN_CONT to S57enum(2, "container"),
+        CatCRN.CRN_SHRL to S57enum(3, "sheerlegs"),
+        CatCRN.CRN_TRAV to S57enum(4, "travelling"),
+        CatCRN.CRN_AFRM to S57enum(5, "a-frame"),
+        CatCRN.CRN_GLTH to S57enum(6, "goliath"),
     )
 
     private val Catdam: Map<Any, S57enum> = mapOf(
-        CatDAM.DAM_UNKN to S57enum(0, "")                 ,
-        CatDAM.DAM_WEIR to S57enum(1, "weir")             ,
-        CatDAM.DAM_DAM to S57enum(2, "dam")               ,
-        CatDAM.DAM_FLDB to S57enum(3, "flood_barrage")    ,
+        CatDAM.DAM_UNKN to S57enum(0, ""),
+        CatDAM.DAM_WEIR to S57enum(1, "weir"),
+        CatDAM.DAM_DAM to S57enum(2, "dam"),
+        CatDAM.DAM_FLDB to S57enum(3, "flood_barrage"),
     )
 
     private val Catdis: Map<Any, S57enum> = mapOf(
@@ -288,7 +288,7 @@ object S57val {
         CatHAF.HAF_MANF to S57enum(22, "marina_no_facilities"),
     )
 
-    private val Cathlk : Map<Any, S57enum> = mapOf(
+    private val Cathlk: Map<Any, S57enum> = mapOf(
         CatHLK.HLK_UNKN to S57enum(0, ""),
         CatHLK.HLK_REST to S57enum(1, "floating_restaurant"),
         CatHLK.HLK_HIST to S57enum(2, "historic"),
@@ -298,7 +298,7 @@ object S57val {
         CatHLK.HLK_CSNO to S57enum(6, "casino_boat"),
     )
 
-    private val Catice : Map<Any, S57enum> = mapOf(
+    private val Catice: Map<Any, S57enum> = mapOf(
         CatICE.ICE_UNKN to S57enum(0, ""),
         CatICE.ICE_FAST to S57enum(1, "fast"),
         CatICE.ICE_SEA to S57enum(2, "sea"),
@@ -310,13 +310,13 @@ object S57val {
         CatICE.ICE_POLR to S57enum(8, "polar"),
     )
 
-    private val Catinb : Map<Any, S57enum> = mapOf(
+    private val Catinb: Map<Any, S57enum> = mapOf(
         CatINB.INB_UNKN to S57enum(0, ""),
         CatINB.INB_CALM to S57enum(1, "calm"),
         CatINB.INB_SBM to S57enum(2, "sbm"),
     )
 
-    private val Catlnd : Map<Any, S57enum> = mapOf(
+    private val Catlnd: Map<Any, S57enum> = mapOf(
         CatLND.LND_UNKN to S57enum(0, ""),
         CatLND.LND_FEN to S57enum(1, "fen"),
         CatLND.LND_MRSH to S57enum(2, "marsh"),
@@ -340,7 +340,7 @@ object S57val {
         CatLND.LND_CAY to S57enum(20, "cay"),
     )
 
-    private val Catlmk : Map<Any, S57enum> = mapOf(
+    private val Catlmk: Map<Any, S57enum> = mapOf(
         CatLMK.LMK_UNKN to S57enum(0, ""),
         CatLMK.LMK_CARN to S57enum(1, "cairn"),
         CatLMK.LMK_CMTY to S57enum(2, "cemetery"),
@@ -369,7 +369,7 @@ object S57val {
         CatLMK.LMK_TORL to S57enum(25, "toril"),
     )
 
-    private val Catlam : Map<Any, S57enum> = mapOf(
+    private val Catlam: Map<Any, S57enum> = mapOf(
         CatLAM.LAM_UNKN to S57enum(0, ""),
         CatLAM.LAM_PORT to S57enum(1, "port"),
         CatLAM.LAM_STBD to S57enum(2, "starboard"),
@@ -396,7 +396,7 @@ object S57val {
         CatLAM.LAM_BRGP to S57enum(23, "bridge_pier"),
     )
 
-    private val Catlit : Map<Any, S57enum> = mapOf(
+    private val Catlit: Map<Any, S57enum> = mapOf(
         CatLIT.LIT_UNKN to S57enum(0, ""),
         CatLIT.LIT_DIR to S57enum(1, "directional"),
         CatLIT.LIT_LEAD to S57enum(4, "leading"),
@@ -418,7 +418,7 @@ object S57val {
         CatLIT.LIT_VERT to S57enum(20, "vertical"),
     )
 
-    private val Catmfa : Map<Any, S57enum> = mapOf(
+    private val Catmfa: Map<Any, S57enum> = mapOf(
         CatMFA.MFA_UNKN to S57enum(0, ""),
         CatMFA.MFA_CRST to S57enum(1, "crustaceans"),
         CatMFA.MFA_OYMS to S57enum(2, "oysters_mussels"),
@@ -427,7 +427,7 @@ object S57val {
         CatMFA.MFA_PRLC to S57enum(5, "pearl_culture"),
     )
 
-    private val Catmpa : Map<Any, S57enum> = mapOf(
+    private val Catmpa: Map<Any, S57enum> = mapOf(
         CatMPA.MPA_UNKN to S57enum(0, ""),
         CatMPA.MPA_PRCT to S57enum(1, "practice"),
         CatMPA.MPA_TRPD to S57enum(2, "torpedo"),
@@ -437,7 +437,7 @@ object S57val {
         CatMPA.MPA_SMLA to S57enum(6, "small_arms"),
     )
 
-    private val Catmor : Map<Any, S57enum> = mapOf(
+    private val Catmor: Map<Any, S57enum> = mapOf(
         CatMOR.MOR_UNKN to S57enum(0, ""),
         CatMOR.MOR_DLPN to S57enum(1, "dolphin"),
         CatMOR.MOR_DDPN to S57enum(2, "deviation_dolphin"),
@@ -453,14 +453,14 @@ object S57val {
         CatMOR.MOR_CABL to S57enum(12, "cable"),
     )
 
-    private val Catnav : Map<Any, S57enum> = mapOf(
+    private val Catnav: Map<Any, S57enum> = mapOf(
         CatNAV.NAV_UNKN to S57enum(0, ""),
         CatNAV.NAV_CLRG to S57enum(1, "clearing"),
         CatNAV.NAV_TRST to S57enum(2, "transit"),
         CatNAV.NAV_LDNG to S57enum(3, "leading"),
     )
 
-    private val Catobs : Map<Any, S57enum> = mapOf(
+    private val Catobs: Map<Any, S57enum> = mapOf(
         CatOBS.OBS_UNKN to S57enum(0, ""),
         CatOBS.OBS_STMP to S57enum(1, "stump"),
         CatOBS.OBS_WELH to S57enum(2, "wellhead"),
@@ -483,7 +483,7 @@ object S57val {
         CatOBS.OBS_SCII to S57enum(19, "scientific_instrument"),
     )
 
-    private val Catofp : Map<Any, S57enum> = mapOf(
+    private val Catofp: Map<Any, S57enum> = mapOf(
         CatOFP.OFP_UNKN to S57enum(0, ""),
         CatOFP.OFP_OIL to S57enum(1, "oil"),
         CatOFP.OFP_PROD to S57enum(2, "production"),
@@ -498,13 +498,13 @@ object S57val {
         CatOFP.OFP_FOTK to S57enum(11, "floating_oil_tank"),
     )
 
-    private val Catolb : Map<Any, S57enum> = mapOf(
+    private val Catolb: Map<Any, S57enum> = mapOf(
         CatOLB.OLB_UNKN to S57enum(0, ""),
         CatOLB.OLB_RETN to S57enum(1, "retention"),
         CatOLB.OLB_FLTG to S57enum(2, "floating"),
     )
 
-    private val Catple : Map<Any, S57enum> = mapOf(
+    private val Catple: Map<Any, S57enum> = mapOf(
         CatPLE.PLE_UNKN to S57enum(0, ""),
         CatPLE.PLE_STAK to S57enum(1, "stake"),
         CatPLE.PLE_POST to S57enum(3, "post"),
@@ -514,14 +514,14 @@ object S57val {
         CatPLE.PLE_PIPE to S57enum(7, "pipe"),
     )
 
-    private val Catpil : Map<Any, S57enum> = mapOf(
+    private val Catpil: Map<Any, S57enum> = mapOf(
         CatPIL.PIL_UNKN to S57enum(0, ""),
         CatPIL.PIL_CVSL to S57enum(1, "cruising_vessel"),
         CatPIL.PIL_HELI to S57enum(2, "helicopter"),
         CatPIL.PIL_SHOR to S57enum(3, "from_shore"),
     )
 
-    private val Catpip : Map<Any, S57enum> = mapOf(
+    private val Catpip: Map<Any, S57enum> = mapOf(
         CatPIP.PIP_UNKN to S57enum(0, ""),
         CatPIP.PIP_OFAL to S57enum(2, "outfall"),
         CatPIP.PIP_ITAK to S57enum(3, "intake"),
@@ -530,7 +530,7 @@ object S57val {
         CatPIP.PIP_SPPL to S57enum(6, "supply"),
     )
 
-    private val Catpra : Map<Any, S57enum> = mapOf(
+    private val Catpra: Map<Any, S57enum> = mapOf(
         CatPRA.PRA_UNKN to S57enum(0, ""),
         CatPRA.PRA_QRRY to S57enum(1, "quarry"),
         CatPRA.PRA_MINE to S57enum(2, "mine"),
@@ -548,7 +548,7 @@ object S57val {
         CatPRA.PRA_WAVE to S57enum(14, "wave_energy"),
     )
 
-    private val Catpyl : Map<Any, S57enum> = mapOf(
+    private val Catpyl: Map<Any, S57enum> = mapOf(
         CatPYL.PYL_UNKN to S57enum(0, ""),
         CatPYL.PYL_POWR to S57enum(1, "power"),
         CatPYL.PYL_TELE to S57enum(2, "telecom"),
@@ -557,20 +557,20 @@ object S57val {
         CatPYL.PYL_PIER to S57enum(5, "bridge_pier"),
     )
 
-    private val Catras : Map<Any, S57enum> = mapOf(
+    private val Catras: Map<Any, S57enum> = mapOf(
         CatRAS.RAS_UNKN to S57enum(0, ""),
         CatRAS.RAS_SURV to S57enum(1, "surveillance"),
         CatRAS.RAS_COST to S57enum(2, "coast"),
     )
 
-    private val Catrtb : Map<Any, S57enum> = mapOf(
+    private val Catrtb: Map<Any, S57enum> = mapOf(
         CatRTB.RTB_UNKN to S57enum(0, ""),
         CatRTB.RTB_RAMK to S57enum(1, "ramark"),
         CatRTB.RTB_RACN to S57enum(2, "racon"),
         CatRTB.RTB_LDG to S57enum(3, "leading"),
     )
 
-    private val Catros : Map<Any, S57enum> = mapOf(
+    private val Catros: Map<Any, S57enum> = mapOf(
         CatROS.ROS_UNKN to S57enum(0, ""),
         CatROS.ROS_OMNI to S57enum(1, "omnidirectional"),
         CatROS.ROS_DIRL to S57enum(2, "directional"),
@@ -605,7 +605,7 @@ object S57val {
         CatROS.ROS_VAWK to S57enum(31, "v-ais_wreck"),
     )
 
-    private val Catrsc : Map<Any, S57enum> = mapOf(
+    private val Catrsc: Map<Any, S57enum> = mapOf(
         CatRSC.RSC_UNKN to S57enum(0, ""),
         CatRSC.RSC_LIFB to S57enum(1, "lifeboat"),
         CatRSC.RSC_ROKT to S57enum(2, "rocket"),
@@ -620,7 +620,7 @@ object S57val {
         CatRSC.RSC_STUG to S57enum(12, "tug"),
     )
 
-    private val Catrea : Map<Any, S57enum> = mapOf(
+    private val Catrea: Map<Any, S57enum> = mapOf(
         CatREA.REA_UNKN to S57enum(0, ""),
         CatREA.REA_SFTY to S57enum(1, "safety"),
         CatREA.REA_NANC to S57enum(2, "no_anchoring"),
@@ -655,7 +655,7 @@ object S57val {
         CatREA.REA_CRLS to S57enum(31, "coral_sactuary"),
     )
 
-    private val Catrod : Map<Any, S57enum> = mapOf(
+    private val Catrod: Map<Any, S57enum> = mapOf(
         CatROD.ROD_UNKN to S57enum(0, ""),
         CatROD.ROD_MWAY to S57enum(1, "motorway"),
         CatROD.ROD_MAJR to S57enum(2, "major_road"),
@@ -667,13 +667,13 @@ object S57val {
         CatROD.ROD_PATH to S57enum(8, "path"),
     )
 
-    private val Catrun : Map<Any, S57enum> = mapOf(
+    private val Catrun: Map<Any, S57enum> = mapOf(
         CatRUN.RUN_UNKN to S57enum(0, ""),
         CatRUN.RUN_AERP to S57enum(1, "aeroplane"),
         CatRUN.RUN_HELI to S57enum(2, "helicopter"),
     )
 
-    private val Catsea : Map<Any, S57enum> = mapOf(
+    private val Catsea: Map<Any, S57enum> = mapOf(
         CatSEA.SEA_UNKN to S57enum(0, ""),
         CatSEA.SEA_GENL to S57enum(1, "general"),
         CatSEA.SEA_GAT to S57enum(2, "gat"),
@@ -731,7 +731,7 @@ object S57val {
         CatSEA.SEA_RECH to S57enum(54, "reach"),
     )
 
-    private val Catslc : Map<Any, S57enum> = mapOf(
+    private val Catslc: Map<Any, S57enum> = mapOf(
         CatSLC.SLC_UNKN to S57enum(0, ""),
         CatSLC.SLC_BWTR to S57enum(1, "breakwater"),
         CatSLC.SLC_GRYN to S57enum(2, "groyne"),
@@ -754,7 +754,7 @@ object S57val {
         CatSLC.SLC_ICEB to S57enum(18, "ice_breaker"),
     )
 
-    private val Catsit : Map<Any, S57enum> = mapOf(
+    private val Catsit: Map<Any, S57enum> = mapOf(
         CatSIT.SIT_UNKN to S57enum(0, ""),
         CatSIT.SIT_PRTC to S57enum(1, "port_control"),
         CatSIT.SIT_PRTE to S57enum(2, "port_entry_departure"),
@@ -771,7 +771,7 @@ object S57val {
         CatSIT.SIT_ONCT to S57enum(13, "oncoming_traffic"),
     )
 
-    private val Catsiw : Map<Any, S57enum> = mapOf(
+    private val Catsiw: Map<Any, S57enum> = mapOf(
         CatSIW.SIW_UNKN to S57enum(0, ""),
         CatSIW.SIW_DNGR to S57enum(1, "danger"),
         CatSIW.SIW_OBST to S57enum(2, "maritime_obstruction"),
@@ -794,7 +794,7 @@ object S57val {
         CatSIW.SIW_CURR to S57enum(19, "current"),
     )
 
-    private val Catsil : Map<Any, S57enum> = mapOf(
+    private val Catsil: Map<Any, S57enum> = mapOf(
         CatSIL.SIL_UNKN to S57enum(0, ""),
         CatSIL.SIL_SILO to S57enum(1, "silo"),
         CatSIL.SIL_TANK to S57enum(2, "tank"),
@@ -802,7 +802,7 @@ object S57val {
         CatSIL.SIL_WTRT to S57enum(4, "water_tower"),
     )
 
-    private val Catslo : Map<Any, S57enum> = mapOf(
+    private val Catslo: Map<Any, S57enum> = mapOf(
         CatSLO.SLO_UNKN to S57enum(0, ""),
         CatSLO.SLO_CUTG to S57enum(1, "cutting"),
         CatSLO.SLO_EMBK to S57enum(2, "embankment"),
@@ -813,7 +813,7 @@ object S57val {
         CatSLO.SLO_SCRE to S57enum(7, "scree"),
     )
 
-    private val Catscf : Map<Any, S57enum> = mapOf(
+    private val Catscf: Map<Any, S57enum> = mapOf(
         CatSCF.SCF_UNKN to S57enum(0, ""),
         CatSCF.SCF_VBTH to S57enum(1, "visitor_berth"),
         CatSCF.SCF_CLUB to S57enum(2, "nautical_club"),
@@ -850,7 +850,7 @@ object S57val {
         CatSCF.SCF_SECS to S57enum(33, "security_service"),
     )
 
-    private val Catspm : Map<Any, S57enum> = mapOf(
+    private val Catspm: Map<Any, S57enum> = mapOf(
         CatSPM.SPM_UNKN to S57enum(0, ""),
         CatSPM.SPM_FDGA to S57enum(1, "firing_danger_area"),
         CatSPM.SPM_TRGT to S57enum(2, "target"),
@@ -910,19 +910,19 @@ object S57val {
         CatSPM.SPM_AREF to S57enum(56, "artificial_reef"),
     )
 
-    private val Cattrk : Map<Any, S57enum> = mapOf(
+    private val Cattrk: Map<Any, S57enum> = mapOf(
         CatTRK.TRK_UNKN to S57enum(0, ""),
         CatTRK.TRK_FIXM to S57enum(1, "fixed_marks"),
         CatTRK.TRK_NFXM to S57enum(2, "no_fixed_marks"),
     )
 
-    private val Cattss : Map<Any, S57enum> = mapOf(
+    private val Cattss: Map<Any, S57enum> = mapOf(
         CatTSS.TSS_UNKN to S57enum(0, ""),
         CatTSS.TSS_IMOA to S57enum(1, "imo_adopted"),
         CatTSS.TSS_NIMO to S57enum(2, "not_imo_adopted"),
     )
 
-    private val Catveg : Map<Any, S57enum> = mapOf(
+    private val Catveg: Map<Any, S57enum> = mapOf(
         CatVEG.VEG_UNKN to S57enum(0, ""),
         CatVEG.VEG_GRAS to S57enum(1, "grass"),
         CatVEG.VEG_PDDY to S57enum(2, "paddy"),
@@ -948,7 +948,7 @@ object S57val {
         CatVEG.VEG_FLOT to S57enum(22, "filao_tree"),
     )
 
-    private val Catwat : Map<Any, S57enum> = mapOf(
+    private val Catwat: Map<Any, S57enum> = mapOf(
         CatWAT.WAT_UNKN to S57enum(0, ""),
         CatWAT.WAT_BKRS to S57enum(1, "breakers"),
         CatWAT.WAT_EDDY to S57enum(2, "eddies"),
@@ -957,7 +957,7 @@ object S57val {
         CatWAT.WAT_BMBR to S57enum(5, "bombora"),
     )
 
-    private val Catwed : Map<Any, S57enum> = mapOf(
+    private val Catwed: Map<Any, S57enum> = mapOf(
         CatWED.WED_UNKN to S57enum(0, ""),
         CatWED.WED_KELP to S57enum(1, "kelp"),
         CatWED.WED_SWED to S57enum(2, "sea_weed"),
@@ -965,7 +965,7 @@ object S57val {
         CatWED.WED_SGSO to S57enum(4, "sargasso"),
     )
 
-    private val Catwrk : Map<Any, S57enum> = mapOf(
+    private val Catwrk: Map<Any, S57enum> = mapOf(
         CatWRK.WRK_UNKN to S57enum(0, ""),
         CatWRK.WRK_NDGR to S57enum(1, "non-dangerous"),
         CatWRK.WRK_DNGR to S57enum(2, "dangerous"),
@@ -974,7 +974,7 @@ object S57val {
         CatWRK.WRK_HULS to S57enum(5, "hull_showing"),
     )
 
-    private val Catzoc : Map<Any, S57enum> = mapOf(
+    private val Catzoc: Map<Any, S57enum> = mapOf(
         CatZOC.ZOC_UNKN to S57enum(0, ""),
         CatZOC.ZOC_A1 to S57enum(1, "a1"),
         CatZOC.ZOC_A2 to S57enum(2, "a2"),
@@ -984,7 +984,7 @@ object S57val {
         CatZOC.ZOC_U to S57enum(6, "u"),
     )
 
-    private val Colour : Map<Any, S57enum> = mapOf(
+    private val Colour: Map<Any, S57enum> = mapOf(
         ColCOL.COL_UNK to S57enum(0, ""),
         ColCOL.COL_WHT to S57enum(1, "white"),
         ColCOL.COL_BLK to S57enum(2, "black"),
@@ -1001,7 +1001,7 @@ object S57val {
         ColCOL.COL_PNK to S57enum(13, "pink"),
     )
 
-    private val Colpat : Map<Any, S57enum> = mapOf(
+    private val Colpat: Map<Any, S57enum> = mapOf(
         ColPAT.PAT_UNKN to S57enum(0, ""),
         ColPAT.PAT_HORI to S57enum(1, "horizontal"),
         ColPAT.PAT_VERT to S57enum(2, "vertical"),
@@ -1013,7 +1013,7 @@ object S57val {
         ColPAT.PAT_SALT to S57enum(8, "saltire"),
     )
 
-    private val Condtn : Map<Any, S57enum> = mapOf(
+    private val Condtn: Map<Any, S57enum> = mapOf(
         CndCND.CND_UNKN to S57enum(0, ""),
         CndCND.CND_UCNS to S57enum(1, "under_construction"),
         CndCND.CND_RUIN to S57enum(2, "ruined"),
@@ -1022,20 +1022,20 @@ object S57val {
         CndCND.CND_PCNS to S57enum(5, "planned_construction"),
     )
 
-    private val Conrad : Map<Any, S57enum> = mapOf(
+    private val Conrad: Map<Any, S57enum> = mapOf(
         ConRAD.RAD_UNKN to S57enum(0, ""),
         ConRAD.RAD_CNSP to S57enum(1, "conspicuous"),
         ConRAD.RAD_NCSP to S57enum(2, "not_conspicuous"),
         ConRAD.RAD_REFL to S57enum(3, "reflector"),
     )
 
-    private val Convis : Map<Any, S57enum> = mapOf(
+    private val Convis: Map<Any, S57enum> = mapOf(
         ConVIS.VIS_UNKN to S57enum(0, ""),
         ConVIS.VIS_CNSP to S57enum(1, "conspicuous"),
         ConVIS.VIS_NCSP to S57enum(2, "not_conspicuous"),
     )
 
-    private val Dunits : Map<Any, S57enum> = mapOf(
+    private val Dunits: Map<Any, S57enum> = mapOf(
         UniDPU.DPU_UNKN to S57enum(0, ""),
         UniDPU.DPU_METR to S57enum(1, "metres"),
         UniDPU.DPU_FTFT to S57enum(2, "fathoms_feet"),
@@ -1043,7 +1043,7 @@ object S57val {
         UniDPU.DPU_FTFR to S57enum(4, "fathoms_fractions"),
     )
 
-    private val Exclit : Map<Any, S57enum> = mapOf(
+    private val Exclit: Map<Any, S57enum> = mapOf(
         ExcLIT.EXH_UNKN to S57enum(0, ""),
         ExcLIT.EXH_24H to S57enum(1, "24h"),
         ExcLIT.EXH_DAY to S57enum(2, "day"),
@@ -1053,14 +1053,14 @@ object S57val {
         ExcLIT.EXH_STRM to S57enum(6, "storm"),
     )
 
-    private val Expsou : Map<Any, S57enum> = mapOf(
+    private val Expsou: Map<Any, S57enum> = mapOf(
         ExpSOU.EXP_UNKN to S57enum(0, ""),
         ExpSOU.EXP_WTHN to S57enum(1, "within"),
         ExpSOU.EXP_SHLR to S57enum(2, "shoaler"),
         ExpSOU.EXP_DEPR to S57enum(3, "deeper"),
     )
 
-    private val Functn : Map<Any, S57enum> = mapOf(
+    private val Functn: Map<Any, S57enum> = mapOf(
         FncFNC.FNC_UNKN to S57enum(0, ""),
         FncFNC.FNC_HBRM to S57enum(2, "harbour_master"),
         FncFNC.FNC_CSTM to S57enum(3, "customs"),
@@ -1111,7 +1111,7 @@ object S57val {
         FncFNC.FNC_PMPS to S57enum(48, "pumping_station"),
     )
 
-    private val Hunits : Map<Any, S57enum> = mapOf(
+    private val Hunits: Map<Any, S57enum> = mapOf(
         UniHLU.HLU_UNKN to S57enum(0, ""),
         UniHLU.HLU_METR to S57enum(1, "metres"),
         UniHLU.HLU_FEET to S57enum(2, "feet"),
@@ -1121,14 +1121,14 @@ object S57val {
         UniHLU.HLU_NMIL to S57enum(6, "nautical_miles"),
     )
 
-    private val Jrsdtn : Map<Any, S57enum> = mapOf(
+    private val Jrsdtn: Map<Any, S57enum> = mapOf(
         JrsJRS.JRS_UNKN to S57enum(0, ""),
         JrsJRS.JRS_INT to S57enum(1, "international"),
         JrsJRS.JRS_NAT to S57enum(2, "national"),
         JrsJRS.JRS_NSD to S57enum(3, "national_sub-division"),
     )
 
-    private val Litchr : Map<Any, S57enum> = mapOf(
+    private val Litchr: Map<Any, S57enum> = mapOf(
         LitCHR.CHR_UNKN to S57enum(0, ""),
         LitCHR.CHR_F to S57enum(1, "F"),
         LitCHR.CHR_FL to S57enum(2, "Fl"),
@@ -1157,7 +1157,7 @@ object S57val {
         LitCHR.CHR_ALFFL to S57enum(29, "Al.FFl"),
     )
 
-    private val Litvis : Map<Any, S57enum> = mapOf(
+    private val Litvis: Map<Any, S57enum> = mapOf(
         LitVIS.LIT_UNKN to S57enum(0, ""),
         LitVIS.LIT_HIGH to S57enum(1, "high"),
         LitVIS.LIT_LOW to S57enum(2, "low"),
@@ -1169,7 +1169,7 @@ object S57val {
         LitVIS.LIT_POBS to S57enum(8, "part_obscured"),
     )
 
-    private val Marsys : Map<Any, S57enum> = mapOf(
+    private val Marsys: Map<Any, S57enum> = mapOf(
         MarSYS.SYS_UNKN to S57enum(0, ""),
         MarSYS.SYS_IALA to S57enum(1, "iala-a"),
         MarSYS.SYS_IALB to S57enum(2, "iala-b"),
@@ -1182,7 +1182,7 @@ object S57val {
         MarSYS.SYS_PPWB to S57enum(15, "ppwbc"),
     )
 
-    private val Natcon : Map<Any, S57enum> = mapOf(
+    private val Natcon: Map<Any, S57enum> = mapOf(
         NatCON.CON_UNKN to S57enum(0, ""),
         NatCON.CON_MSNY to S57enum(1, "masonry"),
         NatCON.CON_CONC to S57enum(2, "concreted"),
@@ -1198,7 +1198,7 @@ object S57val {
         NatCON.CON_GLAS to S57enum(12, "glass"),
     )
 
-    private val Natsur : Map<Any, S57enum> = mapOf(
+    private val Natsur: Map<Any, S57enum> = mapOf(
         NatSUR.SUR_UNKN to S57enum(0, ""),
         NatSUR.SUR_MUD to S57enum(1, "mud"),
         NatSUR.SUR_CLAY to S57enum(2, "clay"),
@@ -1215,7 +1215,7 @@ object S57val {
         NatSUR.SUR_BLDR to S57enum(18, "boulders"),
     )
 
-    private val Natqua : Map<Any, S57enum> = mapOf(
+    private val Natqua: Map<Any, S57enum> = mapOf(
         NatQUA.QUA_UNKN to S57enum(0, ""),
         NatQUA.QUA_FINE to S57enum(1, "fine"),
         NatQUA.QUA_MEDM to S57enum(2, "medium"),
@@ -1229,7 +1229,7 @@ object S57val {
         NatQUA.QUA_HARD to S57enum(10, "hard"),
     )
 
-    private val Prodct : Map<Any, S57enum> = mapOf(
+    private val Prodct: Map<Any, S57enum> = mapOf(
         PrdPRD.PRD_UNKN to S57enum(0, ""),
         PrdPRD.PRD_OIL to S57enum(1, "oil"),
         PrdPRD.PRD_GAS to S57enum(2, "gas"),
@@ -1255,7 +1255,7 @@ object S57val {
         PrdPRD.PRD_GRAN to S57enum(22, "grain"),
     )
 
-    private val Quasou : Map<Any, S57enum> = mapOf(
+    private val Quasou: Map<Any, S57enum> = mapOf(
         QuaSOU.SOU_UNKN to S57enum(0, ""),
         QuaSOU.SOU_KNWN to S57enum(1, "known"),
         QuaSOU.SOU_UKNN to S57enum(2, "unknown"),
@@ -1270,7 +1270,7 @@ object S57val {
         QuaSOU.SOU_NMNT to S57enum(11, "not_maintained"),
     )
 
-    private val Restrn : Map<Any, S57enum> = mapOf(
+    private val Restrn: Map<Any, S57enum> = mapOf(
         RstRST.RST_UNKN to S57enum(0, ""),
         RstRST.RST_NANC to S57enum(1, "no_anchoring"),
         RstRST.RST_RANC to S57enum(2, "restricted_anchoring"),
@@ -1312,7 +1312,7 @@ object S57val {
         RstRST.RST_NSWM to S57enum(38, "no_swimming"),
     )
 
-    private val Siggen : Map<Any, S57enum> = mapOf(
+    private val Siggen: Map<Any, S57enum> = mapOf(
         SigGEN.GEN_UNKN to S57enum(0, ""),
         SigGEN.GEN_AUTO to S57enum(1, "automatic"),
         SigGEN.GEN_WAVE to S57enum(2, "wave"),
@@ -1320,7 +1320,7 @@ object S57val {
         SigGEN.GEN_WIND to S57enum(4, "wind"),
     )
 
-    private val Status : Map<Any, S57enum> = mapOf(
+    private val Status: Map<Any, S57enum> = mapOf(
         StsSTS.STS_UNKN to S57enum(0, ""),
         StsSTS.STS_PERM to S57enum(1, "permanent"),
         StsSTS.STS_OCAS to S57enum(2, "occasional"),
@@ -1350,7 +1350,7 @@ object S57val {
         StsSTS.STS_POOR to S57enum(27, "poor"),
     )
 
-    private val Surtyp : Map<Any, S57enum> = mapOf(
+    private val Surtyp: Map<Any, S57enum> = mapOf(
         SurTYP.TYP_UNKN to S57enum(0, ""),
         SurTYP.TYP_SKCH to S57enum(1, "sketch"),
         SurTYP.TYP_CTLD to S57enum(2, "controlled"),
@@ -1359,7 +1359,7 @@ object S57val {
         SurTYP.TYP_REMT to S57enum(6, "remote"),
     )
 
-    private val Tecsou : Map<Any, S57enum> = mapOf(
+    private val Tecsou: Map<Any, S57enum> = mapOf(
         TecSOU.SOU_UNKN to S57enum(0, ""),
         TecSOU.SOU_ESND to S57enum(1, "echo-sounder"),
         TecSOU.SOU_FSSN to S57enum(2, "side-scan_sonar"),
@@ -1377,7 +1377,7 @@ object S57val {
         TecSOU.SOU_COMP to S57enum(14, "computer"),
     )
 
-    private val Topshp : Map<Any, S57enum> = mapOf(
+    private val Topshp: Map<Any, S57enum> = mapOf(
         TopSHP.TOP_UNKN to S57enum(0, ""),
         TopSHP.TOP_CONE to S57enum(1, "cone, point up"),
         TopSHP.TOP_ICONE to S57enum(2, "cone, point down"),
@@ -1416,7 +1416,7 @@ object S57val {
         TopSHP.TOP_COSP to S57enum(35, "cone, point up over sphere"),
     )
 
-    private val Trafic : Map<Any, S57enum> = mapOf(
+    private val Trafic: Map<Any, S57enum> = mapOf(
         TrfTRF.TRF_UNKN to S57enum(0, ""),
         TrfTRF.TRF_INBD to S57enum(1, "inbound"),
         TrfTRF.TRF_OBND to S57enum(2, "outbbound"),
@@ -1424,7 +1424,7 @@ object S57val {
         TrfTRF.TRF_TWOW to S57enum(4, "two-way"),
     )
 
-    private val Watlev : Map<Any, S57enum> = mapOf(
+    private val Watlev: Map<Any, S57enum> = mapOf(
         WatLEV.LEV_UNKN to S57enum(0, ""),
         WatLEV.LEV_PSUB to S57enum(1, "part-submerged"),
         WatLEV.LEV_DRY to S57enum(2, "dry"),
@@ -1437,14 +1437,14 @@ object S57val {
         WatLEV.LEV_BMWL to S57enum(9, "below_mwl"),
     )
 
-    private val Cat_ts : Map<Any, S57enum> = mapOf(
+    private val Cat_ts: Map<Any, S57enum> = mapOf(
         Cat_TS.TS_UNKN to S57enum(0, ""),
         Cat_TS.TS_FLOD to S57enum(1, "flood"),
         Cat_TS.TS_EBB to S57enum(2, "ebb"),
         Cat_TS.TS_OTHR to S57enum(3, "other"),
     )
 
-    private val Punits : Map<Any, S57enum> = mapOf(
+    private val Punits: Map<Any, S57enum> = mapOf(
         UniPAU.PAU_UNKN to S57enum(0, ""),
         UniPAU.PAU_MTRS to S57enum(1, "metres"),
         UniPAU.PAU_DGRS to S57enum(2, "degrees"),
@@ -1453,7 +1453,7 @@ object S57val {
         UniPAU.PAU_CBLS to S57enum(5, "cables"),
     )
 
-    private val Quapos : Map<Any, S57enum> = mapOf(
+    private val Quapos: Map<Any, S57enum> = mapOf(
         QuaPOS.POS_UNKN to S57enum(0, ""),
         QuaPOS.POS_SRVD to S57enum(1, "surveyed"),
         QuaPOS.POS_USRV to S57enum(2, "unsurveyed"),
@@ -1468,7 +1468,7 @@ object S57val {
         QuaPOS.POS_CALC to S57enum(11, "calculated"),
     )
 
-    private val Verdat : Map<Any, S57enum> = mapOf(
+    private val Verdat: Map<Any, S57enum> = mapOf(
         VerDAT.DAT_UNKN to S57enum(0, ""),
         VerDAT.DAT_MLWS to S57enum(1, "mlws"),
         VerDAT.DAT_MLLWS to S57enum(2, "mllws"),
@@ -1513,7 +1513,7 @@ object S57val {
         VerDAT.DAT_OHIO to S57enum(41, "ohio_rd"),
     )
 
-    private val Addmrk : Map<Any, S57enum> = mapOf(
+    private val Addmrk: Map<Any, S57enum> = mapOf(
         AddMRK.MRK_UNKN to S57enum(0, ""),
         AddMRK.MRK_TOPB to S57enum(1, "top_board"),
         AddMRK.MRK_BOTB to S57enum(2, "bottom_board"),
@@ -1522,13 +1522,13 @@ object S57val {
         AddMRK.MRK_BTRI to S57enum(5, "bottom_triangle"),
     )
 
-    private val Bnkwtw : Map<Any, S57enum> = mapOf(
+    private val Bnkwtw: Map<Any, S57enum> = mapOf(
         BnkWTW.BWW_UNKN to S57enum(0, ""),
         BnkWTW.BWW_LEFT to S57enum(1, "left"),
         BnkWTW.BWW_RGHT to S57enum(2, "right"),
     )
 
-    private val Catnmk : Map<Any, S57enum> = mapOf(
+    private val Catnmk: Map<Any, S57enum> = mapOf(
         CatNMK.NMK_UNKN to S57enum(0, ""),
         CatNMK.NMK_NENT to S57enum(1, "no_entry"),
         CatNMK.NMK_CLSA to S57enum(2, "closed_area"),
@@ -1648,7 +1648,7 @@ object S57val {
         CatNMK.NMK_SHIP to S57enum(112, "shipping_inspection_point"),
     )
 
-    private val Clsdng : Map<Any, S57enum> = mapOf(
+    private val Clsdng: Map<Any, S57enum> = mapOf(
         ClsDNG.DNG_UNKN to S57enum(0, ""),
         ClsDNG.DNG_1BLU to S57enum(1, "one_blue"),
         ClsDNG.DNG_2BLU to S57enum(2, "two_blue"),
@@ -1657,7 +1657,7 @@ object S57val {
         ClsDNG.DNG_1RED to S57enum(5, "one_red"),
     )
 
-    private val Dirimp : Map<Any, S57enum> = mapOf(
+    private val Dirimp: Map<Any, S57enum> = mapOf(
         DirIMP.IMP_UNKN to S57enum(0, ""),
         DirIMP.IMP_UPST to S57enum(1, "upstream"),
         DirIMP.IMP_DNST to S57enum(2, "downstream"),
@@ -1666,7 +1666,7 @@ object S57val {
         DirIMP.IMP_THBR to S57enum(5, "to_harbour"),
     )
 
-    private val Fnctnm : Map<Any, S57enum> = mapOf(
+    private val Fnctnm: Map<Any, S57enum> = mapOf(
         FncFNM.FNM_UNKN to S57enum(0, ""),
         FncFNM.FNM_PRHB to S57enum(1, "prohibition"),
         FncFNM.FNM_RGLN to S57enum(2, "regulation"),
@@ -1675,13 +1675,13 @@ object S57val {
         FncFNM.FNM_INFO to S57enum(5, "information"),
     )
 
-    private val Bunves : Map<Any, S57enum> = mapOf(
+    private val Bunves: Map<Any, S57enum> = mapOf(
         BunVES.VES_UNKN to S57enum(0, ""),
         BunVES.VES_BVAV to S57enum(1, "bunker_vessel_available"),
         BunVES.VES_NBVA to S57enum(2, "no_bunker_vessel_available"),
     )
 
-    private val Catbrt : Map<Any, S57enum> = mapOf(
+    private val Catbrt: Map<Any, S57enum> = mapOf(
         CatBRT.BRT_UNKN to S57enum(0, ""),
         CatBRT.BRT_LODG to S57enum(1, "loading"),
         CatBRT.BRT_ULDG to S57enum(2, "unloading"),
@@ -1693,14 +1693,14 @@ object S57val {
         CatBRT.BRT_SCLS to S57enum(8, "second_class"),
     )
 
-    private val Catbun : Map<Any, S57enum> = mapOf(
+    private val Catbun: Map<Any, S57enum> = mapOf(
         CatBUN.BUN_UNKN to S57enum(0, ""),
         CatBUN.BUN_DESL to S57enum(1, "diesel"),
         CatBUN.BUN_WATR to S57enum(2, "water"),
         CatBUN.BUN_BLST to S57enum(3, "ballast"),
     )
 
-    private val Catccl : Map<Any, S57enum> = mapOf(
+    private val Catccl: Map<Any, S57enum> = mapOf(
         CatCCL.CCL_UNKN to S57enum(0, ""),
         CatCCL.CCL_SMLV to S57enum(1, "small_vessels"),
         CatCCL.CCL_PNCH to S57enum(2, "peniche"),
@@ -1715,7 +1715,7 @@ object S57val {
         CatCCL.CCL_NCCL to S57enum(11, "no_cemt_class"),
     )
 
-    private val Catcom : Map<Any, S57enum> = mapOf(
+    private val Catcom: Map<Any, S57enum> = mapOf(
         CatCOM.COM_UNKN to S57enum(0, ""),
         CatCOM.COM_VTSC to S57enum(1, "vts_centre"),
         CatCOM.COM_VTSS to S57enum(2, "vts_sector"),
@@ -1727,7 +1727,7 @@ object S57val {
         CatCOM.COM_HRBR to S57enum(8, "harbour"),
     )
 
-    private val Cathbr : Map<Any, S57enum> = mapOf(
+    private val Cathbr: Map<Any, S57enum> = mapOf(
         CatHBR.HBR_UNKN to S57enum(0, ""),
         CatHBR.HBR_CSTM to S57enum(1, "customs"),
         CatHBR.HBR_REFG to S57enum(2, "refuge"),
@@ -1736,7 +1736,7 @@ object S57val {
         CatHBR.HBR_PRIV to S57enum(5, "private"),
     )
 
-    private val Catrfd : Map<Any, S57enum> = mapOf(
+    private val Catrfd: Map<Any, S57enum> = mapOf(
         CatRFD.RFD_UNKN to S57enum(0, ""),
         CatRFD.RFD_CRSD to S57enum(1, "cargo_residue"),
         CatRFD.RFD_WOIL to S57enum(2, "waste_oil"),
@@ -1744,7 +1744,7 @@ object S57val {
         CatRFD.RFD_DREF to S57enum(4, "domestic_refuse"),
     )
 
-    private val Cattml : Map<Any, S57enum> = mapOf(
+    private val Cattml: Map<Any, S57enum> = mapOf(
         CatTML.TML_UNKN to S57enum(0, ""),
         CatTML.TML_PSGR to S57enum(1, "passenger"),
         CatTML.TML_FERY to S57enum(2, "ferry"),
@@ -1752,7 +1752,7 @@ object S57val {
         CatTML.TML_RORO to S57enum(4, "roro"),
     )
 
-    private val Trshgd : Map<Any, S57enum> = mapOf(
+    private val Trshgd: Map<Any, S57enum> = mapOf(
         TrsTGD.TGD_UNKN to S57enum(0, ""),
         TrsTGD.TGD_CONT to S57enum(1, "containers"),
         TrsTGD.TGD_BULK to S57enum(2, "bulk"),
@@ -1766,7 +1766,7 @@ object S57val {
         TrsTGD.TGD_GNRL to S57enum(10, "general"),
     )
 
-    private val Catgag : Map<Any, S57enum> = mapOf(
+    private val Catgag: Map<Any, S57enum> = mapOf(
         CatGAG.GAG_UNKN to S57enum(0, ""),
         CatGAG.GAG_STAF to S57enum(1, "staff"),
         CatGAG.GAG_RCRD to S57enum(2, "recording"),
@@ -1775,7 +1775,7 @@ object S57val {
         CatGAG.GAG_RRAI to S57enum(5, "recording_remote_access_indicator"),
     )
 
-    private val Reflev : Map<Any, S57enum> = mapOf(
+    private val Reflev: Map<Any, S57enum> = mapOf(
         RefLEV.LEV_UNKN to S57enum(0, ""),
         RefLEV.LEV_BALT to S57enum(1, "baltic"),
         RefLEV.LEV_ADRC to S57enum(2, "adriatic"),
@@ -1788,7 +1788,7 @@ object S57val {
         RefLEV.LEV_1929 to S57enum(9, "msl1929"),
     )
 
-    private val Catvtr : Map<Any, S57enum> = mapOf(
+    private val Catvtr: Map<Any, S57enum> = mapOf(
         CatVTR.VTR_UNKN to S57enum(0, ""),
         CatVTR.VTR_OFFL to S57enum(1, "official"),
         CatVTR.VTR_PRIV to S57enum(2, "private"),
@@ -1798,20 +1798,20 @@ object S57val {
         CatVTR.VTR_LGAT to S57enum(6, "locked_gate"),
     )
 
-    private val Cattab : Map<Any, S57enum> = mapOf(
+    private val Cattab: Map<Any, S57enum> = mapOf(
         CatTAB.TAB_UNKN to S57enum(0, ""),
         CatTAB.TAB_OPPD to S57enum(1, "operational_period"),
         CatTAB.TAB_NOPP to S57enum(2, "non-operational_period"),
     )
 
-    private val Useshp : Map<Any, S57enum> = mapOf(
+    private val Useshp: Map<Any, S57enum> = mapOf(
         UseSHP.SHP_UNKN to S57enum(0, ""),
         UseSHP.SHP_LINT to S57enum(1, "liner_trade"),
         UseSHP.SHP_OCSH to S57enum(2, "occasional_professional_shipping"),
         UseSHP.SHP_LESR to S57enum(3, "leisure"),
     )
 
-    private val Catexs : Map<Any, S57enum> = mapOf(
+    private val Catexs: Map<Any, S57enum> = mapOf(
         CatEXS.EXS_UNKN to S57enum(0, ""),
         CatEXS.EXS_LLOK to S57enum(1, "lift-lock"),
         CatEXS.EXS_AQDT to S57enum(2, "aqueduct"),
@@ -1820,7 +1820,7 @@ object S57val {
         CatEXS.EXS_OTHR to S57enum(5, "other"),
     )
 
-    private val Catwwm : Map<Any, S57enum> = mapOf(
+    private val Catwwm: Map<Any, S57enum> = mapOf(
         CatWWM.WWM_UNKN to S57enum(0, ""),
         CatWWM.WWM_WWRT to S57enum(1, "waterway_right"),
         CatWWM.WWM_WWLT to S57enum(2, "waterway_left"),
@@ -1843,21 +1843,21 @@ object S57val {
         CatWWM.WWM_BRPR to S57enum(19, "bridge_pier"),
     )
 
-    private val Lg_spr : Map<Any, S57enum> = mapOf(
+    private val Lg_spr: Map<Any, S57enum> = mapOf(
         Lg_SPR.SPR_UNKN to S57enum(0, ""),
         Lg_SPR.SPR_OTHR to S57enum(1, "other"),
         Lg_SPR.SPR_SPOG to S57enum(2, "speed_over_ground"),
         Lg_SPR.SPR_SPTW to S57enum(3, "speed_through_water"),
     )
 
-    private val Lg_wdu : Map<Any, S57enum> = mapOf(
+    private val Lg_wdu: Map<Any, S57enum> = mapOf(
         Lg_WDU.WDU_UNKN to S57enum(0, ""),
         Lg_WDU.WDU_OTHR to S57enum(1, "other"),
         Lg_WDU.WDU_CUMT to S57enum(2, "cubic_metres"),
         Lg_WDU.WDU_TONS to S57enum(3, "tonnes"),
     )
 
-    private val Lg_rel : Map<Any, S57enum> = mapOf(
+    private val Lg_rel: Map<Any, S57enum> = mapOf(
         Lg_REL.REL_UNKN to S57enum(0, ""),
         Lg_REL.REL_OTHR to S57enum(1, "other"),
         Lg_REL.REL_USWW to S57enum(2, "usage_of_waterway"),
@@ -1865,7 +1865,7 @@ object S57val {
         Lg_REL.REL_TKOP to S57enum(4, "task_operation"),
     )
 
-    private val Lg_fnc : Map<Any, S57enum> = mapOf(
+    private val Lg_fnc: Map<Any, S57enum> = mapOf(
         Lg_FNC.FNC_UNKN to S57enum(0, ""),
         Lg_FNC.FNC_OTHR to S57enum(1, "other"),
         Lg_FNC.FNC_PRHB to S57enum(2, "prohibited"),
@@ -1876,7 +1876,7 @@ object S57val {
         Lg_FNC.FNC_NRCD to S57enum(7, "not_recommended"),
     )
 
-    private val Lc_csi : Map<Any, S57enum> = mapOf(
+    private val Lc_csi: Map<Any, S57enum> = mapOf(
         Lc_CSX.CSX_UNKN to S57enum(0, ""),
         Lc_CSX.CSX_ALL to S57enum(1, "all"),
         Lc_CSX.CSX_OTHR to S57enum(2, "other"),
@@ -1911,7 +1911,7 @@ object S57val {
         Lc_CSX.CSX_FOBJ to S57enum(32, "floating_object"),
     )
 
-    private val Lc_cse : Map<Any, S57enum> = mapOf(
+    private val Lc_cse: Map<Any, S57enum> = mapOf(
         Lc_CSX.CSX_UNKN to S57enum(0, ""),
         Lc_CSX.CSX_ALL to S57enum(1, "all"),
         Lc_CSX.CSX_OTHR to S57enum(2, "other"),
@@ -1946,7 +1946,7 @@ object S57val {
         Lc_CSX.CSX_FOBJ to S57enum(32, "floating_object"),
     )
 
-    private val Lc_asi : Map<Any, S57enum> = mapOf(
+    private val Lc_asi: Map<Any, S57enum> = mapOf(
         Lc_ASX.ASX_UNKN to S57enum(0, ""),
         Lc_ASX.ASX_ALL to S57enum(1, "all"),
         Lc_ASX.ASX_OTHR to S57enum(2, "other"),
@@ -1959,7 +1959,7 @@ object S57val {
         Lc_ASX.ASX_TCNV to S57enum(10, "towed_convoy"),
     )
 
-    private val Lc_ase : Map<Any, S57enum> = mapOf(
+    private val Lc_ase: Map<Any, S57enum> = mapOf(
         Lc_ASX.ASX_UNKN to S57enum(0, ""),
         Lc_ASX.ASX_ALL to S57enum(1, "all"),
         Lc_ASX.ASX_OTHR to S57enum(2, "other"),
@@ -1972,7 +1972,7 @@ object S57val {
         Lc_ASX.ASX_TCNV to S57enum(10, "towed_convoy"),
     )
 
-    private val Lc_cci : Map<Any, S57enum> = mapOf(
+    private val Lc_cci: Map<Any, S57enum> = mapOf(
         Lc_CCX.CCX_UNKN to S57enum(0, ""),
         Lc_CCX.CCX_ALL to S57enum(1, "all"),
         Lc_CCX.CCX_OTHR to S57enum(2, "other"),
@@ -1984,7 +1984,7 @@ object S57val {
         Lc_CCX.CCX_GAS to S57enum(9, "gas"),
     )
 
-    private val Lc_cce : Map<Any, S57enum> = mapOf(
+    private val Lc_cce: Map<Any, S57enum> = mapOf(
         Lc_CCX.CCX_UNKN to S57enum(0, ""),
         Lc_CCX.CCX_ALL to S57enum(1, "all"),
         Lc_CCX.CCX_OTHR to S57enum(2, "other"),
@@ -1996,7 +1996,7 @@ object S57val {
         Lc_CCX.CCX_GAS to S57enum(9, "gas"),
     )
 
-    private val Shptyp : Map<Any, S57enum> = mapOf(
+    private val Shptyp: Map<Any, S57enum> = mapOf(
         ShpTYP.TYP_UNKN to S57enum(0, ""),
         ShpTYP.TYP_CRGO to S57enum(1, "cargo"),
         ShpTYP.TYP_CONT to S57enum(2, "container"),
@@ -2015,7 +2015,7 @@ object S57val {
         ShpTYP.TYP_BOAT to S57enum(15, "boat"),
     )
 
-    private val Catcvr : Map<Any, S57enum> = mapOf(
+    private val Catcvr: Map<Any, S57enum> = mapOf(
         CatCVR.CVR_UNKN to S57enum(0, ""),
         CatCVR.CVR_COVR to S57enum(1, "coverage"),
         CatCVR.CVR_NCVR to S57enum(2, "no_coverage"),
@@ -2445,7 +2445,6 @@ object S57val {
         return s57key!!.map!!.keys.toTypedArray()[0] as Enum<*>
     }
 
-    // CHECKSTYLE.OFF: LineLength
     internal class S57enum(var atvl: Int?, var `val`: String?)
 
     enum class Conv {

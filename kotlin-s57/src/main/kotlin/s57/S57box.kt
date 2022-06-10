@@ -159,7 +159,6 @@ object S57box {
         return
     }
 
-    // CHECKSTYLE.OFF: LineLength
     enum class Ext {
         I, N, W, S, E
     }

@@ -4,6 +4,7 @@ package s57
 
 /**
  * @author Malcolm Herring
+ * @author mgrouch
  */
 object S57obj {
     private val ObjS57 = mapOf(
@@ -427,7 +428,6 @@ object S57obj {
         return if (type != null && !type.isEmpty() && StrObj.containsKey(type)) StrObj[type] else Obj.UNKOBJ
     }
 
-    // CHECKSTYLE.OFF: LineLength
     enum class Obj {
         UNKOBJ, M_COVR, M_NSYS, AIRARE, ACHBRT, ACHARE, BCNCAR, BCNISD, BCNLAT, BCNSAW, BCNSPP, BERTHS, BRIDGE,
         BUISGL, BUAARE, BOYCAR, BOYINB, BOYISD, BOYLAT, BOYSAW, BOYSPP, CBLARE, CBLOHD, CBLSUB, CANALS, CTSARE,

@@ -3,9 +3,10 @@ package s57
 
 /**
  * @author Malcolm Herring
+ * @author mgrouch
  */
 object S57enc {
-    // CHECKSTYLE.OFF: LineLength
+
     private val header: ByteArray = byteArrayOf(
         '0'.code.toByte(),
         '1'.code.toByte(),

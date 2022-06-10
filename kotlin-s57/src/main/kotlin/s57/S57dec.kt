@@ -6,9 +6,10 @@ import java.io.IOException
 
 /**
  * @author Malcolm Herring
+ * @author mgrouch
  */
 object S57dec {
-    // CHECKSTYLE.OFF: LineLength
+
     @JvmStatic
     @Throws(IOException::class)
     fun decodeChart(`in`: FileInputStream, map: S57map) {
@@ -55,7 +56,8 @@ object S57dec {
                 if (!ddr) {
                     when (tag) {
                         "0001" ->
-                            var  i8rn : Int = (S57dat.decSubf(
+                            var  i8rn
+                            : Int = (S57dat.decSubf(
                             record,
                             fields + pos,
                             S57dat.S57field.I8RI,

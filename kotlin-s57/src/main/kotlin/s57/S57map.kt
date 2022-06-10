@@ -1,29 +1,28 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import java.lang.Math.toRadians
+
 
 /**
  * @author Malcolm Herring
+ * @author mgrouch
  */
 class S57map(private val sea: Boolean) {
+
     // S57/OSM map generation methods
-    // CHECKSTYLE.OFF: LineLength
     class MapBounds {
         @JvmField
-        var minlat: Double
-        @JvmField
-        var minlon: Double
-        @JvmField
-        var maxlat: Double
-        @JvmField
-        var maxlon: Double
+        var minlat: Double = toRadians(90.0)
 
-        init {
-            minlat = Math.toRadians(90.0)
-            minlon = Math.toRadians(180.0)
-            maxlat = Math.toRadians(-90.0)
-            maxlon = Math.toRadians(-180.0)
-        }
+        @JvmField
+        var minlon: Double = toRadians(180.0)
+
+        @JvmField
+        var maxlat: Double = toRadians(-90.0)
+
+        @JvmField
+        var maxlon: Double = toRadians(-180.0)
     }
 
     enum class Nflag {
@@ -31,7 +30,7 @@ class S57map(private val sea: Boolean) {
         ISOL,  // Node not part of Edge
         CONN,  // Edge first and last nodes
         TRNK,  // Edge truncated polygon nodes
-        DPTH // Sounding nodes
+        DPTH,  // Sounding nodes
     }
 
     class Snode {
@@ -39,6 +38,7 @@ class S57map(private val sea: Boolean) {
         @JvmField
         var lat // Latitude in radians
                 : Double
+
         @JvmField
         var lon // Longitude in radians
                 : Double
@@ -83,11 +83,8 @@ class S57map(private val sea: Boolean) {
         var last // Last CONN node
                 : Long = 0
         var nodes // Inner ANON nodes
-                : ArrayList<Long?>?
+                : ArrayList<Long?>? = ArrayList()
 
-        init {
-            nodes = ArrayList()
-        }
     }
 
     enum class Rflag {
@@ -97,13 +94,11 @@ class S57map(private val sea: Boolean) {
     class Reln(var id: Long, var reln: Rflag?)
     class RelTab : ArrayList<Reln?>()
     class ObjTab : HashMap<Int?, AttMap?>()
-    class ObjMap : HashMap<S57obj.Obj?, ObjTab?>(S57obj.Obj::class.java)
+    class ObjMap : HashMap<S57obj.Obj?, ObjTab?>()
     class AttMap : HashMap<S57att.Att?, S57val.AttVal<*>?>()
     class NodeTab : HashMap<Long?, Snode?>()
     class EdgeTab : HashMap<Long?, Edge?>()
-    class FtrMap : HashMap<S57obj.Obj?, ArrayList<Feature?>?>(
-        S57obj.Obj::class.java
-    )
+    class FtrMap : HashMap<S57obj.Obj?, ArrayList<Feature?>?>()
 
     class FtrTab : HashMap<Long?, Feature?>()
     class Prim {
@@ -168,26 +163,27 @@ class S57map(private val sea: Boolean) {
         : Pflag?
     ) {
         var elems // Ordered list of elements
-                : ArrayList<Prim?>?
+                : ArrayList<Prim?>? = ArrayList()
         var outers // Number of outers
                 : Int
         var inners // Number of inners
-                : Int
+                : Int = 0
         var comps // Ordered list of compounds
                 : ArrayList<Comp?>?
+
         @JvmField
         var area // Area of feature
                 : Double
+
         @JvmField
         var length // Length of feature
                 : Double
+
         @JvmField
         var centre // Centre of feature
                 : Snode?
 
         init {
-            elems = ArrayList()
-            inners = 0
             outers = inners
             comps = ArrayList()
             area = 0.0
@@ -199,27 +195,30 @@ class S57map(private val sea: Boolean) {
     class Feature internal constructor() {
         var id // Ref for this feature
                 : Long = 0
+
         @JvmField
         var reln // Relationship status
-                : Rflag?
+                : Rflag? = Rflag.UNKN
+
         @JvmField
         var geom // Geometry data
-                : Geom?
+                : Geom? = Geom(Pflag.NOSP)
+
         @JvmField
         var type // Feature type
                 : S57obj.Obj?
+
         @JvmField
         var atts // Feature attributes
                 : AttMap?
         var rels // Related objects
                 : RelTab?
+
         @JvmField
         var objs // Slave object attributes
                 : ObjMap?
 
         init {
-            reln = Rflag.UNKN
-            geom = Geom(Pflag.NOSP)
             type = S57obj.Obj.UNKOBJ
             atts = AttMap()
             rels = RelTab()
@@ -229,8 +228,9 @@ class S57map(private val sea: Boolean) {
 
     @JvmField
     var bounds: MapBounds?
-    var nodes: NodeTab?
-    var edges: EdgeTab?
+    var nodes: NodeTab? = NodeTab()
+    var edges: EdgeTab? = EdgeTab()
+
     @JvmField
     var features: FtrMap?
     var index: FtrTab?
@@ -241,8 +241,8 @@ class S57map(private val sea: Boolean) {
     private var osm: ArrayList<S57osm.KeyVal<*>?>? = null
 
     init {
-        nodes = NodeTab() // All nodes in map
-        edges = EdgeTab() // All edges in map
+        // All nodes in map
+        // All edges in map
         feature = Feature() // Current feature being built
         features = FtrMap() // All features in map, grouped by type
         index = FtrTab() // Feature look-up table
@@ -253,14 +253,14 @@ class S57map(private val sea: Boolean) {
 
     // S57 map building methods
     fun newNode(id: Long, lat: Double, lon: Double, flag: Nflag?) {
-        nodes!![id] = Snode(Math.toRadians(lat), Math.toRadians(lon), flag)
+        nodes!![id] = Snode(toRadians(lat), toRadians(lon), flag)
         if (flag == Nflag.ANON) {
             edge!!.nodes!!.add(id)
         }
     }
 
     fun newNode(id: Long, lat: Double, lon: Double, depth: Double) {
-        nodes!![id] = Snode(Math.toRadians(lat), Math.toRadians(lon), depth)
+        nodes!![id] = Snode(toRadians(lat), toRadians(lon), depth)
     }
 
     fun newFeature(id: Long, p: Pflag?, objl: Long) {
@@ -355,7 +355,7 @@ class S57map(private val sea: Boolean) {
 
     // OSM map building methods
     fun addNode(id: Long, lat: Double, lon: Double) {
-        nodes!![id] = Snode(Math.toRadians(lat), Math.toRadians(lon))
+        nodes!![id] = Snode(toRadians(lat), toRadians(lon))
         feature = Feature()
         feature!!.id = id
         feature!!.reln = Rflag.UNKN
@@ -479,7 +479,7 @@ class S57map(private val sea: Boolean) {
         when (feature!!.geom!!.prim) {
             Pflag.POINT -> {
                 val node = nodes!![id]
-                if (node!!.flg != Nflag.CONN && node.flg != Nflag.DPTH && (!feature!!.objs!!.isEmpty() || !osm!!.isEmpty())) {
+                if (node!!.flg != Nflag.CONN && node.flg != Nflag.DPTH && (!feature!!.objs!!.isEmpty() || osm!!.isNotEmpty())) {
                     node.flg = Nflag.ISOL
                 }
             }
@@ -562,7 +562,7 @@ class S57map(private val sea: Boolean) {
             }
             var prev = sweep
             var top = 0
-            while (!outer!!.elems!!.isEmpty()) {
+            while (outer!!.elems!!.isNotEmpty()) {
                 val prim = outer.elems!!.removeAt(0)
                 val edge = edges!![prim!!.id] ?: return false
                 if (next == true) {
@@ -665,7 +665,7 @@ class S57map(private val sea: Boolean) {
         }
 
         fun nextRef(): Long {
-            var ref: Long = 0
+            var ref: Long
             if (forward) {
                 if (it == null) {
                     ref = edge!!.first
@@ -702,14 +702,13 @@ class S57map(private val sea: Boolean) {
     inner class GeomIterator(var geom: Geom?) {
         var prim: Prim? = null
         var eit: EdgeIterator? = null
-        var ite: ListIterator<Prim?>?
+        var ite: ListIterator<Prim?>? = geom!!.elems!!.listIterator()
         var itc: ListIterator<Comp?>?
         var comp: Comp? = null
         var ec = 0
         var lastref: Long = 0
 
         init {
-            ite = geom!!.elems!!.listIterator()
             itc = geom!!.comps!!.listIterator()
         }
 
@@ -805,7 +804,7 @@ class S57map(private val sea: Boolean) {
         lat = lon
         var sigma = 0.0
         var first = true
-        val git: GeomIterator = GeomIterator(geom)
+        val git = GeomIterator(geom)
         while (git.hasComp()) {
             git.nextComp()
             while (git.hasEdge()) {
@@ -837,10 +836,9 @@ class S57map(private val sea: Boolean) {
         var lat: Double
         var lon: Double
         var slat: Double
-        var slon: Double
         var llat: Double
         var llon: Double
-        slon = 0.0
+        var slon: Double = 0.0
         slat = slon
         lon = slat
         lat = lon
