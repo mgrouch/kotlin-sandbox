@@ -1681,7 +1681,7 @@ object S57enc {
             )
         )
         ds.add(S57dat.Fparams(S57field.DSSI, arrayOf(2, 1, 2, metas, 0, geos, 0, isols, conns, edges, 0)))
-        val dp = ArrayList<S57dat.Fparams>()
+        val dp = arrayListOf<S57dat.Fparams>()
         dp.add(
             S57dat.Fparams(
                 S57field.DSPM,
@@ -1711,7 +1711,7 @@ object S57enc {
             }
         }
         if (depths.isNotEmpty()) {
-            fields = ArrayList()
+            fields = arrayListOf()
             fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, -2, 1, 1)))
             fields.add(S57dat.Fparams(S57field.SG3D, depths.toTypedArray()))
             record = S57dat.encRecord(recs++, fields)
@@ -1724,7 +1724,7 @@ object S57enc {
         for (entry in map.nodes!!.entries) {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.ISOL) {
-                fields = ArrayList()
+                fields = arrayListOf()
                 fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, hash(entry.key!!), 1, 1)))
                 fields.add(
                     S57dat.Fparams(
@@ -1744,7 +1744,7 @@ object S57enc {
         for (entry in map.nodes!!.entries) {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.CONN) {
-                fields = ArrayList()
+                fields = arrayListOf()
                 fields.add(S57dat.Fparams(S57field.VRID, arrayOf(120, hash(entry.key!!), 1, 1)))
                 fields.add(
                     S57dat.Fparams(
@@ -1763,7 +1763,7 @@ object S57enc {
         // Edges
         for (entry in map.edges!!.entries) {
             val edge = entry.value
-            fields = ArrayList()
+            fields = arrayListOf()
             fields.add(S57dat.Fparams(S57field.VRID, arrayOf(130, hash(entry.key!!), 1, 1)))
             fields.add(
                 S57dat.Fparams(
@@ -1773,16 +1773,15 @@ object S57enc {
                     )
                 )
             )
-            var nodes: Array<Any?>? = arrayOfNulls<Any?>(0)
+            val nodes: ArrayList<Any> = arrayListOf(0)
             for (ref in edge.nodes!!) {
-                val nval = arrayOf<Any?>(
+                val nval = arrayOf<Any>(
                     rad2deg(map.nodes!![ref]!!.lat) * COMF, rad2deg(map.nodes!![ref]!!.lon) * COMF
                 )
-                nodes = Arrays.copyOf(nodes, nodes!!.size + nval.size)
-                arraycopy(nval, 0, nodes, nodes.size - nval.size, nval.size)
+                nodes.addAll(nval)
             }
-            if (nodes!!.isNotEmpty()) {
-                fields.add(S57dat.Fparams(S57field.SG2D, nodes))
+            if (nodes.isNotEmpty()) {
+                fields.add(S57dat.Fparams(S57field.SG2D, nodes.toTypedArray()))
             }
             record = S57dat.encRecord(recs++, fields)
             byteArrayCopy(record, 0, buf, idx, record.size)
@@ -1804,7 +1803,7 @@ object S57enc {
                     Obj.DEPARE, Obj.DRGARE, Obj.FLODOC, Obj.HULKES, Obj.LNDARE, Obj.PONTON, Obj.UNSARE -> 1
                     else -> 2
                 }
-                val geom = ArrayList<S57dat.Fparams>()
+                val geom = arrayListOf<S57dat.Fparams>()
                 var outers = if (feature.geom!!.prim == S57map.Pflag.POINT) 1 else feature.geom!!.comps!![0]!!.size
                 for (elem in feature.geom!!.elems!!) {
                     if (feature.geom!!.prim == S57map.Pflag.POINT) {
@@ -1840,13 +1839,13 @@ object S57enc {
                         )
                     }
                 }
-                val objects = ArrayList<ArrayList<S57dat.Fparams>?>()
-                val slaves = ArrayList<Long?>()
+                val objects = arrayListOf<ArrayList<S57dat.Fparams>?>(0)
+                val slaves = arrayListOf<Long?>(0)
                 var slaveid = feature.id + 0x0100000000000000L
                 for (objs in feature.objs!!.entries) {
                     val objobj = objs.key
                     for (o in objs.value!!.entries) {
-                        val objatts = ArrayList<S57dat.Fparams>()
+                        val objatts = arrayListOf<S57dat.Fparams>()
                         val master = feature.type == objobj && (o.key == 0 || o.key) == 1
                         val id = hash(if (master) feature.id else slaveid)
                         objatts.add(
@@ -1894,22 +1893,21 @@ object S57enc {
                     }
                 }
                 if (slaves.isNotEmpty()) {
-                    val refs = ArrayList<S57dat.Fparams>()
-                    var params: Array<Any?>? = arrayOfNulls<Any?>(0)
+                    val refs = arrayListOf<S57dat.Fparams>()
+                    val params: ArrayList<Any> = arrayListOf(0)
                     while (slaves.isNotEmpty()) {
                         val id = slaves.removeAt(0)!!
                         val next =
-                            arrayOf<Any?>((((id and 0xffffffffL) + 0x100000000L shl 16) + (agen and 0xffff)), 2, "")
-                        params = params!!.copyOf(params.size + next.size)
-                        arraycopy(next, 0, params, params.size - next.size, next.size)
+                            arrayOf<Any>((((id and 0xffffffffL) + 0x100000000L shl 16) + (agen and 0xffff)), 2, "")
+                        params.addAll(next)
                     }
-                    refs.add(S57dat.Fparams(S57field.FFPT, params))
+                    refs.add(S57dat.Fparams(S57field.FFPT, params.toTypedArray()))
                     objects[objects.size - 1]!!.addAll(refs)
                 }
                 for (o in objects) {
                     o!!.addAll(geom)
                     record = S57dat.encRecord(recs++, o)
-                    arraycopy(record, 0, buf, idx, record.size)
+                    byteArrayCopy(record, 0, buf, idx, record.size)
                     idx += record.size
                     if (obj == Obj.M_COVR || obj == Obj.M_NSYS) metas++
                     else geos++
@@ -1947,7 +1945,7 @@ object S57enc {
         return idx
     }
 
-    private fun arraycopy(src: Array<Any?>, srcPos: Int, dest: Array<Any?>, destPos: Int, size: Int) {
+    private fun arraycopy(src: Array<Any>, srcPos: Int, dest: Array<Any>, destPos: Int, size: Int) {
         src.copyInto(dest, destPos, srcPos,  size - srcPos)
     }
 }
