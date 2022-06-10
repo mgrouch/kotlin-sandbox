@@ -3,6 +3,7 @@ package s57
 
 import s57.S57map.Pflag.POINT
 import s57.S57obj.Obj
+import java.nio.charset.Charset
 
 
 import kotlin.math.abs
@@ -335,7 +336,8 @@ object S57dat {
         '4'.code.toByte()
     )
 
-    private var buffer: ByteArray
+    private lateinit var buffer: ByteArray
+
     private var offset = 0
     private var maxoff = 0
     private var index = 0
@@ -399,22 +401,16 @@ object S57dat {
     fun decSubf(subf: S57subf): Any {
         val conv = findSubf(subf)
         return if (conv!!.bin == 0) {
-            var str = ""
+            val str: String
             if (conv.asc == 0) {
                 var i = 0
-                while (buffer[offset + i].toInt() != 0x1f) {
-                    i++
+                while (buffer[offset + i].toInt() != 0x1f) i++
+                val charset = when (field) {
+                    S57field.ATTF -> aall
+                    S57field.NATF -> nall
+                    else -> "US-ASCII"
                 }
-                try {
-                    val charset = when (field) {
-                        S57field.ATTF -> aall
-                        S57field.NATF -> nall
-                        else -> "US-ASCII"
-                    }
-                    str = String(buffer, offset, i, charset)
-                } catch (e: UnsupportedEncodingException) {
-                    e.printStackTrace()
-                }
+                str = String(buffer, offset, i, Charset.forName(charset))
                 offset += i + 1
             } else {
                 str = String(buffer, offset, conv.asc)
