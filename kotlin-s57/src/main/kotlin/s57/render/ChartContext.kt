@@ -16,9 +16,9 @@ interface ChartContext {
         ALL, BASE, SEAMARK
     }
 
-    fun getPoint(coord: S57map.Snode?): Point2D?
-    fun mile(feature: S57map.Feature?): Double
+    fun getPoint(coord: S57map.Snode): Point2D?
+    fun mile(feature: S57map.Feature): Double
     fun clip(): Boolean
-    fun background(map: S57map?): Color?
+    fun background(map: S57map): Color?
     fun ruleset(): RuleSet?
 }
