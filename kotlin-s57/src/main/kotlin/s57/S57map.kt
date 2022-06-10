@@ -71,13 +71,9 @@ class S57map(private val sea: Boolean) {
 
     class Edge {
         // A polyline segment
-        var first // First CONN node
-                : Long = 0
-        var last // Last CONN node
-                : Long = 0
-        var nodes // Inner ANON nodes
-                : ArrayList<Long?>? = ArrayList()
-
+        var first: Long = 0 // First CONN node
+        var last: Long = 0 // Last CONN node
+        var nodes: ArrayList<Long?>? = ArrayList() // Inner ANON nodes
     }
 
     enum class Rflag {
@@ -92,41 +88,28 @@ class S57map(private val sea: Boolean) {
     class NodeTab : HashMap<Long?, Snode?>()
     class EdgeTab : HashMap<Long?, Edge?>()
     class FtrMap : HashMap<Obj?, ArrayList<Feature?>?>()
-
     class FtrTab : HashMap<Long?, Feature?>()
+
     class Prim {
         // Spatial element
-        var id: Long // Snode ID for POINTs, Edge ID for LINEs & AREAs
-        var forward: Boolean // Direction of vector used (LINEs & AREAs)
-        var outer: Boolean // Exterior/Interior boundary (AREAs)
-        var trunc: Boolean // Cell limit truncation
-
-        constructor() {
-            id = 0
-            forward = true
-            outer = true
-            trunc = false
-        }
+        var id: Long = 0 // Snode ID for POINTs, Edge ID for LINEs & AREAs
+        var forward: Boolean = true // Direction of vector used (LINEs & AREAs)
+        var outer: Boolean = true // Exterior/Interior boundary (AREAs)
+        var trunc: Boolean = false // Cell limit truncation
 
         constructor(i: Long) {
             id = i
-            forward = true
-            outer = true
-            trunc = false
         }
 
         constructor(i: Long, o: Boolean) {
             id = i
-            forward = true
             outer = o
-            trunc = false
         }
 
         constructor(i: Long, f: Boolean, o: Boolean) {
             id = i
             forward = f
             outer = o
-            trunc = false
         }
 
         constructor(i: Long, f: Boolean, o: Boolean, t: Boolean) {
@@ -159,7 +142,7 @@ class S57map(private val sea: Boolean) {
 
         init {
             outers = inners
-            comps = ArrayList()
+            comps = arrayListOf()
             area = 0.0
             length = 0.0
             centre = Snode()
@@ -763,11 +746,7 @@ class S57map(private val sea: Boolean) {
                         llon = lon
                         lat = node.lat
                         lon = node.lon
-                        sigma += acos(
-                            sin(lat) * sin(llat) + cos(lat) * cos(llat) * cos(
-                                llon - lon
-                            )
-                        )
+                        sigma += acos(sin(lat) * sin(llat) + cos(lat) * cos(llat) * cos(llon - lon))
                     }
                 }
             }

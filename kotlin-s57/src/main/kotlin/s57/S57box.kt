@@ -119,7 +119,7 @@ object S57box {
             }
             islands = ArrayList()
             for (land in lands) {
-                if (land.sbound == Ext.I || land.ebound == Ext.I) {
+                if (land.sbound == I || land.ebound == I) {
                     islands.add(land)
                 }
             }
