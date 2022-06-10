@@ -1642,15 +1642,14 @@ object S57enc {
         }
         S57dat.S57geoms(map)
         var record: ByteArray?
-        var fields: ArrayList<S57dat.Fparams?>
+        var fields: ArrayList<S57dat.Fparams>
         edges = 0
         geos = edges
         metas = geos
         conns = metas
         isols = conns
         val date = SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().time)
-        var ds = ArrayList<S57dat.Fparams?>()
-        ds.add(
+        var ds = arrayListOf(
             S57dat.Fparams(
                 S57field.DSID,
                 arrayOf<Any>(
@@ -1674,7 +1673,7 @@ object S57enc {
             )
         )
         ds.add(S57dat.Fparams(S57field.DSSI, arrayOf(2, 1, 2, metas, 0, geos, 0, isols, conns, edges, 0)))
-        val dp = ArrayList<S57dat.Fparams?>()
+        val dp = ArrayList<S57dat.Fparams>()
         dp.add(
             S57dat.Fparams(
                 S57field.DSPM,
@@ -1684,8 +1683,8 @@ object S57enc {
         arraycopy(header, 0, buf, 0, header.size)
         idx = header.size
         record = S57dat.encRecord(1, ds)
-        arraycopy(record, 0, buf, idx, record!!.size)
-        idx += record!!.size
+        arraycopy(record, 0, buf, idx, record.size)
+        idx += record.size
         record = S57dat.encRecord(2, dp)
         arraycopy(record, 0, buf, idx, record.size)
         idx += record.size
@@ -1697,7 +1696,7 @@ object S57enc {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.DPTH) {
                 val dval = arrayOf<Any?>(
-                    toDegrees(node.lat) * COMF, toDegrees(node.lon) * COMF,
+                    rad2deg(node.lat) * COMF, rad2deg(node.lon) * COMF,
                     node.`val` * SOMF
                 )
                 depths = Arrays.copyOf(depths, depths!!.size + dval.size)
@@ -1723,12 +1722,12 @@ object S57enc {
                 fields.add(
                     S57dat.Fparams(
                         S57field.SG2D, arrayOf(
-                            toDegrees(node.lat) * COMF, toDegrees(node.lon) * COMF
+                            rad2deg(node.lat) * COMF, rad2deg(node.lon) * COMF
                         )
                     )
                 )
                 record = S57dat.encRecord(recs++, fields)
-                arraycopy(record, 0, buf, idx, record!!.size)
+                arraycopy(record, 0, buf, idx, record.size)
                 idx += record.size
                 isols++
             }
@@ -1743,13 +1742,13 @@ object S57enc {
                 fields.add(
                     S57dat.Fparams(
                         S57field.SG2D, arrayOf(
-                            toDegrees(node.lat) * COMF, toDegrees(node.lon) * COMF
+                            rad2deg(node.lat) * COMF, rad2deg(node.lon) * COMF
                         )
                     )
                 )
                 record = S57dat.encRecord(recs++, fields)
-                arraycopy(record, 0, buf, idx, record!!.size)
-                idx += record!!.size
+                arraycopy(record, 0, buf, idx, record.size)
+                idx += record.size
                 conns++
             }
         }
@@ -1770,7 +1769,7 @@ object S57enc {
             var nodes: Array<Any?>? = arrayOfNulls<Any?>(0)
             for (ref in edge.nodes!!) {
                 val nval = arrayOf<Any?>(
-                    toDegrees(map.nodes!![ref]!!.lat) * COMF, toDegrees(map.nodes!![ref]!!.lon) * COMF
+                    rad2deg(map.nodes!![ref]!!.lat) * COMF, rad2deg(map.nodes!![ref]!!.lon) * COMF
                 )
                 nodes = Arrays.copyOf(nodes, nodes!!.size + nval.size)
                 arraycopy(nval, 0, nodes, nodes.size - nval.size, nval.size)
@@ -1779,8 +1778,8 @@ object S57enc {
                 fields.add(S57dat.Fparams(S57field.SG2D, nodes))
             }
             record = S57dat.encRecord(recs++, fields)
-            arraycopy(record, 0, buf, idx, record!!.size)
-            idx += record!!.size
+            arraycopy(record, 0, buf, idx, record.size)
+            idx += record.size
             edges++
         }
 
@@ -1839,9 +1838,9 @@ object S57enc {
                 var slaveid = feature.id + 0x0100000000000000L
                 for (objs in feature.objs!!.entries) {
                     val objobj = objs.key
-                    for (`object` in objs.value!!.entries) {
+                    for (o in objs.value!!.entries) {
                         val objatts = ArrayList<S57dat.Fparams?>()
-                        val master = feature.type == objobj && (`object`.key == 0 || `object`.key) == 1
+                        val master = feature.type == objobj && (o.key == 0 || o.key) == 1
                         val id = hash(if (master) feature.id else slaveid)
                         objatts.add(
                             S57dat.Fparams(
@@ -1853,7 +1852,7 @@ object S57enc {
                         var attf: Array<Any?>? = arrayOfNulls<Any?>(0)
                         var natf: Array<Any?>? = arrayOfNulls<Any?>(0)
                         val atts = S57map.AttMap()
-                        atts.putAll(`object`.value!!)
+                        atts.putAll(o.value!!)
                         if (master) {
                             atts.putAll(feature.atts!!)
                         }
@@ -1874,10 +1873,10 @@ object S57enc {
                                 }
                             }
                         }
-                        if (attf!!.size > 0) {
+                        if (attf!!.isNotEmpty()) {
                             objatts.add(S57dat.Fparams(S57field.ATTF, attf))
                         }
-                        if (natf!!.size > 0) {
+                        if (natf!!.isNotEmpty()) {
                             objatts.add(S57dat.Fparams(S57field.NATF, attf))
                         }
                         if (master) {
@@ -1917,8 +1916,7 @@ object S57enc {
         }
 
         // Re-write DSID/DSSI with final totals
-        ds = ArrayList()
-        ds.add(
+        ds = arrayListOf(
             S57dat.Fparams(
                 S57field.DSID,
                 arrayOf<Any>(
@@ -1943,7 +1941,7 @@ object S57enc {
         )
         ds.add(S57dat.Fparams(S57field.DSSI, arrayOf(2, 1, 2, metas, 0, geos, 0, isols, conns, edges, 0)))
         record = S57dat.encRecord(1, ds)
-        arraycopy(record, 0, buf, header.size, record!!.size)
+        arraycopy(record, 0, buf, header.size, record.size)
         return idx
     }
 }

@@ -13,6 +13,7 @@ import s57.S57obj.Obj
  */
 
 fun deg2rad(deg: Double): Double = deg * PI / 180
+fun rad2deg(rad: Double): Double = rad * 180 / PI
 
 class S57map(private val sea: Boolean) {
 
