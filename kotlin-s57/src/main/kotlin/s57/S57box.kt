@@ -3,6 +3,8 @@ package s57
 
 import s57.S57box.Ext.*
 import s57.S57map.Pflag
+import s57.S57map.Pflag.AREA
+import s57.S57map.Pflag.LINE
 import s57.S57obj.Obj
 
 /**
@@ -58,11 +60,11 @@ object S57box {
                 land.reln = S57map.Rflag.MASTER
                 land.objs!![Obj.LNDARE] = S57map.ObjTab()
                 land.objs!![Obj.LNDARE]!![0] = S57map.AttMap()
-                if (feature!!.geom!!.prim == Pflag.AREA) {
+                if (feature!!.geom!!.prim == AREA) {
                     land.geom = feature.geom
                     map.features!![Obj.LNDARE]!!.add(land)
-                } else if (feature.geom!!.prim == Pflag.LINE) {
-                    land.geom!!.prim = Pflag.LINE
+                } else if (feature.geom!!.prim == LINE) {
+                    land.geom!!.prim = LINE
                     land.geom!!.elems!!.addAll(feature.geom!!.elems!!)
                     coasts.add(land)
                 }
@@ -100,7 +102,7 @@ object S57box {
             var islands = ArrayList<Land>()
             for (land in lands) {
                 map.sortGeom(land.land)
-                if (land.land.geom!!.prim == Pflag.AREA) {
+                if (land.land.geom!!.prim == AREA) {
                     islands.add(land)
                     map.features!![Obj.LNDARE]!!.add(land.land)
                 }
@@ -154,7 +156,7 @@ object S57box {
                 map.edges!![++map.xref] = nedge
                 land.land.geom!!.elems!!.add(S57map.Prim(map.xref))
                 land.land.geom!!.comps!![0]!!.size++
-                land.land.geom!!.prim = Pflag.AREA
+                land.land.geom!!.prim = AREA
                 map.features!![Obj.LNDARE]!!.add(land.land)
             }
         }

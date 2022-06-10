@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57map.Pflag.POINT
 import s57.S57obj.Obj
 import kotlin.math.abs
 import kotlin.system.exitProcess
@@ -758,11 +759,11 @@ object S57dat {
             for (feature in list!!) {
                 when (S57prims[feature!!.type]) {
                     Prims.N -> {}
-                    Prims.P -> if (feature.geom!!.prim != S57map.Pflag.POINT) {
+                    Prims.P -> if (feature.geom!!.prim != POINT) {
                         //                        Snode node = feature.geom.centre;
                         //                        node.flg = Nflag.ISOL;
                         //                        map.nodes.put(++map.xref, node);
-                        //                        feature.geom = map.new Geom(Pflag.POINT);
+                        //                        feature.geom = map.new Geom(POINT);
                         //                        feature.geom.centre = node;
                         //                        feature.geom.elems.add(map.new Prim(map.xref));
                     }
@@ -770,7 +771,7 @@ object S57dat {
                     Prims.A -> {}
                     Prims.PA -> {}
                     Prims.PL -> {}
-                    Prims.LA -> if (feature.geom!!.prim == S57map.Pflag.POINT) {
+                    Prims.LA -> if (feature.geom!!.prim == POINT) {
                         //                        list.remove(feature);
                     }
                     Prims.PLA -> {}

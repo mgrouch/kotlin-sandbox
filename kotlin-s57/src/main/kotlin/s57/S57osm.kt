@@ -80,8 +80,7 @@ object S57osm {
         }
         return
     }
-
-    @Throws(Exception::class)
+    
     fun OSMmap(`in`: BufferedReader?, map: S57map?, bb: Boolean) {
         var k: String?
         var v: String

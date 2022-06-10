@@ -88,14 +88,10 @@ class S57map(private val sea: Boolean) {
     class FtrTab : HashMap<Long?, Feature?>()
     class Prim {
         // Spatial element
-        var id // Snode ID for POINTs, Edge ID for LINEs & AREAs)
-                : Long
-        var forward // Direction of vector used (LINEs & AREAs)
-                : Boolean
-        var outer // Exterior/Interior boundary (AREAs)
-                : Boolean
-        var trunc // Cell limit truncation
-                : Boolean
+        var id: Long // Snode ID for POINTs, Edge ID for LINEs & AREAs)
+        var forward: Boolean // Direction of vector used (LINEs & AREAs)
+        var outer: Boolean // Exterior/Interior boundary (AREAs)
+        var trunc: Boolean // Cell limit truncation
 
         constructor() {
             id = 0
@@ -133,10 +129,9 @@ class S57map(private val sea: Boolean) {
         }
     }
 
-    class Comp(// Composite spatial element
-        var ref // ID of Comp
-        : Long, // Number of Prims in this Comp
-        var size: Int
+    class Comp( // Composite spatial element
+        var ref: Long, // ID of Comp
+        var size: Int // Number of Prims in this Comp
     )
 
     enum class Pflag {
@@ -167,17 +162,10 @@ class S57map(private val sea: Boolean) {
         var id: Long = 0 // Ref for this feature
         var reln: Rflag? = Rflag.UNKN // Relationship status
         var geom: Geom? = Geom(Pflag.NOSP) // Geometry data
-        var type: S57obj.Obj? // Feature type
-        var atts: AttMap? // Feature attributes
-        var rels: RelTab? // Related objects
-        var objs: ObjMap? // Slave object attributes
-
-        init {
-            type = S57obj.Obj.UNKOBJ
-            atts = AttMap()
-            rels = RelTab()
-            objs = ObjMap()
-        }
+        var type: S57obj.Obj? = S57obj.Obj.UNKOBJ // Feature type
+        var atts: AttMap? = AttMap() // Feature attributes
+        var rels: RelTab? = RelTab() // Related objects
+        var objs: ObjMap? = ObjMap() // Slave object attributes
     }
 
     var bounds: MapBounds?
@@ -186,6 +174,7 @@ class S57map(private val sea: Boolean) {
     var features: FtrMap?
     var index: FtrTab?
     var xref: Long
+
     private var cref: Long
     private var feature: Feature?
     private var edge: Edge? = null

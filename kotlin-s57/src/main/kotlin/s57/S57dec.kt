@@ -1,6 +1,10 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57dat.S57field
+import s57.S57dat.S57subf
+import s57.S57map.Nflag
+import s57.S57map.Pflag.*
 import java.io.FileInputStream
 import java.io.IOException
 
@@ -28,8 +32,8 @@ object S57dec {
         var comf = 1.0
         var somf = 1.0
         var name: Long = 0
-        var nflag = S57map.Nflag.ANON
-        var pflag = S57map.Pflag.NOSP
+        var nflag = Nflag.ANON
+        var pflag = NOSP
         var objl: Long = 0
         while (`in`.read(leader) == 24) {
             try {
@@ -58,71 +62,71 @@ object S57dec {
                             : Int = (S57dat.decSubf(
                             record,
                             fields + pos,
-                            S57dat.S57field.I8RI,
-                            S57dat.S57subf.I8RN
+                            S57field.I8RI,
+                            S57subf.I8RN
                         ) as Long).toInt()
                         "DSSI" -> {
-                            S57dat.decSubf(record, fields + pos, S57dat.S57field.DSSI, S57dat.S57subf.AALL)
-                            S57dat.decSubf(S57dat.S57subf.NALL)
+                            S57dat.decSubf(record, fields + pos, S57field.DSSI, S57subf.AALL)
+                            S57dat.decSubf(S57subf.NALL)
                         }
                         "DSPM" -> {
                             comf = S57dat.decSubf(
                                 record,
                                 fields + pos,
-                                S57dat.S57field.DSPM,
-                                S57dat.S57subf.COMF
+                                S57field.DSPM,
+                                S57subf.COMF
                             ) as Long?. toDouble ()
-                            somf = S57dat.decSubf(S57dat.S57subf.SOMF) as Long?. toDouble ()
+                            somf = S57dat.decSubf(S57subf.SOMF) as Long?. toDouble ()
                         }
                         "FRID" -> {
                             inFeature = true
                             pflag = when ((S57dat.decSubf(
                                 record,
                                 fields + pos,
-                                S57dat.S57field.FRID,
-                                S57dat.S57subf.PRIM
+                                S57field.FRID,
+                                S57subf.PRIM
                             ) as Long).toInt()) {
-                                1 -> S57map.Pflag.POINT
-                                2 -> S57map.Pflag.LINE
-                                3 -> S57map.Pflag.AREA
-                                else -> S57map.Pflag.NOSP
+                                1 -> POINT
+                                2 -> LINE
+                                3 -> AREA
+                                else -> NOSP
                             }
-                            objl = (S57dat.decSubf(S57dat.S57subf.OBJL) as Long)
+                            objl = (S57dat.decSubf(S57subf.OBJL) as Long)
                         }
                         "FOID" -> {
                             name =
-                                S57dat.decSubf(record, fields + pos, S57dat.S57field.LNAM, S57dat.S57subf.LNAM) as Long
+                                S57dat.decSubf(record, fields + pos, S57field.LNAM, S57subf.LNAM) as Long
                             map.newFeature(name, pflag, objl)
                         }
                         "ATTF" -> {
-                            S57dat.setField(record, fields + pos, S57dat.S57field.ATTF, len)
+                            S57dat.setField(record, fields + pos, S57field.ATTF, len)
                             do {
-                                val attl = S57dat.decSubf(S57dat.S57subf.ATTL) as Long
-                                val atvl = (S57dat.decSubf(S57dat.S57subf.ATVL) as String).trim { it <= ' ' }
+                                val attl = S57dat.decSubf(S57subf.ATTL) as Long
+                                val atvl = (S57dat.decSubf(S57subf.ATVL) as String).trim { it <= ' ' }
                                 if (!atvl.isEmpty()) {
                                     map.newAtt(attl, atvl)
                                 }
                             } while (S57dat.more())
                         }
                         "FFPT" -> {
-                            S57dat.setField(record, fields + pos, S57dat.S57field.FFPT, len)
+                            S57dat.setField(record, fields + pos, S57field.FFPT, len)
                             do {
-                                name = S57dat.decSubf(S57dat.S57subf.LNAM) as Long
-                                val rind = (S57dat.decSubf(S57dat.S57subf.RIND) as Long).toInt()
-                                S57dat.decSubf(S57dat.S57subf.COMT)
+                                name = S57dat.decSubf(S57subf.LNAM) as Long
+                                val rind = (S57dat.decSubf(S57subf.RIND) as Long).toInt()
+                                S57dat.decSubf(S57subf.COMT)
                                 map.refObj(name, rind)
                             } while (S57dat.more())
                         }
                         "FSPT" -> {
-                            S57dat.setField(record, fields + pos, S57dat.S57field.FSPT, len)
+                            S57dat.setField(record, fields + pos, S57field.FSPT, len)
                             do {
-                                name = S57dat.decSubf(S57dat.S57subf.NAME) as Long shl 16
+                                name = S57dat.decSubf(S57subf.NAME) as Long shl 16
                                 map.newPrim(
                                     name,
-                                    (S57dat.decSubf(S57dat.S57subf.ORNT) as Long),
-                                    (S57dat.decSubf(S57dat.S57subf.USAG) as Long)
+                                    (S57dat.decSubf(S57subf.ORNT) as Long),
+                                    (S57dat.decSubf(S57subf.USAG) as Long)
                                 )
-                                S57dat.decSubf(S57dat.S57subf.MASK)
+                                S57dat.decSubf(S57subf.MASK)
                             } while (S57dat.more())
                         }
                         "VRID" -> {
@@ -130,36 +134,36 @@ object S57dec {
                             name = (S57dat.decSubf(
                                 record,
                                 fields + pos,
-                                S57dat.S57field.VRID,
-                                S57dat.S57subf.RCNM
+                                S57field.VRID,
+                                S57subf.RCNM
                             ) as Long)
                             nflag = when (name.toInt()) {
-                                110 -> S57map.Nflag.ISOL
-                                120 -> S57map.Nflag.CONN
-                                else -> S57map.Nflag.ANON
+                                110 -> Nflag.ISOL
+                                120 -> Nflag.CONN
+                                else -> Nflag.ANON
                             }
                             name = name shl 32
-                            name += S57dat.decSubf(S57dat.S57subf.RCID) as Long
+                            name += S57dat.decSubf(S57subf.RCID) as Long
                             name = name shl 16
-                            if (nflag == S57map.Nflag.ANON) {
+                            if (nflag == Nflag.ANON) {
                                 map.newEdge(name)
                             }
                         }
                         "VRPT" -> {
-                            S57dat.setField(record, fields + pos, S57dat.S57field.VRPT, len)
+                            S57dat.setField(record, fields + pos, S57field.VRPT, len)
                             do {
-                                val conn = (S57dat.decSubf(S57dat.S57subf.NAME) as Long) shl 16
-                                val topi = (S57dat.decSubf(S57dat.S57subf.TOPI) as Long).toInt()
+                                val conn = (S57dat.decSubf(S57subf.NAME) as Long) shl 16
+                                val topi = (S57dat.decSubf(S57subf.TOPI) as Long).toInt()
                                 map.addConn(conn, topi)
-                                S57dat.decSubf(S57dat.S57subf.MASK)
+                                S57dat.decSubf(S57subf.MASK)
                             } while (S57dat.more())
                         }
                         "SG2D" -> {
-                            S57dat.setField(record, fields + pos, S57dat.S57field.SG2D, len)
+                            S57dat.setField(record, fields + pos, S57field.SG2D, len)
                             do {
-                                var lat = (S57dat.decSubf(S57dat.S57subf.YCOO) as Long).toDouble() / comf
-                                var lon = (S57dat.decSubf(S57dat.S57subf.XCOO) as Long).toDouble() / comf
-                                if (nflag == S57map.Nflag.ANON) {
+                                var lat = (S57dat.decSubf(S57subf.YCOO) as Long).toDouble() / comf
+                                var lon = (S57dat.decSubf(S57subf.XCOO) as Long).toDouble() / comf
+                                if (nflag == Nflag.ANON) {
                                     map.newNode(++name, lat, lon, nflag)
                                 } else {
                                     map.newNode(name, lat, lon, nflag)
@@ -173,11 +177,11 @@ object S57dec {
                             } while (S57dat.more())
                         }
                         "SG3D" -> {
-                            S57dat.setField(record, fields + pos, S57dat.S57field.SG3D, len)
+                            S57dat.setField(record, fields + pos, S57field.SG3D, len)
                             do {
-                                var lat = (S57dat.decSubf(S57dat.S57subf.YCOO) as Long).toDouble() / comf
-                                var lon = (S57dat.decSubf(S57dat.S57subf.XCOO) as Long).toDouble() / comf
-                                val depth = (S57dat.decSubf(S57dat.S57subf.VE3D) as Long).toDouble() / somf
+                                var lat = (S57dat.decSubf(S57subf.YCOO) as Long).toDouble() / comf
+                                var lon = (S57dat.decSubf(S57subf.XCOO) as Long).toDouble() / comf
+                                val depth = (S57dat.decSubf(S57subf.VE3D) as Long).toDouble() / somf
                                 map.newNode(name++, lat, lon, depth)
                                 lat = Math.toRadians(lat)
                                 lon = Math.toRadians(lon)
