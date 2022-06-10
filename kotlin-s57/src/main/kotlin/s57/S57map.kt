@@ -425,7 +425,7 @@ class S57map(private val sea: Boolean) {
             AREA -> {}
             else -> {}
         }
-        if (sortGeom(feature) && (edge != null && edge!!.last) != 0L) {
+        if (sortGeom(feature) && (edge == null || edge!!.last != 0L)) {
             if (feature!!.type != Obj.UNKOBJ) {
                 index!![id] = feature
                 if (features!![feature!!.type] == null) {
