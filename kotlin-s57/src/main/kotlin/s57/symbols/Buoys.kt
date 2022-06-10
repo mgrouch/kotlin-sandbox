@@ -575,7 +575,6 @@ object Buoys {
         Super.add(Instr(Form.PLIN, p))
     }
 
-
     val Shapes = mapOf(
         BoySHP.BOY_UNKN to Pillar,
         BoySHP.BOY_CONE to Cone,

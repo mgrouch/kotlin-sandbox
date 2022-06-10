@@ -1,11 +1,11 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-
 import s57.S57val.BcnSHP
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Symbol
+
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.*
@@ -99,24 +99,9 @@ object Beacons {
         FogSignal.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
         FogSignal.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         FogSignal.add(Instr(Form.FILL, Color(0xd400d4)))
-        FogSignal.add(
-            Instr(
-                Form.EARC,
-                Arc2D.Double(-120.0, -120.0, 240.0, 240.0, 190.0, 50.0, Arc2D.OPEN)
-            )
-        )
-        FogSignal.add(
-            Instr(
-                Form.EARC,
-                Arc2D.Double(-92.5, -92.5, 185.0, 185.0, 190.0, 50.0, Arc2D.OPEN)
-            )
-        )
-        FogSignal.add(
-            Instr(
-                Form.EARC,
-                Arc2D.Double(-65.0, -65.0, 130.0, 130.0, 190.0, 50.0, Arc2D.OPEN)
-            )
-        )
+        FogSignal.add(Instr(Form.EARC, Arc2D.Double(-120.0, -120.0, 240.0, 240.0, 190.0, 50.0, Arc2D.OPEN)))
+        FogSignal.add(Instr(Form.EARC, Arc2D.Double(-92.5, -92.5, 185.0, 185.0, 190.0, 50.0, Arc2D.OPEN)))
+        FogSignal.add(Instr(Form.EARC,Arc2D.Double(-65.0, -65.0, 130.0, 130.0, 190.0, 50.0, Arc2D.OPEN)))
     }
 
     val Lattice = Symbol()
@@ -192,7 +177,6 @@ object Beacons {
         Lattice.add(Instr(Form.PLIN, p))
     }
 
-
     val LightFlare = Symbol()
 
     init {
@@ -231,7 +215,6 @@ object Beacons {
         LightMajor.add(Instr(Form.PGON, p))
     }
 
-
     val LightMinor = Symbol()
 
     init {
@@ -251,7 +234,6 @@ object Beacons {
         LightMinor.add(Instr(Form.PGON, p))
     }
 
-
     val PerchPort = Symbol()
 
     init {
@@ -263,16 +245,10 @@ object Beacons {
         PerchPort.add(Instr(Form.LINE, Line2D.Double(-25.0, -70.0, 0.0, -40.0)))
     }
 
-
     val PerchStarboard = Symbol()
 
     init {
-        PerchStarboard.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)
-            )
-        )
+        PerchStarboard.add(Instr(Form.STRK,BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         PerchStarboard.add(Instr(Form.FILL, Color.black))
         PerchStarboard.add(Instr(Form.LINE, Line2D.Double(-10.0, 0.0, 10.0, 0.0)))
         PerchStarboard.add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -70.0)))
@@ -280,20 +256,13 @@ object Beacons {
         PerchStarboard.add(Instr(Form.LINE, Line2D.Double(-25.0, -40.0, 0.0, -68.7)))
     }
 
-
     val RadarStation = Symbol()
 
     init {
-        RadarStation.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2.5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)
-            )
-        )
+        RadarStation.add(Instr(Form.STRK, BasicStroke(2.5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         RadarStation.add(Instr(Form.FILL, Color(0xd400d4)))
         RadarStation.add(Instr(Form.ELPS, Ellipse2D.Double(-125.0, -125.0, 250.0, 250.0)))
     }
-
 
     val Stake = Symbol()
 
@@ -407,7 +376,6 @@ object Beacons {
         Tower.add(Instr(Form.PLIN, p))
     }
 
-
     val WithyPort = Symbol()
 
     init {
@@ -421,16 +389,10 @@ object Beacons {
         WithyPort.add(Instr(Form.LINE, Line2D.Double(-30.0, -35.0, 0.0, -21.0)))
     }
 
-
     val WithyStarboard = Symbol()
 
     init {
-        WithyStarboard.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)
-            )
-        )
+        WithyStarboard.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         WithyStarboard.add(Instr(Form.FILL, Color.black))
         WithyStarboard.add(Instr(Form.LINE, Line2D.Double(-10.0, 0.0, 10.0, 0.0)))
         WithyStarboard.add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -70.0)))
@@ -439,7 +401,6 @@ object Beacons {
         WithyStarboard.add(Instr(Form.LINE, Line2D.Double(30.0, -21.0, 0.0, -35.0)))
         WithyStarboard.add(Instr(Form.LINE, Line2D.Double(-30.0, -21.0, 0.0, -35.0)))
     }
-
 
     val Shapes = mapOf(
         BcnSHP.BCN_UNKN to Beacon,

@@ -46,6 +46,7 @@ import s57.symbols.Notices.getScheme
 import s57.symbols.Symbols.Delta
 import s57.symbols.Symbols.Handle
 import s57.symbols.Symbols.LineStyle
+import s57.symbols.Symbols.Patt
 import s57.symbols.Symbols.Scheme
 
 import java.awt.Color
@@ -80,15 +81,15 @@ open class Rules {
         )
 
         val pattMap = mapOf(
-            ColPAT.PAT_UNKN to Symbols.Patt.Z,
-            ColPAT.PAT_HORI to Symbols.Patt.H,
-            ColPAT.PAT_VERT to Symbols.Patt.V,
-            ColPAT.PAT_DIAG to Symbols.Patt.D,
-            ColPAT.PAT_BRDR to Symbols.Patt.B,
-            ColPAT.PAT_SQUR to Symbols.Patt.S,
-            ColPAT.PAT_CROS to Symbols.Patt.C,
-            ColPAT.PAT_SALT to Symbols.Patt.X,
-            ColPAT.PAT_STRP to Symbols.Patt.H,
+            ColPAT.PAT_UNKN to Patt.Z,
+            ColPAT.PAT_HORI to Patt.H,
+            ColPAT.PAT_VERT to Patt.V,
+            ColPAT.PAT_DIAG to Patt.D,
+            ColPAT.PAT_BRDR to Patt.B,
+            ColPAT.PAT_SQUR to Patt.S,
+            ColPAT.PAT_CROS to Patt.C,
+            ColPAT.PAT_SALT to Patt.X,
+            ColPAT.PAT_STRP to Patt.H,
         )
 
         val name: String?
@@ -162,7 +163,7 @@ open class Rules {
             for (col in getAttList(obj, Att.COLOUR) as ArrayList<ColCOL>) {
                 colours.add(bodyColours[col])
             }
-            val patterns = ArrayList<Symbols.Patt>()
+            val patterns = ArrayList<Patt>()
             for (pat in getAttList(obj, Att.COLPAT) as ArrayList<ColPAT>) {
                 patterns.add(pattMap[pat]!!)
             }

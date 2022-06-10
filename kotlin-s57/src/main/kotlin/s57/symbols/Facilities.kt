@@ -1,16 +1,15 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-
 import s57.S57val.CatSCF
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
+import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol
 
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.*
-
 
 /**
  * @author Malcolm Herring
@@ -32,7 +31,7 @@ object Facilities {
 
     init {
         Boatlift.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Boatlift.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Boatlift.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         Boatlift.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
         Boatlift.add(Instr(Form.ELPS, Ellipse2D.Double(-3.7, -19.7, 12.0, 12.0)))
         Boatlift.add(Instr(Form.LINE, Line2D.Double(2.3, -7.7, 2.3, -2.0)))
@@ -43,7 +42,7 @@ object Facilities {
 
     init {
         Boatyard.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Boatyard.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Boatyard.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         Boatyard.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
         Boatyard.add(Instr(Form.LINE, Line2D.Double(19.0, 19.0, -8.0, -8.0)))
         val p = Path2D.Double()
@@ -64,7 +63,7 @@ object Facilities {
 
     init {
         Chandler.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Chandler.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Chandler.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         Chandler.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Chandler.add(Instr(Form.ELPS, Ellipse2D.Double(14.0, 7.0, 10.0, 10.0)))
         Chandler.add(Instr(Form.LINE, Line2D.Double(-23.0, 12.0, 14.0, 12.0)))
@@ -77,7 +76,7 @@ object Facilities {
 
     init {
         Fuel.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Fuel.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Fuel.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         Fuel.add(Instr(Form.STRK, BasicStroke(2.5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Fuel.add(Instr(Form.FILL, Color(0xa30075)))
         var p = Path2D.Double()
@@ -120,13 +119,8 @@ object Facilities {
 
     init {
         Laundrette.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Laundrette.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
-        Laundrette.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(1.5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)
-            )
-        )
+        Laundrette.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Laundrette.add(Instr(Form.STRK, BasicStroke(1.5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Laundrette.add(Instr(Form.FILL, Color(0xa30075)))
         Laundrette.add(Instr(Form.RECT, Rectangle2D.Double(-15.0, -15.0, 30.0, 30.0)))
         Laundrette.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
@@ -146,7 +140,7 @@ object Facilities {
 
     init {
         PumpOut.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        PumpOut.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        PumpOut.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         PumpOut.add(Instr(Form.STRK, BasicStroke(2.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
         PumpOut.add(Instr(Form.FILL, Color(0xa30075)))
         var p = Path2D.Double()
@@ -187,7 +181,7 @@ object Facilities {
 
     init {
         SailingClub.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        SailingClub.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        SailingClub.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         SailingClub.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         SailingClub.add(Instr(Form.FILL, Color(0xa30075)))
         SailingClub.add(Instr(Form.LINE, Line2D.Double(-5.0, 20.0, -5.0, -20.0)))
@@ -203,7 +197,7 @@ object Facilities {
 
     init {
         Shower.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Shower.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Shower.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         Shower.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Shower.add(Instr(Form.FILL, Color(0xa30075)))
         Shower.add(Instr(Form.LINE, Line2D.Double(-4.8, -24.5, 6.2, -13.5)))
@@ -223,7 +217,7 @@ object Facilities {
 
     init {
         Slipway.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Slipway.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Slipway.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         Slipway.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Slipway.add(Instr(Form.FILL, Color(0xa30075)))
         var p = Path2D.Double()
@@ -261,7 +255,7 @@ object Facilities {
 
     init {
         Toilet.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Toilet.add(Instr(Form.SYMB, Symbols.SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
+        Toilet.add(Instr(Form.SYMB, SubSymbol(Facility, 1.0, 0.0, 0.0, null, null)))
         Toilet.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Toilet.add(Instr(Form.FILL, Color(0xa30075)))
         Toilet.add(Instr(Form.LINE, Line2D.Double(0.0, 20.0, 0.0, -20.0)))
@@ -344,21 +338,11 @@ object Facilities {
         p.curveTo(8.0, -11.0, -8.0, -11.0, -8.0, 0.0)
         p.closePath()
         VisitorMooring.add(Instr(Form.PGON, p))
-        VisitorMooring.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)
-            )
-        )
+        VisitorMooring.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         VisitorMooring.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
         VisitorMooring.add(Instr(Form.LINE, Line2D.Double(-33.0, 0.0, -10.0, 0.0)))
         VisitorMooring.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 40.0, 0.0)))
-        VisitorMooring.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)
-            )
-        )
+        VisitorMooring.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         VisitorMooring.add(Instr(Form.ELPS, Ellipse2D.Double(6.5, -49.5, 12.0, 12.0)))
         VisitorMooring.add(Instr(Form.FILL, Color.white))
         p = Path2D.Double()

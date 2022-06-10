@@ -1090,15 +1090,8 @@ object Notices {
 
     init {
         NoticeD2b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeD2b.add(
-            Instr(
-                Form.SYMB, SubSymbol(
-                    NoticeD2a, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                        Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0))
-                    )
-                )
-            )
-        )
+        NoticeD2b.add(Instr(Form.SYMB, SubSymbol(NoticeD2a, 1.0, 0.0, 0.0, null,
+            Symbols.Delta(Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0))))))
     }
 
     val NoticeD3a = Symbol()
@@ -1521,15 +1514,8 @@ object Notices {
     init {
         NoticeE6.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE6.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE6.add(
-            Instr(
-                Form.SYMB, SubSymbol(
-                    Harbours.Anchor, 0.4, 0.0, 0.0, Symbols.Scheme(
-                        Color.white
-                    ), null
-                )
-            )
-        )
+        NoticeE6.add(Instr(Form.SYMB,
+            SubSymbol(Harbours.Anchor, 0.4, 0.0, 0.0, Symbols.Scheme(Color.white), null)))
     }
 
     val NoticeE7 = Symbol()

@@ -17,7 +17,6 @@ import java.awt.geom.*
 object Landmarks {
 
     private val Base = Symbol()
-
     init {
         Base.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         Base.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
@@ -186,14 +185,8 @@ object Landmarks {
         Monument.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
         Monument.add(Instr(Form.LINE, Line2D.Double(-25.0, 0.0, -15.0, -105.0)))
         Monument.add(Instr(Form.LINE, Line2D.Double(25.0, 0.0, 15.0, -105.0)))
-        Monument.add(
-            Instr(
-                Form.EARC,
-                Arc2D.Double(-25.0, -150.0, 50.0, 50.0, 233.0, -285.0, Arc2D.OPEN)
-            )
-        )
+        Monument.add(Instr(Form.EARC, Arc2D.Double(-25.0, -150.0, 50.0, 50.0, 233.0, -285.0, Arc2D.OPEN)))
     }
-
 
     val Platform = Symbol()
 

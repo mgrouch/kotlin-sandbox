@@ -7,10 +7,10 @@ import s57.symbols.Symbols.Delta
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Handle
 import s57.symbols.Symbols.Instr
+import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol
 
 import java.awt.BasicStroke
-import java.awt.Color
 import java.awt.Color.*
 import java.awt.geom.*
 
@@ -24,12 +24,7 @@ object Topmarks {
 
     init {
         RadarReflector.add(Instr(Form.BBOX, Rectangle2D.Double(-50.0, -40.0, 100.0, 40.0)))
-        RadarReflector.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        RadarReflector.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         RadarReflector.add(Instr(Form.FILL, black))
         val p = Path2D.Double()
         p.moveTo(-30.0, -3.0)
@@ -136,7 +131,6 @@ object Topmarks {
         TopBoard.add(Instr(Form.PLIN, p))
     }
 
-
     val TopCan = Symbol()
 
     init {
@@ -205,12 +199,7 @@ object Topmarks {
         p.closePath()
         colours.add(Instr(Form.P1, p))
         TopConeSphere.add(Instr(Form.COLR, colours))
-        TopConeSphere.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopConeSphere.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopConeSphere.add(Instr(Form.FILL, black))
         TopConeSphere.add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -15.0)))
         TopConeSphere.add(Instr(Form.LINE, Line2D.Double(0.0, -42.0, 0.0, -47.0)))
@@ -222,7 +211,6 @@ object Topmarks {
         TopConeSphere.add(Instr(Form.ELPS, Ellipse2D.Double(-14.0, -42.0, 28.0, 28.0)))
         TopConeSphere.add(Instr(Form.PLIN, p))
     }
-
 
     val TopCross = Symbol()
 
@@ -301,7 +289,6 @@ object Topmarks {
         p.lineTo(15.0, -37.0)
         TopCube.add(Instr(Form.PLIN, p))
     }
-
 
     val TopEast = Symbol()
 
@@ -445,7 +432,6 @@ object Topmarks {
         TopIcone.add(Instr(Form.PLIN, p))
     }
 
-
     val TopIsol = Symbol()
 
     init {
@@ -472,7 +458,6 @@ object Topmarks {
         TopIsol.add(Instr(Form.ELPS, Ellipse2D.Double(-13.0, -68.0, 26.0, 26.0)))
     }
 
-
     val TopMooring = Symbol()
 
     init {
@@ -482,7 +467,6 @@ object Topmarks {
         TopMooring.add(Instr(Form.ELPS, Ellipse2D.Double(-1.5, -6.0, 3.0, 3.0)))
         TopMooring.add(Instr(Form.ELPS, Ellipse2D.Double(-8.5, -25.0, 17.0, 17.0)))
     }
-
 
     val TopNorth = Symbol()
 
@@ -552,7 +536,6 @@ object Topmarks {
         p.closePath()
         TopSouth.add(Instr(Form.PLIN, p))
     }
-
 
     val TopSphere = Symbol()
 
@@ -679,12 +662,7 @@ object Topmarks {
         p.closePath()
         colours.add(Instr(Form.V3, p))
         TopRectangleH.add(Instr(Form.COLR, colours))
-        TopRectangleH.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopRectangleH.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopRectangleH.add(Instr(Form.FILL, black))
         p = Path2D.Double()
         p.moveTo(-14.0, -1.0)
@@ -736,12 +714,7 @@ object Topmarks {
         p.closePath()
         colours.add(Instr(Form.V3, p))
         TopRectangleV.add(Instr(Form.COLR, colours))
-        TopRectangleV.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopRectangleV.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopRectangleV.add(Instr(Form.FILL, black))
         p = Path2D.Double()
         p.moveTo(-11.0, -1.0)
@@ -824,7 +797,7 @@ object Topmarks {
 
     init {
         TopSphereRhombus.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -80.0, 60.0, 80.0)))
-        TopSphereRhombus.add(Instr(Form.SYMB, Symbols.SubSymbol(TopRhombus, 1.0, 0.0, 0.0, null, null)))
+        TopSphereRhombus.add(Instr(Form.SYMB, SubSymbol(TopRhombus, 1.0, 0.0, 0.0, null, null)))
         val colours = Symbol()
         val p = Path2D.Double()
         p.moveTo(-14.0, -44.0)
@@ -833,19 +806,9 @@ object Topmarks {
         p.closePath()
         colours.add(Instr(Form.P1, p))
         TopSphereRhombus.add(Instr(Form.COLR, colours))
-        TopSphereRhombus.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopSphereRhombus.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopSphereRhombus.add(Instr(Form.FILL, black))
-        TopSphereRhombus.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopSphereRhombus.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopSphereRhombus.add(Instr(Form.ELPS, Ellipse2D.Double(-14.0, -58.0, 28.0, 28.0)))
     }
 
@@ -863,12 +826,7 @@ object Topmarks {
         p.closePath()
         colours.add(Instr(Form.P1, p))
         TopTrapeziumU.add(Instr(Form.COLR, colours))
-        TopTrapeziumU.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopTrapeziumU.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopTrapeziumU.add(Instr(Form.FILL, black))
         p = Path2D.Double()
         p.moveTo(-20.0, -1.0)
@@ -892,12 +850,7 @@ object Topmarks {
         p.closePath()
         colours.add(Instr(Form.P1, p))
         TopTrapeziumD.add(Instr(Form.COLR, colours))
-        TopTrapeziumD.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopTrapeziumD.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopTrapeziumD.add(Instr(Form.FILL, black))
         p = Path2D.Double()
         p.moveTo(-13.0, -1.0)
@@ -964,12 +917,7 @@ object Topmarks {
         p.closePath()
         colours.add(Instr(Form.B1, p))
         TopItriangle.add(Instr(Form.COLR, colours))
-        TopItriangle.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        TopItriangle.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         TopItriangle.add(Instr(Form.FILL, black))
         p = Path2D.Double()
         p.moveTo(-15.0, -29.0)
@@ -1123,18 +1071,13 @@ object Topmarks {
             Handle.BC,
             AffineTransform(0.948324, 0.317305, -0.3173047, 0.948324, 12.7, -37.9)
         ),
-        BoySHP.BOY_SUPR to
-                Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -42.0)),
-        BoySHP.BOY_ICE to
-                Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0)),
+        BoySHP.BOY_SUPR to Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -42.0)),
+        BoySHP.BOY_ICE to Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0)),
     )
 
     val FloatDelta = Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -42.0))
 
     val BeaconDelta = Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -70.0))
 
-    val LightDelta = Delta(
-        Handle.BC,
-        AffineTransform.getTranslateInstance(0.0, -20.0)
-    ) // CHECKSTYLE.ON: SingleSpaceSeparator
+    val LightDelta = Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -20.0))
 }

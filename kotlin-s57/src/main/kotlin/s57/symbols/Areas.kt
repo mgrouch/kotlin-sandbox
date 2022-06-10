@@ -301,12 +301,7 @@ object Areas {
     init {
         WreckD.add(Instr(Form.FILL, Color(0x80c0ff)))
         WreckD.add(Instr(Form.RSHP, Ellipse2D.Double(-50.0, -40.0, 100.0, 80.0)))
-        WreckD.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, floatArrayOf(5f, 5f), 0f)
-            )
-        )
+        WreckD.add(Instr(Form.STRK,BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, floatArrayOf(5f, 5f), 0f)))
         WreckD.add(Instr(Form.FILL, Color.black))
         WreckD.add(Instr(Form.ELPS, Ellipse2D.Double(-50.0, -40.0, 100.0, 80.0)))
         WreckD.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -425,7 +420,6 @@ object Areas {
         p.quadTo(48.0, -8.0, 60.0, 0.0)
         KelpS.add(Instr(Form.PLIN, p))
     }
-
 
     val KelpA = BufferedImage(240, 240, BufferedImage.TYPE_INT_ARGB)
 

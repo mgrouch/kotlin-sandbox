@@ -16,7 +16,6 @@ import java.awt.geom.*
 object Harbours {
 
     val Anchor = Symbol()
-
     init {
         Anchor.add(Instr(Form.BBOX, Rectangle2D.Double(-60.0, -60.0, 120.0, 120.0)))
         Anchor.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -74,12 +73,7 @@ object Harbours {
     val Anchorage = Symbol()
 
     init {
-        Anchorage.add(
-            Instr(
-                Form.SYMB,
-                SubSymbol(Anchor, 0.67, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
-            )
-        )
+        Anchorage.add(Instr(Form.SYMB,SubSymbol(Anchor, 0.67, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)))
     }
 
     val Bollard = Symbol()
@@ -122,12 +116,7 @@ object Harbours {
     val ContainerCrane = Symbol()
 
     init {
-        ContainerCrane.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        ContainerCrane.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         ContainerCrane.add(Instr(Form.RSHP, Rectangle2D.Double(-15.0, -65.0, 30.0, 100.0)))
         ContainerCrane.add(Instr(Form.RECT, Rectangle2D.Double(-40.0, -12.5, 80.0, 25.0)))
     }
@@ -142,16 +131,10 @@ object Harbours {
         Customs.add(Instr(Form.LINE, Line2D.Double(-25.0, -5.0, 25.0, -5.0)))
     }
 
-
     val DeviationDolphin = Symbol()
 
     init {
-        DeviationDolphin.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        DeviationDolphin.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         val p = Path2D.Double()
         p.moveTo(-30.0, 0.0)
         p.lineTo(30.0, 0.0)
@@ -164,14 +147,12 @@ object Harbours {
         DeviationDolphin.add(Instr(Form.PLIN, p))
     }
 
-
     val DistanceI = Symbol()
 
     init {
         DistanceI.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         DistanceI.add(Instr(Form.ELPS, Ellipse2D.Double(-11.0, -11.0, 22.0, 22.0)))
     }
-
 
     val DistanceU = Symbol()
 
@@ -180,7 +161,6 @@ object Harbours {
         DistanceU.add(Instr(Form.FILL, Symbols.Msymb))
         DistanceU.add(Instr(Form.ELPS, Ellipse2D.Double(-11.0, -11.0, 22.0, 22.0)))
     }
-
 
     val Dolphin = Symbol()
 
@@ -201,7 +181,6 @@ object Harbours {
         Dolphin.add(Instr(Form.FILL, Color.black))
         Dolphin.add(Instr(Form.PLIN, p))
     }
-
 
     val Explosives = Symbol()
 
@@ -229,12 +208,7 @@ object Harbours {
         Fishing.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         Fishing.add(Instr(Form.FILL, Symbols.Msymb))
         Fishing.add(Instr(Form.EARC, Arc2D.Double(-50.0, -50.0, 100.0, 100.0, 15.0, 140.0, Arc2D.OPEN)))
-        Fishing.add(
-            Instr(
-                Form.EARC,
-                Arc2D.Double(-50.0, -50.0, 100.0, 100.0, -15.0, -140.0, Arc2D.OPEN)
-            )
-        )
+        Fishing.add(Instr(Form.EARC, Arc2D.Double(-50.0, -50.0, 100.0, 100.0, -15.0, -140.0, Arc2D.OPEN)))
         val p = Path2D.Double()
         p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
         p.moveTo(-24.0, 3.0)
@@ -257,28 +231,17 @@ object Harbours {
         Harbour.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         Harbour.add(Instr(Form.FILL, Symbols.Msymb))
         Harbour.add(Instr(Form.ELPS, Ellipse2D.Double(-50.0, -50.0, 100.0, 100.0)))
-        Harbour.add(
-            Instr(
-                Form.SYMB,
-                SubSymbol(Anchor, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
-            )
-        )
+        Harbour.add(Instr(Form.SYMB, SubSymbol(Anchor, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)))
     }
 
     val HarbourMaster = Symbol()
 
     init {
         HarbourMaster.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        HarbourMaster.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        HarbourMaster.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         HarbourMaster.add(Instr(Form.ELPS, Ellipse2D.Double(-24.0, -28.0, 48.0, 56.0)))
         HarbourMaster.add(Instr(Form.SYMB, SubSymbol(Anchor, 0.4, 0.0, 0.0, null, null)))
     }
-
 
     val Hospital = Symbol()
 
@@ -322,38 +285,20 @@ object Harbours {
         LandingSteps.add(Instr(Form.PGON, p))
     }
 
-
     val Marina = Symbol()
 
     init {
         Marina.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         Marina.add(Instr(Form.FILL, Symbols.Msymb))
-        Marina.add(
-            Instr(
-                Form.EARC,
-                Arc2D.Double(-50.0, -50.0, 100.0, 100.0, 215.0, -250.0, Arc2D.OPEN)
-            )
-        )
-        Marina.add(
-            Instr(
-                Form.SYMB,
-                SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
-            )
-        )
+        Marina.add(Instr(Form.EARC, Arc2D.Double(-50.0, -50.0, 100.0, 100.0, 215.0, -250.0, Arc2D.OPEN)))
+        Marina.add(Instr(Form.SYMB, SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)))
     }
-
 
     val MarinaNF = Symbol()
 
     init {
-        MarinaNF.add(
-            Instr(
-                Form.SYMB,
-                SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
-            )
-        )
+        MarinaNF.add(Instr(Form.SYMB,SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)))
     }
-
 
     val Pilot = Symbol()
 
@@ -370,27 +315,19 @@ object Harbours {
         Pilot.add(Instr(Form.ELPS, Ellipse2D.Double(-58.0, -58.0, 116.0, 116.0)))
     }
 
-
     val PortCrane = Symbol()
 
     init {
         PortCrane.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        PortCrane.add(
-            Instr(
-                Form.EARC,
-                Arc2D.Double(-36.0, -36.0, 72.0, 72.0, 70.0, -320.0, Arc2D.OPEN)
-            )
-        )
+        PortCrane.add(Instr(Form.EARC, Arc2D.Double(-36.0, -36.0, 72.0, 72.0, 70.0, -320.0, Arc2D.OPEN)))
         PortCrane.add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -60.0)))
     }
-
 
     val Post = Symbol()
 
     init {
         Post.add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
     }
-
 
     val Rescue = Symbol()
 
@@ -407,20 +344,13 @@ object Harbours {
         Rescue.add(Instr(Form.LINE, Line2D.Double(-15.0, 0.0, 15.0, 0.0)))
     }
 
-
     val SignalStation = Symbol()
 
     init {
-        SignalStation.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-            )
-        )
+        SignalStation.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         SignalStation.add(Instr(Form.ELPS, Ellipse2D.Double(-25.0, -25.0, 50.0, 50.0)))
         SignalStation.add(Instr(Form.RSHP, Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0)))
     }
-
 
     val TideGauge = Symbol()
 

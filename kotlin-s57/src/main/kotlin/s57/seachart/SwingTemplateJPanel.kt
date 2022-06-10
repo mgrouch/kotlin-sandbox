@@ -36,6 +36,7 @@ class SwingTemplateJPanel : JPanel() {
             zoom = 14
             factor = 3.0
             chartImage = ChartImage()
+            println("ChartImage() done")
         } catch (e: Exception) {
             e.printStackTrace()
         }
