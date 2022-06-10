@@ -318,7 +318,7 @@ open class Rules {
                 Obj.BUAARE -> lineVector(LineStyle(Color(0x20000000, true)))
                 Obj.COALNE -> if (Renderer.zoom >= 12) lineVector(LineStyle(black, 10f))
                 Obj.DEPARE -> {
-                    var depmax = 0.0
+                    var depmax: Double
                     if ((getAttVal(Obj.DEPARE, Att.DRVAL2) as Double?).also {
                             depmax = it!!
                         } != null && depmax <= 0.0) {
@@ -367,7 +367,9 @@ open class Rules {
                     if (Renderer.zoom >= 14) {
                         symbol(Areas.MarineFarm)
                     }
-                    if (((feature!!.geom!!.area > 0.2 || feature!!.geom!!.area > 0.05 && Renderer.zoom) >= 14 || feature!!.geom!!.area > 0.005 && Renderer.zoom) >= 16) {
+
+                    if (feature!!.geom!!.area > 0.2 || (feature!!.geom!!.area > 0.05 && Renderer.zoom >= 14) ||
+                                (feature!!.geom!!.area > 0.005 && Renderer.zoom >= 16)) {
                         lineVector(LineStyle(black, 4f, floatArrayOf(10f, 10f)))
                     }
                 }
@@ -465,10 +467,9 @@ open class Rules {
         }
 
         private fun beacons() {
-            if ((Renderer.zoom >= 14 || Renderer.zoom >= 12) && (feature!!.type === Obj.BCNLAT || feature!!.type) === Obj.BCNCAR || Renderer.zoom >= 11 && (feature!!.type === Obj.BCNSAW || hasObject(
-                    Obj.RTPBCN
-                ))
-            ) {
+            if (Renderer.zoom >= 14
+                || (Renderer.zoom >= 12 && (feature!!.type === Obj.BCNLAT || feature!!.type === Obj.BCNCAR))
+                || (Renderer.zoom >= 11 && (feature!!.type === Obj.BCNSAW || hasObject(Obj.RTPBCN)))) {
                 var shape = getAttEnum(feature!!.type, Att.BCNSHP) as BcnSHP
                 if (shape === BcnSHP.BCN_UNKN) shape = BcnSHP.BCN_PILE
                 if (shape === BcnSHP.BCN_WTHY && feature!!.type === Obj.BCNLAT) {
@@ -515,10 +516,9 @@ open class Rules {
         }
 
         private fun buoys() {
-            if (Renderer.zoom >= 14 || Renderer.zoom >= 12 && (feature!!.type === Obj.BOYLAT || feature!!.type) === Obj.BOYCAR || Renderer.zoom >= 11 && (feature!!.type === Obj.BOYSAW || hasObject(
-                    Obj.RTPBCN
-                ))
-            ) {
+            if (Renderer.zoom >= 14
+                || (Renderer.zoom >= 12 && (feature!!.type == Obj.BOYLAT || feature!!.type == Obj.BOYCAR))
+                || (Renderer.zoom >= 11 && (feature!!.type == Obj.BOYSAW || hasObject(Obj.RTPBCN)))) {
                 var shape = getAttEnum(feature!!.type, Att.BOYSHP) as BoySHP
                 if (shape === BoySHP.BOY_UNKN) shape = BoySHP.BOY_PILR
                 symbol(Buoys.Shapes[shape], getScheme(feature!!.type))
