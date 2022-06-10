@@ -2,6 +2,7 @@
 package s57.symbols
 
 import s57.S57val
+import s57.S57val.CatLMK
 import s57.S57val.FncFNC
 import java.awt.BasicStroke
 import java.awt.geom.*
@@ -299,26 +300,26 @@ object Landmarks {
 
 
     val Shapes = mapOf(
-        S57val.CatLMK.LMK_CARN to Beacons.Cairn,
-        S57val.CatLMK.LMK_CHMY to Chimney,
-        S57val.CatLMK.LMK_DISH to DishAerial,
-        S57val.CatLMK.LMK_FLAG to Flagstaff,
-        S57val.CatLMK.LMK_FLAR to FlareStack,
-        S57val.CatLMK.LMK_MAST to Mast,
-        S57val.CatLMK.LMK_WNDS to Windsock,
-        S57val.CatLMK.LMK_MNMT to Monument,
-        S57val.CatLMK.LMK_CLMN to Monument,
-        S57val.CatLMK.LMK_MEML to Monument,
-        S57val.CatLMK.LMK_OBLK to Monument,
-        S57val.CatLMK.LMK_STAT to Monument,
-        S57val.CatLMK.LMK_CROS to Cross,
-        S57val.CatLMK.LMK_DOME to Dome,
-        S57val.CatLMK.LMK_RADR to Mast,
-        S57val.CatLMK.LMK_TOWR to LandTower,
-        S57val.CatLMK.LMK_WNDM to Windmill,
-        S57val.CatLMK.LMK_WNDG to WindMotor,
-        S57val.CatLMK.LMK_SPIR to Spire,
-        S57val.CatLMK.LMK_BLDR to Beacons.Cairn,
+        CatLMK.LMK_CARN to Beacons.Cairn,
+        CatLMK.LMK_CHMY to Chimney,
+        CatLMK.LMK_DISH to DishAerial,
+        CatLMK.LMK_FLAG to Flagstaff,
+        CatLMK.LMK_FLAR to FlareStack,
+        CatLMK.LMK_MAST to Mast,
+        CatLMK.LMK_WNDS to Windsock,
+        CatLMK.LMK_MNMT to Monument,
+        CatLMK.LMK_CLMN to Monument,
+        CatLMK.LMK_MEML to Monument,
+        CatLMK.LMK_OBLK to Monument,
+        CatLMK.LMK_STAT to Monument,
+        CatLMK.LMK_CROS to Cross,
+        CatLMK.LMK_DOME to Dome,
+        CatLMK.LMK_RADR to Mast,
+        CatLMK.LMK_TOWR to LandTower,
+        CatLMK.LMK_WNDM to Windmill,
+        CatLMK.LMK_WNDG to WindMotor,
+        CatLMK.LMK_SPIR to Spire,
+        CatLMK.LMK_BLDR to Beacons.Cairn,
     )
 
 

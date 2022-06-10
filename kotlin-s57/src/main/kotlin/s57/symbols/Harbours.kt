@@ -11,7 +11,6 @@ import java.awt.geom.*
  * @author Malcolm Herring
  */
 object Harbours {
-    // CHECKSTYLE.OFF: LineLength
 
     val Anchor = Symbols.Symbol()
 
@@ -79,7 +78,6 @@ object Harbours {
             )
         )
     }
-
 
     val Bollard = Symbols.Symbol()
 

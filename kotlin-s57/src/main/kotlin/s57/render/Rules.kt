@@ -5,11 +5,27 @@ import s57.S57att.Att
 import s57.S57map
 import s57.S57obj.Obj
 import s57.S57val
+import s57.S57val.CatHAF
+import s57.S57val.CatLAM
+import s57.S57val.CatLMK
+import s57.S57val.CatROD
+import s57.S57val.CatSIW
+import s57.S57val.CatWRK
+import s57.S57val.ColCOL
+import s57.S57val.ColPAT
+import s57.S57val.FncFNC
 import s57.S57val.unknAtt
 import s57.render.Renderer.labelText
+import s57.render.Renderer.lineSymbols
+import s57.render.Renderer.lineVector
+import s57.render.Renderer.symbol
 import s57.symbols.*
 import s57.symbols.Notices.getNotice
 import s57.symbols.Notices.getScheme
+import s57.symbols.Symbols.Delta
+import s57.symbols.Symbols.Handle
+import s57.symbols.Symbols.LineStyle
+import s57.symbols.Symbols.Scheme
 
 import java.awt.Color
 import java.awt.Font
@@ -23,32 +39,32 @@ open class Rules {
     companion object {
         val df = DecimalFormat("#.#")
         val bodyColours = mapOf(
-            S57val.ColCOL.COL_UNK to Color(0, true),
-            S57val.ColCOL.COL_WHT to Color(0xffffff),
-            S57val.ColCOL.COL_BLK to Color(0x000000),
-            S57val.ColCOL.COL_RED to Color(0xd40000),
-            S57val.ColCOL.COL_GRN to Color(0x00d400),
-            S57val.ColCOL.COL_BLU to Color.blue,
-            S57val.ColCOL.COL_YEL to Color(0xffd400),
-            S57val.ColCOL.COL_GRY to Color.gray,
-            S57val.ColCOL.COL_BRN to Color(0x8b4513),
-            S57val.ColCOL.COL_AMB to Color(0xfbf00f),
-            S57val.ColCOL.COL_VIO to Color(0xee82ee),
-            S57val.ColCOL.COL_ORG to Color.orange,
-            S57val.ColCOL.COL_MAG to Color(0xf000f0),
-            S57val.ColCOL.COL_PNK to Color.pink,
+            ColCOL.COL_UNK to Color(0, true),
+            ColCOL.COL_WHT to Color(0xffffff),
+            ColCOL.COL_BLK to Color(0x000000),
+            ColCOL.COL_RED to Color(0xd40000),
+            ColCOL.COL_GRN to Color(0x00d400),
+            ColCOL.COL_BLU to Color.blue,
+            ColCOL.COL_YEL to Color(0xffd400),
+            ColCOL.COL_GRY to Color.gray,
+            ColCOL.COL_BRN to Color(0x8b4513),
+            ColCOL.COL_AMB to Color(0xfbf00f),
+            ColCOL.COL_VIO to Color(0xee82ee),
+            ColCOL.COL_ORG to Color.orange,
+            ColCOL.COL_MAG to Color(0xf000f0),
+            ColCOL.COL_PNK to Color.pink,
         )
 
         val pattMap = mapOf(
-            S57val.ColPAT.PAT_UNKN to Symbols.Patt.Z,
-            S57val.ColPAT.PAT_HORI to Symbols.Patt.H,
-            S57val.ColPAT.PAT_VERT to Symbols.Patt.V,
-            S57val.ColPAT.PAT_DIAG to Symbols.Patt.D,
-            S57val.ColPAT.PAT_BRDR to Symbols.Patt.B,
-            S57val.ColPAT.PAT_SQUR to Symbols.Patt.S,
-            S57val.ColPAT.PAT_CROS to Symbols.Patt.C,
-            S57val.ColPAT.PAT_SALT to Symbols.Patt.X,
-            S57val.ColPAT.PAT_STRP to Symbols.Patt.H,
+            ColPAT.PAT_UNKN to Symbols.Patt.Z,
+            ColPAT.PAT_HORI to Symbols.Patt.H,
+            ColPAT.PAT_VERT to Symbols.Patt.V,
+            ColPAT.PAT_DIAG to Symbols.Patt.D,
+            ColPAT.PAT_BRDR to Symbols.Patt.B,
+            ColPAT.PAT_SQUR to Symbols.Patt.S,
+            ColPAT.PAT_CROS to Symbols.Patt.C,
+            ColPAT.PAT_SALT to Symbols.Patt.X,
+            ColPAT.PAT_STRP to Symbols.Patt.H,
         )
 
         val name: String?
@@ -65,13 +81,13 @@ open class Rules {
                 return if (name != null) name.value as String? else null
             }
 
-        fun addName(z: Int, font: Font, delta: Symbols.Delta?) {
+        fun addName(z: Int, font: Font, delta: Delta?) {
             addName(z, font, Color.black, delta)
         }
 
         fun addName(
-            z: Int, font: Font, colour: Color? = Color.black, delta: Symbols.Delta? = Symbols.Delta(
-                Symbols.Handle.CC, AffineTransform()
+            z: Int, font: Font, colour: Color? = Color.black, delta: Delta? = Delta(
+                Handle.CC, AffineTransform()
             )
         ) {
             if (Renderer.zoom >= z) {
@@ -117,16 +133,16 @@ open class Rules {
             return list
         }
 
-        fun getScheme(obj: Obj?): Symbols.Scheme {
+        fun getScheme(obj: Obj?): Scheme {
             val colours = ArrayList<Color?>()
-            for (col in getAttList(obj, Att.COLOUR) as ArrayList<S57val.ColCOL>) {
+            for (col in getAttList(obj, Att.COLOUR) as ArrayList<ColCOL>) {
                 colours.add(bodyColours[col])
             }
             val patterns = ArrayList<Symbols.Patt?>()
-            for (pat in getAttList(obj, Att.COLPAT) as ArrayList<S57val.ColPAT>) {
+            for (pat in getAttList(obj, Att.COLPAT) as ArrayList<ColPAT>) {
                 patterns.add(pattMap[pat])
             }
-            return Symbols.Scheme(patterns, colours)
+            return Scheme(patterns, colours)
         }
 
         fun hasAttribute(obj: Obj, att: Att): Boolean {
@@ -274,78 +290,78 @@ open class Rules {
         private fun areas() {
             val name = name
             when (feature!!.type) {
-                Obj.BUAARE -> Renderer.lineVector(Symbols.LineStyle(Color(0x20000000, true)))
-                Obj.COALNE -> if (Renderer.zoom >= 12) Renderer.lineVector(Symbols.LineStyle(Color.black, 10f))
+                Obj.BUAARE -> lineVector(LineStyle(Color(0x20000000, true)))
+                Obj.COALNE -> if (Renderer.zoom >= 12) lineVector(LineStyle(Color.black, 10f))
                 Obj.DEPARE -> {
                     var depmax = 0.0
                     if ((getAttVal(Obj.DEPARE, Att.DRVAL2) as Double?).also {
                             depmax = it!!
                         } != null && depmax <= 0.0) {
-                        Renderer.lineVector(Symbols.LineStyle(Symbols.Gdries))
+                        lineVector(LineStyle(Symbols.Gdries))
                     }
                 }
-                Obj.LAKARE -> if (Renderer.zoom >= 12 || feature!!.geom!!.area > 10.0) Renderer.lineVector(
-                    Symbols.LineStyle(Symbols.Bwater)
+                Obj.LAKARE -> if (Renderer.zoom >= 12 || feature!!.geom!!.area > 10.0) lineVector(
+                    LineStyle(Symbols.Bwater)
                 )
                 Obj.DRGARE -> {
-                    if (Renderer.zoom < 16) Renderer.lineVector(
-                        Symbols.LineStyle(
+                    if (Renderer.zoom < 16) lineVector(
+                        LineStyle(
                             Color.black,
                             8f,
                             floatArrayOf(25f, 25f),
                             Color(0x40ffffff, true)
                         )
-                    ) else Renderer.lineVector(
-                        Symbols.LineStyle(Color.black, 8f, floatArrayOf(25f, 25f))
+                    ) else lineVector(
+                        LineStyle(Color.black, 8f, floatArrayOf(25f, 25f))
                     )
-                    addName(12, Font("Arial", Font.PLAIN, 100), Symbols.Delta(Symbols.Handle.CC, AffineTransform()))
+                    addName(12, Font("Arial", Font.PLAIN, 100), Delta(Handle.CC, AffineTransform()))
                 }
                 Obj.FAIRWY -> if (feature!!.geom!!.area > 2.0) {
-                    if (Renderer.zoom < 16) Renderer.lineVector(
-                        Symbols.LineStyle(Symbols.Mline, 8f, floatArrayOf(50f, 50f), Color(0x40ffffff, true))
-                    ) else Renderer.lineVector(
-                        Symbols.LineStyle(Symbols.Mline, 8f, floatArrayOf(50f, 50f))
+                    if (Renderer.zoom < 16) lineVector(
+                        LineStyle(Symbols.Mline, 8f, floatArrayOf(50f, 50f), Color(0x40ffffff, true))
+                    ) else lineVector(
+                        LineStyle(Symbols.Mline, 8f, floatArrayOf(50f, 50f))
                     )
                 } else {
-                    if (Renderer.zoom >= 14) Renderer.lineVector(Symbols.LineStyle(Color(0x40ffffff, true)))
+                    if (Renderer.zoom >= 14) lineVector(LineStyle(Color(0x40ffffff, true)))
                 }
                 Obj.LKBSPT, Obj.LOKBSN, Obj.HRBBSN -> if (Renderer.zoom >= 12) {
-                    Renderer.lineVector(Symbols.LineStyle(Color.black, 10f, Symbols.Bwater))
+                    lineVector(LineStyle(Color.black, 10f, Symbols.Bwater))
                 } else {
-                    Renderer.lineVector(Symbols.LineStyle(Symbols.Bwater))
+                    lineVector(LineStyle(Symbols.Bwater))
                 }
                 Obj.HRBFAC -> if (feature!!.objs!![Obj.HRBBSN] != null) {
                     if (Renderer.zoom >= 12) {
-                        Renderer.lineVector(Symbols.LineStyle(Color.black, 10f, Symbols.Bwater))
+                        lineVector(LineStyle(Color.black, 10f, Symbols.Bwater))
                     } else {
-                        Renderer.lineVector(Symbols.LineStyle(Symbols.Bwater))
+                        lineVector(LineStyle(Symbols.Bwater))
                     }
                 }
-                Obj.LNDARE -> Renderer.lineVector(Symbols.LineStyle(Symbols.Yland))
+                Obj.LNDARE -> lineVector(LineStyle(Symbols.Yland))
                 Obj.MARCUL -> if (Renderer.zoom >= 12) {
                     if (Renderer.zoom >= 14) {
-                        Renderer.symbol(Areas.MarineFarm)
+                        symbol(Areas.MarineFarm)
                     }
                     if (((feature!!.geom!!.area > 0.2 || feature!!.geom!!.area > 0.05 && Renderer.zoom) >= 14 || feature!!.geom!!.area > 0.005 && Renderer.zoom) >= 16) {
-                        Renderer.lineVector(Symbols.LineStyle(Color.black, 4f, floatArrayOf(10f, 10f)))
+                        lineVector(LineStyle(Color.black, 4f, floatArrayOf(10f, 10f)))
                     }
                 }
                 Obj.OSPARE -> if (testAttribute(feature!!.type, Att.CATPRA, S57val.CatPRA.PRA_WFRM)) {
-                    Renderer.symbol(Areas.WindFarm)
-                    Renderer.lineVector(Symbols.LineStyle(Color.black, 20f, floatArrayOf(40f, 40f)))
+                    symbol(Areas.WindFarm)
+                    lineVector(LineStyle(Color.black, 20f, floatArrayOf(40f, 40f)))
                     addName(
                         15, Font("Arial", Font.BOLD, 80),
-                        Symbols.Delta(Symbols.Handle.TC, AffineTransform.getTranslateInstance(0.0, 10.0))
+                        Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 10.0))
                     )
                 }
                 Obj.RESARE, Obj.MIPARE -> if (Renderer.zoom >= 12) {
-                    Renderer.lineSymbols(Areas.Restricted, 1.0, null, null, 0, Symbols.Mline)
+                    lineSymbols(Areas.Restricted, 1.0, null, null, 0, Symbols.Mline)
                     if (testAttribute(feature!!.type, Att.CATREA, S57val.CatREA.REA_NWAK)) {
-                        Renderer.symbol(Areas.NoWake)
+                        symbol(Areas.NoWake)
                     }
                 }
                 Obj.PRCARE -> if (Renderer.zoom >= 12) {
-                    Renderer.lineVector(Symbols.LineStyle(Symbols.Mline, 10f, floatArrayOf(40f, 40f)))
+                    lineVector(LineStyle(Symbols.Mline, 10f, floatArrayOf(40f, 40f)))
                 }
                 Obj.SEAARE -> when (getAttEnum(feature!!.type, Att.CATSEA) as S57val.CatSEA) {
                     S57val.CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
@@ -353,7 +369,7 @@ open class Rules {
                     } else {
                         Renderer.labelText(
                             name, Font("Arial", Font.PLAIN, 150), Color.black,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                            Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                         )
                     }
                     S57val.CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
@@ -361,20 +377,20 @@ open class Rules {
                     } else {
                         Renderer.labelText(
                             name, Font("Arial", Font.PLAIN, 150), Color.black,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                            Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                         )
                     }
                     S57val.CatSEA.SEA_SHOL -> if (Renderer.zoom >= 14) {
                         if (feature!!.geom!!.prim === S57map.Pflag.AREA) {
-                            Renderer.lineVector(Symbols.LineStyle(Color(0xc480ff), 4f, floatArrayOf(25f, 25f)))
+                            lineVector(LineStyle(Color(0xc480ff), 4f, floatArrayOf(25f, 25f)))
                             if (name != null) {
                                 Renderer.labelText(
                                     name, Font("Arial", Font.ITALIC, 75), Color.black,
-                                    Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                                    Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                                 )
                                 Renderer.labelText(
                                     "(Shoal)", Font("Arial", Font.PLAIN, 60), Color.black,
-                                    Symbols.Delta(Symbols.Handle.BC)
+                                    Delta(Handle.BC)
                                 )
                             }
                         } else if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
@@ -386,11 +402,11 @@ open class Rules {
                             if (name != null) {
                                 Renderer.labelText(
                                     name, Font("Arial", Font.ITALIC, 75), Color.black,
-                                    Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                                    Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                                 )
                                 Renderer.labelText(
                                     "(Shoal)", Font("Arial", Font.PLAIN, 60), Color.black,
-                                    Symbols.Delta(Symbols.Handle.BC)
+                                    Delta(Handle.BC)
                                 )
                             }
                         }
@@ -404,19 +420,19 @@ open class Rules {
                         S57val.CatWED.WED_KELP -> if (feature!!.geom!!.prim === S57map.Pflag.AREA) {
                             Renderer.fillPattern(Areas.KelpA)
                         } else {
-                            Renderer.symbol(Areas.KelpS)
+                            symbol(Areas.KelpS)
                         }
                         else -> {}
                     }
                 }
                 Obj.SPLARE -> {
                     if (Renderer.zoom >= 12) {
-                        Renderer.symbol(Areas.Plane, Symbols.Scheme(Symbols.Msymb))
-                        Renderer.lineSymbols(Areas.Restricted, 0.5, Areas.LinePlane, null, 10, Symbols.Mline)
+                        symbol(Areas.Plane, Scheme(Symbols.Msymb))
+                        lineSymbols(Areas.Restricted, 0.5, Areas.LinePlane, null, 10, Symbols.Mline)
                     }
                     addName(
                         15, Font("Arial", Font.BOLD, 80),
-                        Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -90.0))
+                        Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -90.0))
                     )
                 }
                 else -> {}
@@ -431,25 +447,25 @@ open class Rules {
                 var shape = getAttEnum(feature!!.type, Att.BCNSHP) as S57val.BcnSHP
                 if (shape === S57val.BcnSHP.BCN_UNKN) shape = S57val.BcnSHP.BCN_PILE
                 if (shape === S57val.BcnSHP.BCN_WTHY && feature!!.type === Obj.BCNLAT) {
-                    when (getAttEnum(feature!!.type, Att.CATLAM) as S57val.CatLAM) {
-                        S57val.CatLAM.LAM_PORT -> Renderer.symbol(Beacons.WithyPort)
-                        S57val.CatLAM.LAM_STBD -> Renderer.symbol(Beacons.WithyStarboard)
-                        else -> Renderer.symbol(Beacons.Stake, getScheme(feature!!.type))
+                    when (getAttEnum(feature!!.type, Att.CATLAM) as CatLAM) {
+                        CatLAM.LAM_PORT -> symbol(Beacons.WithyPort)
+                        CatLAM.LAM_STBD -> symbol(Beacons.WithyStarboard)
+                        else -> symbol(Beacons.Stake, getScheme(feature!!.type))
                     }
                 } else if (shape === S57val.BcnSHP.BCN_PRCH && feature!!.type === Obj.BCNLAT
                     && !feature!!.objs!!.containsKey(Obj.TOPMAR)
                 ) {
-                    when (getAttEnum(feature!!.type, Att.CATLAM) as S57val.CatLAM) {
-                        S57val.CatLAM.LAM_PORT -> Renderer.symbol(Beacons.PerchPort)
-                        S57val.CatLAM.LAM_STBD -> Renderer.symbol(Beacons.PerchStarboard)
-                        else -> Renderer.symbol(Beacons.Stake, getScheme(feature!!.type))
+                    when (getAttEnum(feature!!.type, Att.CATLAM) as CatLAM) {
+                        CatLAM.LAM_PORT -> symbol(Beacons.PerchPort)
+                        CatLAM.LAM_STBD -> symbol(Beacons.PerchStarboard)
+                        else -> symbol(Beacons.Stake, getScheme(feature!!.type))
                     }
                 } else {
-                    Renderer.symbol(Beacons.Shapes[shape], getScheme(feature!!.type))
+                    symbol(Beacons.Shapes[shape], getScheme(feature!!.type))
                     if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
                         val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                         if (topmap!!.containsKey(Att.TOPSHP)) {
-                            Renderer.symbol(
+                            symbol(
                                 Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
                                 getScheme(Obj.TOPMAR), Topmarks.BeaconDelta
                             )
@@ -457,7 +473,7 @@ open class Rules {
                     } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
                         val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                         if (topmap!!.containsKey(Att.TOPSHP)) {
-                            Renderer.symbol(
+                            symbol(
                                 Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
                                 getScheme(Obj.DAYMAR), Topmarks.BeaconDelta
                             )
@@ -467,7 +483,7 @@ open class Rules {
                 if (hasObject(Obj.NOTMRK)) notices()
                 addName(
                     15, Font("Arial", Font.BOLD, 40),
-                    Symbols.Delta(Symbols.Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
+                    Delta(Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -480,11 +496,11 @@ open class Rules {
             ) {
                 var shape = getAttEnum(feature!!.type, Att.BOYSHP) as S57val.BoySHP
                 if (shape === S57val.BoySHP.BOY_UNKN) shape = S57val.BoySHP.BOY_PILR
-                Renderer.symbol(Buoys.Shapes[shape], getScheme(feature!!.type))
+                symbol(Buoys.Shapes[shape], getScheme(feature!!.type))
                 if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
                             getScheme(Obj.TOPMAR), Topmarks.BuoyDeltas[shape]
                         )
@@ -492,7 +508,7 @@ open class Rules {
                 } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
                             getScheme(Obj.DAYMAR), Topmarks.BuoyDeltas[shape]
                         )
@@ -500,7 +516,7 @@ open class Rules {
                 }
                 addName(
                     15, Font("Arial", Font.BOLD, 40),
-                    Symbols.Delta(Symbols.Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
+                    Delta(Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -541,21 +557,21 @@ open class Rules {
                     if (hstr.isEmpty() && !vstr.isEmpty()) {
                         Renderer.labelText(
                             vstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.VCLR,
-                            Color.black, Color.white, Symbols.Delta(Symbols.Handle.CC)
+                            Color.black, Color.white, Delta(Handle.CC)
                         )
                     } else if (!hstr.isEmpty() && !vstr.isEmpty()) {
                         Renderer.labelText(
                             vstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.VCLR,
-                            Color.black, Color.white, Symbols.Delta(Symbols.Handle.BC)
+                            Color.black, Color.white, Delta(Handle.BC)
                         )
                         Renderer.labelText(
                             hstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.HCLR,
-                            Color.black, Color.white, Symbols.Delta(Symbols.Handle.TC)
+                            Color.black, Color.white, Delta(Handle.TC)
                         )
                     } else if (!hstr.isEmpty() && vstr.isEmpty()) {
                         Renderer.labelText(
                             hstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.HCLR,
-                            Color.black, Color.white, Symbols.Delta(Symbols.Handle.CC)
+                            Color.black, Color.white, Delta(Handle.CC)
                         )
                     }
                 }
@@ -565,26 +581,26 @@ open class Rules {
         private fun cables() {
             if (Renderer.zoom >= 16 && feature!!.geom!!.length < 2) {
                 if (feature!!.type === Obj.CBLSUB) {
-                    Renderer.lineSymbols(Areas.Cable, 0.0, null, null, 0, Symbols.Mline)
+                    lineSymbols(Areas.Cable, 0.0, null, null, 0, Symbols.Mline)
                 } else if (feature!!.type === Obj.CBLOHD) {
                     val atts = feature!!.objs!![Obj.CBLOHD]!![0]
                     if (atts != null && atts.containsKey(Att.CATCBL) && atts[Att.CATCBL].value === S57val.CatCBL.CBL_POWR) {
-                        Renderer.lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, Areas.CableFlash, 2, Color.black)
+                        lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, Areas.CableFlash, 2, Color.black)
                     } else {
-                        Renderer.lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, null, 2, Color.black)
+                        lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, null, 2, Color.black)
                     }
                     if (atts != null) {
                         if (atts.containsKey(Att.VERCLR)) {
                             Renderer.labelText(
                                 java.lang.String.valueOf(atts[Att.VERCLR].value), Font("Arial", Font.PLAIN, 50),
                                 Color.black, Renderer.LabelStyle.VCLR, Color.black,
-                                Symbols.Delta(Symbols.Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
+                                Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
                             )
                         } else if (atts.containsKey(Att.VERCSA)) {
                             Renderer.labelText(
                                 java.lang.String.valueOf(atts[Att.VERCSA].value), Font("Arial", Font.PLAIN, 50),
                                 Color.black, Renderer.LabelStyle.PCLR, Color.black,
-                                Symbols.Delta(Symbols.Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
+                                Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
                             )
                         }
                     }
@@ -603,9 +619,9 @@ open class Rules {
                 if ((getAttVal(feature!!.type, Att.ORIENT) as Double?).also { orient = it } == null) {
                     orient = 0.0
                 }
-                Renderer.symbol(
-                    symb, Symbols.Delta(
-                        Symbols.Handle.CC, AffineTransform.getRotateInstance(
+                symbol(
+                    symb, Delta(
+                        Handle.CC, AffineTransform.getRotateInstance(
                             Math.toRadians(
                                 orient!!
                             )
@@ -617,7 +633,7 @@ open class Rules {
                         .isEmpty()) {
                     Renderer.labelText(
                         "Ch.$chn", Font("Arial", Font.PLAIN, 50), Color.black,
-                        Symbols.Delta(Symbols.Handle.TC, AffineTransform.getTranslateInstance(0.0, 50.0))
+                        Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 50.0))
                     )
                 }
             }
@@ -646,15 +662,15 @@ open class Rules {
                     }
                     Renderer.labelText(
                         ul, Font("Arial", Font.PLAIN, 30), Color.black,
-                        Symbols.Delta(Symbols.Handle.RC, AffineTransform.getTranslateInstance(10.0, 15.0))
+                        Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 15.0))
                     )
                     Renderer.labelText(
                         id, Font("Arial", Font.PLAIN, 30), Color.black,
-                        Symbols.Delta(Symbols.Handle.RC, AffineTransform.getTranslateInstance(10.0, 0.0))
+                        Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 0.0))
                     )
                     Renderer.labelText(
                         dd, Font("Arial", Font.PLAIN, 20), Color.black,
-                        Symbols.Delta(Symbols.Handle.LC, AffineTransform.getTranslateInstance(15.0, 10.0))
+                        Delta(Handle.LC, AffineTransform.getTranslateInstance(15.0, 10.0))
                     )
                 }
                 Obj.DEPCNT -> {}
@@ -665,9 +681,9 @@ open class Rules {
         private fun distances() {
             if (Renderer.zoom >= 14) {
                 if (!testAttribute(Obj.DISMAR, Att.CATDIS, S57val.CatDIS.DIS_NONI)) {
-                    Renderer.symbol(Harbours.DistanceI)
+                    symbol(Harbours.DistanceI)
                 } else {
-                    Renderer.symbol(Harbours.DistanceU)
+                    symbol(Harbours.DistanceU)
                 }
                 if (Renderer.zoom >= 15) {
                     val atts = getAtts(Obj.DISMAR, 0)
@@ -688,7 +704,7 @@ open class Rules {
                         str += String.format("%1.0f", dist)
                         Renderer.labelText(
                             str, Font("Arial", Font.PLAIN, 40), Color.black,
-                            Symbols.Delta(Symbols.Handle.CC, AffineTransform.getTranslateInstance(0.0, 45.0))
+                            Delta(Handle.CC, AffineTransform.getTranslateInstance(0.0, 45.0))
                         )
                     }
                 }
@@ -702,17 +718,17 @@ open class Rules {
                 )))
             ) {
                 when (feature!!.type) {
-                    Obj.LITVES -> Renderer.symbol(
+                    Obj.LITVES -> symbol(
                         Buoys.Super, getScheme(
                             feature!!.type
                         )
                     )
-                    Obj.LITFLT -> Renderer.symbol(
+                    Obj.LITFLT -> symbol(
                         Buoys.Float, getScheme(
                             feature!!.type
                         )
                     )
-                    Obj.BOYINB -> Renderer.symbol(
+                    Obj.BOYINB -> symbol(
                         Buoys.Super, getScheme(
                             feature!!.type
                         )
@@ -722,7 +738,7 @@ open class Rules {
                 if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), Topmarks.FloatDelta
                         )
@@ -730,7 +746,7 @@ open class Rules {
                 } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.DAYMAR), Topmarks.FloatDelta
                         )
@@ -738,7 +754,7 @@ open class Rules {
                 }
                 addName(
                     15, Font("Arial", Font.BOLD, 40),
-                    Symbols.Delta(Symbols.Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
+                    Delta(Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -746,10 +762,10 @@ open class Rules {
 
         private fun gauges() {
             if (Renderer.zoom >= 14) {
-                Renderer.symbol(Harbours.TideGauge)
+                symbol(Harbours.TideGauge)
                 addName(
                     15, Font("Arial", Font.BOLD, 40),
-                    Symbols.Delta(Symbols.Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
+                    Delta(Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -760,11 +776,11 @@ open class Rules {
             when (feature!!.type) {
                 Obj.ACHBRT -> {
                     if (Renderer.zoom >= 14) {
-                        Renderer.symbol(Harbours.Anchor, Symbols.Scheme(Symbols.Msymb))
+                        symbol(Harbours.Anchor, Scheme(Symbols.Msymb))
                         if (Renderer.zoom >= 15) {
                             Renderer.labelText(
                                 name ?: "", Font("Arial", Font.PLAIN, 30), Symbols.Msymb,
-                                Renderer.LabelStyle.RRCT, Symbols.Msymb, Color.white, Symbols.Delta(Symbols.Handle.BC)
+                                Renderer.LabelStyle.RRCT, Symbols.Msymb, Color.white, Delta(Handle.BC)
                             )
                         }
                     }
@@ -776,7 +792,7 @@ open class Rules {
                                 units = S57val.UniHLU.HLU_METR
                             }
                             Renderer.lineCircle(
-                                Symbols.LineStyle(Symbols.Mline, 4f, floatArrayOf(10f, 10f), null),
+                                LineStyle(Symbols.Mline, 4f, floatArrayOf(10f, 10f), null),
                                 radius,
                                 units
                             )
@@ -785,20 +801,20 @@ open class Rules {
                 }
                 Obj.ACHARE -> if (Renderer.zoom >= 12) {
                     if (feature!!.geom!!.prim !== S57map.Pflag.AREA) {
-                        Renderer.symbol(Harbours.Anchorage, Symbols.Scheme(Color.black))
+                        symbol(Harbours.Anchorage, Scheme(Color.black))
                     } else {
-                        Renderer.symbol(Harbours.Anchorage, Symbols.Scheme(Symbols.Mline))
-                        Renderer.lineSymbols(Areas.Restricted, 1.0, Areas.LineAnchor, null, 10, Symbols.Mline)
+                        symbol(Harbours.Anchorage, Scheme(Symbols.Mline))
+                        lineSymbols(Areas.Restricted, 1.0, Areas.LineAnchor, null, 10, Symbols.Mline)
                     }
                     addName(
                         15, Font("Arial", Font.BOLD, 60), Symbols.Mline,
-                        Symbols.Delta(Symbols.Handle.LC, AffineTransform.getTranslateInstance(70.0, 0.0))
+                        Delta(Handle.LC, AffineTransform.getTranslateInstance(70.0, 0.0))
                     )
                     val sts = getAttList(Obj.ACHARE, Att.STATUS) as ArrayList<S57val.StsSTS?>
                     if (Renderer.zoom >= 15 && sts.contains(S57val.StsSTS.STS_RESV)) {
                         Renderer.labelText(
                             "Reserved", Font("Arial", Font.PLAIN, 50), Symbols.Mline,
-                            Symbols.Delta(Symbols.Handle.TC, AffineTransform.getTranslateInstance(0.0, 60.0))
+                            Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 60.0))
                         )
                     }
                     val cats = getAttList(Obj.ACHARE, Att.CATACH) as ArrayList<S57val.CatACH?>
@@ -808,8 +824,8 @@ open class Rules {
                             S57val.CatACH.ACH_DEEP -> {
                                 Renderer.labelText(
                                     "DW", Font("Arial", Font.BOLD, 50), Symbols.Msymb,
-                                    Symbols.Delta(
-                                        Symbols.Handle.RC,
+                                    Delta(
+                                        Handle.RC,
                                         AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
                                     )
                                 )
@@ -818,8 +834,8 @@ open class Rules {
                             S57val.CatACH.ACH_TANK -> {
                                 Renderer.labelText(
                                     "Tanker", Font("Arial", Font.BOLD, 50), Symbols.Msymb,
-                                    Symbols.Delta(
-                                        Symbols.Handle.RC,
+                                    Delta(
+                                        Handle.RC,
                                         AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
                                     )
                                 )
@@ -828,38 +844,38 @@ open class Rules {
                             S57val.CatACH.ACH_H24P -> {
                                 Renderer.labelText(
                                     "24h", Font("Arial", Font.BOLD, 50), Symbols.Msymb,
-                                    Symbols.Delta(
-                                        Symbols.Handle.RC,
+                                    Delta(
+                                        Handle.RC,
                                         AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
                                     )
                                 )
                                 dy += 60
                             }
                             S57val.CatACH.ACH_EXPL -> {
-                                Renderer.symbol(
-                                    Harbours.Explosives, Symbols.Scheme(Symbols.Msymb),
-                                    Symbols.Delta(
-                                        Symbols.Handle.RC,
+                                symbol(
+                                    Harbours.Explosives, Scheme(Symbols.Msymb),
+                                    Delta(
+                                        Handle.RC,
                                         AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
                                     )
                                 )
                                 dy += 60
                             }
                             S57val.CatACH.ACH_QUAR -> {
-                                Renderer.symbol(
-                                    Harbours.Hospital, Symbols.Scheme(Symbols.Msymb),
-                                    Symbols.Delta(
-                                        Symbols.Handle.RC,
+                                symbol(
+                                    Harbours.Hospital, Scheme(Symbols.Msymb),
+                                    Delta(
+                                        Handle.RC,
                                         AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
                                     )
                                 )
                                 dy += 60
                             }
                             S57val.CatACH.ACH_SEAP -> {
-                                Renderer.symbol(
-                                    Areas.Seaplane, Symbols.Scheme(Symbols.Msymb),
-                                    Symbols.Delta(
-                                        Symbols.Handle.RC,
+                                symbol(
+                                    Areas.Seaplane, Scheme(Symbols.Msymb),
+                                    Delta(
+                                        Handle.RC,
                                         AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
                                     )
                                 )
@@ -870,7 +886,7 @@ open class Rules {
                     }
                 }
                 Obj.BERTHS -> if (Renderer.zoom >= 14) {
-                    Renderer.lineVector(Symbols.LineStyle(Symbols.Mline, 6f, floatArrayOf(20f, 20f)))
+                    lineVector(LineStyle(Symbols.Mline, 6f, floatArrayOf(20f, 20f)))
                     labelText(
                         name ?: " ", Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
                         Renderer.LabelStyle.RRCT, Symbols.Mline, Color.white
@@ -878,7 +894,7 @@ open class Rules {
                 }
                 Obj.BUISGL -> if (Renderer.zoom >= 16) {
                     val symbols = ArrayList<Symbols.Symbol?>()
-                    val fncs = getAttList(Obj.BUISGL, Att.FUNCTN) as ArrayList<S57val.FncFNC?>
+                    val fncs = getAttList(Obj.BUISGL, Att.FUNCTN) as ArrayList<FncFNC?>
                     for (fnc in fncs) {
                         symbols.add(Landmarks.Funcs.get(fnc))
                     }
@@ -891,16 +907,16 @@ open class Rules {
                     Renderer.cluster(symbols)
                 }
                 Obj.HRBFAC -> if (Renderer.zoom >= 12) {
-                    val cathaf = getAttList(Obj.HRBFAC, Att.CATHAF) as ArrayList<S57val.CatHAF?>
+                    val cathaf = getAttList(Obj.HRBFAC, Att.CATHAF) as ArrayList<CatHAF?>
                     if (cathaf.size == 1) {
                         when (cathaf[0]) {
-                            S57val.CatHAF.HAF_MRNA -> Renderer.symbol(Harbours.Marina)
-                            S57val.CatHAF.HAF_MANF -> Renderer.symbol(Harbours.MarinaNF)
-                            S57val.CatHAF.HAF_FISH -> Renderer.symbol(Harbours.Fishing)
-                            else -> Renderer.symbol(Harbours.Harbour)
+                            CatHAF.HAF_MRNA -> symbol(Harbours.Marina)
+                            CatHAF.HAF_MANF -> symbol(Harbours.MarinaNF)
+                            CatHAF.HAF_FISH -> symbol(Harbours.Fishing)
+                            else -> symbol(Harbours.Harbour)
                         }
                     } else {
-                        Renderer.symbol(Harbours.Harbour)
+                        symbol(Harbours.Harbour)
                     }
                 }
                 else -> {}
@@ -910,21 +926,21 @@ open class Rules {
         private fun highways() {
             when (feature!!.type) {
                 Obj.ROADWY -> {
-                    val cat = getAttList(Obj.ROADWY, Att.CATROD) as ArrayList<S57val.CatROD?>
+                    val cat = getAttList(Obj.ROADWY, Att.CATROD) as ArrayList<CatROD?>
                     if (cat.size > 0) {
                         when (cat[0]) {
-                            S57val.CatROD.ROD_MWAY -> Renderer.lineVector(Symbols.LineStyle(Color.black, 20f))
-                            S57val.CatROD.ROD_MAJR -> Renderer.lineVector(Symbols.LineStyle(Color.black, 15f))
-                            S57val.CatROD.ROD_MINR -> Renderer.lineVector(Symbols.LineStyle(Color.black, 10f))
-                            else -> Renderer.lineVector(Symbols.LineStyle(Color.black, 5f))
+                            CatROD.ROD_MWAY -> lineVector(LineStyle(Color.black, 20f))
+                            CatROD.ROD_MAJR -> lineVector(LineStyle(Color.black, 15f))
+                            CatROD.ROD_MINR -> lineVector(LineStyle(Color.black, 10f))
+                            else -> lineVector(LineStyle(Color.black, 5f))
                         }
                     } else {
-                        Renderer.lineVector(Symbols.LineStyle(Color.black, 5f))
+                        lineVector(LineStyle(Color.black, 5f))
                     }
                 }
                 Obj.RAILWY -> {
-                    Renderer.lineVector(Symbols.LineStyle(Color.gray, 10f))
-                    Renderer.lineVector(Symbols.LineStyle(Color.black, 10f, floatArrayOf(30f, 30f)))
+                    lineVector(LineStyle(Color.gray, 10f))
+                    lineVector(LineStyle(Color.black, 10f, floatArrayOf(30f, 30f)))
                 }
                 else -> {}
             }
@@ -935,35 +951,35 @@ open class Rules {
                 && (!hasAttribute(Obj.LNDMRK, Att.FUNCTN) || testAttribute(
                     Obj.LNDMRK,
                     Att.FUNCTN,
-                    S57val.FncFNC.FNC_LGHT
+                    FncFNC.FNC_LGHT
                 ))
                 && hasObject(Obj.LIGHTS)
             ) lights() else if (Renderer.zoom >= 12) {
                 when (feature!!.type) {
                     Obj.LNDMRK -> {
-                        val cats = getAttList(feature!!.type, Att.CATLMK) as ArrayList<S57val.CatLMK?>
+                        val cats = getAttList(feature!!.type, Att.CATLMK) as ArrayList<CatLMK?>
                         var catSym = Landmarks.Shapes[cats[0]]
-                        val fncs = getAttList(feature!!.type, Att.FUNCTN) as ArrayList<S57val.FncFNC?>
+                        val fncs = getAttList(feature!!.type, Att.FUNCTN) as ArrayList<FncFNC?>
                         var fncSym = Landmarks.Funcs[fncs[0]]
-                        if (fncs[0] === S57val.FncFNC.FNC_CHCH && cats[0] === S57val.CatLMK.LMK_TOWR) catSym =
+                        if (fncs[0] === FncFNC.FNC_CHCH && cats[0] === CatLMK.LMK_TOWR) catSym =
                             Landmarks.ChurchTower
-                        if (cats[0] === S57val.CatLMK.LMK_RADR) fncSym = Landmarks.RadioTV
-                        Renderer.symbol(catSym)
-                        Renderer.symbol(fncSym)
+                        if (cats[0] === CatLMK.LMK_RADR) fncSym = Landmarks.RadioTV
+                        symbol(catSym)
+                        symbol(fncSym)
                     }
                     Obj.SILTNK -> if (testAttribute(
                             feature!!.type,
                             Att.CATSIL,
                             S57val.CatSIL.SIL_WTRT
                         )
-                    ) Renderer.symbol(
+                    ) symbol(
                         Landmarks.WaterTower
                     )
                     else -> {}
                 }
                 if (Renderer.zoom >= 15) addName(
                     15, Font("Arial", Font.BOLD, 40),
-                    Symbols.Delta(Symbols.Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
+                    Delta(Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -973,11 +989,11 @@ open class Rules {
             var ok = false
             when (feature!!.type) {
                 Obj.FOGSIG -> if (Renderer.zoom >= 12) {
-                    if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights() else Renderer.symbol(Harbours.Post)
+                    if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights() else symbol(Harbours.Post)
                     ok = true
                 }
                 else -> if (Renderer.zoom >= 14) {
-                    if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights() else Renderer.symbol(Harbours.Post)
+                    if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights() else symbol(Harbours.Post)
                     ok = true
                 }
             }
@@ -985,7 +1001,7 @@ open class Rules {
                 if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), null
                         )
@@ -993,7 +1009,7 @@ open class Rules {
                 } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.DAYMAR), null
                         )
@@ -1007,11 +1023,11 @@ open class Rules {
             var ok = false
             when (feature!!.type) {
                 Obj.LITMAJ, Obj.LNDMRK -> if (Renderer.zoom >= 12) {
-                    Renderer.symbol(Beacons.LightMajor)
+                    symbol(Beacons.LightMajor)
                     ok = true
                 }
                 Obj.LITMIN, Obj.LIGHTS, Obj.PILPNT -> if (Renderer.zoom >= 14) {
-                    Renderer.symbol(Beacons.LightMinor)
+                    symbol(Beacons.LightMinor)
                     ok = true
                 }
                 else -> {}
@@ -1020,7 +1036,7 @@ open class Rules {
                 if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), Topmarks.LightDelta
                         )
@@ -1028,7 +1044,7 @@ open class Rules {
                 } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
-                        Renderer.symbol(
+                        symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.DAYMAR), Topmarks.LightDelta
                         )
@@ -1052,16 +1068,16 @@ open class Rules {
         private fun moorings() {
             if (Renderer.zoom >= 14) {
                 when (getAttEnum(feature!!.type, Att.CATMOR) as S57val.CatMOR) {
-                    S57val.CatMOR.MOR_DLPN -> Renderer.symbol(Harbours.Dolphin)
-                    S57val.CatMOR.MOR_DDPN -> Renderer.symbol(Harbours.DeviationDolphin)
-                    S57val.CatMOR.MOR_BLRD, S57val.CatMOR.MOR_POST -> Renderer.symbol(Harbours.Bollard)
+                    S57val.CatMOR.MOR_DLPN -> symbol(Harbours.Dolphin)
+                    S57val.CatMOR.MOR_DDPN -> symbol(Harbours.DeviationDolphin)
+                    S57val.CatMOR.MOR_BLRD, S57val.CatMOR.MOR_POST -> symbol(Harbours.Bollard)
                     S57val.CatMOR.MOR_BUOY -> {
                         var shape = getAttEnum(feature!!.type, Att.BOYSHP) as S57val.BoySHP
                         if (shape === S57val.BoySHP.BOY_UNKN) {
                             shape = S57val.BoySHP.BOY_SPHR
                         }
-                        Renderer.symbol(Buoys.Shapes[shape], getScheme(feature!!.type))
-                        Renderer.symbol(Topmarks.TopMooring, Topmarks.BuoyDeltas[shape])
+                        symbol(Buoys.Shapes[shape], getScheme(feature!!.type))
+                        symbol(Topmarks.TopMooring, Topmarks.BuoyDeltas[shape])
                     }
                     else -> {}
                 }
@@ -1095,9 +1111,9 @@ open class Rules {
                 val objs = feature!!.objs!![Obj.NOTMRK]
                 val n = objs!!.size
                 if (n > 5) {
-                    Renderer.symbol(
+                    symbol(
                         Notices.Notice,
-                        Symbols.Delta(Symbols.Handle.CC, AffineTransform.getTranslateInstance(dx, dy))
+                        Delta(Handle.CC, AffineTransform.getTranslateInstance(dx, dy))
                     )
                 } else {
                     var i = 0
@@ -1114,27 +1130,27 @@ open class Rules {
                         var add: ArrayList<S57val.AddMRK?>? = ArrayList()
                         if (atts[Att.ADDMRK] != null) add =
                             atts[Att.ADDMRK]!!.value as ArrayList<S57val.AddMRK>?
-                        var h: Symbols.Handle? = Symbols.Handle.CC
+                        var h: Handle? = Handle.CC
                         var ax = 0.0
                         var ay = 0.0
                         when (i) {
                             0 -> if (n != 1) h = null
                             1 -> if (n <= 3) {
-                                h = Symbols.Handle.RC
+                                h = Handle.RC
                                 ax = -30.0
                                 ay = dy
                             } else {
-                                h = Symbols.Handle.BR
+                                h = Handle.BR
                             }
-                            2 -> h = if (n <= 3) Symbols.Handle.LC else Symbols.Handle.BL
-                            3 -> h = if (n == 4) Symbols.Handle.TC else Symbols.Handle.TR
-                            4 -> h = Symbols.Handle.TL
+                            2 -> h = if (n <= 3) Handle.LC else Handle.BL
+                            3 -> h = if (n == 4) Handle.TC else Handle.TR
+                            4 -> h = Handle.TL
                         }
                         if (h != null) {
-                            Renderer.symbol(sym, sch, Symbols.Delta(h, AffineTransform.getTranslateInstance(dx, dy)))
-                            if (!add!!.isEmpty()) Renderer.symbol(
+                            symbol(sym, sch, Delta(h, AffineTransform.getTranslateInstance(dx, dy)))
+                            if (!add!!.isEmpty()) symbol(
                                 Notices.NoticeBoard,
-                                Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(ax, ay - 30))
+                                Delta(Handle.BC, AffineTransform.getTranslateInstance(ax, ay - 30))
                             )
                         }
                         i++
@@ -1146,7 +1162,7 @@ open class Rules {
         private fun obstructions() {
             if (Renderer.zoom >= 12 && feature!!.type === Obj.OBSTRN) {
                 if (getAttEnum(feature!!.type, Att.CATOBS) === S57val.CatOBS.OBS_BOOM) {
-                    Renderer.lineVector(Symbols.LineStyle(Color.black, 5f, floatArrayOf(20f, 20f), null))
+                    lineVector(LineStyle(Color.black, 5f, floatArrayOf(20f, 20f), null))
                     if (Renderer.zoom >= 15) {
                         Renderer.lineText("Boom", Font("Arial", Font.PLAIN, 80), Color.black, -20.0)
                     }
@@ -1154,21 +1170,21 @@ open class Rules {
             }
             if (Renderer.zoom >= 14 && feature!!.type === Obj.UWTROC) {
                 when (getAttEnum(feature!!.type, Att.WATLEV) as S57val.WatLEV) {
-                    S57val.WatLEV.LEV_CVRS -> Renderer.symbol(Areas.RockC)
-                    S57val.WatLEV.LEV_AWSH -> Renderer.symbol(Areas.RockA)
-                    else -> Renderer.symbol(Areas.Rock)
+                    S57val.WatLEV.LEV_CVRS -> symbol(Areas.RockC)
+                    S57val.WatLEV.LEV_AWSH -> symbol(Areas.RockA)
+                    else -> symbol(Areas.Rock)
                 }
             } else {
-                Renderer.symbol(Areas.Rock)
+                symbol(Areas.Rock)
             }
         }
 
         private fun pipelines() {
             if (Renderer.zoom >= 16 && feature!!.geom!!.length < 2) {
                 if (feature!!.type === Obj.PIPSOL) {
-                    Renderer.lineSymbols(Areas.Pipeline, 1.0, null, null, 0, Symbols.Mline)
+                    lineSymbols(Areas.Pipeline, 1.0, null, null, 0, Symbols.Mline)
                 } else if (feature!!.type === Obj.PIPOHD) {
-                    Renderer.lineVector(Symbols.LineStyle(Color.black, 8f))
+                    lineVector(LineStyle(Color.black, 8f))
                     val atts = feature!!.atts
                     var verclr = 0.0
                     if (atts != null) {
@@ -1181,7 +1197,7 @@ open class Rules {
                             Renderer.labelText(
                                 verclr.toString(), Font("Arial", Font.PLAIN, 50), Color.black,
                                 Renderer.LabelStyle.VCLR, Color.black,
-                                Symbols.Delta(Symbols.Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
+                                Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
                             )
                         }
                     }
@@ -1191,10 +1207,10 @@ open class Rules {
 
         private fun platforms() {
             val cats = getAttList(Obj.OFSPLF, Att.CATOFP) as ArrayList<S57val.CatOFP?>
-            if (cats[0] === S57val.CatOFP.OFP_FPSO) Renderer.symbol(Buoys.Storage) else Renderer.symbol(Landmarks.Platform)
+            if (cats[0] === S57val.CatOFP.OFP_FPSO) symbol(Buoys.Storage) else symbol(Landmarks.Platform)
             addName(
                 15, Font("Arial", Font.BOLD, 40),
-                Symbols.Delta(Symbols.Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
+                Delta(Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
             )
             Signals.addSignals()
         }
@@ -1206,11 +1222,11 @@ open class Rules {
                             feature!!.type,
                             Att.CATCRN
                         ) as S57val.CatCRN === S57val.CatCRN.CRN_CONT
-                    ) Renderer.symbol(
+                    ) symbol(
                         Harbours.ContainerCrane
-                    ) else Renderer.symbol(Harbours.PortCrane)
+                    ) else symbol(Harbours.PortCrane)
                 } else if (feature!!.type === Obj.HULKES) {
-                    Renderer.lineVector(Symbols.LineStyle(Color.black, 4f, null, Color(0xffe000)))
+                    lineVector(LineStyle(Color.black, 4f, null, Color(0xffe000)))
                     addName(15, Font("Arial", Font.BOLD, 40))
                 }
             }
@@ -1219,22 +1235,22 @@ open class Rules {
         private fun separation() {
             when (feature!!.type) {
                 Obj.TSEZNE, Obj.TSSCRS, Obj.TSSRON -> {
-                    if (Renderer.zoom <= 15) Renderer.lineVector(Symbols.LineStyle(Symbols.Mtss)) else Renderer.lineVector(
-                        Symbols.LineStyle(Symbols.Mtss, 20f, null, null)
+                    if (Renderer.zoom <= 15) lineVector(LineStyle(Symbols.Mtss)) else lineVector(
+                        LineStyle(Symbols.Mtss, 20f, null, null)
                     )
                     addName(10, Font("Arial", Font.BOLD, 150), Symbols.Mline)
                 }
-                Obj.TSELNE -> Renderer.lineVector(Symbols.LineStyle(Symbols.Mtss, 20f, null, null))
-                Obj.TSSLPT -> Renderer.lineSymbols(Areas.LaneArrow, 0.5, null, null, 0, Symbols.Mtss)
-                Obj.TSSBND -> Renderer.lineVector(
-                    Symbols.LineStyle(
+                Obj.TSELNE -> lineVector(LineStyle(Symbols.Mtss, 20f, null, null))
+                Obj.TSSLPT -> lineSymbols(Areas.LaneArrow, 0.5, null, null, 0, Symbols.Mtss)
+                Obj.TSSBND -> lineVector(
+                    LineStyle(
                         Symbols.Mtss,
                         20f,
                         floatArrayOf(40f, 40f),
                         null
                     )
                 )
-                Obj.ISTZNE -> Renderer.lineSymbols(Areas.Restricted, 1.0, null, null, 0, Symbols.Mtss)
+                Obj.ISTZNE -> lineSymbols(Areas.Restricted, 1.0, null, null, 0, Symbols.Mtss)
                 else -> {}
             }
         }
@@ -1244,9 +1260,9 @@ open class Rules {
             if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL || Renderer.context!!.ruleset() === ChartContext.RuleSet.BASE) {
                 if (cat !== S57val.CatSLC.SLC_SWAY && cat !== S57val.CatSLC.SLC_TWAL) {
                     if (Renderer.zoom >= 12) {
-                        Renderer.lineVector(Symbols.LineStyle(Color.black, 10f, Symbols.Yland))
+                        lineVector(LineStyle(Color.black, 10f, Symbols.Yland))
                     } else {
-                        Renderer.lineVector(Symbols.LineStyle(Symbols.Yland))
+                        lineVector(LineStyle(Symbols.Yland))
                     }
                 }
             }
@@ -1256,7 +1272,7 @@ open class Rules {
                         S57val.CatSLC.SLC_TWAL -> {
                             val lev = getAttEnum(feature!!.type, Att.WATLEV) as S57val.WatLEV
                             if (lev === S57val.WatLEV.LEV_CVRS) {
-                                Renderer.lineVector(Symbols.LineStyle(Color.black, 10f, floatArrayOf(40f, 40f), null))
+                                lineVector(LineStyle(Color.black, 10f, floatArrayOf(40f, 40f), null))
                                 if (Renderer.zoom >= 15) Renderer.lineText(
                                     "(covers)",
                                     Font("Arial", Font.PLAIN, 60),
@@ -1264,7 +1280,7 @@ open class Rules {
                                     80.0
                                 )
                             } else {
-                                Renderer.lineVector(Symbols.LineStyle(Color.black, 10f, null, null))
+                                lineVector(LineStyle(Color.black, 10f, null, null))
                             }
                             if (Renderer.zoom >= 15) Renderer.lineText(
                                 "Training Wall",
@@ -1274,7 +1290,7 @@ open class Rules {
                             )
                         }
                         S57val.CatSLC.SLC_SWAY -> {
-                            Renderer.lineVector(Symbols.LineStyle(Color.black, 2f, null, Color(0xffe000)))
+                            lineVector(LineStyle(Color.black, 2f, null, Color(0xffe000)))
                             if (Renderer.zoom >= 16 && feature!!.objs!!.containsKey(Obj.SMCFAC)) {
                                 val symbols = ArrayList<Symbols.Symbol?>()
                                 val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<S57val.CatSCF?>
@@ -1295,7 +1311,7 @@ open class Rules {
                 var str = ""
                 when (feature!!.type) {
                     Obj.SISTAT -> {
-                        Renderer.symbol(Harbours.SignalStation)
+                        symbol(Harbours.SignalStation)
                         str = "SS"
                         val tcats = getAttList(Obj.SISTAT, Att.CATSIT) as ArrayList<S57val.CatSIT?>
                         when (tcats[0]) {
@@ -1308,66 +1324,66 @@ open class Rules {
                         }
                     }
                     Obj.SISTAW -> {
-                        Renderer.symbol(Harbours.SignalStation)
+                        symbol(Harbours.SignalStation)
                         str = "SS"
                         str = "SS"
-                        val wcats = getAttList(Obj.SISTAW, Att.CATSIW) as ArrayList<S57val.CatSIW?>
+                        val wcats = getAttList(Obj.SISTAW, Att.CATSIW) as ArrayList<CatSIW?>
                         when (wcats[0]) {
-                            S57val.CatSIW.SIW_STRM -> str += "(Storm)"
-                            S57val.CatSIW.SIW_WTHR -> str += "(Weather)"
-                            S57val.CatSIW.SIW_ICE -> str += "(Ice)"
-                            S57val.CatSIW.SIW_TIDG -> str = "Tide gauge"
-                            S57val.CatSIW.SIW_TIDS -> str = "Tide scale"
-                            S57val.CatSIW.SIW_TIDE -> str += "(Tide)"
-                            S57val.CatSIW.SIW_TSTR -> str += "(Stream)"
-                            S57val.CatSIW.SIW_DNGR -> str += "(Danger)"
-                            S57val.CatSIW.SIW_MILY -> str += "(Firing)"
-                            S57val.CatSIW.SIW_TIME -> str += "(Time)"
+                            CatSIW.SIW_STRM -> str += "(Storm)"
+                            CatSIW.SIW_WTHR -> str += "(Weather)"
+                            CatSIW.SIW_ICE -> str += "(Ice)"
+                            CatSIW.SIW_TIDG -> str = "Tide gauge"
+                            CatSIW.SIW_TIDS -> str = "Tide scale"
+                            CatSIW.SIW_TIDE -> str += "(Tide)"
+                            CatSIW.SIW_TSTR -> str += "(Stream)"
+                            CatSIW.SIW_DNGR -> str += "(Danger)"
+                            CatSIW.SIW_MILY -> str += "(Firing)"
+                            CatSIW.SIW_TIME -> str += "(Time)"
                             else -> {}
                         }
                     }
                     Obj.RDOSTA, Obj.RTPBCN -> {
-                        Renderer.symbol(Harbours.SignalStation)
-                        Renderer.symbol(Beacons.RadarStation)
+                        symbol(Harbours.SignalStation)
+                        symbol(Beacons.RadarStation)
                     }
-                    Obj.RADRFL -> Renderer.symbol(Topmarks.RadarReflector)
+                    Obj.RADRFL -> symbol(Topmarks.RadarReflector)
                     Obj.RADSTA -> {
-                        Renderer.symbol(Harbours.SignalStation)
-                        Renderer.symbol(Beacons.RadarStation)
+                        symbol(Harbours.SignalStation)
+                        symbol(Beacons.RadarStation)
                         Renderer.labelText(
                             "Ra", Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
-                            Symbols.Delta(Symbols.Handle.TR, AffineTransform.getTranslateInstance(-30.0, -70.0))
+                            Delta(Handle.TR, AffineTransform.getTranslateInstance(-30.0, -70.0))
                         )
                     }
                     Obj.PILBOP -> {
-                        Renderer.symbol(Harbours.Pilot)
+                        symbol(Harbours.Pilot)
                         addName(
                             15, Font("Arial", Font.BOLD, 40), Symbols.Msymb,
-                            Symbols.Delta(Symbols.Handle.LC, AffineTransform.getTranslateInstance(70.0, -40.0))
+                            Delta(Handle.LC, AffineTransform.getTranslateInstance(70.0, -40.0))
                         )
                         val cat = getAttEnum(feature!!.type, Att.CATPIL) as S57val.CatPIL
                         if (cat === S57val.CatPIL.PIL_HELI) {
                             Renderer.labelText(
                                 "H", Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
-                                Symbols.Delta(Symbols.Handle.LC, AffineTransform.getTranslateInstance(70.0, 0.0))
+                                Delta(Handle.LC, AffineTransform.getTranslateInstance(70.0, 0.0))
                             )
                         }
                     }
                     Obj.CGUSTA -> {
-                        Renderer.symbol(Harbours.SignalStation)
+                        symbol(Harbours.SignalStation)
                         str = "CG"
-                        if (feature!!.objs!!.containsKey(Obj.RSCSTA)) Renderer.symbol(
+                        if (feature!!.objs!!.containsKey(Obj.RSCSTA)) symbol(
                             Harbours.Rescue,
-                            Symbols.Delta(Symbols.Handle.CC, AffineTransform.getTranslateInstance(130.0, 0.0))
+                            Delta(Handle.CC, AffineTransform.getTranslateInstance(130.0, 0.0))
                         )
                     }
-                    Obj.RSCSTA -> Renderer.symbol(Harbours.Rescue)
+                    Obj.RSCSTA -> symbol(Harbours.Rescue)
                     else -> {}
                 }
                 if (Renderer.zoom >= 15 && !str.isEmpty()) {
                     Renderer.labelText(
                         str, Font("Arial", Font.PLAIN, 40), Color.black,
-                        Symbols.Delta(Symbols.Handle.LC, AffineTransform.getTranslateInstance(40.0, 0.0))
+                        Delta(Handle.LC, AffineTransform.getTranslateInstance(40.0, 0.0))
                     )
                 }
                 Signals.addSignals()
@@ -1376,15 +1392,15 @@ open class Rules {
 
         private fun transits() {
             if (Renderer.zoom >= 14) {
-                if (feature!!.type === Obj.RECTRC) Renderer.lineVector(
-                    Symbols.LineStyle(
+                if (feature!!.type === Obj.RECTRC) lineVector(
+                    LineStyle(
                         Color.black,
                         10f,
                         null,
                         null
                     )
-                ) else if (feature!!.type === Obj.NAVLNE) Renderer.lineVector(
-                    Symbols.LineStyle(Color.black, 10f, floatArrayOf(25f, 25f), null)
+                ) else if (feature!!.type === Obj.NAVLNE) lineVector(
+                    LineStyle(Color.black, 10f, floatArrayOf(25f, 25f), null)
                 )
             }
             if (Renderer.zoom >= 15) {
@@ -1400,8 +1416,8 @@ open class Rules {
         }
 
         private fun waterways() {
-            Renderer.lineVector(
-                Symbols.LineStyle(
+            lineVector(
+                LineStyle(
                     Symbols.Bwater,
                     20f,
                     if (feature!!.geom!!.prim === S57map.Pflag.AREA) Symbols.Bwater else null
@@ -1411,10 +1427,10 @@ open class Rules {
 
         private fun wrecks() {
             if (Renderer.zoom >= 14) {
-                when (getAttEnum(feature!!.type, Att.CATWRK) as S57val.CatWRK) {
-                    S57val.CatWRK.WRK_DNGR, S57val.CatWRK.WRK_MSTS -> Renderer.symbol(Areas.WreckD)
-                    S57val.CatWRK.WRK_HULS -> Renderer.symbol(Areas.WreckS)
-                    else -> Renderer.symbol(Areas.WreckND)
+                when (getAttEnum(feature!!.type, Att.CATWRK) as CatWRK) {
+                    CatWRK.WRK_DNGR, CatWRK.WRK_MSTS -> symbol(Areas.WreckD)
+                    CatWRK.WRK_HULS -> symbol(Areas.WreckS)
+                    else -> symbol(Areas.WreckND)
                 }
             }
         }

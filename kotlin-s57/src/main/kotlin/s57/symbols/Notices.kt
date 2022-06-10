@@ -2,7 +2,9 @@
 package s57.symbols
 
 import s57.S57val
+import s57.S57val.BnkWTW
 import s57.S57val.CatNMK
+import s57.S57val.MarSYS
 import s57.symbols.Symbols.Caption
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
@@ -2859,16 +2861,16 @@ object Notices {
         CatNMK.NMK_SHIP to NoticeRship,
     )
 
-    fun getScheme(sys: S57val.MarSYS?, bank: S57val.BnkWTW?): Symbols.Scheme {
+    fun getScheme(sys: MarSYS?, bank: BnkWTW?): Symbols.Scheme {
         val colours = ArrayList<Color?>()
         val scheme = Symbols.Scheme(colours)
         when (sys) {
-            S57val.MarSYS.SYS_BNWR, S57val.MarSYS.SYS_BWR2 -> when (bank) {
-                S57val.BnkWTW.BWW_LEFT -> {
+            MarSYS.SYS_BNWR, MarSYS.SYS_BWR2 -> when (bank) {
+                BnkWTW.BWW_LEFT -> {
                     colours.add(Color.white)
                     colours.add(Color(0xf00000))
                 }
-                S57val.BnkWTW.BWW_RGHT -> {
+                BnkWTW.BWW_RGHT -> {
                     colours.add(Color.white)
                     colours.add(Color(0x00a000))
                 }
@@ -2883,17 +2885,17 @@ object Notices {
     }
 
 
-    fun getNotice(cat: CatNMK, sys: S57val.MarSYS?, bank: S57val.BnkWTW?): Symbol? {
+    fun getNotice(cat: CatNMK, sys: MarSYS?, bank: BnkWTW?): Symbol? {
         var symbol: Symbol? = null
         when (sys) {
-            S57val.MarSYS.SYS_CEVN -> symbol = NmkCevni[cat]
-            S57val.MarSYS.SYS_BNWR, S57val.MarSYS.SYS_BWR2 -> symbol = NmkBniwr[cat]
-            S57val.MarSYS.SYS_PPWB -> when (bank) {
-                S57val.BnkWTW.BWW_LEFT -> symbol = NmkPpwbcl[cat]
-                S57val.BnkWTW.BWW_RGHT -> symbol = NmkPpwbcr[cat]
+            MarSYS.SYS_CEVN -> symbol = NmkCevni[cat]
+            MarSYS.SYS_BNWR, MarSYS.SYS_BWR2 -> symbol = NmkBniwr[cat]
+            MarSYS.SYS_PPWB -> when (bank) {
+                BnkWTW.BWW_LEFT -> symbol = NmkPpwbcl[cat]
+                BnkWTW.BWW_RGHT -> symbol = NmkPpwbcr[cat]
                 else -> {}
             }
-            S57val.MarSYS.SYS_RIWR -> symbol = NmkRiwr[cat]
+            MarSYS.SYS_RIWR -> symbol = NmkRiwr[cat]
             else -> {}
         }
         return symbol

@@ -1,7 +1,6 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-import s57.S57val
 import s57.S57val.BoySHP
 import s57.S57val.TopSHP
 import s57.symbols.Symbols.Delta

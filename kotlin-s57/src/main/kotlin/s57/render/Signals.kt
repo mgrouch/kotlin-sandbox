@@ -401,8 +401,8 @@ object Signals : Rules() {
         )
         if (Renderer.zoom >= 12) {
             var str: String? = ""
-            if (lights!![1] != null) {
-                for (atts in lights!!.values) {
+            if (lights[1] != null) {
+                for (atts in lights.values) {
                     var col1: Enum<ColCOL>? = null
                     var col2: Enum<ColCOL>? = null
                     val radius = 0.2
@@ -423,7 +423,7 @@ object Signals : Rules() {
                                 dir = atts[Att.ORIENT]!!.value as Double?
                                 s1 = (dir!! - 4 + 360) % 360
                                 s2 = (dir + 4) % 360
-                                for (satts in lights!!.values) {
+                                for (satts in lights.values) {
                                     val srad = 0.2
                                     var ss1 = 361.0
                                     var ss2 = 361.0
@@ -511,7 +511,7 @@ object Signals : Rules() {
                     }
 
                     val litatts = ArrayList<LitSect?>()
-                    for (atts in lights!!.values) {
+                    for (atts in lights.values) {
                         val sect = LitSect()
                         sect.dir =
                             atts!!.containsKey(Att.CATLIT) && (atts[Att.CATLIT]!!.value as ArrayList<S57val.CatLIT?>?)!!.contains(
@@ -628,7 +628,7 @@ object Signals : Rules() {
                 }
             } else {
                 if (Renderer.zoom >= 15) {
-                    val atts = lights!![0]
+                    val atts = lights[0]
                     var cats: ArrayList<S57val.CatLIT?>? = ArrayList()
                     if (atts!!.containsKey(Att.CATLIT)) {
                         cats = atts[Att.CATLIT]!!.value as ArrayList<S57val.CatLIT?>?
