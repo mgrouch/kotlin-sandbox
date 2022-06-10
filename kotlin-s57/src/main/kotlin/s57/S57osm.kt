@@ -7,10 +7,10 @@ import java.io.BufferedReader
  * @author Malcolm Herring
  */
 object S57osm {
-    private val OSMtags: HashMap<String?, KeyVal<*>?>? = HashMap()
+    private val OSMtags: HashMap<String?, KeyVal<*>?> = HashMap()
 
     init {
-        OSMtags!!["natural=coastline"] = KeyVal<Any?>(S57obj.Obj.COALNE, S57att.Att.UNKATT, null, null)
+        OSMtags["natural=coastline"] = KeyVal<Any?>(S57obj.Obj.COALNE, S57att.Att.UNKATT, null, null)
         OSMtags["natural=water"] = KeyVal<Any?>(S57obj.Obj.LAKARE, S57att.Att.UNKATT, null, null)
         OSMtags["water=river"] =
             KeyVal<Any?>(S57obj.Obj.RIVERS, S57att.Att.UNKATT, null, null)
@@ -75,7 +75,7 @@ object S57osm {
     }
 
     fun OSMtag(osm: ArrayList<KeyVal<*>?>?, key: String?, `val`: String?) {
-        val kv = OSMtags!!["$key=$`val`"]
+        val kv = OSMtags["$key=$`val`"]
         if (kv != null) {
             if (kv.conv == S57val.Conv.E) {
                 val list = ArrayList<Enum<*>?>()
@@ -112,8 +112,8 @@ object S57osm {
 
     @Throws(Exception::class)
     fun OSMmap(`in`: BufferedReader?, map: S57map?, bb: Boolean) {
-        var k: String? = ""
-        var v = ""
+        var k: String?
+        var v: String
         var lat = 0.0
         var lon = 0.0
         var id: Long = 0
@@ -129,7 +129,7 @@ object S57osm {
         while (`in`!!.readLine().also { ln = it } != null) {
             if (inOsm) {
                 if (ln!!.contains("<bounds") && !bb) {
-                    for (token in ln!!.split("[ ]+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                    for (token in ln!!.split(" +".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                         if (token.matches("^minlat=.+".toRegex())) {
                             map.bounds!!.minlat =
                                 Math.toRadians(token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
@@ -158,14 +158,12 @@ object S57osm {
                     }
                 } else {
                     if ((inNode || inWay || inRel) && ln!!.contains("<tag")) {
-                        v = ""
-                        k = v
                         var token: Array<String?> = ln!!.split("k=".toRegex()).dropLastWhile { it.isEmpty() }
                             .toTypedArray()
                         k = token[1]!!.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
                         token = token[1]!!.split("v=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                         v = token[1]!!.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-                        if (!k.isEmpty() && !v.isEmpty()) {
+                        if (k.isNotEmpty() && v.isNotEmpty()) {
                             map.addTag(k, v)
                         }
                     }
@@ -175,7 +173,7 @@ object S57osm {
                             map.tagsDone(id)
                         }
                     } else if (ln!!.contains("<node")) {
-                        for (token in ln!!.split("[ ]+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                        for (token in ln!!.split(" +".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                             if (token.matches("^id=.+".toRegex())) {
                                 id = token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()[1].toLong()
@@ -196,7 +194,7 @@ object S57osm {
                     } else if (inWay) {
                         if (ln!!.contains("<nd")) {
                             var ref: Long = 0
-                            for (token in ln!!.split("[ ]+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                            for (token in ln!!.split(" +".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                                 if (token.matches("^ref=.+".toRegex())) {
                                     ref = token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                         .toTypedArray()[1].toLong()
@@ -213,7 +211,7 @@ object S57osm {
                             map.tagsDone(id)
                         }
                     } else if (ln!!.contains("<way")) {
-                        for (token in ln!!.split("[ ]+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                        for (token in ln!!.split(" +".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                             if (token.matches("^id=.+".toRegex())) {
                                 id = token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()[1].toLong()
@@ -227,14 +225,13 @@ object S57osm {
                         }
                     } else if (ln!!.contains("</osm")) {
                         map.mapDone()
-                        inOsm = false
                         break
                     } else if (inRel) {
                         if (ln!!.contains("<member")) {
                             var type = ""
                             var role = ""
                             var ref: Long = 0
-                            for (token in ln!!.split("[ ]+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                            for (token in ln!!.split(" +".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                                 if (token.matches("^ref=.+".toRegex())) {
                                     ref = token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                         .toTypedArray()[1].toLong()
@@ -258,7 +255,7 @@ object S57osm {
                             map.tagsDone(id)
                         }
                     } else if (ln!!.contains("<relation")) {
-                        for (token in ln!!.split("[ ]+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                        for (token in ln!!.split(" +".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                             if (token.matches("^id=.+".toRegex())) {
                                 id = token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()[1].toLong()
