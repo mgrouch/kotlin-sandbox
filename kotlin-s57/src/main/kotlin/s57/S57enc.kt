@@ -1846,7 +1846,7 @@ object S57enc {
                     val objobj = objs.key
                     for (o in objs.value!!.entries) {
                         val objatts = arrayListOf<S57dat.Fparams>()
-                        val master = feature.type == objobj && (o.key == 0 || o.key) == 1
+                        val master = feature.type == objobj && (o.key == 0 || o.key == 1)
                         val id = hash(if (master) feature.id else slaveid)
                         objatts.add(
                             S57dat.Fparams(
@@ -1863,7 +1863,7 @@ object S57enc {
                             atts.putAll(feature.atts!!)
                         }
                         for (att in atts.entries) {
-                            if ((obj == Obj.SOUNDG && att.key) != Att.VALSOU) {
+                            if (obj != Obj.SOUNDG || att.key != Att.VALSOU) {
                                 val attl = S57att.encodeAttribute(att.key)!!.toLong()
                                 val next = arrayOf(
                                     attl, S57val.encodeValue(att.value, att.key) as Any
