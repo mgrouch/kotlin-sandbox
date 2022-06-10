@@ -3,6 +3,7 @@ package s57
 
 import s57.S57map.Pflag.POINT
 import s57.S57obj.Obj
+
 import kotlin.math.abs
 import kotlin.system.exitProcess
 
@@ -331,6 +332,7 @@ object S57dat {
         '0'.code.toByte(),
         '4'.code.toByte()
     )
+
     private var buffer: ByteArray
     private var offset = 0
     private var maxoff = 0
@@ -535,7 +537,7 @@ object S57dat {
             buf = buf.copyOf(buf.size + 1)
             buf[buf.size - 1] = 0x1e
             val flen = buf.size - offset
-            index.add(Index(sfparams.field.toString().toByteArray(StandardCharsets.UTF_8), flen, offset))
+            index.add(Index(sfparams.field.toString().toByteArray(UTF_8), flen, offset))
             maxlen = if (flen > maxlen) flen else maxlen
             offset += flen
         }
