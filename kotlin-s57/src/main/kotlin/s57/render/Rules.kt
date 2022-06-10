@@ -3,16 +3,21 @@ package s57.render
 
 import s57.S57att.Att
 import s57.S57map
+import s57.S57map.Feature
 import s57.S57obj.Obj
 import s57.S57val
+import s57.S57val.AddMRK
 import s57.S57val.BcnSHP
+import s57.S57val.BnkWTW
 import s57.S57val.BoySHP
 import s57.S57val.CatACH
 import s57.S57val.CatDIS
 import s57.S57val.CatHAF
 import s57.S57val.CatLAM
 import s57.S57val.CatLMK
+import s57.S57val.CatNMK
 import s57.S57val.CatROD
+import s57.S57val.CatSCF
 import s57.S57val.CatSEA
 import s57.S57val.CatSIW
 import s57.S57val.CatWED
@@ -20,6 +25,7 @@ import s57.S57val.CatWRK
 import s57.S57val.ColCOL
 import s57.S57val.ColPAT
 import s57.S57val.FncFNC
+import s57.S57val.MarSYS
 import s57.S57val.TopSHP
 import s57.S57val.TrfTRF
 import s57.S57val.UniHLU
@@ -122,11 +128,11 @@ open class Rules {
         }
 
         fun getAttVal(obj: Obj?, att: Att): Any? {
-            val atts: S57map.AttMap
-            var objs: HashMap<Int?, S57map.AttMap?>
+            val atts: S57map.AttMap?
+            var objs: S57map.ObjTab?
             var item: S57val.AttVal<*>
-            if (feature!!.objs!![obj].also { objs = it!! } != null) atts = objs[0] else return null
-            return if (atts[att].also { item = it!! } == null) null else item.value
+            if (feature!!.objs!![obj].also { objs = it!! } != null) atts = objs!![0] else return null
+            return if (atts!![att].also { item = it!! } == null) null else item.value
         }
 
         fun getAttStr(obj: Obj?, att: Att): String {
@@ -156,9 +162,9 @@ open class Rules {
             for (col in getAttList(obj, Att.COLOUR) as ArrayList<ColCOL>) {
                 colours.add(bodyColours[col])
             }
-            val patterns = ArrayList<Symbols.Patt?>()
+            val patterns = ArrayList<Symbols.Patt>()
             for (pat in getAttList(obj, Att.COLPAT) as ArrayList<ColPAT>) {
-                patterns.add(pattMap[pat])
+                patterns.add(pattMap[pat]!!)
             }
             return Scheme(patterns, colours)
         }
@@ -191,14 +197,15 @@ open class Rules {
             return feature!!.objs!!.containsKey(obj)
         }
 
-        var feature: S57map.Feature? = null
-        var objects: ArrayList<S57map.Feature>? = null
+        var feature: Feature? = null
+        var objects: ArrayList<Feature?>? = null
+
         fun testObject(obj: Obj): Boolean {
             return Renderer.map!!.features!![obj].also { objects = it } != null
         }
 
-        fun testFeature(f: S57map.Feature): Boolean {
-            return f.also { feature = it }.reln === S57map.Rflag.MASTER
+        fun testFeature(f: Feature?): Boolean {
+            return f.also { feature = it }!!.reln === S57map.Rflag.MASTER
         }
 
         fun rules(): Boolean {
@@ -908,15 +915,15 @@ open class Rules {
                     )
                 }
                 Obj.BUISGL -> if (Renderer.zoom >= 16) {
-                    val symbols = ArrayList<Symbols.Symbol?>()
+                    val symbols = ArrayList<Symbols.Symbol>()
                     val fncs = getAttList(Obj.BUISGL, Att.FUNCTN) as ArrayList<FncFNC?>
                     for (fnc in fncs) {
-                        symbols.add(Landmarks.Funcs.get(fnc))
+                        symbols.add(Landmarks.Funcs[fnc]!!)
                     }
                     if (feature!!.objs!!.containsKey(Obj.SMCFAC)) {
-                        val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<S57val.CatSCF?>
+                        val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
                         for (scf in scfs) {
-                            symbols.add(Facilities.Cats.get(scf))
+                            symbols.add(Facilities.Cats[scf]!!)
                         }
                     }
                     Renderer.cluster(symbols)
@@ -1071,10 +1078,10 @@ open class Rules {
 
         private fun marinas() {
             if (Renderer.zoom >= 16) {
-                val symbols = ArrayList<Symbols.Symbol?>()
-                val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<S57val.CatSCF?>
+                val symbols = ArrayList<Symbols.Symbol>()
+                val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
                 for (scf in scfs) {
-                    symbols.add(Facilities.Cats.get(scf))
+                    symbols.add(Facilities.Cats[scf]!!)
                 }
                 Renderer.cluster(symbols)
             }
@@ -1117,12 +1124,12 @@ open class Rules {
                     Obj.NOTMRK -> 0.0
                     else -> return
                 }
-                var sys: S57val.MarSYS? = S57val.MarSYS.SYS_CEVN
-                var bnk: S57val.BnkWTW? = S57val.BnkWTW.BWW_UNKN
+                var sys: MarSYS? = MarSYS.SYS_CEVN
+                var bnk: BnkWTW? = BnkWTW.BWW_UNKN
                 var att = feature!!.atts!![Att.MARSYS]
-                if (att != null) sys = att.value as S57val.MarSYS?
+                if (att != null) sys = att.value as MarSYS?
                 att = feature!!.atts!![Att.BNKWTW]
-                if (att != null) bnk = att.value as S57val.BnkWTW?
+                if (att != null) bnk = att.value as BnkWTW?
                 val objs = feature!!.objs!![Obj.NOTMRK]
                 val n = objs!!.size
                 if (n > 5) {
@@ -1133,18 +1140,15 @@ open class Rules {
                 } else {
                     var i = 0
                     for (atts in objs.values) {
-                        if (atts!![Att.MARSYS] != null) sys =
-                            (atts[Att.MARSYS]!!.value as ArrayList<S57val.MarSYS>?)!![0]
-                        if (atts[Att.BNKWTW] != null) bnk =
-                            (atts[Att.BNKWTW]!!.value as ArrayList<S57val.BnkWTW>?)!![0]
-                        var cat: S57val.CatNMK? = S57val.CatNMK.NMK_UNKN
-                        if (atts[Att.CATNMK] != null) cat =
-                            (atts[Att.CATNMK]!!.value as ArrayList<S57val.CatNMK>?)!![0]
+                        if (atts!![Att.MARSYS] != null) sys = (atts[Att.MARSYS]!!.value as ArrayList<MarSYS>?)!![0]
+                        if (atts[Att.BNKWTW] != null) bnk = (atts[Att.BNKWTW]!!.value as ArrayList<BnkWTW>?)!![0]
+
+                        var cat: CatNMK? = CatNMK.NMK_UNKN
+                        if (atts[Att.CATNMK] != null) cat = (atts[Att.CATNMK]!!.value as ArrayList<CatNMK>?)!![0]
                         val sym = getNotice(cat!!, sys, bnk)
                         val sch = getScheme(sys, bnk)
-                        var add: ArrayList<S57val.AddMRK?>? = ArrayList()
-                        if (atts[Att.ADDMRK] != null) add =
-                            atts[Att.ADDMRK]!!.value as ArrayList<S57val.AddMRK>?
+                        var add: ArrayList<AddMRK>? = ArrayList()
+                        if (atts[Att.ADDMRK] != null) add = atts[Att.ADDMRK]!!.value as ArrayList<AddMRK>?
                         var h: Handle? = Handle.CC
                         var ax = 0.0
                         var ay = 0.0
@@ -1307,10 +1311,10 @@ open class Rules {
                         S57val.CatSLC.SLC_SWAY -> {
                             lineVector(LineStyle(black, 2f, null, Color(0xffe000)))
                             if (Renderer.zoom >= 16 && feature!!.objs!!.containsKey(Obj.SMCFAC)) {
-                                val symbols = ArrayList<Symbols.Symbol?>()
-                                val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<S57val.CatSCF?>
+                                val symbols = ArrayList<Symbols.Symbol>()
+                                val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
                                 for (scf in scfs) {
-                                    symbols.add(Facilities.Cats.get(scf))
+                                    symbols.add(Facilities.Cats[scf]!!)
                                 }
                                 Renderer.cluster(symbols)
                             }
