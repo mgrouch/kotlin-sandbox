@@ -76,22 +76,22 @@ object Renderer {
     }
 
     fun symbol(symbol: Symbol?) {
-        val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
+        val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, symbol, sScale, point!!.x, point.y, null, null)
     }
 
     fun symbol(symbol: Symbol?, scheme: Symbols.Scheme?) {
-        val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
+        val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, symbol, sScale, point!!.x, point.y, scheme, null)
     }
 
     fun symbol(symbol: Symbol?, delta: Delta?) {
-        val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
+        val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, symbol, sScale, point!!.x, point.y, null, delta)
     }
 
     fun symbol(symbol: Symbol?, scheme: Symbols.Scheme?, delta: Delta?) {
-        val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
+        val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, symbol, sScale, point!!.x, point.y, scheme, delta)
     }
 
@@ -459,7 +459,7 @@ object Renderer {
             var first = true
             while (git.hasEdge()) {
                 git.nextEdge()
-                point = context!!.getPoint(git.next())
+                point = context!!.getPoint(git.next()!!)
                 if (first) {
                     p.moveTo(point!!.x, point.y)
                     first = false
