@@ -2348,11 +2348,11 @@ object S57val {
             if (attval.conv == Conv.E || attval.conv == Conv.L) {
                 val vals: Array<String?> = str!!.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                 str = ""
-                for (`val` in vals) {
+                for (value in vals) {
                     if (str.isNotEmpty()) str += ","
                     val map = keys[att]!!.map
                     for (item in map!!.keys) {
-                        if (map[item]!!.`val` == `val`) str += map[item]!!.atvl.toString()
+                        if (map[item]!!.`val` == value) str += map[item]!!.atvl.toString()
                     }
                 }
             }
