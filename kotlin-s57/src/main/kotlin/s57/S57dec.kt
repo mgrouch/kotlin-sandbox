@@ -5,6 +5,9 @@ import s57.S57dat.S57field
 import s57.S57dat.S57subf
 import s57.S57map.Nflag
 import s57.S57map.Pflag.*
+
+import java.io.InputStream
+
 import kotlin.system.exitProcess
 
 /**
@@ -13,13 +16,13 @@ import kotlin.system.exitProcess
  */
 object S57dec {
 
-    fun decodeChart(inp: FileInputStream, map: S57map) {
+    fun decodeChart(inp: InputStream, map: S57map) {
         S57dat.rnum = 0
         val leader = ByteArray(24)
-        var record = ByteArray(0)
-        var ddr = false
-        var length = 0
-        var fields = 0
+        var record: ByteArray
+        var ddr: Boolean
+        var length: Int
+        var fields: Int
         var mapfl: Int
         var mapfp: Int
         var mapts: Int
@@ -57,25 +60,24 @@ object S57dec {
                 if (!ddr) {
                     when (tag) {
                         "0001" -> {
-                            i8rn : Int = (S57dat.decSubf(
+                            val i8rn: Int = (S57dat.decSubf(
                                 record,
                                 fields + pos,
                                 S57field.I8RI,
-                                S57subf.I8RN
-                            ) as Long).toInt()
+                                S57subf.I8RN) as Long).toInt()
                         }
                         "DSSI" -> {
                             S57dat.decSubf(record, fields + pos, S57field.DSSI, S57subf.AALL)
                             S57dat.decSubf(S57subf.NALL)
                         }
                         "DSPM" -> {
-                            comf = S57dat.decSubf(
+                            comf = (S57dat.decSubf(
                                 record,
                                 fields + pos,
                                 S57field.DSPM,
                                 S57subf.COMF
-                            ) as Long?. toDouble ()
-                            somf = S57dat.decSubf(S57subf.SOMF) as Long?. toDouble ()
+                            ) as Long).toDouble()
+                            somf = (S57dat.decSubf(S57subf.SOMF) as Long).toDouble()
                         }
                         "FRID" -> {
                             inFeature = true
@@ -102,7 +104,7 @@ object S57dec {
                             do {
                                 val attl = S57dat.decSubf(S57subf.ATTL) as Long
                                 val atvl = (S57dat.decSubf(S57subf.ATVL) as String).trim { it <= ' ' }
-                                if (!atvl.isEmpty()) {
+                                if (atvl.isNotEmpty()) {
                                     map.newAtt(attl, atvl)
                                 }
                             } while (S57dat.more())

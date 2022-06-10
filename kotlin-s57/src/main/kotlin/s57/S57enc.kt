@@ -1851,7 +1851,7 @@ object S57enc {
                         objatts.add(
                             S57dat.Fparams(
                                 S57field.FRID,
-                                arrayOf(100, id, prim, grup, S57obj.encodeType(objobj), 1, 1)
+                                arrayOf<Any>(100, id, prim, grup, S57obj.encodeType(objobj), 1, 1)
                             )
                         )
                         objatts.add(S57dat.Fparams(S57field.FOID, arrayOf(agen, id, 1)))
@@ -1866,9 +1866,7 @@ object S57enc {
                             if ((obj == Obj.SOUNDG && att.key) != Att.VALSOU) {
                                 val attl = S57att.encodeAttribute(att.key)!!.toLong()
                                 val next = arrayOf<Any?>(
-                                    attl, S57val.encodeValue(
-                                        att.value, att.key
-                                    )
+                                    attl, S57val.encodeValue(att.value, att.key)
                                 )
                                 if (attl < 300 || attl > 304) {
                                     attf = attf!!.copyOf(attf.size + next.size)
