@@ -46,8 +46,8 @@ object S57osm {
         OSMtags["landuse=residential"] = KeyVal<Any?>(Obj.BUAARE, Att.UNKATT, null, null)
     }
 
-    fun OSMtag(osm: ArrayList<KeyVal<*>?>?, key: String?, `val`: String?) {
-        val kv = OSMtags["$key=$`val`"]
+    fun OSMtag(osm: ArrayList<KeyVal<*>?>?, key: String?, value: String?) {
+        val kv = OSMtags["$key=$value"]
         if (kv != null) {
             if (kv.conv == Conv.E) {
                 val list = ArrayList<Enum<*>?>()
