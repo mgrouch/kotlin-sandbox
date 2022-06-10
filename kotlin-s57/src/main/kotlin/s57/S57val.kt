@@ -2282,15 +2282,15 @@ object S57val {
         Att.CATCVR to S57key(Conv.E, Catcvr),
     )
 
-    fun s57Enum(`val`: String?, att: Att?): Enum<*>? { // Convert S57 attribute value string to SCM enumeration
+    private fun s57Enum(`val`: String?, att: Att?): Enum<*>? { // Convert S57 attribute value string to SCM enumeration
         val s57key: S57key? = keys[att]
         val map = s57key!!.map
-        var unkn: Enum<*>? = null
         val i = try {
             `val`!!.toInt()
         } catch (e: Exception) {
-            return unkn
+            return null
         }
+        var unkn: Enum<*>? = null
         if (map != null) {
             for (item in map.keys) {
                 if (unkn == null) unkn = item as Enum<*>
@@ -2361,7 +2361,7 @@ object S57val {
         return ""
     }
 
-    fun stringValue(
+    private fun stringValue(
         attval: AttVal<*>?,
         att: Att?
     ): String? { // Convert SCM attribute value to OSM attribute value string
@@ -2388,7 +2388,7 @@ object S57val {
         return ""
     }
 
-    fun osmEnum(`val`: String?, att: Att?): Enum<*>? { // Convert OSM attribute value string to SCM enumeration
+    private fun osmEnum(`val`: String?, att: Att?): Enum<*>? { // Convert OSM attribute value string to SCM enumeration
         val map = keys[att]!!.map
         var unkn: Enum<*>? = null
         if (map != null) {
