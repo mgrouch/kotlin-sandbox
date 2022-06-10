@@ -10,8 +10,6 @@ import java.io.IOException
  */
 object S57dec {
 
-    @JvmStatic
-    @Throws(IOException::class)
     fun decodeChart(`in`: FileInputStream, map: S57map) {
         S57dat.rnum = 0
         val leader = ByteArray(24)

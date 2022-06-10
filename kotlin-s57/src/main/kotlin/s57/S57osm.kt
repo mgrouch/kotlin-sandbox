@@ -11,6 +11,7 @@ import s57.S57val.Conv
  * @author mgrouch
  */
 object S57osm {
+
     private val OSMtags: HashMap<String?, KeyVal<*>?> = HashMap()
 
     init {
@@ -91,10 +92,12 @@ object S57osm {
         var inNode = false
         var inWay = false
         var inRel = false
+
         map!!.nodes!![1L] = S57map.Snode()
         map.nodes!![2L] = S57map.Snode()
         map.nodes!![3L] = S57map.Snode()
         map.nodes!![4L] = S57map.Snode()
+
         var ln: String?
         while (`in`!!.readLine().also { ln = it } != null) {
             if (inOsm) {

@@ -1,6 +1,10 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57box.Ext.*
+import s57.S57map.Pflag
+import s57.S57obj.Obj
+
 /**
  * @author Malcolm Herring
  * @author mgrouch
@@ -8,13 +12,13 @@ package s57
 object S57box {
     fun getExt(map: S57map, lat: Double, lon: Double): Ext {
         if (lat >= map.bounds!!.maxlat && lon < map.bounds!!.maxlon) {
-            return Ext.N
+            return N
         } else if (lon <= map.bounds!!.minlon) {
-            return Ext.W
+            return W
         } else if (lat <= map.bounds!!.minlat) {
-            return Ext.S
+            return S
         } else if (lon >= map.bounds!!.maxlon) {
-            return Ext.E
+            return E
         }
         return Ext.I
     }
@@ -43,24 +47,24 @@ object S57box {
                 sbound = ebound
             }
         }
-        if (map.features!![S57obj.Obj.COALNE] != null) {
+        if (map.features!![Obj.COALNE] != null) {
             val coasts = ArrayList<S57map.Feature>()
             val lands = ArrayList<Land>()
-            if (map.features!![S57obj.Obj.LNDARE] == null) {
-                map.features!![S57obj.Obj.LNDARE] = ArrayList()
+            if (map.features!![Obj.LNDARE] == null) {
+                map.features!![Obj.LNDARE] = ArrayList()
             }
-            for (feature in map.features!![S57obj.Obj.COALNE]!!) {
+            for (feature in map.features!![Obj.COALNE]!!) {
                 val land = S57map.Feature()
                 land.id = ++map.xref
-                land.type = S57obj.Obj.LNDARE
+                land.type = Obj.LNDARE
                 land.reln = S57map.Rflag.MASTER
-                land.objs!![S57obj.Obj.LNDARE] = S57map.ObjTab()
-                land.objs!![S57obj.Obj.LNDARE]!![0] = S57map.AttMap()
-                if (feature!!.geom!!.prim == S57map.Pflag.AREA) {
+                land.objs!![Obj.LNDARE] = S57map.ObjTab()
+                land.objs!![Obj.LNDARE]!![0] = S57map.AttMap()
+                if (feature!!.geom!!.prim == Pflag.AREA) {
                     land.geom = feature.geom
-                    map.features!![S57obj.Obj.LNDARE]!!.add(land)
-                } else if (feature.geom!!.prim == S57map.Pflag.LINE) {
-                    land.geom!!.prim = S57map.Pflag.LINE
+                    map.features!![Obj.LNDARE]!!.add(land)
+                } else if (feature.geom!!.prim == Pflag.LINE) {
+                    land.geom!!.prim = Pflag.LINE
                     land.geom!!.elems!!.addAll(feature.geom!!.elems!!)
                     coasts.add(land)
                 }
@@ -98,9 +102,9 @@ object S57box {
             var islands = ArrayList<Land>()
             for (land in lands) {
                 map.sortGeom(land.land)
-                if (land.land.geom!!.prim == S57map.Pflag.AREA) {
+                if (land.land.geom!!.prim == Pflag.AREA) {
                     islands.add(land)
-                    map.features!![S57obj.Obj.LNDARE]!!.add(land.land)
+                    map.features!![Obj.LNDARE]!!.add(land.land)
                 }
             }
             for (island in islands) {
@@ -130,21 +134,21 @@ object S57box {
                 var bound = land.ebound
                 while (bound != land.sbound) {
                     bound = when (bound) {
-                        Ext.N -> {
+                        N -> {
                             nedge.nodes!!.add(1L)
-                            Ext.W
+                            W
                         }
-                        Ext.W -> {
+                        W -> {
                             nedge.nodes!!.add(2L)
-                            Ext.S
+                            S
                         }
-                        Ext.S -> {
+                        S -> {
                             nedge.nodes!!.add(3L)
-                            Ext.E
+                            E
                         }
-                        Ext.E -> {
+                        E -> {
                             nedge.nodes!!.add(4L)
-                            Ext.N
+                            N
                         }
                         else -> continue
                     }
@@ -152,8 +156,8 @@ object S57box {
                 map.edges!![++map.xref] = nedge
                 land.land.geom!!.elems!!.add(S57map.Prim(map.xref))
                 land.land.geom!!.comps!![0]!!.size++
-                land.land.geom!!.prim = S57map.Pflag.AREA
-                map.features!![S57obj.Obj.LNDARE]!!.add(land.land)
+                land.land.geom!!.prim = Pflag.AREA
+                map.features!![Obj.LNDARE]!!.add(land.land)
             }
         }
         return

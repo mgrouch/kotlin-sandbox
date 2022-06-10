@@ -357,7 +357,11 @@ object S57dat {
             if (sub == subf) {
                 return conv
             } else {
-                offset += if (conv!!.bin != 0) if (conv.bin < 8) abs(conv.bin) else conv.bin / 8 else conv.asc
+                offset += if (conv!!.bin != 0) {
+                    if (conv.bin < 8) abs(conv.bin) else conv.bin / 8
+                } else {
+                    conv.asc
+                }
             }
         }
     }
@@ -398,7 +402,11 @@ object S57dat {
                 }
                 try {
                     var charset = ""
-                    charset = if (field == S57field.ATTF) aall else if (field == S57field.NATF) nall else "US-ASCII"
+                    charset = when (field) {
+                        S57field.ATTF -> aall
+                        S57field.NATF -> nall
+                        else -> "US-ASCII"
+                    }
                     str = String(buffer, offset, i, charset)
                 } catch (e: UnsupportedEncodingException) {
                     e.printStackTrace()
@@ -425,11 +433,8 @@ object S57dat {
                         1 -> charset = "ISO-8859-1"
                         2 -> charset = "UTF-16LE"
                     }
-                    if (subf == S57subf.NALL) {
-                        nall = charset
-                    } else {
-                        aall = charset
-                    }
+                    if (subf == S57subf.NALL) nall = charset
+                    else aall = charset
                 }
                 `val`
             } else {
@@ -464,14 +469,11 @@ object S57dat {
         val conv = convs[subf]
         if (conv!!.bin == 0 || asc) {
             var sval = ""
-            if (`val` is String) {
-                sval = `val`
-            } else if (`val` is Int) {
-                sval = `val`.toString()
-            } else if (`val` is Long) {
-                sval = `val`.toString()
-            } else if (`val` is Double) {
-                sval = `val`.toString()
+            when (`val`) {
+                is String -> sval = `val`
+                is Int -> sval = `val`.toString()
+                is Long -> sval = `val`.toString()
+                is Double -> sval = `val`.toString()
             }
             index = sval.length
             try {
@@ -491,14 +493,11 @@ object S57dat {
         } else {
             val f = abs(conv.bin)
             var lval: Long
-            if (`val` is String) {
-                lval = `val`.toLong()
-            } else if (`val` is Double) {
-                lval = `val`.toLong()
-            } else if (`val` is Int) {
-                lval = `val`.toLong()
-            } else {
-                lval = `val` as Long
+            when (`val`) {
+                is String -> lval = `val`.toLong()
+                is Double -> lval = `val`.toLong()
+                is Int -> lval = `val`.toLong()
+                else -> lval = `val` as Long
             }
             buffer = ByteArray(f)
             for (i in 0 until f) {
@@ -529,7 +528,7 @@ object S57dat {
                 for (subf in fields[sfparams.field]!!) {
                     val next = encSubf(subf, sfparams.params[ip++])
                     buf = buf.copyOf(buf.size + next.size)
-                    System.arraycopy(next, 0, buf, buf.size - next.size, next.size)
+                    arraycopy(next, 0, buf, buf.size - next.size, next.size)
                 }
             }
             buf = buf.copyOf(buf.size + 1)
@@ -562,12 +561,12 @@ object S57dat {
         }
         ibuf[i] = 0x1e
         val fbuf = leader.copyOf(leader.size + ibuf.size + buf.size)
-        System.arraycopy(ibuf, 0, fbuf, leader.size, ibuf.size)
-        System.arraycopy(buf, 0, fbuf, leader.size + ibuf.size, buf.size)
+        arraycopy(ibuf, 0, fbuf, leader.size, ibuf.size)
+        arraycopy(buf, 0, fbuf, leader.size + ibuf.size, buf.size)
         fbuf[20] = (mlen + 0x30).toByte()
         fbuf[21] = (olen + 0x30).toByte()
-        System.arraycopy(String.format("%05d", fbuf.size).toByteArray(), 0, fbuf, 0, 5)
-        System.arraycopy(String.format("%05d", leader.size + ibuf.size).toByteArray(), 0, fbuf, 12, 5)
+        arraycopy(String.format("%05d", fbuf.size).toByteArray(), 0, fbuf, 0, 5)
+        arraycopy(String.format("%05d", leader.size + ibuf.size).toByteArray(), 0, fbuf, 12, 5)
         asc = false
         return fbuf
     }
@@ -794,7 +793,9 @@ object S57dat {
     }
 
     internal class Index(var field: ByteArray, var length: Int, var offset: Int)
+
     class Fparams(var field: S57field, var params: Array<Any>)
+
     internal enum class Prims {
         N, P, L, A, PA, PL, LA, PLA
     }
