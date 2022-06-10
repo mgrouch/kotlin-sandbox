@@ -2,7 +2,6 @@
 package s57
 
 import s57.S57box.Ext.*
-import s57.S57map.Pflag
 import s57.S57map.Pflag.AREA
 import s57.S57map.Pflag.LINE
 import s57.S57obj.Obj

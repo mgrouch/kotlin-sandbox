@@ -5,8 +5,6 @@ import s57.S57dat.S57field
 import s57.S57dat.S57subf
 import s57.S57map.Nflag
 import s57.S57map.Pflag.*
-import java.io.FileInputStream
-import java.io.IOException
 
 /**
  * @author Malcolm Herring

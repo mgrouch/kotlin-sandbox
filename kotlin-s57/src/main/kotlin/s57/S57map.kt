@@ -1,6 +1,14 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57att.Att
+import s57.S57map.Pflag.*
+import s57.S57obj.Obj
+import kotlin.math.abs
+import kotlin.math.acos
+import kotlin.math.cos
+import kotlin.math.sin
+
 
 /**
  * @author Malcolm Herring
@@ -79,16 +87,16 @@ class S57map(private val sea: Boolean) {
     class Reln(var id: Long, var reln: Rflag?)
     class RelTab : ArrayList<Reln?>()
     class ObjTab : HashMap<Int?, AttMap?>()
-    class ObjMap : HashMap<S57obj.Obj?, ObjTab?>()
-    class AttMap : HashMap<S57att.Att?, S57val.AttVal<*>?>()
+    class ObjMap : HashMap<Obj?, ObjTab?>()
+    class AttMap : HashMap<Att?, S57val.AttVal<*>?>()
     class NodeTab : HashMap<Long?, Snode?>()
     class EdgeTab : HashMap<Long?, Edge?>()
-    class FtrMap : HashMap<S57obj.Obj?, ArrayList<Feature?>?>()
+    class FtrMap : HashMap<Obj?, ArrayList<Feature?>?>()
 
     class FtrTab : HashMap<Long?, Feature?>()
     class Prim {
         // Spatial element
-        var id: Long // Snode ID for POINTs, Edge ID for LINEs & AREAs)
+        var id: Long // Snode ID for POINTs, Edge ID for LINEs & AREAs
         var forward: Boolean // Direction of vector used (LINEs & AREAs)
         var outer: Boolean // Exterior/Interior boundary (AREAs)
         var trunc: Boolean // Cell limit truncation
@@ -161,8 +169,8 @@ class S57map(private val sea: Boolean) {
     class Feature internal constructor() {
         var id: Long = 0 // Ref for this feature
         var reln: Rflag? = Rflag.UNKN // Relationship status
-        var geom: Geom? = Geom(Pflag.NOSP) // Geometry data
-        var type: S57obj.Obj? = S57obj.Obj.UNKOBJ // Feature type
+        var geom: Geom? = Geom(NOSP) // Geometry data
+        var type: Obj? = Obj.UNKOBJ // Feature type
         var atts: AttMap? = AttMap() // Feature attributes
         var rels: RelTab? = RelTab() // Related objects
         var objs: ObjMap? = ObjMap() // Slave object attributes
@@ -208,7 +216,7 @@ class S57map(private val sea: Boolean) {
         val obj = S57obj.decodeType(objl)
         feature!!.geom = Geom(p)
         feature!!.type = obj
-        if (obj != S57obj.Obj.UNKOBJ) {
+        if (obj != Obj.UNKOBJ) {
             index!![id] = feature
             feature!!.id = id
         }
@@ -270,7 +278,7 @@ class S57map(private val sea: Boolean) {
             if (feature!!.reln == Rflag.UNKN) {
                 feature.reln = Rflag.MASTER
             }
-            if (feature.type != S57obj.Obj.UNKOBJ && feature.reln == Rflag.MASTER) {
+            if (feature.type != Obj.UNKOBJ && feature.reln == Rflag.MASTER) {
                 if (features!![feature.type] == null) {
                     features!![feature.type] = ArrayList()
                 }
@@ -299,7 +307,7 @@ class S57map(private val sea: Boolean) {
         feature = Feature()
         feature!!.id = id
         feature!!.reln = Rflag.UNKN
-        feature!!.geom!!.prim = Pflag.POINT
+        feature!!.geom!!.prim = POINT
         feature!!.geom!!.elems!!.add(Prim(id))
         edge = null
         osm = ArrayList()
@@ -309,7 +317,7 @@ class S57map(private val sea: Boolean) {
         feature = Feature()
         feature!!.id = id
         feature!!.reln = Rflag.UNKN
-        feature!!.geom!!.prim = Pflag.LINE
+        feature!!.geom!!.prim = LINE
         feature!!.geom!!.elems!!.add(Prim(id))
         edge = Edge()
         osm = ArrayList()
@@ -331,7 +339,7 @@ class S57map(private val sea: Boolean) {
         feature = Feature()
         feature!!.id = id
         feature!!.reln = Rflag.UNKN
-        feature!!.geom!!.prim = Pflag.AREA
+        feature!!.geom!!.prim = AREA
         edge = null
         osm = ArrayList()
     }
@@ -345,9 +353,9 @@ class S57map(private val sea: Boolean) {
         val subkeys: Array<String?> = key!!.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         if (subkeys.size > 1 && subkeys[0] == "seamark") {
             var obj = S57obj.enumType(subkeys[1])
-            if (subkeys.size > 2 && obj != S57obj.Obj.UNKOBJ) {
+            if (subkeys.size > 2 && obj != Obj.UNKOBJ) {
                 var idx = 0
-                var att: S57att.Att? = S57att.Att.UNKATT
+                var att: Att? = Att.UNKATT
                 try {
                     idx = subkeys[2]!!.toInt()
                     if (subkeys.size == 4) {
@@ -368,7 +376,7 @@ class S57map(private val sea: Boolean) {
                 }
                 val attval = S57val.convertValue(`val`, att)
                 if (attval!!.`val` != null) {
-                    if (att == S57att.Att.VALSOU) {
+                    if (att == Att.VALSOU) {
                         val node = nodes!![feature!!.geom!!.elems!![0]!!.id]
                         node!!.`val` = (attval.`val` as Double)
                     }
@@ -388,12 +396,12 @@ class S57map(private val sea: Boolean) {
                         atts = AttMap()
                         objs[0] = atts
                     }
-                    if (obj == S57obj.Obj.SOUNDG && feature!!.geom!!.prim == Pflag.POINT) {
+                    if (obj == Obj.SOUNDG && feature!!.geom!!.prim == POINT) {
                         val node = nodes!![feature!!.geom!!.elems!![0]!!.id]
                         node!!.flg = Nflag.DPTH
                     }
                 } else {
-                    if (obj != S57obj.Obj.UNKOBJ) {
+                    if (obj != Obj.UNKOBJ) {
                         if (`val` == "yes") {
                             var objs = feature!!.objs!![obj]
                             if (objs == null) {
@@ -402,8 +410,8 @@ class S57map(private val sea: Boolean) {
                             }
                         }
                     } else {
-                        val att = S57att.enumAttribute(subkeys[1], S57obj.Obj.UNKOBJ)
-                        if (att != S57att.Att.UNKATT) {
+                        val att = S57att.enumAttribute(subkeys[1], Obj.UNKOBJ)
+                        if (att != Att.UNKATT) {
                             val attval = S57val.convertValue(`val`, att)
                             if (attval!!.`val` != null) feature!!.atts!![att] = attval
                         }
@@ -417,25 +425,25 @@ class S57map(private val sea: Boolean) {
 
     fun tagsDone(id: Long) {
         when (feature!!.geom!!.prim) {
-            Pflag.POINT -> {
+            POINT -> {
                 val node = nodes!![id]
                 if (node!!.flg != Nflag.CONN && node.flg != Nflag.DPTH && (!feature!!.objs!!.isEmpty() || osm!!.isNotEmpty())) {
                     node.flg = Nflag.ISOL
                 }
             }
-            Pflag.LINE -> {
+            LINE -> {
                 edges!![id] = edge
                 nodes!![edge!!.first]!!.flg = Nflag.CONN
                 nodes!![edge!!.last]!!.flg = Nflag.CONN
                 if (edge!!.first == edge!!.last) {
-                    feature!!.geom!!.prim = Pflag.AREA
+                    feature!!.geom!!.prim = AREA
                 }
             }
-            Pflag.AREA -> {}
+            AREA -> {}
             else -> {}
         }
         if (sortGeom(feature) && (edge != null && edge!!.last) != 0L) {
-            if (feature!!.type != S57obj.Obj.UNKOBJ) {
+            if (feature!!.type != Obj.UNKOBJ) {
                 index!![id] = feature
                 if (features!![feature!!.type] == null) {
                     features!![feature!!.type] = ArrayList()
@@ -451,7 +459,7 @@ class S57map(private val sea: Boolean) {
                 base.objs!![kvx.obj] = objs
                 val atts = AttMap()
                 objs[0] = atts
-                if (kvx.att != S57att.Att.UNKATT) {
+                if (kvx.att != Att.UNKATT) {
                     atts[kvx.att] = S57val.AttVal(kvx.conv, kvx.`val`)
                 }
                 index!![++xref] = base
@@ -482,7 +490,7 @@ class S57map(private val sea: Boolean) {
             if (feature.geom!!.elems!!.isEmpty()) {
                 return false
             }
-            if (feature.geom!!.prim == Pflag.POINT) {
+            if (feature.geom!!.prim == POINT) {
                 feature.geom!!.centre = nodes!![feature.geom!!.elems!![0]!!.id]
                 return true
             }
@@ -546,7 +554,7 @@ class S57map(private val sea: Boolean) {
                 if (--sweep == 0) {
                     sweep = outer.elems!!.size
                     if (sweep == 0 || sweep == prev) {
-                        if (sort.prim == Pflag.AREA && first != last) {
+                        if (sort.prim == AREA && first != last) {
                             return false
                         }
                         if (outin) {
@@ -563,16 +571,16 @@ class S57map(private val sea: Boolean) {
                     prev = sweep
                 }
             }
-            if (sort.prim == Pflag.LINE && sort.outers == 1 && sort.inners == 0 && first == last) {
-                sort.prim = Pflag.AREA
+            if (sort.prim == LINE && sort.outers == 1 && sort.inners == 0 && first == last) {
+                sort.prim = AREA
             }
             feature.geom = sort
-            if (feature.geom!!.prim == Pflag.AREA) {
+            if (feature.geom!!.prim == AREA) {
                 var ie = 0
                 var ic = 0
                 while (ie < feature.geom!!.elems!!.size) {
                     val area = calcArea(feature.geom, ic)
-                    if (ie == 0) feature.geom!!.area = Math.abs(area) * 3444 * 3444
+                    if (ie == 0) feature.geom!!.area = abs(area) * 3444 * 3444
                     if (ie == 0 && area < 0.0 || ie > 0 && area >= 0.0) {
                         val tmp = ArrayList<Prim?>()
                         for (i in 0 until feature.geom!!.comps!![ic]!!.size) {
@@ -605,7 +613,7 @@ class S57map(private val sea: Boolean) {
         }
 
         fun nextRef(): Long {
-            var ref: Long
+            val ref: Long
             if (forward) {
                 if (it == null) {
                     ref = edge!!.first
@@ -643,14 +651,10 @@ class S57map(private val sea: Boolean) {
         var prim: Prim? = null
         var eit: EdgeIterator? = null
         var ite: ListIterator<Prim?>? = geom!!.elems!!.listIterator()
-        var itc: ListIterator<Comp?>?
+        var itc: ListIterator<Comp?>? = geom!!.comps!!.listIterator()
         var comp: Comp? = null
         var ec = 0
         var lastref: Long = 0
-
-        init {
-            itc = geom!!.comps!!.listIterator()
-        }
 
         fun hasComp(): Boolean {
             return itc!!.hasNext()
@@ -716,7 +720,7 @@ class S57map(private val sea: Boolean) {
                         llat = lat
                         lat = node.lat
                         lon = node.lon
-                        sigma += lon * Math.sin(llat) - llon * Math.sin(lat)
+                        sigma += lon * sin(llat) - llon * sin(lat)
                     }
                 }
                 if (i != comp) {
@@ -759,8 +763,8 @@ class S57map(private val sea: Boolean) {
                         llon = lon
                         lat = node.lat
                         lon = node.lon
-                        sigma += Math.acos(
-                            Math.sin(lat) * Math.sin(llat) + Math.cos(lat) * Math.cos(llat) * Math.cos(
+                        sigma += acos(
+                            sin(lat) * sin(llat) + cos(lat) * cos(llat) * cos(
                                 llon - lon
                             )
                         )
@@ -777,7 +781,7 @@ class S57map(private val sea: Boolean) {
         var slat: Double
         var llat: Double
         var llon: Double
-        var slon: Double = 0.0
+        var slon = 0.0
         slat = slon
         lon = slat
         lat = lon
@@ -786,8 +790,8 @@ class S57map(private val sea: Boolean) {
         var sarc = 0.0
         var first = true
         when (feature!!.geom!!.prim) {
-            Pflag.POINT -> return nodes!![feature.geom!!.elems!![0]!!.id]
-            Pflag.LINE -> {
+            POINT -> return nodes!![feature.geom!!.elems!![0]!!.id]
+            LINE -> {
                 var git: GeomIterator? = GeomIterator(feature.geom)
                 while (git!!.hasComp()) {
                     git.nextComp()
@@ -800,7 +804,7 @@ class S57map(private val sea: Boolean) {
                             if (first) {
                                 first = false
                             } else {
-                                sarc += Math.acos(Math.cos(lon - llon) * Math.cos(lat - llat))
+                                sarc += acos(cos(lon - llon) * cos(lat - llat))
                             }
                             llat = lat
                             llon = lon
@@ -822,7 +826,7 @@ class S57map(private val sea: Boolean) {
                             if (first) {
                                 first = false
                             } else {
-                                sarc = Math.acos(Math.cos(lon - llon) * Math.cos(lat - llat))
+                                sarc = acos(cos(lon - llon) * cos(lat - llat))
                                 if (sarc > harc) break
                             }
                             harc -= sarc
@@ -833,7 +837,7 @@ class S57map(private val sea: Boolean) {
                 }
                 return Snode(llat + (lat - llat) * harc / sarc, llon + (lon - llon) * harc / sarc)
             }
-            Pflag.AREA -> {
+            AREA -> {
                 val git = GeomIterator(feature.geom)
                 while (git.hasComp()) {
                     git.nextComp()
@@ -846,7 +850,7 @@ class S57map(private val sea: Boolean) {
                             if (first) {
                                 first = false
                             } else {
-                                val arc = Math.acos(Math.cos(lon - llon) * Math.cos(lat - llat))
+                                val arc = acos(cos(lon - llon) * cos(lat - llat))
                                 slat += (lat + llat) / 2 * arc
                                 slon += (lon + llon) / 2 * arc
                                 sarc += arc
@@ -856,7 +860,9 @@ class S57map(private val sea: Boolean) {
                         }
                     }
                 }
-                return Snode(if (sarc > 0.0) slat / sarc else 0.0, if (sarc > 0.0) slon / sarc else 0.0)
+                return Snode(
+                    if (sarc > 0.0) slat / sarc else 0.0,
+                    if (sarc > 0.0) slon / sarc else 0.0)
             }
             else -> {}
         }
