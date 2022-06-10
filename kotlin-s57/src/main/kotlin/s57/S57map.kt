@@ -150,14 +150,14 @@ class S57map(private val sea: Boolean) {
         }
     }
 
-    class Feature internal constructor() {
+    public class Feature internal constructor() {
         var id: Long = 0 // Ref for this feature
         var reln: Rflag? = Rflag.UNKN // Relationship status
         var geom: Geom? = Geom(NOSP) // Geometry data
         var type: Obj? = Obj.UNKOBJ // Feature type
         var atts: AttMap? = AttMap() // Feature attributes
         var rels: RelTab? = RelTab() // Related objects
-        var objs: ObjMap? = ObjMap() // Slave object attributes
+        public var objs: ObjMap? = ObjMap() // Slave object attributes
     }
 
     var bounds: MapBounds?

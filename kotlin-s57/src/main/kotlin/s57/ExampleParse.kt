@@ -5,7 +5,7 @@ import java.io.IOException
 
 fun main(args : Array<String>) {
     try {
-        val input = FileInputStream("D:\\US5MA11M.000")
+        val input = FileInputStream("D:\\kotlin-sandbox\\kotlin-introspection\\src\\main\\kotlin\\US5MA11M.000")
         val map = S57map(true)
         S57dec.decodeChart(input, map)
         println(map.edges)

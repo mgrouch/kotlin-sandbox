@@ -6,7 +6,6 @@ import s57.S57dat.S57field
 import s57.S57dat.byteArrayCopy
 import s57.S57obj.Obj
 import java.nio.ByteBuffer
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -1658,7 +1657,7 @@ object S57enc {
         metas = geos
         conns = metas
         isols = conns
-        val now = Date()
+        val now = java.util.Date()
         val date = "${now.getYear() + 1900}" +
                 (now.getMonth() + 1).toString().padStart(2, '0') +
                 (now.getDate()).toString().padStart(2, '0')

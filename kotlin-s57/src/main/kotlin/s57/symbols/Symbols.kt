@@ -49,7 +49,7 @@ object Symbols {
         g2.scale(scale, scale)
         if (symbol != null) {
             for (item in symbol) {
-                when (item.type) {
+                when (item!!.type) {
                     Form.BBOX -> {
                         val bbox = item.params as Rectangle2D.Double?
                         var dx = 0.0
@@ -98,8 +98,8 @@ object Symbols {
                         }
                     }
                     Form.COLR -> if (cs != null && cs.col != null) {
-                        for (patch in (item.params as Symbol?)!!) {
-                            when (patch.type) {
+                        for (patch in (item!!.params as Symbol?)!!) {
+                            when (patch!!.type) {
                                 Form.N1 -> if (cn > 0) {
                                     val s = patch.params as Symbol?
                                     drawSymbol(g2, s, 1.0, 0.0, 0.0, Scheme(cs.col!![0]), null)
@@ -172,27 +172,27 @@ object Symbols {
                             }
                         }
                     }
-                    Form.STRK -> g2.stroke = item.params as BasicStroke?
-                    Form.FILL -> g2.paint = item.params as Color?
-                    Form.LINE -> g2.draw(item.params as Line2D.Double?)
-                    Form.RECT -> g2.draw(item.params as Rectangle2D.Double?)
-                    Form.RRCT -> g2.draw(item.params as RoundRectangle2D.Double?)
-                    Form.ELPS -> g2.draw(item.params as Ellipse2D.Double?)
-                    Form.EARC -> g2.draw(item.params as Arc2D.Double?)
-                    Form.PLIN -> g2.draw(item.params as Path2D.Double?)
-                    Form.PGON -> g2.fill(item.params as Path2D.Double?)
-                    Form.RSHP -> g2.fill(item.params as RectangularShape?)
+                    Form.STRK -> g2.stroke = item!!.params as BasicStroke?
+                    Form.FILL -> g2.paint = item!!.params as Color?
+                    Form.LINE -> g2.draw(item!!.params as Line2D.Double?)
+                    Form.RECT -> g2.draw(item!!.params as Rectangle2D.Double?)
+                    Form.RRCT -> g2.draw(item!!.params as RoundRectangle2D.Double?)
+                    Form.ELPS -> g2.draw(item!!.params as Ellipse2D.Double?)
+                    Form.EARC -> g2.draw(item!!.params as Arc2D.Double?)
+                    Form.PLIN -> g2.draw(item!!.params as Path2D.Double?)
+                    Form.PGON -> g2.fill(item!!.params as Path2D.Double?)
+                    Form.RSHP -> g2.fill(item!!.params as RectangularShape?)
                     Form.SYMB -> {
-                        val s = item.params as SubSymbol?
+                        val s = item!!.params as SubSymbol?
                         drawSymbol(g2, s!!.instr, s.scale, s.x, s.y, if (s.scheme != null) s.scheme else cs, s.delta)
                     }
                     Form.TEXT -> {
-                        val c = item.params as Caption?
+                        val c = item!!.params as Caption?
                         g2.paint = c!!.colour
                         val layout = TextLayout(c.string, c.font, g2.fontRenderContext)
                         val bb = layout.bounds
-                        dx = 0.0
-                        dy = 0.0
+                        var dx = 0.0
+                        var dy = 0.0
                         if (c.dd != null) {
                             if (c.dd!!.t != null) g2.transform(c.dd!!.t)
                             when (c.dd!!.h) {
@@ -299,13 +299,13 @@ object Symbols {
 
     class Caption(var string: String, var font: Font, var colour: Color?, var dd: Delta?)
     class LineStyle {
-    
+
         var line: Color?
-    
+
         var width: Float
-    
+
         var dash: FloatArray?
-    
+
         var fill: Color?
 
         constructor(ifill: Color?) {

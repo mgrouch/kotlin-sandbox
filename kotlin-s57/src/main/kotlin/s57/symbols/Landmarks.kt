@@ -2,9 +2,10 @@
 package s57.symbols
 
 import s57.S57val
+import s57.S57val.FncFNC
 import java.awt.BasicStroke
 import java.awt.geom.*
-import java.util.*
+
 
 /**
  * @author Malcolm Herring
@@ -297,56 +298,48 @@ object Landmarks {
     }
 
 
-    val Shapes = EnumMap<S57val.CatLMK, Symbols.Symbol?>(
-        S57val.CatLMK::class.java
+    val Shapes = mapOf(
+        S57val.CatLMK.LMK_CARN to Beacons.Cairn,
+        S57val.CatLMK.LMK_CHMY to Chimney,
+        S57val.CatLMK.LMK_DISH to DishAerial,
+        S57val.CatLMK.LMK_FLAG to Flagstaff,
+        S57val.CatLMK.LMK_FLAR to FlareStack,
+        S57val.CatLMK.LMK_MAST to Mast,
+        S57val.CatLMK.LMK_WNDS to Windsock,
+        S57val.CatLMK.LMK_MNMT to Monument,
+        S57val.CatLMK.LMK_CLMN to Monument,
+        S57val.CatLMK.LMK_MEML to Monument,
+        S57val.CatLMK.LMK_OBLK to Monument,
+        S57val.CatLMK.LMK_STAT to Monument,
+        S57val.CatLMK.LMK_CROS to Cross,
+        S57val.CatLMK.LMK_DOME to Dome,
+        S57val.CatLMK.LMK_RADR to Mast,
+        S57val.CatLMK.LMK_TOWR to LandTower,
+        S57val.CatLMK.LMK_WNDM to Windmill,
+        S57val.CatLMK.LMK_WNDG to WindMotor,
+        S57val.CatLMK.LMK_SPIR to Spire,
+        S57val.CatLMK.LMK_BLDR to Beacons.Cairn,
     )
 
-    init {
-        Shapes[S57val.CatLMK.LMK_CARN] = Beacons.Cairn
-        Shapes[S57val.CatLMK.LMK_CHMY] = Chimney
-        Shapes[S57val.CatLMK.LMK_DISH] = DishAerial
-        Shapes[S57val.CatLMK.LMK_FLAG] = Flagstaff
-        Shapes[S57val.CatLMK.LMK_FLAR] = FlareStack
-        Shapes[S57val.CatLMK.LMK_MAST] = Mast
-        Shapes[S57val.CatLMK.LMK_WNDS] = Windsock
-        Shapes[S57val.CatLMK.LMK_MNMT] = Monument
-        Shapes[S57val.CatLMK.LMK_CLMN] = Monument
-        Shapes[S57val.CatLMK.LMK_MEML] = Monument
-        Shapes[S57val.CatLMK.LMK_OBLK] = Monument
-        Shapes[S57val.CatLMK.LMK_STAT] = Monument
-        Shapes[S57val.CatLMK.LMK_CROS] = Cross
-        Shapes[S57val.CatLMK.LMK_DOME] = Dome
-        Shapes[S57val.CatLMK.LMK_RADR] = Mast
-        Shapes[S57val.CatLMK.LMK_TOWR] = LandTower
-        Shapes[S57val.CatLMK.LMK_WNDM] = Windmill
-        Shapes[S57val.CatLMK.LMK_WNDG] = WindMotor
-        Shapes[S57val.CatLMK.LMK_SPIR] = Spire
-        Shapes[S57val.CatLMK.LMK_BLDR] = Beacons.Cairn
-    }
 
-
-    val Funcs = EnumMap<S57val.FncFNC, Symbols.Symbol?>(
-        S57val.FncFNC::class.java
+    val Funcs = mapOf(
+        FncFNC.FNC_CHCH to Church,
+        FncFNC.FNC_CHPL to Church,
+        FncFNC.FNC_TMPL to Temple,
+        FncFNC.FNC_PGDA to Temple,
+        FncFNC.FNC_SHSH to Temple,
+        FncFNC.FNC_BTMP to Temple,
+        FncFNC.FNC_MOSQ to Minaret,
+        FncFNC.FNC_MRBT to Spire,
+        FncFNC.FNC_COMM to RadioTV,
+        FncFNC.FNC_TV to RadioTV,
+        FncFNC.FNC_RADO to RadioTV,
+        FncFNC.FNC_RADR to RadioTV,
+        FncFNC.FNC_LGHT to Beacons.LightMajor,
+        FncFNC.FNC_MCWV to RadioTV,
+        FncFNC.FNC_HBRM to Harbours.HarbourMaster,
+        FncFNC.FNC_CSTM to Harbours.Customs,
+        FncFNC.FNC_HLTH to Harbours.Hospital,
+        FncFNC.FNC_HOSP to Harbours.Hospital,
     )
-
-    init {
-        Funcs[S57val.FncFNC.FNC_CHCH] = Church
-        Funcs[S57val.FncFNC.FNC_CHPL] = Church
-        Funcs[S57val.FncFNC.FNC_TMPL] = Temple
-        Funcs[S57val.FncFNC.FNC_PGDA] = Temple
-        Funcs[S57val.FncFNC.FNC_SHSH] = Temple
-        Funcs[S57val.FncFNC.FNC_BTMP] = Temple
-        Funcs[S57val.FncFNC.FNC_MOSQ] = Minaret
-        Funcs[S57val.FncFNC.FNC_MRBT] = Spire
-        Funcs[S57val.FncFNC.FNC_COMM] = RadioTV
-        Funcs[S57val.FncFNC.FNC_TV] = RadioTV
-        Funcs[S57val.FncFNC.FNC_RADO] = RadioTV
-        Funcs[S57val.FncFNC.FNC_RADR] = RadioTV
-        Funcs[S57val.FncFNC.FNC_LGHT] = Beacons.LightMajor
-        Funcs[S57val.FncFNC.FNC_MCWV] = RadioTV
-        Funcs[S57val.FncFNC.FNC_HBRM] = Harbours.HarbourMaster
-        Funcs[S57val.FncFNC.FNC_CSTM] = Harbours.Customs
-        Funcs[S57val.FncFNC.FNC_HLTH] = Harbours.Hospital
-        Funcs[S57val.FncFNC.FNC_HOSP] = Harbours.Hospital
-    }
 }
