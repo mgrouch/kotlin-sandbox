@@ -2,9 +2,6 @@
 package s57
 
 import s57.S57obj.Obj
-import java.io.UnsupportedEncodingException
-import java.nio.charset.StandardCharsets
-import java.util.*
 import kotlin.math.abs
 import kotlin.system.exitProcess
 
@@ -341,6 +338,7 @@ object S57dat {
     private var aall = "US-ASCII"
     private var nall = "US-ASCII"
     var rnum = 0
+
     private fun findSubf(subf: S57subf): S57conv? {
         val subs = fields[field]!!
         var wrap = false
@@ -393,9 +391,8 @@ object S57dat {
         val conv = findSubf(subf)
         return if (conv!!.bin == 0) {
             var str = ""
-            var i = 0
             if (conv.asc == 0) {
-                i = 0
+                var i = 0
                 while (buffer[offset + i].toInt() != 0x1f) {
                     i++
                 }

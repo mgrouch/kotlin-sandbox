@@ -1,6 +1,10 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57att.Att
+import s57.S57dat.S57field
+import s57.S57obj.Obj
+
 /**
  * @author Malcolm Herring
  * @author mgrouch
@@ -1609,7 +1613,6 @@ object S57enc {
         return crc.value
     }
 
-    @Throws(IndexOutOfBoundsException::class, UnsupportedEncodingException::class)
     fun encodeChart(map: S57map?, meta: HashMap<String?, String?>?, buf: ByteArray?): Int {
         for (entry in meta!!.entries) {
             try {
@@ -1634,7 +1637,7 @@ object S57enc {
         }
 
         //M_COVR & MNSYS in BB if not in map
-        if (!map!!.features!!.containsKey(S57obj.Obj.M_COVR)) {
+        if (!map!!.features!!.containsKey(Obj.M_COVR)) {
             S57osm.OSMmeta(map)
         }
         S57dat.S57geoms(map)
@@ -1649,8 +1652,8 @@ object S57enc {
         var ds = ArrayList<S57dat.Fparams?>()
         ds.add(
             S57dat.Fparams(
-                S57dat.S57field.DSID,
-                arrayOf<Any?>(
+                S57field.DSID,
+                arrayOf<Any>(
                     10,
                     1,
                     1,
@@ -1670,21 +1673,21 @@ object S57enc {
                 )
             )
         )
-        ds.add(S57dat.Fparams(S57dat.S57field.DSSI, arrayOf<Any?>(2, 1, 2, metas, 0, geos, 0, isols, conns, edges, 0)))
+        ds.add(S57dat.Fparams(S57field.DSSI, arrayOf(2, 1, 2, metas, 0, geos, 0, isols, conns, edges, 0)))
         val dp = ArrayList<S57dat.Fparams?>()
         dp.add(
             S57dat.Fparams(
-                S57dat.S57field.DSPM,
-                arrayOf<Any?>(20, 2, 2, vdat, vdat, cscl, duni, huni, 1, 1, 10000000, 10, "")
+                S57field.DSPM,
+                arrayOf(20, 2, 2, vdat, vdat, cscl, duni, huni, 1, 1, 10000000, 10, "")
             )
         )
-        System.arraycopy(header, 0, buf, 0, header!!.size)
+        arraycopy(header, 0, buf, 0, header!!.size)
         idx = header.size
         record = S57dat.encRecord(1, ds)
-        System.arraycopy(record, 0, buf, idx, record!!.size)
+        arraycopy(record, 0, buf, idx, record!!.size)
         idx += record.size
         record = S57dat.encRecord(2, dp)
-        System.arraycopy(record, 0, buf, idx, record.size)
+        arraycopy(record, 0, buf, idx, record.size)
         idx += record.size
         recs = 3
 
@@ -1699,15 +1702,15 @@ object S57enc {
                     ) * COMF, node.`val` * SOMF
                 )
                 depths = Arrays.copyOf(depths, depths!!.size + dval.size)
-                System.arraycopy(dval, 0, depths, depths.size - dval.size, dval.size)
+                arraycopy(dval, 0, depths, depths.size - dval.size, dval.size)
             }
         }
         if (depths!!.size > 0) {
             fields = ArrayList()
-            fields.add(S57dat.Fparams(S57dat.S57field.VRID, arrayOf<Any?>(110, -2, 1, 1)))
-            fields.add(S57dat.Fparams(S57dat.S57field.SG3D, depths))
+            fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, -2, 1, 1)))
+            fields.add(S57dat.Fparams(S57field.SG3D, depths))
             record = S57dat.encRecord(recs++, fields)
-            System.arraycopy(record, 0, buf, idx, record.size)
+            arraycopy(record, 0, buf, idx, record.size)
             idx += record.size
             isols++
         }
@@ -1717,18 +1720,16 @@ object S57enc {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.ISOL) {
                 fields = ArrayList()
-                fields.add(S57dat.Fparams(S57dat.S57field.VRID, arrayOf<Any?>(110, hash(entry.key!!), 1, 1)))
+                fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, hash(entry.key!!), 1, 1)))
                 fields.add(
                     S57dat.Fparams(
-                        S57dat.S57field.SG2D, arrayOf<Any?>(
-                            Math.toDegrees(
-                                node.lat
-                            ) * COMF, Math.toDegrees(node.lon) * COMF
+                        S57field.SG2D, arrayOf(
+                            Math.toDegrees(node.lat) * COMF, Math.toDegrees(node.lon) * COMF
                         )
                     )
                 )
                 record = S57dat.encRecord(recs++, fields)
-                System.arraycopy(record, 0, buf, idx, record!!.size)
+                arraycopy(record, 0, buf, idx, record!!.size)
                 idx += record.size
                 isols++
             }
@@ -1739,18 +1740,16 @@ object S57enc {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.CONN) {
                 fields = ArrayList()
-                fields.add(S57dat.Fparams(S57dat.S57field.VRID, arrayOf<Any?>(120, hash(entry.key!!), 1, 1)))
+                fields.add(S57dat.Fparams(S57field.VRID, arrayOf(120, hash(entry.key!!), 1, 1)))
                 fields.add(
                     S57dat.Fparams(
-                        S57dat.S57field.SG2D, arrayOf<Any?>(
-                            Math.toDegrees(
-                                node.lat
-                            ) * COMF, Math.toDegrees(node.lon) * COMF
+                        S57field.SG2D, arrayOf(
+                            Math.toDegrees(node.lat) * COMF, Math.toDegrees(node.lon) * COMF
                         )
                     )
                 )
                 record = S57dat.encRecord(recs++, fields)
-                System.arraycopy(record, 0, buf, idx, record!!.size)
+                arraycopy(record, 0, buf, idx, record!!.size)
                 idx += record.size
                 conns++
             }
@@ -1760,13 +1759,12 @@ object S57enc {
         for (entry in map.edges!!.entries) {
             val edge = entry.value
             fields = ArrayList()
-            fields.add(S57dat.Fparams(S57dat.S57field.VRID, arrayOf<Any?>(130, hash(entry.key!!), 1, 1)))
+            fields.add(S57dat.Fparams(S57field.VRID, arrayOf(130, hash(entry.key!!), 1, 1)))
             fields.add(
                 S57dat.Fparams(
-                    S57dat.S57field.VRPT, arrayOf<Any?>(
-                        (hash(edge!!.first) and 0xffffffffL shl 8) + 120L, 255, 255, 1, 255, (hash(
-                            edge.last
-                        ) and 0xffffffffL shl 8) + 120L, 255, 255, 2, 255
+                    S57field.VRPT, arrayOf(
+                        (hash(edge!!.first) and 0xffffffffL shl 8) + 120L, 255, 255, 1, 255,
+                        (hash(edge.last) and 0xffffffffL shl 8) + 120L, 255, 255, 2, 255
                     )
                 )
             )
@@ -1778,13 +1776,13 @@ object S57enc {
                     ) * COMF
                 )
                 nodes = Arrays.copyOf(nodes, nodes!!.size + nval.size)
-                System.arraycopy(nval, 0, nodes, nodes.size - nval.size, nval.size)
+                arraycopy(nval, 0, nodes, nodes.size - nval.size, nval.size)
             }
             if (nodes!!.size > 0) {
-                fields.add(S57dat.Fparams(S57dat.S57field.SG2D, nodes))
+                fields.add(S57dat.Fparams(S57field.SG2D, nodes))
             }
             record = S57dat.encRecord(recs++, fields)
-            System.arraycopy(record, 0, buf, idx, record!!.size)
+            arraycopy(record, 0, buf, idx, record!!.size)
             idx += record.size
             edges++
         }
@@ -1794,7 +1792,7 @@ object S57enc {
         for (entry in map.features!!.entries) {
             val obj = entry.key
             for (feature in entry.value!!) {
-                if (obj == S57obj.Obj.SOUNDG) {
+                if (obj == Obj.SOUNDG) {
                     soundings = if (soundings) {
                         continue
                     } else {
@@ -1804,29 +1802,26 @@ object S57enc {
                 var prim = feature!!.geom!!.prim!!.ordinal
                 prim = if (prim == 0) 255 else prim
                 val grup =
-                    if (obj == S57obj.Obj.DEPARE || obj == S57obj.Obj.DRGARE || obj == S57obj.Obj.FLODOC || obj == S57obj.Obj.HULKES || obj == S57obj.Obj.LNDARE || obj == S57obj.Obj.PONTON || obj == S57obj.Obj.UNSARE) 1 else 2
+                    if (obj == Obj.DEPARE || obj == Obj.DRGARE || obj == Obj.FLODOC || obj == Obj.HULKES || obj == Obj.LNDARE || obj == Obj.PONTON || obj == Obj.UNSARE) 1 else 2
                 val geom = ArrayList<S57dat.Fparams?>()
                 var outers = 0
                 outers = if (feature.geom!!.prim == S57map.Pflag.POINT) 1 else feature.geom!!.comps!![0]!!.size
                 for (elem in feature.geom!!.elems!!) {
                     if (feature.geom!!.prim == S57map.Pflag.POINT) {
-                        if (obj == S57obj.Obj.SOUNDG) {
+                        if (obj == Obj.SOUNDG) {
                             geom.add(
                                 S57dat.Fparams(
-                                    S57dat.S57field.FSPT,
-                                    arrayOf<Any?>((-2 shl 8) + 110L, 255, 255, 255)
+                                    S57field.FSPT,
+                                    arrayOf((-2 shl 8) + 110L, 255, 255, 255)
                                 )
                             )
                         } else {
                             geom.add(
                                 S57dat.Fparams(
-                                    S57dat.S57field.FSPT, arrayOf<Any?>(
-                                        (hash(
-                                            elem!!.id
-                                        ) shl 8) + if (map.nodes!![elem.id]!!.flg == S57map.Nflag.CONN) 120L else 110L,
-                                        255,
-                                        255,
-                                        255
+                                    S57field.FSPT, arrayOf(
+                                        (hash(elem!!.id) shl 8)
+                                                + if (map.nodes!![elem.id]!!.flg == S57map.Nflag.CONN) 120L else 110L,
+                                        255, 255, 255
                                     )
                                 )
                             )
@@ -1834,8 +1829,8 @@ object S57enc {
                     } else {
                         geom.add(
                             S57dat.Fparams(
-                                S57dat.S57field.FSPT,
-                                arrayOf<Any?>(
+                                S57field.FSPT,
+                                arrayOf(
                                     (hash(elem!!.id) shl 8) + 130L,
                                     if (elem.forward) 1 else 2,
                                     if (outers-- > 0) 1 else 2,
@@ -1850,18 +1845,17 @@ object S57enc {
                 var slaveid = feature.id + 0x0100000000000000L
                 for (objs in feature.objs!!.entries) {
                     val objobj = objs.key
-                    var master = true
                     for (`object` in objs.value!!.entries) {
                         val objatts = ArrayList<S57dat.Fparams?>()
-                        master = feature.type == objobj && (`object`.key == 0 || `object`.key) == 1
+                        var master = feature.type == objobj && (`object`.key == 0 || `object`.key) == 1
                         val id = hash(if (master) feature.id else slaveid)
                         objatts.add(
                             S57dat.Fparams(
-                                S57dat.S57field.FRID,
-                                arrayOf<Any?>(100, id, prim, grup, S57obj.encodeType(objobj), 1, 1)
+                                S57field.FRID,
+                                arrayOf(100, id, prim, grup, S57obj.encodeType(objobj), 1, 1)
                             )
                         )
-                        objatts.add(S57dat.Fparams(S57dat.S57field.FOID, arrayOf<Any?>(agen, id, 1)))
+                        objatts.add(S57dat.Fparams(S57field.FOID, arrayOf(agen, id, 1)))
                         var attf: Array<Any?>? = arrayOfNulls<Any?>(0)
                         var natf: Array<Any?>? = arrayOfNulls<Any?>(0)
                         val atts = S57map.AttMap()
@@ -1870,7 +1864,7 @@ object S57enc {
                             atts.putAll(feature.atts!!)
                         }
                         for (att in atts.entries) {
-                            if ((obj == S57obj.Obj.SOUNDG && att.key) != S57att.Att.VALSOU) {
+                            if ((obj == Obj.SOUNDG && att.key) != Att.VALSOU) {
                                 val attl = S57att.encodeAttribute(att.key)!!.toLong()
                                 val next = arrayOf<Any?>(
                                     attl, S57val.encodeValue(
@@ -1879,18 +1873,18 @@ object S57enc {
                                 )
                                 if (attl < 300 || attl > 304) {
                                     attf = Arrays.copyOf(attf, attf!!.size + next.size)
-                                    System.arraycopy(next, 0, attf, attf.size - next.size, next.size)
+                                    arraycopy(next, 0, attf, attf.size - next.size, next.size)
                                 } else {
                                     natf = Arrays.copyOf(natf, natf!!.size + next.size)
-                                    System.arraycopy(next, 0, natf, natf.size - next.size, next.size)
+                                    arraycopy(next, 0, natf, natf.size - next.size, next.size)
                                 }
                             }
                         }
                         if (attf!!.size > 0) {
-                            objatts.add(S57dat.Fparams(S57dat.S57field.ATTF, attf))
+                            objatts.add(S57dat.Fparams(S57field.ATTF, attf))
                         }
                         if (natf!!.size > 0) {
-                            objatts.add(S57dat.Fparams(S57dat.S57field.NATF, attf))
+                            objatts.add(S57dat.Fparams(S57field.NATF, attf))
                         }
                         if (master) {
                             objects.add(objatts)
@@ -1909,17 +1903,17 @@ object S57enc {
                         val next =
                             arrayOf<Any?>((((id and 0xffffffffL) + 0x100000000L shl 16) + (agen and 0xffff)), 2, "")
                         params = Arrays.copyOf(params, params!!.size + next.size)
-                        System.arraycopy(next, 0, params, params.size - next.size, next.size)
+                        arraycopy(next, 0, params, params.size - next.size, next.size)
                     }
-                    refs.add(S57dat.Fparams(S57dat.S57field.FFPT, params))
+                    refs.add(S57dat.Fparams(S57field.FFPT, params))
                     objects[objects.size - 1]!!.addAll(refs)
                 }
                 for (`object` in objects) {
                     `object`!!.addAll(geom)
                     record = S57dat.encRecord(recs++, `object`)
-                    System.arraycopy(record, 0, buf, idx, record!!.size)
+                    arraycopy(record, 0, buf, idx, record!!.size)
                     idx += record.size
-                    if (obj == S57obj.Obj.M_COVR || obj == S57obj.Obj.M_NSYS) {
+                    if (obj == Obj.M_COVR || obj == Obj.M_NSYS) {
                         metas++
                     } else {
                         geos++
@@ -1932,8 +1926,8 @@ object S57enc {
         ds = ArrayList()
         ds.add(
             S57dat.Fparams(
-                S57dat.S57field.DSID,
-                arrayOf<Any?>(
+                S57field.DSID,
+                arrayOf<Any>(
                     10,
                     1,
                     1,
@@ -1953,9 +1947,9 @@ object S57enc {
                 )
             )
         )
-        ds.add(S57dat.Fparams(S57dat.S57field.DSSI, arrayOf<Any?>(2, 1, 2, metas, 0, geos, 0, isols, conns, edges, 0)))
+        ds.add(S57dat.Fparams(S57field.DSSI, arrayOf(2, 1, 2, metas, 0, geos, 0, isols, conns, edges, 0)))
         record = S57dat.encRecord(1, ds)
-        System.arraycopy(record, 0, buf, header.size, record!!.size)
+        arraycopy(record, 0, buf, header.size, record!!.size)
         return idx
     }
 }

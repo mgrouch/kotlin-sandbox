@@ -1,8 +1,6 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
-import java.lang.Math.toRadians
-
 
 /**
  * @author Malcolm Herring

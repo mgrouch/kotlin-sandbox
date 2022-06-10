@@ -7,6 +7,7 @@ package s57
  * @author mgrouch
  */
 object S57obj {
+
     private val ObjS57 = mapOf(
         Obj.UNKOBJ to 0,
         Obj.AIRARE to 2,

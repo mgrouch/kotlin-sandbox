@@ -1,8 +1,10 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import s57.S57att.Att
 import s57.S57obj.Obj
-import java.io.BufferedReader
+import s57.S57val.CatROD
+import s57.S57val.Conv
 
 /**
  * @author Malcolm Herring
@@ -12,74 +14,40 @@ object S57osm {
     private val OSMtags: HashMap<String?, KeyVal<*>?> = HashMap()
 
     init {
-        OSMtags["natural=coastline"] = KeyVal<Any?>(Obj.COALNE, S57att.Att.UNKATT, null, null)
-        OSMtags["natural=water"] = KeyVal<Any?>(Obj.LAKARE, S57att.Att.UNKATT, null, null)
-        OSMtags["water=river"] =
-            KeyVal<Any?>(Obj.RIVERS, S57att.Att.UNKATT, null, null)
-        OSMtags["water=canal"] =
-            KeyVal<Any?>(Obj.CANALS, S57att.Att.UNKATT, null, null)
-        OSMtags["waterway=riverbank"] = KeyVal<Any?>(Obj.RIVERS, S57att.Att.UNKATT, null, null)
-        OSMtags["waterway=dock"] = KeyVal<Any?>(Obj.HRBBSN, S57att.Att.UNKATT, null, null)
-        OSMtags["waterway=lock"] =
-            KeyVal<Any?>(Obj.HRBBSN, S57att.Att.UNKATT, null, null)
-        OSMtags["landuse=basin"] = KeyVal<Any?>(Obj.LAKARE, S57att.Att.UNKATT, null, null)
-        OSMtags["wetland=tidalflat"] =
-            KeyVal<Double?>(Obj.DEPARE, S57att.Att.DRVAL2, S57val.Conv.F, 0.0)
-        OSMtags["tidal=yes"] =
-            KeyVal<Double?>(Obj.DEPARE, S57att.Att.DRVAL2, S57val.Conv.F, 0.0)
-        OSMtags["natural=mud"] =
-            KeyVal<Any?>(Obj.DEPARE, S57att.Att.UNKATT, null, null)
-        OSMtags["natural=sand"] = KeyVal<Any?>(Obj.DEPARE, S57att.Att.UNKATT, null, null)
-        OSMtags["highway=motorway"] = KeyVal<S57val.CatROD?>(
-            Obj.ROADWY,
-            S57att.Att.CATROD,
-            S57val.Conv.E,
-            S57val.CatROD.ROD_MWAY
-        )
-        OSMtags["highway=trunk"] = KeyVal<S57val.CatROD?>(
-            Obj.ROADWY,
-            S57att.Att.CATROD,
-            S57val.Conv.E,
-            S57val.CatROD.ROD_MAJR
-        )
-        OSMtags["highway=primary"] = KeyVal<S57val.CatROD?>(
-            Obj.ROADWY,
-            S57att.Att.CATROD,
-            S57val.Conv.E,
-            S57val.CatROD.ROD_MAJR
-        )
-        OSMtags["highway=secondary"] = KeyVal<S57val.CatROD?>(
-            Obj.ROADWY,
-            S57att.Att.CATROD,
-            S57val.Conv.E,
-            S57val.CatROD.ROD_MINR
-        )
-        OSMtags["highway=tertiary"] = KeyVal<S57val.CatROD?>(
-            Obj.ROADWY,
-            S57att.Att.CATROD,
-            S57val.Conv.E,
-            S57val.CatROD.ROD_MINR
-        )
-        OSMtags["highway=residential"] = KeyVal<Any?>(Obj.ROADWY, S57att.Att.UNKATT, null, null)
-        OSMtags["highway=unclassified"] = KeyVal<Any?>(Obj.ROADWY, S57att.Att.UNKATT, null, null)
-        OSMtags["railway=rail"] = KeyVal<Any?>(Obj.RAILWY, S57att.Att.UNKATT, null, null)
-        OSMtags["man_made=breakwater"] = KeyVal<Any?>(Obj.SLCONS, S57att.Att.UNKATT, null, null)
-        OSMtags["man_made=groyne"] = KeyVal<Any?>(Obj.SLCONS, S57att.Att.UNKATT, null, null)
-        OSMtags["man_made=pier"] =
-            KeyVal<Any?>(Obj.SLCONS, S57att.Att.UNKATT, null, null)
-        OSMtags["man_made=jetty"] =
-            KeyVal<Any?>(Obj.SLCONS, S57att.Att.UNKATT, null, null)
-        OSMtags["landuse=industrial"] = KeyVal<Any?>(Obj.BUAARE, S57att.Att.UNKATT, null, null)
-        OSMtags["landuse=commercial"] = KeyVal<Any?>(Obj.BUAARE, S57att.Att.UNKATT, null, null)
-        OSMtags["landuse=retail"] =
-            KeyVal<Any?>(Obj.BUAARE, S57att.Att.UNKATT, null, null)
-        OSMtags["landuse=residential"] = KeyVal<Any?>(Obj.BUAARE, S57att.Att.UNKATT, null, null)
+        OSMtags["natural=coastline"] = KeyVal<Any?>(Obj.COALNE, Att.UNKATT, null, null)
+        OSMtags["natural=water"] = KeyVal<Any?>(Obj.LAKARE, Att.UNKATT, null, null)
+        OSMtags["water=river"] = KeyVal<Any?>(Obj.RIVERS, Att.UNKATT, null, null)
+        OSMtags["water=canal"] = KeyVal<Any?>(Obj.CANALS, Att.UNKATT, null, null)
+        OSMtags["waterway=riverbank"] = KeyVal<Any?>(Obj.RIVERS, Att.UNKATT, null, null)
+        OSMtags["waterway=dock"] = KeyVal<Any?>(Obj.HRBBSN, Att.UNKATT, null, null)
+        OSMtags["waterway=lock"] = KeyVal<Any?>(Obj.HRBBSN, Att.UNKATT, null, null)
+        OSMtags["landuse=basin"] = KeyVal<Any?>(Obj.LAKARE, Att.UNKATT, null, null)
+        OSMtags["wetland=tidalflat"] = KeyVal<Double?>(Obj.DEPARE, Att.DRVAL2, Conv.F, 0.0)
+        OSMtags["tidal=yes"] = KeyVal<Double?>(Obj.DEPARE, Att.DRVAL2, Conv.F, 0.0)
+        OSMtags["natural=mud"] = KeyVal<Any?>(Obj.DEPARE, Att.UNKATT, null, null)
+        OSMtags["natural=sand"] = KeyVal<Any?>(Obj.DEPARE, Att.UNKATT, null, null)
+        OSMtags["highway=motorway"] = KeyVal<CatROD?>(Obj.ROADWY, Att.CATROD, Conv.E, CatROD.ROD_MWAY)
+        OSMtags["highway=trunk"] = KeyVal<CatROD?>(Obj.ROADWY, Att.CATROD, Conv.E, CatROD.ROD_MAJR)
+        OSMtags["highway=primary"] = KeyVal<CatROD?>(Obj.ROADWY, Att.CATROD, Conv.E, CatROD.ROD_MAJR)
+        OSMtags["highway=secondary"] = KeyVal<CatROD?>(Obj.ROADWY, Att.CATROD, Conv.E, CatROD.ROD_MINR)
+        OSMtags["highway=tertiary"] = KeyVal<CatROD?>(Obj.ROADWY, Att.CATROD, Conv.E, CatROD.ROD_MINR)
+        OSMtags["highway=residential"] = KeyVal<Any?>(Obj.ROADWY, Att.UNKATT, null, null)
+        OSMtags["highway=unclassified"] = KeyVal<Any?>(Obj.ROADWY, Att.UNKATT, null, null)
+        OSMtags["railway=rail"] = KeyVal<Any?>(Obj.RAILWY, Att.UNKATT, null, null)
+        OSMtags["man_made=breakwater"] = KeyVal<Any?>(Obj.SLCONS, Att.UNKATT, null, null)
+        OSMtags["man_made=groyne"] = KeyVal<Any?>(Obj.SLCONS, Att.UNKATT, null, null)
+        OSMtags["man_made=pier"] = KeyVal<Any?>(Obj.SLCONS, Att.UNKATT, null, null)
+        OSMtags["man_made=jetty"] = KeyVal<Any?>(Obj.SLCONS, Att.UNKATT, null, null)
+        OSMtags["landuse=industrial"] = KeyVal<Any?>(Obj.BUAARE, Att.UNKATT, null, null)
+        OSMtags["landuse=commercial"] = KeyVal<Any?>(Obj.BUAARE, Att.UNKATT, null, null)
+        OSMtags["landuse=retail"] = KeyVal<Any?>(Obj.BUAARE, Att.UNKATT, null, null)
+        OSMtags["landuse=residential"] = KeyVal<Any?>(Obj.BUAARE, Att.UNKATT, null, null)
     }
 
     fun OSMtag(osm: ArrayList<KeyVal<*>?>?, key: String?, `val`: String?) {
         val kv = OSMtags["$key=$`val`"]
         if (kv != null) {
-            if (kv.conv == S57val.Conv.E) {
+            if (kv.conv == Conv.E) {
                 val list = ArrayList<Enum<*>?>()
                 list.add(kv.`val` as Enum<*>?)
                 osm!!.add(KeyVal<ArrayList<Enum<*>?>?>(kv.obj, kv.att, kv.conv, list))
@@ -288,5 +256,5 @@ object S57osm {
         map.tagsDone(map.xref)
     }
 
-    class KeyVal<V>(var obj: Obj?, var att: S57att.Att?, var conv: S57val.Conv?, var `val`: V?)
+    class KeyVal<V>(var obj: Obj?, var att: Att?, var conv: Conv?, var `val`: V?)
 }
