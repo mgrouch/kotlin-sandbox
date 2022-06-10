@@ -5,9 +5,6 @@ import s57.S57att.Att
 import s57.S57dat.S57field
 import s57.S57dat.byteArrayCopy
 import s57.S57obj.Obj
-
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.js.Date
 
 /**
@@ -1594,8 +1591,10 @@ object S57enc {
         ')'.code.toByte(),
         0x1e
     )
+
     const val COMF = 10000000.0
     const val SOMF = 10.0
+
     var file: String? = "0S000000.000"
     var intu = 0
     var code: String? = "0S"
@@ -1612,11 +1611,15 @@ object S57enc {
     var geos = 0
     var edges = 0
 
+    @OptIn(ExperimentalUnsignedTypes::class)
     fun hash(value: Long): Long {
-        val bval = ByteBuffer.allocate(java.lang.Long.SIZE).putLong(value).array()
+/*
+        val bval: UByteArray = ByteBuffer.allocate(java.lang.Long.SIZE).putLong(value).array()
         val crc = CRC32()
         crc.update(bval)
-        return crc.value
+        return crc.value.toLong()
+*/
+        TODO("Not yet implemented")
     }
 
     fun encodeChart(map: S57map?, meta: HashMap<String?, String?>?, buf: ByteArray?): Int {

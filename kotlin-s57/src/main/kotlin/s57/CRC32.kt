@@ -5,12 +5,12 @@ package s57
 fun UByte.toBigEndianUInt(): UInt = this.toUInt() shl 24
 
 @OptIn(ExperimentalUnsignedTypes::class)
-class CRC32(val polynomial: UInt = 0x04C11DB7.toUInt()) {
-    val lookupTable: List<UInt> = (0 until 256).map { crc32(it.toUByte(), polynomial) }
+class CRC32(private val polynomial: UInt = 0x04C11DB7.toUInt()) {
+
+    private val lookupTable: List<UInt> = (0 until 256).map { crc32(it.toUByte(), polynomial) }
 
     var value: UInt = 0.toUInt()
         private set
-
 
     fun update(inputs: UByteArray) {
         value = crc32(inputs, value)
