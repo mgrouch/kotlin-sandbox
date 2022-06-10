@@ -2352,7 +2352,7 @@ object S57val {
                     if (str.isNotEmpty()) str += ","
                     val map = keys[att]!!.map
                     for (item in map!!.keys) {
-                        if (map[item]!!.`val` == value) str += map[item]!!.atvl.toString()
+                        if (map[item]!!.value == value) str += map[item]!!.atvl.toString()
                     }
                 }
             }
@@ -2370,14 +2370,14 @@ object S57val {
                 Conv.A, Conv.S -> return attval.value as String?
                 Conv.E -> {
                     val map = keys[att]!!.map
-                    return map!![(attval.value as ArrayList<*>?)!![0]]!!.`val`
+                    return map!![(attval.value as ArrayList<*>?)!![0]]!!.value
                 }
                 Conv.L -> {
                     var str: String? = ""
                     val map = keys[att]!!.map
                     for (item in (attval.value as ArrayList<*>?)!!) {
                         if (str!!.isNotEmpty()) str += ";"
-                        if (item != null) str += (map?.get(item) as S57enum).`val`
+                        if (item != null) str += (map?.get(item) as S57enum).value
                     }
                     return str
                 }
@@ -2394,7 +2394,7 @@ object S57val {
         if (map != null) {
             for (item in map.keys) {
                 if (unkn == null) unkn = item as Enum<*>
-                if (map[item]!!.`val` == `val`) return item as Enum<*>
+                if (map[item]!!.value == `val`) return item as Enum<*>
             }
         }
         return unkn
@@ -2444,7 +2444,7 @@ object S57val {
         return s57key!!.map!!.keys.toTypedArray()[0] as Enum<*>
     }
 
-    internal class S57enum(var atvl: Int?, var `val`: String?)
+    internal class S57enum(var atvl: Int?, var value: String?)
 
     enum class Conv {
         S, A, L, E, F, I
