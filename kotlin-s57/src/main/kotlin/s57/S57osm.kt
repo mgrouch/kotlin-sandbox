@@ -49,7 +49,7 @@ object S57osm {
         if (kv != null) {
             if (kv.conv == Conv.E) {
                 val list = ArrayList<Enum<*>?>()
-                list.add(kv.`val` as Enum<*>?)
+                list.add(kv.value as Enum<*>?)
                 osm!!.add(KeyVal<ArrayList<Enum<*>?>?>(kv.obj, kv.att, kv.conv, list))
             } else {
                 osm!!.add(kv)
@@ -257,5 +257,5 @@ object S57osm {
         map.tagsDone(map.xref)
     }
 
-    class KeyVal<V>(var obj: Obj?, var att: Att?, var conv: Conv?, var `val`: V?)
+    class KeyVal<V>(var obj: Obj?, var att: Att?, var conv: Conv?, var value: V?)
 }

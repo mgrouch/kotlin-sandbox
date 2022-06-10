@@ -444,7 +444,7 @@ class S57map(private val sea: Boolean) {
                 val atts = AttMap()
                 objs[0] = atts
                 if (kvx.att != Att.UNKATT) {
-                    atts[kvx.att] = S57val.AttVal(kvx.conv, kvx.`val`)
+                    atts[kvx.att] = S57val.AttVal(kvx.conv, kvx.value)
                 }
                 index!![++xref] = base
                 if (features!![kvx.obj] == null) {
