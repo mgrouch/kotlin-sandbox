@@ -475,7 +475,7 @@ object Notices {
                 Form.SYMB, SubSymbol(
                     Harbours.Anchor, 0.4, 0.0, 0.0, Symbols.Scheme(
                         Color.black
-                    ), Symbols.Delta(Symbols.Handle.CC, AffineTransform.getRotateInstance(Math.toRadians(180.0)))
+                    ), Symbols.Delta(Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0)))
                 )
             )
         )
@@ -561,7 +561,7 @@ object Notices {
             Instr(
                 Form.SYMB, SubSymbol(
                     NoticeA10a, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                        Symbols.Handle.CC, AffineTransform.getRotateInstance(Math.toRadians(180.0))
+                        Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0))
                     )
                 )
             )
@@ -1093,7 +1093,7 @@ object Notices {
             Instr(
                 Form.SYMB, SubSymbol(
                     NoticeD2a, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                        Symbols.Handle.CC, AffineTransform.getRotateInstance(Math.toRadians(180.0))
+                        Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0))
                     )
                 )
             )

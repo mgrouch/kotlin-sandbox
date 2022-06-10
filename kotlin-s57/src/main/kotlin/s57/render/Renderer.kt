@@ -3,9 +3,12 @@ package s57.render
 
 import s57.S57map
 import s57.S57val
+import s57.S57val.UniHLU
+import s57.deg2rad
 import s57.symbols.Areas
 import s57.symbols.Symbols
 import s57.symbols.Symbols.Caption
+import s57.symbols.Symbols.Delta
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Symbol
@@ -82,12 +85,12 @@ object Renderer {
         drawSymbol(g2!!, symbol, sScale, point!!.x, point.y, scheme, null)
     }
 
-    fun symbol(symbol: Symbol?, delta: Symbols.Delta?) {
+    fun symbol(symbol: Symbol?, delta: Delta?) {
         val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
         drawSymbol(g2!!, symbol, sScale, point!!.x, point.y, null, delta)
     }
 
-    fun symbol(symbol: Symbol?, scheme: Symbols.Scheme?, delta: Symbols.Delta?) {
+    fun symbol(symbol: Symbol?, scheme: Symbols.Scheme?, delta: Delta?) {
         val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
         drawSymbol(g2!!, symbol, sScale, point!!.x, point.y, scheme, delta)
     }
@@ -104,35 +107,35 @@ object Renderer {
             if (bbox == null) return
         }
         when (symbols.size) {
-            1 -> symbol(symbols[0], Symbols.Delta(Symbols.Handle.CC, AffineTransform()))
+            1 -> symbol(symbols[0], Delta(Symbols.Handle.CC, AffineTransform()))
             2 -> {
-                symbol(symbols[0], Symbols.Delta(Symbols.Handle.RC, AffineTransform()))
-                symbol(symbols[1], Symbols.Delta(Symbols.Handle.LC, AffineTransform()))
+                symbol(symbols[0], Delta(Symbols.Handle.RC, AffineTransform()))
+                symbol(symbols[1], Delta(Symbols.Handle.LC, AffineTransform()))
             }
             3 -> {
-                symbol(symbols[0], Symbols.Delta(Symbols.Handle.BC, AffineTransform()))
-                symbol(symbols[1], Symbols.Delta(Symbols.Handle.TR, AffineTransform()))
-                symbol(symbols[2], Symbols.Delta(Symbols.Handle.TL, AffineTransform()))
+                symbol(symbols[0], Delta(Symbols.Handle.BC, AffineTransform()))
+                symbol(symbols[1], Delta(Symbols.Handle.TR, AffineTransform()))
+                symbol(symbols[2], Delta(Symbols.Handle.TL, AffineTransform()))
             }
             4 -> {
-                symbol(symbols[0], Symbols.Delta(Symbols.Handle.BR, AffineTransform()))
-                symbol(symbols[1], Symbols.Delta(Symbols.Handle.BL, AffineTransform()))
-                symbol(symbols[2], Symbols.Delta(Symbols.Handle.TR, AffineTransform()))
-                symbol(symbols[3], Symbols.Delta(Symbols.Handle.TL, AffineTransform()))
+                symbol(symbols[0], Delta(Symbols.Handle.BR, AffineTransform()))
+                symbol(symbols[1], Delta(Symbols.Handle.BL, AffineTransform()))
+                symbol(symbols[2], Delta(Symbols.Handle.TR, AffineTransform()))
+                symbol(symbols[3], Delta(Symbols.Handle.TL, AffineTransform()))
             }
             5 -> {
-                symbol(symbols[0], Symbols.Delta(Symbols.Handle.BR, AffineTransform()))
-                symbol(symbols[1], Symbols.Delta(Symbols.Handle.BL, AffineTransform()))
+                symbol(symbols[0], Delta(Symbols.Handle.BR, AffineTransform()))
+                symbol(symbols[1], Delta(Symbols.Handle.BL, AffineTransform()))
                 symbol(
                     symbols[2],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TR,
                         AffineTransform.getTranslateInstance(-bbox!!.width / 2, 0.0)
                     )
                 )
-                symbol(symbols[3], Symbols.Delta(Symbols.Handle.TC, AffineTransform()))
+                symbol(symbols[3], Delta(Symbols.Handle.TC, AffineTransform()))
                 symbol(
-                    symbols[4], Symbols.Delta(
+                    symbols[4], Delta(
                         Symbols.Handle.TL, AffineTransform.getTranslateInstance(
                             bbox.width / 2, 0.0
                         )
@@ -142,14 +145,14 @@ object Renderer {
             6 -> {
                 symbol(
                     symbols[0],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.BR,
                         AffineTransform.getTranslateInstance(-bbox!!.width / 2, 0.0)
                     )
                 )
-                symbol(symbols[1], Symbols.Delta(Symbols.Handle.BC, AffineTransform()))
+                symbol(symbols[1], Delta(Symbols.Handle.BC, AffineTransform()))
                 symbol(
-                    symbols[2], Symbols.Delta(
+                    symbols[2], Delta(
                         Symbols.Handle.BL, AffineTransform.getTranslateInstance(
                             bbox.width / 2, 0.0
                         )
@@ -157,14 +160,14 @@ object Renderer {
                 )
                 symbol(
                     symbols[3],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TR,
                         AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
                     )
                 )
-                symbol(symbols[4], Symbols.Delta(Symbols.Handle.TC, AffineTransform()))
+                symbol(symbols[4], Delta(Symbols.Handle.TC, AffineTransform()))
                 symbol(
-                    symbols[5], Symbols.Delta(
+                    symbols[5], Delta(
                         Symbols.Handle.TL, AffineTransform.getTranslateInstance(
                             bbox.width / 2, 0.0
                         )
@@ -174,21 +177,21 @@ object Renderer {
             7 -> {
                 symbol(
                     symbols[0],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.BC,
                         AffineTransform.getTranslateInstance(0.0, -bbox!!.height / 2)
                     )
                 )
                 symbol(
                     symbols[1],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.RC,
                         AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
                     )
                 )
-                symbol(symbols[2], Symbols.Delta(Symbols.Handle.CC, AffineTransform()))
+                symbol(symbols[2], Delta(Symbols.Handle.CC, AffineTransform()))
                 symbol(
-                    symbols[3], Symbols.Delta(
+                    symbols[3], Delta(
                         Symbols.Handle.LC, AffineTransform.getTranslateInstance(
                             bbox.width / 2, 0.0
                         )
@@ -196,20 +199,20 @@ object Renderer {
                 )
                 symbol(
                     symbols[4],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TR,
                         AffineTransform.getTranslateInstance(-bbox.width / 2, bbox.height / 2)
                     )
                 )
                 symbol(
                     symbols[5],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TC,
                         AffineTransform.getTranslateInstance(0.0, bbox.height / 2)
                     )
                 )
                 symbol(
-                    symbols[6], Symbols.Delta(
+                    symbols[6], Delta(
                         Symbols.Handle.TL, AffineTransform.getTranslateInstance(
                             bbox.width / 2, bbox.height / 2
                         )
@@ -219,28 +222,28 @@ object Renderer {
             8 -> {
                 symbol(
                     symbols[0],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.BR,
                         AffineTransform.getTranslateInstance(0.0, -bbox!!.height / 2)
                     )
                 )
                 symbol(
                     symbols[1],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.BL,
                         AffineTransform.getTranslateInstance(0.0, -bbox.height / 2)
                     )
                 )
                 symbol(
                     symbols[2],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.RC,
                         AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
                     )
                 )
-                symbol(symbols[3], Symbols.Delta(Symbols.Handle.CC, AffineTransform()))
+                symbol(symbols[3], Delta(Symbols.Handle.CC, AffineTransform()))
                 symbol(
-                    symbols[4], Symbols.Delta(
+                    symbols[4], Delta(
                         Symbols.Handle.LC, AffineTransform.getTranslateInstance(
                             bbox.width / 2, 0.0
                         )
@@ -248,20 +251,20 @@ object Renderer {
                 )
                 symbol(
                     symbols[5],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TR,
                         AffineTransform.getTranslateInstance(-bbox.width / 2, bbox.height / 2)
                     )
                 )
                 symbol(
                     symbols[6],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TC,
                         AffineTransform.getTranslateInstance(0.0, bbox.height / 2)
                     )
                 )
                 symbol(
-                    symbols[7], Symbols.Delta(
+                    symbols[7], Delta(
                         Symbols.Handle.TL, AffineTransform.getTranslateInstance(
                             bbox.width / 2, bbox.height / 2
                         )
@@ -271,20 +274,20 @@ object Renderer {
             9 -> {
                 symbol(
                     symbols[0],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.BR,
                         AffineTransform.getTranslateInstance(-bbox!!.width / 2, -bbox.height / 2)
                     )
                 )
                 symbol(
                     symbols[1],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.BC,
                         AffineTransform.getTranslateInstance(0.0, -bbox.height / 2)
                     )
                 )
                 symbol(
-                    symbols[2], Symbols.Delta(
+                    symbols[2], Delta(
                         Symbols.Handle.BL, AffineTransform.getTranslateInstance(
                             bbox.width / 2, -bbox.height / 2
                         )
@@ -292,14 +295,14 @@ object Renderer {
                 )
                 symbol(
                     symbols[3],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.RC,
                         AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
                     )
                 )
-                symbol(symbols[4], Symbols.Delta(Symbols.Handle.CC, AffineTransform()))
+                symbol(symbols[4], Delta(Symbols.Handle.CC, AffineTransform()))
                 symbol(
-                    symbols[5], Symbols.Delta(
+                    symbols[5], Delta(
                         Symbols.Handle.LC, AffineTransform.getTranslateInstance(
                             bbox.width / 2, 0.0
                         )
@@ -307,20 +310,20 @@ object Renderer {
                 )
                 symbol(
                     symbols[6],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TR,
                         AffineTransform.getTranslateInstance(-bbox.width / 2, bbox.height / 2)
                     )
                 )
                 symbol(
                     symbols[7],
-                    Symbols.Delta(
+                    Delta(
                         Symbols.Handle.TC,
                         AffineTransform.getTranslateInstance(0.0, bbox.height / 2)
                     )
                 )
                 symbol(
-                    symbols[8], Symbols.Delta(
+                    symbols[8], Delta(
                         Symbols.Handle.TL, AffineTransform.getTranslateInstance(
                             bbox.width / 2, bbox.height / 2
                         )
@@ -418,9 +421,9 @@ object Renderer {
                                 if (!gap) {
                                     drawSymbol(
                                         g2!!, symbol, sScale, curr.x, curr.y, Symbols.Scheme(col),
-                                        Symbols.Delta(
+                                        Delta(
                                             Symbols.Handle.BC, AffineTransform.getRotateInstance(
-                                                atan2(succ.getY() - curr.y, succ.getX() - curr.x) + Math.toRadians(
+                                                atan2(succ.getY() - curr.y, succ.getX() - curr.x) + deg2rad(
                                                     90.0
                                                 )
                                             )
@@ -501,14 +504,14 @@ object Renderer {
         }
     }
 
-    fun lineCircle(style: Symbols.LineStyle, radius: Double, units: S57val.UniHLU?) {
+    fun lineCircle(style: Symbols.LineStyle, radius: Double, units: UniHLU?) {
         var radius = radius
         when (units) {
-            S57val.UniHLU.HLU_FEET -> radius /= 6076.0
-            S57val.UniHLU.HLU_KMTR -> radius /= 1.852
-            S57val.UniHLU.HLU_HMTR -> radius /= 18.52
-            S57val.UniHLU.HLU_SMIL -> radius /= 1.15078
-            S57val.UniHLU.HLU_NMIL -> {}
+            UniHLU.HLU_FEET -> radius /= 6076.0
+            UniHLU.HLU_KMTR -> radius /= 1.852
+            UniHLU.HLU_HMTR -> radius /= 18.52
+            UniHLU.HLU_SMIL -> radius /= 1.15078
+            UniHLU.HLU_NMIL -> {}
             else -> radius /= 1852.0
         }
         radius *= context!!.mile(Rules.feature)
@@ -577,11 +580,11 @@ object Renderer {
         }
     }
 
-    fun labelText(str: String?, font: Font, tc: Color?, delta: Symbols.Delta?) {
+    fun labelText(str: String?, font: Font, tc: Color?, delta: Delta?) {
         labelText(str, font, tc, LabelStyle.NONE, null, null, delta)
     }
 
-    fun labelText(str: String?, font: Font, tc: Color?, style: LabelStyle?, fg: Color?, delta: Symbols.Delta?) {
+    fun labelText(str: String?, font: Font, tc: Color?, style: LabelStyle?, fg: Color?, delta: Delta?) {
         labelText(str, font, tc, style, fg, null, delta)
     }
 
@@ -592,12 +595,12 @@ object Renderer {
         style: LabelStyle? = LabelStyle.NONE,
         fg: Color? = null,
         bgArg: Color? = null,
-        deltaArg: Symbols.Delta? = null
+        deltaArg: Delta? = null
     ) {
         var str = strArg
         var bg = bgArg
         var delta = deltaArg
-        if (delta == null) delta = Symbols.Delta(Symbols.Handle.CC)
+        if (delta == null) delta = Delta(Symbols.Handle.CC)
         if (bg == null) bg = Color(0x00000000, true)
         if (str == null || str.isEmpty()) str = " "
         val frc = g2!!.fontRenderContext
@@ -716,7 +719,7 @@ object Renderer {
                     Instr(
                         Form.SYMB, Symbols.SubSymbol(
                             Areas.CableFlash, 1.0, 0.0, 0.0, null,
-                            Symbols.Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, -width / 2, 0.0))
+                            Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, -width / 2, 0.0))
                         )
                     )
                 )
@@ -724,7 +727,7 @@ object Renderer {
                     Instr(
                         Form.SYMB, Symbols.SubSymbol(
                             Areas.CableFlash, 1.0, 0.0, 0.0, null,
-                            Symbols.Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, width / 2, 0.0))
+                            Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, width / 2, 0.0))
                         )
                     )
                 )
@@ -780,7 +783,7 @@ object Renderer {
                     str,
                     font,
                     tc,
-                    Symbols.Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(tx, ty))
+                    Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(tx, ty))
                 )
             )
         )
@@ -849,10 +852,10 @@ object Renderer {
                     label.add(
                         Instr(
                             Form.TEXT,
-                            Caption(str, font, colour, Symbols.Delta(Symbols.Handle.BC))
+                            Caption(str, font, colour, Delta(Symbols.Handle.BC))
                         )
                     )
-                    drawSymbol(g2!!, label, sScale, centre.x, centre.y, null, Symbols.Delta(Symbols.Handle.BC, pos))
+                    drawSymbol(g2!!, label, sScale, centre.x, centre.y, null, Delta(Symbols.Handle.BC, pos))
                 }
             }
         }
@@ -879,22 +882,22 @@ object Renderer {
         if (dir != null) {
             g2!!.draw(
                 Line2D.Double(
-                    centre!!.x, centre.y, centre.x - radial * sin(Math.toRadians(dir)),
-                    centre.y + radial * cos(Math.toRadians(dir))
+                    centre!!.x, centre.y, centre.x - radial * sin(deg2rad(dir)),
+                    centre.y + radial * cos(deg2rad(dir))
                 )
             )
         } else {
             if (s1 != 0.0 || s2 != 360.0) {
                 g2!!.draw(
                     Line2D.Double(
-                        centre!!.x, centre.y, centre.x - radial * sin(Math.toRadians(s1)),
-                        centre.y + radial * cos(Math.toRadians(s1))
+                        centre!!.x, centre.y, centre.x - radial * sin(deg2rad(s1)),
+                        centre.y + radial * cos(deg2rad(s1))
                     )
                 )
                 g2!!.draw(
                     Line2D.Double(
-                        centre.x, centre.y, centre.x - radial * sin(Math.toRadians(s2)),
-                        centre.y + radial * cos(Math.toRadians(s2))
+                        centre.x, centre.y, centre.x - radial * sin(deg2rad(s2)),
+                        centre.y + radial * cos(deg2rad(s2))
                     )
                 )
             }
@@ -920,20 +923,20 @@ object Renderer {
         if (str != null && str.isNotEmpty()) {
             var font = Font("Arial", Font.PLAIN, 40)
             val arc = if (s2 > s1) s2 - s1 else s2 - s1 + 360
-            val awidth = Math.toRadians(arc) * radial
+            val awidth = deg2rad(arc) * radial
             var hand = mid > 270 || mid < 90
-            var phi = Math.toRadians(mid)
+            var phi = deg2rad(mid)
             radial += 30 * sScale
             var at =
                 AffineTransform.getTranslateInstance(-radial * sin(phi) / sScale, radial * cos(phi) / sScale)
             if (font.size * sScale * str.length < awidth) {
-                at.rotate(Math.toRadians(mid + if (hand) 0 else 180))
-                labelText(str, font, Color.black, Symbols.Delta(Symbols.Handle.CC, at))
+                at.rotate(deg2rad(mid + if (hand) 0 else 180))
+                labelText(str, font, Color.black, Delta(Symbols.Handle.CC, at))
             } else if (font.size * sScale < awidth) {
                 hand = mid < 180
-                at.rotate(Math.toRadians(mid + if (hand) -90 else 90))
+                at.rotate(deg2rad(mid + if (hand) -90 else 90))
                 labelText(
-                    str, font, Color.black, if (hand) Symbols.Delta(Symbols.Handle.RC, at) else Symbols.Delta(
+                    str, font, Color.black, if (hand) Delta(Symbols.Handle.RC, at) else Delta(
                         Symbols.Handle.LC, at
                     )
                 )
@@ -942,15 +945,15 @@ object Renderer {
                 font = Font("Arial", Font.PLAIN, 30)
                 str = "$dir°"
                 hand = dir > 180
-                phi = Math.toRadians(dir + if (hand) -0.5 else 0.5)
+                phi = deg2rad(dir + if (hand) -0.5 else 0.5)
                 radial -= 70 * sScale
                 at = AffineTransform.getTranslateInstance(
                     -radial * sin(phi) / sScale,
                     radial * cos(phi) / sScale
                 )
-                at.rotate(Math.toRadians(dir + if (hand) 90 else -90))
+                at.rotate(deg2rad(dir + if (hand) 90 else -90))
                 labelText(
-                    str, font, Color.black, if (hand) Symbols.Delta(Symbols.Handle.BR, at) else Symbols.Delta(
+                    str, font, Color.black, if (hand) Delta(Symbols.Handle.BR, at) else Delta(
                         Symbols.Handle.BL, at
                     )
                 )

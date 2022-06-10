@@ -7,8 +7,14 @@ import s57.S57att.Att
 import s57.S57map
 import s57.S57obj.Obj
 import s57.S57val
+import s57.S57val.BoySHP
+import s57.S57val.CatFOG
+import s57.S57val.CatLIT
 import s57.S57val.CatROS
+import s57.S57val.CatRTB
 import s57.S57val.ColCOL
+import s57.S57val.LitCHR
+import s57.deg2rad
 import s57.symbols.Beacons
 import s57.symbols.Symbols
 import s57.symbols.Topmarks
@@ -46,44 +52,44 @@ object Signals : Rules() {
     )
 
     val LightCharacters = mapOf(
-        S57val.LitCHR.CHR_F to "F",
-        S57val.LitCHR.CHR_FL to "Fl",
-        S57val.LitCHR.CHR_LFL to "LFl",
-        S57val.LitCHR.CHR_Q to "Q",
-        S57val.LitCHR.CHR_VQ to "VQ",
-        S57val.LitCHR.CHR_UQ to "UQ",
-        S57val.LitCHR.CHR_ISO to "Iso",
-        S57val.LitCHR.CHR_OC to "Oc",
-        S57val.LitCHR.CHR_IQ to "IQ",
-        S57val.LitCHR.CHR_IVQ to "IVQ",
-        S57val.LitCHR.CHR_IUQ to "IUQ",
-        S57val.LitCHR.CHR_MO to "Mo",
-        S57val.LitCHR.CHR_FFL to "FFl",
-        S57val.LitCHR.CHR_FLLFL to "FlLFl",
-        S57val.LitCHR.CHR_OCFL to "OcFl",
-        S57val.LitCHR.CHR_FLFL to "FLFl",
-        S57val.LitCHR.CHR_ALOC to "Al.Oc",
-        S57val.LitCHR.CHR_ALLFL to "Al.LFl",
-        S57val.LitCHR.CHR_ALFL to "Al.Fl",
-        S57val.LitCHR.CHR_ALGR to "Al.Gr",
-        S57val.LitCHR.CHR_QLFL to "Q+LFl",
-        S57val.LitCHR.CHR_VQLFL to "VQ+LFl",
-        S57val.LitCHR.CHR_UQLFL to "UQ+LFl",
-        S57val.LitCHR.CHR_AL to "Al",
-        S57val.LitCHR.CHR_ALFFL to "Al.FFl",
+        LitCHR.CHR_F to "F",
+        LitCHR.CHR_FL to "Fl",
+        LitCHR.CHR_LFL to "LFl",
+        LitCHR.CHR_Q to "Q",
+        LitCHR.CHR_VQ to "VQ",
+        LitCHR.CHR_UQ to "UQ",
+        LitCHR.CHR_ISO to "Iso",
+        LitCHR.CHR_OC to "Oc",
+        LitCHR.CHR_IQ to "IQ",
+        LitCHR.CHR_IVQ to "IVQ",
+        LitCHR.CHR_IUQ to "IUQ",
+        LitCHR.CHR_MO to "Mo",
+        LitCHR.CHR_FFL to "FFl",
+        LitCHR.CHR_FLLFL to "FlLFl",
+        LitCHR.CHR_OCFL to "OcFl",
+        LitCHR.CHR_FLFL to "FLFl",
+        LitCHR.CHR_ALOC to "Al.Oc",
+        LitCHR.CHR_ALLFL to "Al.LFl",
+        LitCHR.CHR_ALFL to "Al.Fl",
+        LitCHR.CHR_ALGR to "Al.Gr",
+        LitCHR.CHR_QLFL to "Q+LFl",
+        LitCHR.CHR_VQLFL to "VQ+LFl",
+        LitCHR.CHR_UQLFL to "UQ+LFl",
+        LitCHR.CHR_AL to "Al",
+        LitCHR.CHR_ALFFL to "Al.FFl",
     )
 
     val fogSignals = mapOf(
-        S57val.CatFOG.FOG_EXPL to "Explos",
-        S57val.CatFOG.FOG_DIA to "Dia",
-        S57val.CatFOG.FOG_SIRN to "Siren",
-        S57val.CatFOG.FOG_NAUT to "Horn",
-        S57val.CatFOG.FOG_REED to "Horn",
-        S57val.CatFOG.FOG_TYPH to "Horn",
-        S57val.CatFOG.FOG_BELL to "Bell",
-        S57val.CatFOG.FOG_WHIS to "Whis",
-        S57val.CatFOG.FOG_GONG to "Gong",
-        S57val.CatFOG.FOG_HORN to "Horn",
+        CatFOG.FOG_EXPL to "Explos",
+        CatFOG.FOG_DIA to "Dia",
+        CatFOG.FOG_SIRN to "Siren",
+        CatFOG.FOG_NAUT to "Horn",
+        CatFOG.FOG_REED to "Horn",
+        CatFOG.FOG_TYPH to "Horn",
+        CatFOG.FOG_BELL to "Bell",
+        CatFOG.FOG_WHIS to "Whis",
+        CatFOG.FOG_GONG to "Gong",
+        CatFOG.FOG_HORN to "Horn",
     )
 
     val df: DecimalFormat = DecimalFormat("#.#")
@@ -148,9 +154,9 @@ object Signals : Rules() {
                     if (Rules.testAttribute(
                             Rules.feature!!.type,
                             Att.BOYSHP,
-                            S57val.BoySHP.BOY_PILR
+                            BoySHP.BOY_PILR
                         ) || Rules.testAttribute(
-                            Rules.feature!!.type, Att.BOYSHP, S57val.BoySHP.BOY_SPAR
+                            Rules.feature!!.type, Att.BOYSHP, BoySHP.BOY_SPAR
                         )
                     ) {
                         Renderer.symbol(
@@ -167,9 +173,9 @@ object Signals : Rules() {
                     if (Rules.testAttribute(
                             Rules.feature!!.type,
                             Att.BOYSHP,
-                            S57val.BoySHP.BOY_PILR
+                            BoySHP.BOY_PILR
                         ) || Rules.testAttribute(
-                            Rules.feature!!.type, Att.BOYSHP, S57val.BoySHP.BOY_SPAR
+                            Rules.feature!!.type, Att.BOYSHP, BoySHP.BOY_SPAR
                         )
                     ) {
                         Renderer.symbol(
@@ -222,11 +228,11 @@ object Signals : Rules() {
         if (Renderer.zoom >= 11) Renderer.symbol(Beacons.RadarStation)
         if (Renderer.zoom >= 15) {
             var bstr = ""
-            val cat = Rules.getAttEnum(Obj.RTPBCN, Att.CATRTB) as S57val.CatRTB
+            val cat = Rules.getAttEnum(Obj.RTPBCN, Att.CATRTB) as CatRTB
             val wal: String = Rules.getAttStr(Obj.RTPBCN, Att.RADWAL)
             when (cat) {
-                S57val.CatRTB.RTB_RAMK -> bstr += " Ramark"
-                S57val.CatRTB.RTB_RACN -> {
+                CatRTB.RTB_RAMK -> bstr += " Ramark"
+                CatRTB.RTB_RACN -> {
                     bstr += " Racon"
                     val astr: String = Rules.getAttStr(Obj.RTPBCN, Att.SIGGRP)
                     if (!astr.isEmpty()) {
@@ -397,7 +403,7 @@ object Signals : Rules() {
         }
         Renderer.symbol(
             Beacons.LightFlare, Symbols.Scheme(LightColours[col]),
-            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getRotateInstance(Math.toRadians(120.0)))
+            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getRotateInstance(deg2rad(120.0)))
         )
         if (Renderer.zoom >= 12) {
             var str: String? = ""
@@ -417,8 +423,8 @@ object Signals : Rules() {
                         continue
                     }
                     if (atts.containsKey(Att.CATLIT)) {
-                        val cats = atts[Att.CATLIT]!!.value as ArrayList<S57val.CatLIT?>?
-                        if (cats!!.contains(S57val.CatLIT.LIT_DIR)) {
+                        val cats = atts[Att.CATLIT]!!.value as ArrayList<CatLIT?>?
+                        if (cats!!.contains(CatLIT.LIT_DIR)) {
                             if (atts.containsKey(Att.ORIENT)) {
                                 dir = atts[Att.ORIENT]!!.value as Double?
                                 s1 = (dir!! - 4 + 360) % 360
@@ -431,8 +437,8 @@ object Signals : Rules() {
                                     if (satts === atts) continue
                                     if (srad == radius) {
                                         val scats =
-                                            (if (satts!!.containsKey(Att.CATLIT)) satts[Att.CATLIT]!!.value as ArrayList<S57val.CatLIT?>? else ArrayList<Any?>()) as ArrayList<S57val.CatLIT?>?
-                                        if (scats!!.contains(S57val.CatLIT.LIT_DIR)) {
+                                            (if (satts!!.containsKey(Att.CATLIT)) satts[Att.CATLIT]!!.value as ArrayList<CatLIT?>? else ArrayList<Any?>()) as ArrayList<CatLIT?>?
+                                        if (scats!!.contains(CatLIT.LIT_DIR)) {
                                             if (satts.containsKey(Att.ORIENT)) {
                                                 sdir = satts[Att.ORIENT]!!.value as Double?
                                                 ss1 = sdir!!
@@ -479,7 +485,7 @@ object Signals : Rules() {
                     }
                     str = ""
                     if (atts.containsKey(Att.LITCHR)) {
-                        str += LightCharacters[(atts[Att.LITCHR]!!.value as ArrayList<S57val.LitCHR>?)!![0]]
+                        str += LightCharacters[(atts[Att.LITCHR]!!.value as ArrayList<LitCHR>?)!![0]]
                     }
                     if (atts.containsKey(Att.SIGGRP)) {
                         str += "(" + atts[Att.SIGGRP]!!.value + ")"
@@ -502,7 +508,7 @@ object Signals : Rules() {
                 if (Renderer.zoom >= 15) {
                     class LitSect {
                         var dir = false
-                        var chr: S57val.LitCHR? = null
+                        var chr: LitCHR? = null
                         var col: ColCOL? = null
                         var grp: String? = null
                         var per = 0.0
@@ -514,17 +520,17 @@ object Signals : Rules() {
                     for (atts in lights.values) {
                         val sect = LitSect()
                         sect.dir =
-                            atts!!.containsKey(Att.CATLIT) && (atts[Att.CATLIT]!!.value as ArrayList<S57val.CatLIT?>?)!!.contains(
-                                S57val.CatLIT.LIT_DIR
+                            atts!!.containsKey(Att.CATLIT) && (atts[Att.CATLIT]!!.value as ArrayList<CatLIT?>?)!!.contains(
+                                CatLIT.LIT_DIR
                             )
                         sect.chr =
-                            if (atts.containsKey(Att.LITCHR)) (atts[Att.LITCHR]!!.value as ArrayList<S57val.LitCHR?>?)!![0] else S57val.LitCHR.CHR_UNKN
+                            if (atts.containsKey(Att.LITCHR)) (atts[Att.LITCHR]!!.value as ArrayList<LitCHR?>?)!![0] else LitCHR.CHR_UNKN
                         when (sect.chr) {
-                            S57val.LitCHR.CHR_AL -> sect.chr = S57val.LitCHR.CHR_F
-                            S57val.LitCHR.CHR_ALOC -> sect.chr = S57val.LitCHR.CHR_OC
-                            S57val.LitCHR.CHR_ALLFL -> sect.chr = S57val.LitCHR.CHR_LFL
-                            S57val.LitCHR.CHR_ALFL -> sect.chr = S57val.LitCHR.CHR_FL
-                            S57val.LitCHR.CHR_ALFFL -> sect.chr = S57val.LitCHR.CHR_FFL
+                            LitCHR.CHR_AL -> sect.chr = LitCHR.CHR_F
+                            LitCHR.CHR_ALOC -> sect.chr = LitCHR.CHR_OC
+                            LitCHR.CHR_ALLFL -> sect.chr = LitCHR.CHR_LFL
+                            LitCHR.CHR_ALFL -> sect.chr = LitCHR.CHR_FL
+                            LitCHR.CHR_ALFFL -> sect.chr = LitCHR.CHR_FFL
                             else -> {}
                         }
                         sect.grp =
@@ -538,7 +544,7 @@ object Signals : Rules() {
                         val cols =
                             (if (atts.containsKey(Att.COLOUR)) atts[Att.COLOUR]!!.value else ArrayList<Any?>()) as ArrayList<ColCOL>
                         sect.col = if (cols.size > 0) cols[0] else ColCOL.COL_UNK
-                        if (sect.chr !== S57val.LitCHR.CHR_UNKN && sect.col != null) litatts.add(sect)
+                        if (sect.chr !== LitCHR.CHR_UNKN && sect.col != null) litatts.add(sect)
                     }
                     val groupings = ArrayList<ArrayList<LitSect?>?>()
                     for (lit in litatts) {
@@ -629,20 +635,20 @@ object Signals : Rules() {
             } else {
                 if (Renderer.zoom >= 15) {
                     val atts = lights[0]
-                    var cats: ArrayList<S57val.CatLIT?>? = ArrayList()
+                    var cats: ArrayList<CatLIT?>? = ArrayList()
                     if (atts!!.containsKey(Att.CATLIT)) {
-                        cats = atts[Att.CATLIT]!!.value as ArrayList<S57val.CatLIT?>?
+                        cats = atts[Att.CATLIT]!!.value as ArrayList<CatLIT?>?
                     }
-                    str = if (cats!!.contains(S57val.CatLIT.LIT_DIR)) "Dir" else ""
+                    str = if (cats!!.contains(CatLIT.LIT_DIR)) "Dir" else ""
                     str += if (atts.containsKey(Att.MLTYLT)) atts[Att.MLTYLT]!!.value else ""
                     if (atts.containsKey(Att.LITCHR)) {
-                        val chr = (atts[Att.LITCHR]!!.value as ArrayList<S57val.LitCHR?>?)!![0]
+                        val chr = (atts[Att.LITCHR]!!.value as ArrayList<LitCHR?>?)!![0]
                         str += if (atts.containsKey(Att.SIGGRP)) {
                             val grp = atts[Att.SIGGRP]!!.value as String?
                             when (chr) {
-                                S57val.LitCHR.CHR_QLFL -> String.format("Q(%s)+LFl", grp)
-                                S57val.LitCHR.CHR_VQLFL -> String.format("VQ(%s)+LFl", grp)
-                                S57val.LitCHR.CHR_UQLFL -> String.format("UQ(%s)+LFl", grp)
+                                LitCHR.CHR_QLFL -> String.format("Q(%s)+LFl", grp)
+                                LitCHR.CHR_VQLFL -> String.format("VQ(%s)+LFl", grp)
+                                LitCHR.CHR_UQLFL -> String.format("UQ(%s)+LFl", grp)
                                 else -> String.format("%s(%s)", LightCharacters[chr], grp)
                             }
                         } else {
@@ -660,8 +666,8 @@ object Signals : Rules() {
                             }
                         }
                     }
-                    str += if (cats.contains(S57val.CatLIT.LIT_VERT)) "(vert)" else ""
-                    str += if (cats.contains(S57val.CatLIT.LIT_HORI)) "(hor)" else ""
+                    str += if (cats.contains(CatLIT.LIT_VERT)) "(vert)" else ""
+                    str += if (cats.contains(CatLIT.LIT_HORI)) "(hor)" else ""
                     str += if (!str.isEmpty() && (atts.containsKey(Att.SIGPER) || atts.containsKey(Att.HEIGHT) || atts.containsKey(
                             Att.VALMXR
                         ))
@@ -670,10 +676,10 @@ object Signals : Rules() {
                     str += if (atts.containsKey(Att.SIGPER)) df.format(atts[Att.SIGPER]!!.value) + "s" else ""
                     str += if (atts.containsKey(Att.HEIGHT)) df.format(atts[Att.HEIGHT]!!.value) + "m" else ""
                     str += if (atts.containsKey(Att.VALNMR)) df.format(atts[Att.VALNMR]!!.value) + "M" else ""
-                    str += if (cats.contains(S57val.CatLIT.LIT_FRNT)) "(Front)" else ""
-                    str += if (cats.contains(S57val.CatLIT.LIT_REAR)) "(Rear)" else ""
-                    str += if (cats.contains(S57val.CatLIT.LIT_UPPR)) "(Upper)" else ""
-                    str += if (cats.contains(S57val.CatLIT.LIT_LOWR)) "(Lower)" else ""
+                    str += if (cats.contains(CatLIT.LIT_FRNT)) "(Front)" else ""
+                    str += if (cats.contains(CatLIT.LIT_REAR)) "(Rear)" else ""
+                    str += if (cats.contains(CatLIT.LIT_UPPR)) "(Upper)" else ""
+                    str += if (cats.contains(CatLIT.LIT_LOWR)) "(Lower)" else ""
                     Renderer.labelText(
                         str, Font("Arial", Font.PLAIN, 40), Color.black,
                         Symbols.Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(60.0, -30.0))
@@ -685,7 +691,7 @@ object Signals : Rules() {
 
     internal class Sect {
         var dir = 0
-        var chr: S57val.LitCHR? = null
+        var chr: LitCHR? = null
         var col: ColCOL? = null
         var alt: ColCOL? = null
         var grp: String? = null
