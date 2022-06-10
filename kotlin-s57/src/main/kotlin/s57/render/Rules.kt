@@ -9,6 +9,7 @@ import s57.S57val.CatHAF
 import s57.S57val.CatLAM
 import s57.S57val.CatLMK
 import s57.S57val.CatROD
+import s57.S57val.CatSEA
 import s57.S57val.CatSIW
 import s57.S57val.CatWRK
 import s57.S57val.ColCOL
@@ -17,6 +18,7 @@ import s57.S57val.FncFNC
 import s57.S57val.unknAtt
 import s57.render.Renderer.labelText
 import s57.render.Renderer.lineSymbols
+import s57.render.Renderer.lineText
 import s57.render.Renderer.lineVector
 import s57.render.Renderer.symbol
 import s57.symbols.*
@@ -93,7 +95,7 @@ open class Rules {
             if (Renderer.zoom >= z) {
                 val name = name
                 if (name != null) {
-                    Renderer.labelText(name, font, colour, delta)
+                    labelText(name, font, colour, delta)
                 }
             }
         }
@@ -363,55 +365,55 @@ open class Rules {
                 Obj.PRCARE -> if (Renderer.zoom >= 12) {
                     lineVector(LineStyle(Symbols.Mline, 10f, floatArrayOf(40f, 40f)))
                 }
-                Obj.SEAARE -> when (getAttEnum(feature!!.type, Att.CATSEA) as S57val.CatSEA) {
-                    S57val.CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
-                        Renderer.lineText(name, Font("Arial", Font.PLAIN, 150), Color.black, -40.0)
+                Obj.SEAARE -> when (getAttEnum(feature!!.type, Att.CATSEA) as CatSEA) {
+                    CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
+                        lineText(name, Font("Arial", Font.PLAIN, 150), Color.black, -40.0)
                     } else {
-                        Renderer.labelText(
+                        labelText(
                             name, Font("Arial", Font.PLAIN, 150), Color.black,
                             Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                         )
                     }
-                    S57val.CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
-                        Renderer.lineText(name, Font("Arial", Font.PLAIN, 150), Color.black, -40.0)
+                    CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
+                        lineText(name, Font("Arial", Font.PLAIN, 150), Color.black, -40.0)
                     } else {
-                        Renderer.labelText(
+                        labelText(
                             name, Font("Arial", Font.PLAIN, 150), Color.black,
                             Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                         )
                     }
-                    S57val.CatSEA.SEA_SHOL -> if (Renderer.zoom >= 14) {
+                    CatSEA.SEA_SHOL -> if (Renderer.zoom >= 14) {
                         if (feature!!.geom!!.prim === S57map.Pflag.AREA) {
                             lineVector(LineStyle(Color(0xc480ff), 4f, floatArrayOf(25f, 25f)))
                             if (name != null) {
-                                Renderer.labelText(
+                                labelText(
                                     name, Font("Arial", Font.ITALIC, 75), Color.black,
                                     Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                                 )
-                                Renderer.labelText(
+                                labelText(
                                     "(Shoal)", Font("Arial", Font.PLAIN, 60), Color.black,
                                     Delta(Handle.BC)
                                 )
                             }
                         } else if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
                             if (name != null) {
-                                Renderer.lineText(name, Font("Arial", Font.ITALIC, 75), Color.black, -40.0)
-                                Renderer.lineText("(Shoal)", Font("Arial", Font.PLAIN, 60), Color.black, 0.0)
+                                lineText(name, Font("Arial", Font.ITALIC, 75), Color.black, -40.0)
+                                lineText("(Shoal)", Font("Arial", Font.PLAIN, 60), Color.black, 0.0)
                             }
                         } else {
                             if (name != null) {
-                                Renderer.labelText(
+                                labelText(
                                     name, Font("Arial", Font.ITALIC, 75), Color.black,
                                     Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                                 )
-                                Renderer.labelText(
+                                labelText(
                                     "(Shoal)", Font("Arial", Font.PLAIN, 60), Color.black,
                                     Delta(Handle.BC)
                                 )
                             }
                         }
                     }
-                    S57val.CatSEA.SEA_GAT, S57val.CatSEA.SEA_NRRW -> addName(12, Font("Arial", Font.PLAIN, 100))
+                    CatSEA.SEA_GAT, CatSEA.SEA_NRRW -> addName(12, Font("Arial", Font.PLAIN, 100))
                     else -> {}
                 }
                 Obj.SNDWAV -> if (Renderer.zoom >= 12) Renderer.fillPattern(Areas.Sandwaves)
@@ -466,7 +468,7 @@ open class Rules {
                         val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                         if (topmap!!.containsKey(Att.TOPSHP)) {
                             symbol(
-                                Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
+                                Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>)[0]],
                                 getScheme(Obj.TOPMAR), Topmarks.BeaconDelta
                             )
                         }
@@ -474,7 +476,7 @@ open class Rules {
                         val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                         if (topmap!!.containsKey(Att.TOPSHP)) {
                             symbol(
-                                Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
+                                Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>)[0]],
                                 getScheme(Obj.DAYMAR), Topmarks.BeaconDelta
                             )
                         }
@@ -501,7 +503,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>)[0]],
                             getScheme(Obj.TOPMAR), Topmarks.BuoyDeltas[shape]
                         )
                     }
@@ -509,7 +511,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>)[0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>)[0]],
                             getScheme(Obj.DAYMAR), Topmarks.BuoyDeltas[shape]
                         )
                     }
@@ -533,18 +535,18 @@ open class Rules {
                 var hstr = ""
                 if (atts != null) {
                     if (atts.containsKey(Att.HORCLR)) {
-                        horclr = (atts[Att.HORCLR].value as Double?)!!
+                        horclr = (atts[Att.HORCLR]!!.value as Double?)!!
                         hstr = horclr.toString()
                     }
                     verclr = if (atts.containsKey(Att.VERCLR)) {
-                        (atts[Att.VERCLR].value as Double?)!!
+                        (atts[Att.VERCLR]!!.value as Double?)!!
                     } else {
-                        if (atts.containsKey(Att.VERCSA)) (atts[Att.VERCSA].value as Double?)!! else 0.0
+                        if (atts.containsKey(Att.VERCSA)) (atts[Att.VERCSA]!!.value as Double?)!! else 0.0
                     }
                     verccl =
-                        if (atts.containsKey(Att.VERCCL)) (atts[Att.VERCCL].value as Double?)!! else 0.0
+                        if (atts.containsKey(Att.VERCCL)) (atts[Att.VERCCL]!!.value as Double?)!! else 0.0
                     vercop =
-                        if (atts.containsKey(Att.VERCOP)) (atts[Att.VERCOP].value as Double?)!! else 0.0
+                        if (atts.containsKey(Att.VERCOP)) (atts[Att.VERCOP]!!.value as Double?)!! else 0.0
                     if (verclr > 0) {
                         vstr += verclr.toString()
                     } else if (verccl > 0) {
@@ -555,21 +557,21 @@ open class Rules {
                         }
                     }
                     if (hstr.isEmpty() && !vstr.isEmpty()) {
-                        Renderer.labelText(
+                        labelText(
                             vstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.VCLR,
                             Color.black, Color.white, Delta(Handle.CC)
                         )
                     } else if (!hstr.isEmpty() && !vstr.isEmpty()) {
-                        Renderer.labelText(
+                        labelText(
                             vstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.VCLR,
                             Color.black, Color.white, Delta(Handle.BC)
                         )
-                        Renderer.labelText(
+                        labelText(
                             hstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.HCLR,
                             Color.black, Color.white, Delta(Handle.TC)
                         )
                     } else if (!hstr.isEmpty() && vstr.isEmpty()) {
-                        Renderer.labelText(
+                        labelText(
                             hstr, Font("Arial", Font.PLAIN, 30), Color.black, Renderer.LabelStyle.HCLR,
                             Color.black, Color.white, Delta(Handle.CC)
                         )
@@ -584,21 +586,21 @@ open class Rules {
                     lineSymbols(Areas.Cable, 0.0, null, null, 0, Symbols.Mline)
                 } else if (feature!!.type === Obj.CBLOHD) {
                     val atts = feature!!.objs!![Obj.CBLOHD]!![0]
-                    if (atts != null && atts.containsKey(Att.CATCBL) && atts[Att.CATCBL].value === S57val.CatCBL.CBL_POWR) {
+                    if (atts != null && atts.containsKey(Att.CATCBL) && atts[Att.CATCBL]!!.value === S57val.CatCBL.CBL_POWR) {
                         lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, Areas.CableFlash, 2, Color.black)
                     } else {
                         lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, null, 2, Color.black)
                     }
                     if (atts != null) {
                         if (atts.containsKey(Att.VERCLR)) {
-                            Renderer.labelText(
-                                java.lang.String.valueOf(atts[Att.VERCLR].value), Font("Arial", Font.PLAIN, 50),
+                            labelText(
+                                java.lang.String.valueOf(atts[Att.VERCLR]!!.value), Font("Arial", Font.PLAIN, 50),
                                 Color.black, Renderer.LabelStyle.VCLR, Color.black,
                                 Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
                             )
                         } else if (atts.containsKey(Att.VERCSA)) {
-                            Renderer.labelText(
-                                java.lang.String.valueOf(atts[Att.VERCSA].value), Font("Arial", Font.PLAIN, 50),
+                            labelText(
+                                java.lang.String.valueOf(atts[Att.VERCSA]!!.value), Font("Arial", Font.PLAIN, 50),
                                 Color.black, Renderer.LabelStyle.PCLR, Color.black,
                                 Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
                             )
@@ -631,7 +633,7 @@ open class Rules {
                 var chn: String?
                 if (!getAttStr(feature!!.type, Att.COMCHA).also { chn = it }
                         .isEmpty()) {
-                    Renderer.labelText(
+                    labelText(
                         "Ch.$chn", Font("Arial", Font.PLAIN, 50), Color.black,
                         Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 50.0))
                     )
@@ -660,15 +662,15 @@ open class Rules {
                     } else {
                         dd = if (tok.size == 2) tok[1] else ""
                     }
-                    Renderer.labelText(
+                    labelText(
                         ul, Font("Arial", Font.PLAIN, 30), Color.black,
                         Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 15.0))
                     )
-                    Renderer.labelText(
+                    labelText(
                         id, Font("Arial", Font.PLAIN, 30), Color.black,
                         Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 0.0))
                     )
-                    Renderer.labelText(
+                    labelText(
                         dd, Font("Arial", Font.PLAIN, 20), Color.black,
                         Delta(Handle.LC, AffineTransform.getTranslateInstance(15.0, 10.0))
                     )
@@ -688,7 +690,7 @@ open class Rules {
                 if (Renderer.zoom >= 15) {
                     val atts = getAtts(Obj.DISMAR, 0)
                     if (atts != null && atts.containsKey(Att.WTWDIS)) {
-                        val dist = atts[Att.WTWDIS].value as Double?
+                        val dist = atts[Att.WTWDIS]!!.value as Double?
                         var str = ""
                         if (atts.containsKey(Att.HUNITS)) {
                             when (getAttEnum(Obj.DISMAR, Att.HUNITS) as S57val.UniHLU) {
@@ -702,7 +704,7 @@ open class Rules {
                             }
                         }
                         str += String.format("%1.0f", dist)
-                        Renderer.labelText(
+                        labelText(
                             str, Font("Arial", Font.PLAIN, 40), Color.black,
                             Delta(Handle.CC, AffineTransform.getTranslateInstance(0.0, 45.0))
                         )
@@ -739,7 +741,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), Topmarks.FloatDelta
                         )
                     }
@@ -747,7 +749,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.DAYMAR), Topmarks.FloatDelta
                         )
                     }
@@ -778,7 +780,7 @@ open class Rules {
                     if (Renderer.zoom >= 14) {
                         symbol(Harbours.Anchor, Scheme(Symbols.Msymb))
                         if (Renderer.zoom >= 15) {
-                            Renderer.labelText(
+                            labelText(
                                 name ?: "", Font("Arial", Font.PLAIN, 30), Symbols.Msymb,
                                 Renderer.LabelStyle.RRCT, Symbols.Msymb, Color.white, Delta(Handle.BC)
                             )
@@ -786,7 +788,7 @@ open class Rules {
                     }
                     if (getAttVal(Obj.ACHBRT, Att.RADIUS) != null) {
                         var radius: Double
-                        if ((getAttVal(Obj.ACHBRT, Att.RADIUS) as Double?).also { radius = it } != 0.0) {
+                        if ((getAttVal(Obj.ACHBRT, Att.RADIUS) as Double?).also { radius = it!! } != 0.0) {
                             var units = getAttEnum(Obj.ACHBRT, Att.HUNITS) as S57val.UniHLU
                             if (units === S57val.UniHLU.HLU_UNKN) {
                                 units = S57val.UniHLU.HLU_METR
@@ -812,7 +814,7 @@ open class Rules {
                     )
                     val sts = getAttList(Obj.ACHARE, Att.STATUS) as ArrayList<S57val.StsSTS?>
                     if (Renderer.zoom >= 15 && sts.contains(S57val.StsSTS.STS_RESV)) {
-                        Renderer.labelText(
+                        labelText(
                             "Reserved", Font("Arial", Font.PLAIN, 50), Symbols.Mline,
                             Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 60.0))
                         )
@@ -822,7 +824,7 @@ open class Rules {
                     for (cat in cats) {
                         when (cat) {
                             S57val.CatACH.ACH_DEEP -> {
-                                Renderer.labelText(
+                                labelText(
                                     "DW", Font("Arial", Font.BOLD, 50), Symbols.Msymb,
                                     Delta(
                                         Handle.RC,
@@ -832,7 +834,7 @@ open class Rules {
                                 dy += 60
                             }
                             S57val.CatACH.ACH_TANK -> {
-                                Renderer.labelText(
+                                labelText(
                                     "Tanker", Font("Arial", Font.BOLD, 50), Symbols.Msymb,
                                     Delta(
                                         Handle.RC,
@@ -842,7 +844,7 @@ open class Rules {
                                 dy += 60
                             }
                             S57val.CatACH.ACH_H24P -> {
-                                Renderer.labelText(
+                                labelText(
                                     "24h", Font("Arial", Font.BOLD, 50), Symbols.Msymb,
                                     Delta(
                                         Handle.RC,
@@ -1002,7 +1004,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), null
                         )
                     }
@@ -1010,7 +1012,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.DAYMAR), null
                         )
                     }
@@ -1037,7 +1039,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), Topmarks.LightDelta
                         )
                     }
@@ -1045,7 +1047,7 @@ open class Rules {
                     val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
-                            Topmarks.Shapes[(topmap[Att.TOPSHP].value as ArrayList<S57val.TopSHP?>?)!![0]],
+                            Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<S57val.TopSHP?>?)!![0]],
                             getScheme(Obj.DAYMAR), Topmarks.LightDelta
                         )
                     }
@@ -1164,7 +1166,7 @@ open class Rules {
                 if (getAttEnum(feature!!.type, Att.CATOBS) === S57val.CatOBS.OBS_BOOM) {
                     lineVector(LineStyle(Color.black, 5f, floatArrayOf(20f, 20f), null))
                     if (Renderer.zoom >= 15) {
-                        Renderer.lineText("Boom", Font("Arial", Font.PLAIN, 80), Color.black, -20.0)
+                        lineText("Boom", Font("Arial", Font.PLAIN, 80), Color.black, -20.0)
                     }
                 }
             }
@@ -1194,7 +1196,7 @@ open class Rules {
                             if (atts.containsKey(Att.VERCSA)) (atts[Att.VERCSA]!!.value as Double?)!! else 0.0
                         }
                         if (verclr > 0) {
-                            Renderer.labelText(
+                            labelText(
                                 verclr.toString(), Font("Arial", Font.PLAIN, 50), Color.black,
                                 Renderer.LabelStyle.VCLR, Color.black,
                                 Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
@@ -1273,7 +1275,7 @@ open class Rules {
                             val lev = getAttEnum(feature!!.type, Att.WATLEV) as S57val.WatLEV
                             if (lev === S57val.WatLEV.LEV_CVRS) {
                                 lineVector(LineStyle(Color.black, 10f, floatArrayOf(40f, 40f), null))
-                                if (Renderer.zoom >= 15) Renderer.lineText(
+                                if (Renderer.zoom >= 15) lineText(
                                     "(covers)",
                                     Font("Arial", Font.PLAIN, 60),
                                     Color.black,
@@ -1282,7 +1284,7 @@ open class Rules {
                             } else {
                                 lineVector(LineStyle(Color.black, 10f, null, null))
                             }
-                            if (Renderer.zoom >= 15) Renderer.lineText(
+                            if (Renderer.zoom >= 15) lineText(
                                 "Training Wall",
                                 Font("Arial", Font.PLAIN, 60),
                                 Color.black,
@@ -1350,7 +1352,7 @@ open class Rules {
                     Obj.RADSTA -> {
                         symbol(Harbours.SignalStation)
                         symbol(Beacons.RadarStation)
-                        Renderer.labelText(
+                        labelText(
                             "Ra", Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
                             Delta(Handle.TR, AffineTransform.getTranslateInstance(-30.0, -70.0))
                         )
@@ -1363,7 +1365,7 @@ open class Rules {
                         )
                         val cat = getAttEnum(feature!!.type, Att.CATPIL) as S57val.CatPIL
                         if (cat === S57val.CatPIL.PIL_HELI) {
-                            Renderer.labelText(
+                            labelText(
                                 "H", Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
                                 Delta(Handle.LC, AffineTransform.getTranslateInstance(70.0, 0.0))
                             )
@@ -1381,7 +1383,7 @@ open class Rules {
                     else -> {}
                 }
                 if (Renderer.zoom >= 15 && !str.isEmpty()) {
-                    Renderer.labelText(
+                    labelText(
                         str, Font("Arial", Font.PLAIN, 40), Color.black,
                         Delta(Handle.LC, AffineTransform.getTranslateInstance(40.0, 0.0))
                     )
@@ -1410,7 +1412,7 @@ open class Rules {
                 var ort: Double?
                 if ((getAttVal(feature!!.type, Att.ORIENT) as Double?).also { ort = it } != null) {
                     str += df.format(ort) + "º"
-                    if (!str.isEmpty()) Renderer.lineText(str, Font("Arial", Font.PLAIN, 80), Color.black, -20.0)
+                    if (!str.isEmpty()) lineText(str, Font("Arial", Font.PLAIN, 80), Color.black, -20.0)
                 }
             }
         }

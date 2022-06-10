@@ -4,6 +4,7 @@ package s57.symbols
 import s57.S57val.BoySHP
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
+import s57.symbols.Symbols.Symbol
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.Arc2D
@@ -16,10 +17,10 @@ import java.awt.geom.Path2D
  */
 object Buoys {
 
-    val Barrel = Symbols.Symbol()
+    val Barrel = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-50.0, 0.0)
         p.curveTo(-50.0, -11.0, -45.0, -32.0, -32.0, -36.0)
@@ -45,10 +46,10 @@ object Buoys {
         Barrel.add(Instr(Form.PLIN, p))
     }
 
-    val Can = Symbols.Symbol()
+    val Can = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-31.6, 0.0)
         p.lineTo(-15.7, -47.4)
@@ -110,10 +111,10 @@ object Buoys {
         Can.add(Instr(Form.PLIN, p))
     }
 
-    val Cone = Symbols.Symbol()
+    val Cone = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-31.6, 0.0)
         p.curveTo(-24.9, -32.2, 1.4, -38.7, 12.7, -37.9)
@@ -173,10 +174,10 @@ object Buoys {
     }
 
 
-    val Float = Symbols.Symbol()
+    val Float = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-36.0, 0.0)
         p.lineTo(-47.0, -33.0)
@@ -258,10 +259,10 @@ object Buoys {
         Float.add(Instr(Form.PLIN, p))
     }
 
-    val Ice = Symbols.Symbol()
+    val Ice = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-15.0, 0.0)
         p.quadTo(-30.0, 0.0, -30.0, -15.0)
@@ -295,10 +296,10 @@ object Buoys {
         Ice.add(Instr(Form.PLIN, p))
     }
 
-    val Pillar = Symbols.Symbol()
+    val Pillar = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-32.0, 0.0)
         p.lineTo(-2.8, -32.5)
@@ -370,10 +371,10 @@ object Buoys {
         Pillar.add(Instr(Form.PLIN, p))
     }
 
-    val Spar = Symbols.Symbol()
+    val Spar = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-3.2, -9.5)
         p.lineTo(25.6, -96.7)
@@ -430,10 +431,10 @@ object Buoys {
         Spar.add(Instr(Form.PLIN, p))
     }
 
-    val Sphere = Symbols.Symbol()
+    val Sphere = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-25.0, 0.0)
         p.curveTo(-32.0, -21.0, -14.0, -45.5, 12.7, -37.9)
@@ -489,7 +490,7 @@ object Buoys {
     }
 
 
-    val Storage = Symbols.Symbol()
+    val Storage = Symbol()
 
     init {
         Storage.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -508,10 +509,10 @@ object Buoys {
     }
 
 
-    val Super = Symbols.Symbol()
+    val Super = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-48.0, 0.0)
         p.lineTo(-28.0, -42.0)

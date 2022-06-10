@@ -3,6 +3,8 @@ package s57.symbols
 
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
+import s57.symbols.Symbols.SubSymbol
+import s57.symbols.Symbols.Symbol
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.*
@@ -12,7 +14,7 @@ import java.awt.geom.*
  */
 object Harbours {
 
-    val Anchor = Symbols.Symbol()
+    val Anchor = Symbol()
 
     init {
         Anchor.add(Instr(Form.BBOX, Rectangle2D.Double(-60.0, -60.0, 120.0, 120.0)))
@@ -45,7 +47,7 @@ object Harbours {
         Anchor.add(Instr(Form.PGON, p))
     }
 
-    val Yacht = Symbols.Symbol()
+    val Yacht = Symbol()
 
     init {
         Yacht.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -68,18 +70,18 @@ object Harbours {
         Yacht.add(Instr(Form.PGON, p))
     }
 
-    val Anchorage = Symbols.Symbol()
+    val Anchorage = Symbol()
 
     init {
         Anchorage.add(
             Instr(
                 Form.SYMB,
-                Symbols.SubSymbol(Anchor, 0.67, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
+                SubSymbol(Anchor, 0.67, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
             )
         )
     }
 
-    val Bollard = Symbols.Symbol()
+    val Bollard = Symbol()
 
     init {
         Bollard.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -91,7 +93,7 @@ object Harbours {
     }
 
 
-    val CallPoint1 = Symbols.Symbol()
+    val CallPoint1 = Symbol()
 
     init {
         CallPoint1.add(Instr(Form.BBOX, Rectangle2D.Double(-50.0, -50.0, 100.0, 100.0)))
@@ -106,11 +108,11 @@ object Harbours {
     }
 
 
-    val CallPoint2 = Symbols.Symbol()
+    val CallPoint2 = Symbol()
 
     init {
         CallPoint2.add(Instr(Form.BBOX, Rectangle2D.Double(-50.0, -50.0, 100.0, 100.0)))
-        CallPoint2.add(Instr(Form.SYMB, Symbols.SubSymbol(CallPoint1, 1.0, 0.0, 0.0, null, null)))
+        CallPoint2.add(Instr(Form.SYMB, SubSymbol(CallPoint1, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-16.0, 20.0)
         p.lineTo(0.0, 50.0)
@@ -118,8 +120,7 @@ object Harbours {
         CallPoint2.add(Instr(Form.PLIN, p))
     }
 
-
-    val ContainerCrane = Symbols.Symbol()
+    val ContainerCrane = Symbol()
 
     init {
         ContainerCrane.add(
@@ -132,7 +133,7 @@ object Harbours {
         ContainerCrane.add(Instr(Form.RECT, Rectangle2D.Double(-40.0, -12.5, 80.0, 25.0)))
     }
 
-    val Customs = Symbols.Symbol()
+    val Customs = Symbol()
 
     init {
         Customs.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -143,7 +144,7 @@ object Harbours {
     }
 
 
-    val DeviationDolphin = Symbols.Symbol()
+    val DeviationDolphin = Symbol()
 
     init {
         DeviationDolphin.add(
@@ -165,7 +166,7 @@ object Harbours {
     }
 
 
-    val DistanceI = Symbols.Symbol()
+    val DistanceI = Symbol()
 
     init {
         DistanceI.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -173,7 +174,7 @@ object Harbours {
     }
 
 
-    val DistanceU = Symbols.Symbol()
+    val DistanceU = Symbol()
 
     init {
         DistanceU.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -182,7 +183,7 @@ object Harbours {
     }
 
 
-    val Dolphin = Symbols.Symbol()
+    val Dolphin = Symbol()
 
     init {
         Dolphin.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -203,7 +204,7 @@ object Harbours {
     }
 
 
-    val Explosives = Symbols.Symbol()
+    val Explosives = Symbol()
 
     init {
         Explosives.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -223,7 +224,7 @@ object Harbours {
     }
 
 
-    val Fishing = Symbols.Symbol()
+    val Fishing = Symbol()
 
     init {
         Fishing.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -251,7 +252,7 @@ object Harbours {
     }
 
 
-    val Harbour = Symbols.Symbol()
+    val Harbour = Symbol()
 
     init {
         Harbour.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -260,12 +261,12 @@ object Harbours {
         Harbour.add(
             Instr(
                 Form.SYMB,
-                Symbols.SubSymbol(Anchor, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
+                SubSymbol(Anchor, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
             )
         )
     }
 
-    val HarbourMaster = Symbols.Symbol()
+    val HarbourMaster = Symbol()
 
     init {
         HarbourMaster.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -276,11 +277,11 @@ object Harbours {
             )
         )
         HarbourMaster.add(Instr(Form.ELPS, Ellipse2D.Double(-24.0, -28.0, 48.0, 56.0)))
-        HarbourMaster.add(Instr(Form.SYMB, Symbols.SubSymbol(Anchor, 0.4, 0.0, 0.0, null, null)))
+        HarbourMaster.add(Instr(Form.SYMB, SubSymbol(Anchor, 0.4, 0.0, 0.0, null, null)))
     }
 
 
-    val Hospital = Symbols.Symbol()
+    val Hospital = Symbol()
 
     init {
         Hospital.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -302,7 +303,7 @@ object Harbours {
         Hospital.add(Instr(Form.PLIN, p))
     }
 
-    val LandingSteps = Symbols.Symbol()
+    val LandingSteps = Symbol()
 
     init {
         LandingSteps.add(Instr(Form.FILL, Symbols.Msymb))
@@ -323,7 +324,7 @@ object Harbours {
     }
 
 
-    val Marina = Symbols.Symbol()
+    val Marina = Symbol()
 
     init {
         Marina.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -337,25 +338,25 @@ object Harbours {
         Marina.add(
             Instr(
                 Form.SYMB,
-                Symbols.SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
+                SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
             )
         )
     }
 
 
-    val MarinaNF = Symbols.Symbol()
+    val MarinaNF = Symbol()
 
     init {
         MarinaNF.add(
             Instr(
                 Form.SYMB,
-                Symbols.SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
+                SubSymbol(Yacht, 0.6, 0.0, 0.0, Symbols.Scheme(Symbols.Msymb), null)
             )
         )
     }
 
 
-    val Pilot = Symbols.Symbol()
+    val Pilot = Symbol()
 
     init {
         Pilot.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -371,7 +372,7 @@ object Harbours {
     }
 
 
-    val PortCrane = Symbols.Symbol()
+    val PortCrane = Symbol()
 
     init {
         PortCrane.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -385,14 +386,14 @@ object Harbours {
     }
 
 
-    val Post = Symbols.Symbol()
+    val Post = Symbol()
 
     init {
         Post.add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
     }
 
 
-    val Rescue = Symbols.Symbol()
+    val Rescue = Symbol()
 
     init {
         Rescue.add(Instr(Form.BBOX, Rectangle2D.Double(-20.0, -50.0, 40.0, 100.0)))
@@ -408,7 +409,7 @@ object Harbours {
     }
 
 
-    val SignalStation = Symbols.Symbol()
+    val SignalStation = Symbol()
 
     init {
         SignalStation.add(
@@ -422,7 +423,7 @@ object Harbours {
     }
 
 
-    val TideGauge = Symbols.Symbol()
+    val TideGauge = Symbol()
 
     init {
         TideGauge.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))

@@ -14,15 +14,10 @@ import java.awt.geom.*
 object Symbols {
 
     val Yland = Color(0xedbc0c)
-
     val Bwater = Color(0x9bc5e3)
-
     val Gdries = Color(0x689868)
-
     val Mline = Color(0x9a6078)
-
     val Msymb = Color(0xa30075)
-
     val Mtss = Color(-0x3f3b7f01, true)
 
     fun drawSymbol(g2: Graphics2D, symbol: Symbol?, scale: Double, x: Double, y: Double, cs: Scheme?, dd: Delta?) {
@@ -242,7 +237,8 @@ object Symbols {
     }
 
     enum class Form {
-        BBOX, STRK, COLR, FILL, LINE, RECT, RRCT, ELPS, EARC, PLIN, PGON, RSHP, TEXT, SYMB, N1, N2, P1, P2, H2, H3, H4, H5, V2, V3, D2, D3, D4, B1, S2, S3, S4, C2, X2
+        BBOX, STRK, COLR, FILL, LINE, RECT, RRCT, ELPS, EARC, PLIN, PGON, RSHP, TEXT, SYMB,
+        N1, N2, P1, P2, H2, H3, H4, H5, V2, V3, D2, D3, D4, B1, S2, S3, S4, C2, X2
     }
 
     enum class Patt {
@@ -343,6 +339,7 @@ object Symbols {
     }
 
     class Symbol : ArrayList<Instr?>()
+
     class SubSymbol(
         var instr: Symbol?,
         var scale: Double,

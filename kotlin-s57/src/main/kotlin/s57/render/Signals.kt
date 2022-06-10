@@ -191,7 +191,7 @@ object Signals : Rules() {
     fun fogSignals() {
         if (Renderer.zoom >= 11) Renderer.symbol(Beacons.FogSignal)
         if (Renderer.zoom >= 15) {
-            val atts: S57map.AttMap? = Rules.feature!!.objs!!.get(Obj.FOGSIG)!!.get(0)
+            val atts: S57map.AttMap? = Rules.feature!!.objs!![Obj.FOGSIG]!![0]
             if (atts != null) {
                 var str: String? = ""
                 if (atts.containsKey(Att.CATFOG)) {
@@ -377,7 +377,7 @@ object Signals : Rules() {
     fun lights() {
         var col: Enum<ColCOL>? = null
         var tcol: Enum<ColCOL>? = null
-        val lights = Rules.feature!!.objs!!.get(Obj.LIGHTS)
+        val lights = Rules.feature!!.objs!![Obj.LIGHTS]
         for (atts in lights!!.values) {
             if (atts!!.containsKey(Att.COLOUR)) {
                 val cols = atts[Att.COLOUR]!!.value as ArrayList<Enum<ColCOL>>?
@@ -396,7 +396,7 @@ object Signals : Rules() {
             }
         }
         Renderer.symbol(
-            Beacons.LightFlare, Symbols.Scheme(LightColours.get(col)),
+            Beacons.LightFlare, Symbols.Scheme(LightColours[col]),
             Symbols.Delta(Symbols.Handle.BC, AffineTransform.getRotateInstance(Math.toRadians(120.0)))
         )
         if (Renderer.zoom >= 12) {
@@ -488,14 +488,14 @@ object Signals : Rules() {
                     }
                     if (atts.containsKey(Att.COLOUR)) {
                         val cols = atts[Att.COLOUR]!!.value as ArrayList<Enum<ColCOL>?>?
-                        str += LightLetters.get(cols!![0])
-                        if (cols.size > 1) str += LightLetters.get(cols[1])
+                        str += LightLetters[cols!![0]]
+                        if (cols.size > 1) str += LightLetters[cols[1]]
                     }
                     if (atts.containsKey(Att.SIGPER)) {
                         str += "." + df.format(atts[Att.SIGPER]!!.value) + "s"
                     }
                     if (s1 <= 360 && s2 <= 360 && s1 != s2) Renderer.lightSector(
-                        LightColours.get(col1), LightColours.get(col2), radius, s1, s2, dir,
+                        LightColours[col1], LightColours[col2], radius, s1, s2, dir,
                         if (Renderer.zoom >= 15) str else ""
                     )
                 }

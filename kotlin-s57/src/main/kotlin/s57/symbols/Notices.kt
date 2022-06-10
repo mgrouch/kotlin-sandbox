@@ -20,7 +20,7 @@ import java.awt.geom.*
  * @author Malcolm Herring
  */
 object Notices {
-    // CHECKSTYLE.OFF: LineLength
+
     private val Bollard = Symbol()
 
     init {
@@ -2027,7 +2027,6 @@ object Notices {
         NoticeTriangle.add(Instr(Form.PLIN, p))
     }
 
-    // CHECKSTYLE.OFF: SingleSpaceSeparator
     val NmkCevni = mapOf(
         CatNMK.NMK_UNKN to Notice,
         CatNMK.NMK_NENT to NoticeA1,

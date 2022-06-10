@@ -5,6 +5,7 @@ package s57.symbols
 import s57.S57val.BcnSHP
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
+import s57.symbols.Symbols.Symbol
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.*
@@ -14,10 +15,10 @@ import java.awt.geom.*
  */
 object Beacons {
 
-    val Beacon = Symbols.Symbol()
+    val Beacon = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-6.0, -8.5)
         p.lineTo(-6.0, -70.0)
@@ -76,7 +77,7 @@ object Beacons {
         Beacon.add(Instr(Form.PLIN, p))
     }
 
-    val Cairn = Symbols.Symbol()
+    val Cairn = Symbol()
 
     init {
         Cairn.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
@@ -90,7 +91,7 @@ object Beacons {
     }
 
 
-    val FogSignal = Symbols.Symbol()
+    val FogSignal = Symbol()
 
     init {
         FogSignal.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
@@ -118,10 +119,10 @@ object Beacons {
         )
     }
 
-    val Lattice = Symbols.Symbol()
+    val Lattice = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-20.0, 0.0)
         p.lineTo(-15.0, -70.0)
@@ -192,7 +193,7 @@ object Beacons {
     }
 
 
-    val LightFlare = Symbols.Symbol()
+    val LightFlare = Symbol()
 
     init {
         LightFlare.add(Instr(Form.BBOX, Rectangle2D.Double(-20.0, -100.0, 40.0, 100.0)))
@@ -206,7 +207,7 @@ object Beacons {
     }
 
 
-    val LightMajor = Symbols.Symbol()
+    val LightMajor = Symbol()
 
     init {
         LightMajor.add(Instr(Form.FILL, Color.black))
@@ -231,7 +232,7 @@ object Beacons {
     }
 
 
-    val LightMinor = Symbols.Symbol()
+    val LightMinor = Symbol()
 
     init {
         LightMinor.add(Instr(Form.FILL, Color.black))
@@ -251,7 +252,7 @@ object Beacons {
     }
 
 
-    val PerchPort = Symbols.Symbol()
+    val PerchPort = Symbol()
 
     init {
         PerchPort.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
@@ -263,7 +264,7 @@ object Beacons {
     }
 
 
-    val PerchStarboard = Symbols.Symbol()
+    val PerchStarboard = Symbol()
 
     init {
         PerchStarboard.add(
@@ -280,7 +281,7 @@ object Beacons {
     }
 
 
-    val RadarStation = Symbols.Symbol()
+    val RadarStation = Symbol()
 
     init {
         RadarStation.add(
@@ -294,13 +295,13 @@ object Beacons {
     }
 
 
-    val Stake = Symbols.Symbol()
+    val Stake = Symbol()
 
     init {
         Stake.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Stake.add(Instr(Form.FILL, Color.black))
         Stake.add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -70.0)))
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-2.0, 0.0)
         p.lineTo(-2.0, -70.0)
@@ -341,10 +342,10 @@ object Beacons {
         Stake.add(Instr(Form.LINE, Line2D.Double(-10.0, 0.0, 10.0, 0.0)))
     }
 
-    val Tower = Symbols.Symbol()
+    val Tower = Symbol()
 
     init {
-        val colours = Symbols.Symbol()
+        val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-25.0, 0.0)
         p.lineTo(-20.0, -70.0)
@@ -407,7 +408,7 @@ object Beacons {
     }
 
 
-    val WithyPort = Symbols.Symbol()
+    val WithyPort = Symbol()
 
     init {
         WithyPort.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
@@ -421,7 +422,7 @@ object Beacons {
     }
 
 
-    val WithyStarboard = Symbols.Symbol()
+    val WithyStarboard = Symbol()
 
     init {
         WithyStarboard.add(

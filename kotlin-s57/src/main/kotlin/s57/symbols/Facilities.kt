@@ -5,6 +5,7 @@ import s57.S57val
 import s57.S57val.CatSCF
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
+import s57.symbols.Symbols.Symbol
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.*
@@ -14,8 +15,8 @@ import java.awt.geom.*
  * @author Malcolm Herring
  */
 object Facilities {
-    // CHECKSTYLE.OFF: LineLength
-    private val Facility = Symbols.Symbol()
+
+    private val Facility = Symbol()
 
     init {
         Facility.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
@@ -26,7 +27,7 @@ object Facilities {
         Facility.add(Instr(Form.RRCT, s))
     }
 
-    val Boatlift = Symbols.Symbol() //was Crane
+    val Boatlift = Symbol() //was Crane
 
     init {
         Boatlift.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -37,7 +38,7 @@ object Facilities {
         Boatlift.add(Instr(Form.EARC, Arc2D.Double(-10.0, -1.5, 20.0, 20.0, 75.0, -260.0, Arc2D.OPEN)))
     }
 
-    val Boatyard = Symbols.Symbol()
+    val Boatyard = Symbol()
 
     init {
         Boatyard.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -58,7 +59,7 @@ object Facilities {
         Boatyard.add(Instr(Form.PGON, p))
     }
 
-    val Chandler = Symbols.Symbol()
+    val Chandler = Symbol()
 
     init {
         Chandler.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -71,7 +72,7 @@ object Facilities {
         Chandler.add(Instr(Form.EARC, Arc2D.Double(-16.0, -20.5, 24.0, 24.0, 0.0, 180.0, Arc2D.OPEN)))
     }
 
-    val Fuel = Symbols.Symbol()
+    val Fuel = Symbol()
 
     init {
         Fuel.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -114,7 +115,7 @@ object Facilities {
         Fuel.add(Instr(Form.PLIN, p))
     }
 
-    val Laundrette = Symbols.Symbol()
+    val Laundrette = Symbol()
 
     init {
         Laundrette.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -140,7 +141,7 @@ object Facilities {
         Laundrette.add(Instr(Form.PLIN, p))
     }
 
-    val PumpOut = Symbols.Symbol()
+    val PumpOut = Symbol()
 
     init {
         PumpOut.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -181,7 +182,7 @@ object Facilities {
         PumpOut.add(Instr(Form.PGON, p))
     }
 
-    val SailingClub = Symbols.Symbol()
+    val SailingClub = Symbol()
 
     init {
         SailingClub.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -197,7 +198,7 @@ object Facilities {
         SailingClub.add(Instr(Form.PGON, p))
     }
 
-    val Shower = Symbols.Symbol()
+    val Shower = Symbol()
 
     init {
         Shower.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -217,7 +218,7 @@ object Facilities {
         Shower.add(Instr(Form.PLIN, p))
     }
 
-    val Slipway = Symbols.Symbol()
+    val Slipway = Symbol()
 
     init {
         Slipway.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -255,7 +256,7 @@ object Facilities {
         Slipway.add(Instr(Form.PGON, p))
     }
 
-    val Toilet = Symbols.Symbol()
+    val Toilet = Symbol()
 
     init {
         Toilet.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -311,7 +312,7 @@ object Facilities {
         Toilet.add(Instr(Form.PGON, p))
     }
 
-    val VisitorBerth = Symbols.Symbol()
+    val VisitorBerth = Symbol()
 
     init {
         VisitorBerth.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
@@ -330,7 +331,7 @@ object Facilities {
         VisitorBerth.add(Instr(Form.PGON, p))
     }
 
-    val VisitorMooring = Symbols.Symbol()
+    val VisitorMooring = Symbol()
 
     init {
         VisitorMooring.add(Instr(Form.FILL, Color(0xa30075)))

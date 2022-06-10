@@ -917,7 +917,7 @@ object Renderer {
                 )
             )
         }
-        if (str != null && !str.isEmpty()) {
+        if (str != null && str.isNotEmpty()) {
             var font = Font("Arial", Font.PLAIN, 40)
             val arc = if (s2 > s1) s2 - s1 else s2 - s1 + 360
             val awidth = Math.toRadians(arc) * radial

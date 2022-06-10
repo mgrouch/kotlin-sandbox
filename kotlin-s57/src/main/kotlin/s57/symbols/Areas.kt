@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage
  * @author Malcolm Herring
  */
 object Areas {
-    // CHECKSTYLE.OFF: LineLength
 
     val Plane = Symbols.Symbol()
 
