@@ -2,6 +2,7 @@
 package s57
 
 import s57.S57att.Att
+import s57.S57map.Snode
 import s57.S57obj.Obj
 import s57.S57val.CatROD
 import s57.S57val.Conv
@@ -80,7 +81,7 @@ object S57osm {
         }
         return
     }
-    
+
     fun OSMmap(`in`: BufferedReader?, map: S57map?, bb: Boolean) {
         var k: String?
         var v: String
@@ -92,10 +93,10 @@ object S57osm {
         var inWay = false
         var inRel = false
 
-        map!!.nodes!![1L] = S57map.Snode()
-        map.nodes!![2L] = S57map.Snode()
-        map.nodes!![3L] = S57map.Snode()
-        map.nodes!![4L] = S57map.Snode()
+        map!!.nodes!![1L] = Snode()
+        map.nodes!![2L] = Snode()
+        map.nodes!![3L] = Snode()
+        map.nodes!![4L] = Snode()
 
         var ln: String?
         while (`in`!!.readLine().also { ln = it } != null) {

@@ -1,27 +1,27 @@
 // License: GPL. For details, see LICENSE file.
 package s57
 
+import kotlin.math.*
+
 import s57.S57att.Att
 import s57.S57map.Pflag.*
 import s57.S57obj.Obj
-import kotlin.math.abs
-import kotlin.math.acos
-import kotlin.math.cos
-import kotlin.math.sin
-
 
 /**
  * @author Malcolm Herring
  * @author mgrouch
  */
+
+fun deg2rad(deg: Double): Double = deg * PI / 180
+
 class S57map(private val sea: Boolean) {
 
     // S57/OSM map generation methods
     class MapBounds {
-        var minlat: Double = toRadians(90.0)
-        var minlon: Double = toRadians(180.0)
-        var maxlat: Double = toRadians(-90.0)
-        var maxlon: Double = toRadians(-180.0)
+        var minlat: Double = deg2rad(90.0)
+        var minlon: Double = deg2rad(180.0)
+        var maxlat: Double = deg2rad(-90.0)
+        var maxlon: Double = deg2rad(-180.0)
     }
 
     enum class Nflag {
@@ -201,14 +201,14 @@ class S57map(private val sea: Boolean) {
 
     // S57 map building methods
     fun newNode(id: Long, lat: Double, lon: Double, flag: Nflag?) {
-        nodes!![id] = Snode(toRadians(lat), toRadians(lon), flag)
+        nodes!![id] = Snode(deg2rad(lat), deg2rad(lon), flag)
         if (flag == Nflag.ANON) {
             edge!!.nodes!!.add(id)
         }
     }
 
     fun newNode(id: Long, lat: Double, lon: Double, depth: Double) {
-        nodes!![id] = Snode(toRadians(lat), toRadians(lon), depth)
+        nodes!![id] = Snode(deg2rad(lat), deg2rad(lon), depth)
     }
 
     fun newFeature(id: Long, p: Pflag?, objl: Long) {
@@ -303,7 +303,7 @@ class S57map(private val sea: Boolean) {
 
     // OSM map building methods
     fun addNode(id: Long, lat: Double, lon: Double) {
-        nodes!![id] = Snode(toRadians(lat), toRadians(lon))
+        nodes!![id] = Snode(deg2rad(lat), deg2rad(lon))
         feature = Feature()
         feature!!.id = id
         feature!!.reln = Rflag.UNKN
