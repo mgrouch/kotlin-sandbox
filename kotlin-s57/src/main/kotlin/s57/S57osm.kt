@@ -7,8 +7,6 @@ import s57.S57obj.Obj
 import s57.S57val.CatROD
 import s57.S57val.Conv
 
-import java.io.BufferedReader
-
 /**
  * @author Malcolm Herring
  * @author mgrouch

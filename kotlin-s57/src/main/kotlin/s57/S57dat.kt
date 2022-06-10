@@ -5,8 +5,6 @@ import s57.S57map.Pflag.POINT
 import s57.S57obj.Obj
 
 import kotlin.math.abs
-import kotlin.system.exitProcess
-import kotlin.text.Charsets.UTF_8
 
 /**
  * @author Malcolm Herring
@@ -353,8 +351,7 @@ object S57dat {
                     index = 0
                     wrap = true
                 } else {
-                    println("ERROR: Subfield not found " + subf.name + " in " + field!!.name + " in record " + rnum)
-                    exitProcess(-1)
+                    throw Exception("ERROR: Subfield not found " + subf.name + " in " + field!!.name + " in record " + rnum)
                 }
             }
             val sub = subs[index++]
@@ -477,8 +474,7 @@ object S57dat {
             try {
                 buffer = "$sval ".toByteArray(charset("ISO-8859-1"))
             } catch (e: Exception) {
-                println(e.message)
-                exitProcess(-1)
+                throw Exception(e.message)
             }
             if (conv.asc == 0) {
                 buffer[index] = 0x01f

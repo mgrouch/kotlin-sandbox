@@ -6,10 +6,6 @@ import s57.S57dat.S57subf
 import s57.S57map.Nflag
 import s57.S57map.Pflag.*
 
-import java.io.InputStream
-
-import kotlin.system.exitProcess
-
 /**
  * @author Malcolm Herring
  * @author mgrouch
@@ -44,8 +40,7 @@ object S57dec {
                 ddr = leader[6] == 'L'.code.toByte()
                 fields = String(leader, 12, 5).toInt() - 24
             } catch (e: Exception) {
-                println("Invalid file format - Encrypted/compressed ENC file?")
-                exitProcess(-1)
+                throw Exception("Invalid file format - Encrypted/compressed ENC file?")
             }
             mapfl = leader[20] - '0'.code.toByte()
             mapfp = leader[21] - '0'.code.toByte()

@@ -8,7 +8,7 @@ import s57.S57obj.Obj
 
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-import kotlin.system.exitProcess
+import kotlin.js.Date
 
 /**
  * @author Malcolm Herring
@@ -1637,8 +1637,7 @@ object S57enc {
                     "HUNI" -> huni = entry.value!!.toInt()
                 }
             } catch (e: Exception) {
-                println("Meta data (" + entry.key + "=" + entry.value + "):" + e.message)
-                exitProcess(-1)
+                throw Exception("Meta data (" + entry.key + "=" + entry.value + "):" + e.message)
             }
         }
 
@@ -1654,7 +1653,10 @@ object S57enc {
         metas = geos
         conns = metas
         isols = conns
-        val date = SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().time)
+        val now = Date()
+        val date = "${now.getFullYear()}" +
+                now.getMonth().toString().padStart(2, '0') +
+                now.getDay().toString().padStart(2, '0')
         var ds = arrayListOf(
             S57dat.Fparams(
                 S57field.DSID,
