@@ -4,8 +4,10 @@ package s57
 import s57.S57map.Pflag.POINT
 import s57.S57obj.Obj
 
+
 import kotlin.math.abs
 import kotlin.system.exitProcess
+import kotlin.text.Charsets.UTF_8
 
 /**
  * @author Malcolm Herring
@@ -571,6 +573,10 @@ object S57dat {
         arraycopy(String.format("%05d", leader.size + ibuf.size).toByteArray(), 0, fbuf, 12, 5)
         asc = false
         return fbuf
+    }
+
+    private fun arraycopy(src: ByteArray, srcPos: Int, dest: ByteArray, destPos: Int, size: Int) {
+        src.copyInto(dest, destPos, srcPos,  size - srcPos)
     }
 
     private val S57prims = mapOf(
