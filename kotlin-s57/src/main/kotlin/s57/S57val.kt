@@ -2388,13 +2388,13 @@ object S57val {
         return ""
     }
 
-    private fun osmEnum(`val`: String?, att: Att?): Enum<*>? { // Convert OSM attribute value string to SCM enumeration
+    private fun osmEnum(value: String?, att: Att?): Enum<*>? { // Convert OSM attribute value string to SCM enumeration
         val map = keys[att]!!.map
         var unkn: Enum<*>? = null
         if (map != null) {
             for (item in map.keys) {
                 if (unkn == null) unkn = item as Enum<*>
-                if (map[item]!!.value == `val`) return item as Enum<*>
+                if (map[item]!!.value == value) return item as Enum<*>
             }
         }
         return unkn
