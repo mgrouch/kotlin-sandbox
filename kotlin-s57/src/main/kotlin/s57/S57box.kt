@@ -2,6 +2,7 @@
 package s57
 
 import s57.S57box.Ext.*
+import s57.S57map.*
 import s57.S57map.Pflag.AREA
 import s57.S57map.Pflag.LINE
 import s57.S57obj.Obj
@@ -12,7 +13,7 @@ import s57.S57obj.Obj
  */
 object S57box {
 
-    fun getExt(map: S57map, lat: Double, lon: Double): Ext {
+    private fun getExt(map: S57map, lat: Double, lon: Double): Ext {
         return when {
             lat >= map.bounds!!.maxlat && lon < map.bounds!!.maxlon -> N
             lon <= map.bounds!!.minlon -> W
@@ -30,12 +31,12 @@ object S57box {
          * Remove nodes outside BB
          * Remove edges that are completely outside BB
          */
-        class Land(var land: S57map.Feature) {
+        class Land(var land: Feature) {
             var first: Long
-            var start: S57map.Snode?
+            var start: Snode?
             var sbound: Ext
             var last: Long = 0
-            var end: S57map.Snode?
+            var end: Snode?
             var ebound: Ext
 
             init {
@@ -47,18 +48,18 @@ object S57box {
             }
         }
         if (map.features!![Obj.COALNE] != null) {
-            val coasts = ArrayList<S57map.Feature>()
-            val lands = ArrayList<Land>()
+            val coasts = arrayListOf<Feature>()
+            val lands = arrayListOf<Land>()
             if (map.features!![Obj.LNDARE] == null) {
-                map.features!![Obj.LNDARE] = ArrayList()
+                map.features!![Obj.LNDARE] = arrayListOf()
             }
             for (feature in map.features!![Obj.COALNE]!!) {
-                val land = S57map.Feature()
+                val land = Feature()
                 land.id = ++map.xref
                 land.type = Obj.LNDARE
-                land.reln = S57map.Rflag.MASTER
-                land.objs!![Obj.LNDARE] = S57map.ObjTab()
-                land.objs!![Obj.LNDARE]!![0] = S57map.AttMap()
+                land.reln = Rflag.MASTER
+                land.objs!![Obj.LNDARE] = ObjTab()
+                land.objs!![Obj.LNDARE]!![0] = AttMap()
                 if (feature!!.geom!!.prim == AREA) {
                     land.geom = feature.geom
                     map.features!![Obj.LNDARE]!!.add(land)
@@ -98,7 +99,7 @@ object S57box {
                 }
                 lands.add(Land(land))
             }
-            var islands = ArrayList<Land>()
+            var islands = arrayListOf<Land>()
             for (land in lands) {
                 map.sortGeom(land.land)
                 if (land.land.geom!!.prim == AREA) {
@@ -117,7 +118,7 @@ object S57box {
                 land.end = map.nodes!![land.last]
                 land.ebound = getExt(map, land.end!!.lat, land.end!!.lon)
             }
-            islands = ArrayList()
+            islands = arrayListOf()
             for (land in lands) {
                 if (land.sbound == I || land.ebound == I) {
                     islands.add(land)
@@ -127,7 +128,7 @@ object S57box {
                 lands.remove(island)
             }
             for (land in lands) {
-                val nedge = S57map.Edge()
+                val nedge = Edge()
                 nedge.first = land.last
                 nedge.last = land.first
                 var bound = land.ebound
@@ -153,7 +154,7 @@ object S57box {
                     }
                 }
                 map.edges!![++map.xref] = nedge
-                land.land.geom!!.elems!!.add(S57map.Prim(map.xref))
+                land.land.geom!!.elems!!.add(Prim(map.xref))
                 land.land.geom!!.comps!![0]!!.size++
                 land.land.geom!!.prim = AREA
                 map.features!![Obj.LNDARE]!!.add(land.land)
