@@ -5,6 +5,7 @@ import s57.S57dat.S57field
 import s57.S57dat.S57subf
 import s57.S57map.Nflag
 import s57.S57map.Pflag.*
+import kotlin.system.exitProcess
 
 /**
  * @author Malcolm Herring
@@ -40,8 +41,8 @@ object S57dec {
                 ddr = leader[6] == 'L'.code.toByte()
                 fields = String(leader, 12, 5).toInt() - 24
             } catch (e: Exception) {
-                System.err.println("Invalid file format - Encrypted/compressed ENC file?")
-                System.exit(-1)
+                println("Invalid file format - Encrypted/compressed ENC file?")
+                exitProcess(-1)
             }
             mapfl = leader[20] - '0'.code.toByte()
             mapfp = leader[21] - '0'.code.toByte()
@@ -166,8 +167,8 @@ object S57dec {
                                 } else {
                                     map.newNode(name, lat, lon, nflag)
                                 }
-                                lat = Math.toRadians(lat)
-                                lon = Math.toRadians(lon)
+                                lat = deg2rad(lat)
+                                lon = deg2rad(lon)
                                 if (lat < map.bounds!!.minlat) map.bounds!!.minlat = lat
                                 if (lat > map.bounds!!.maxlat) map.bounds!!.maxlat = lat
                                 if (lon < map.bounds!!.minlon) map.bounds!!.minlon = lon
@@ -181,8 +182,8 @@ object S57dec {
                                 var lon = (S57dat.decSubf(S57subf.XCOO) as Long).toDouble() / comf
                                 val depth = (S57dat.decSubf(S57subf.VE3D) as Long).toDouble() / somf
                                 map.newNode(name++, lat, lon, depth)
-                                lat = Math.toRadians(lat)
-                                lon = Math.toRadians(lon)
+                                lat = deg2rad(lat)
+                                lon = deg2rad(lon)
                                 if (lat < map.bounds!!.minlat) map.bounds!!.minlat = lat
                                 if (lat > map.bounds!!.maxlat) map.bounds!!.maxlat = lat
                                 if (lon < map.bounds!!.minlon) map.bounds!!.minlon = lon

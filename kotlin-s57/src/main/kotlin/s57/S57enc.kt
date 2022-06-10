@@ -3,7 +3,12 @@ package s57
 
 import s57.S57att.Att
 import s57.S57dat.S57field
+import s57.S57dat.arraycopy
 import s57.S57obj.Obj
+
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.system.exitProcess
 
 /**
  * @author Malcolm Herring
@@ -1632,8 +1637,8 @@ object S57enc {
                     "HUNI" -> huni = entry.value!!.toInt()
                 }
             } catch (e: Exception) {
-                System.err.println("Meta data (" + entry.key + "=" + entry.value + "):" + e.message)
-                System.exit(-1)
+                println("Meta data (" + entry.key + "=" + entry.value + "):" + e.message)
+                exitProcess(-1)
             }
         }
 
@@ -1681,7 +1686,7 @@ object S57enc {
                 arrayOf(20, 2, 2, vdat, vdat, cscl, duni, huni, 1, 1, 10000000, 10, "")
             )
         )
-        arraycopy(header, 0, buf, 0, header.size)
+        arraycopy(header, 0, buf!!, 0, header.size)
         idx = header.size
         record = S57dat.encRecord(1, ds)
         arraycopy(record, 0, buf, idx, record.size)
@@ -1700,7 +1705,7 @@ object S57enc {
                     rad2deg(node.lat) * COMF, rad2deg(node.lon) * COMF,
                     node.value * SOMF
                 )
-                depths = Arrays.copyOf(depths, depths.size + dval.size)
+                depths = depths.copyOf(depths.size + dval.size)
                 arraycopy(dval, 0, depths, depths.size - dval.size, dval.size)
             }
         }
@@ -1866,7 +1871,7 @@ object S57enc {
                                     )
                                 )
                                 if (attl < 300 || attl > 304) {
-                                    attf = Arrays.copyOf(attf, attf!!.size + next.size)
+                                    attf = attf!!.copyOf(attf.size + next.size)
                                     arraycopy(next, 0, attf, attf.size - next.size, next.size)
                                 } else {
                                     natf = Arrays.copyOf(natf, natf!!.size + next.size)
@@ -1889,14 +1894,14 @@ object S57enc {
                         }
                     }
                 }
-                if (!slaves.isEmpty()) {
+                if (slaves.isNotEmpty()) {
                     val refs = ArrayList<S57dat.Fparams?>()
                     var params: Array<Any?>? = arrayOfNulls<Any?>(0)
-                    while (!slaves.isEmpty()) {
+                    while (slaves.isNotEmpty()) {
                         val id = slaves.removeAt(0)!!
                         val next =
                             arrayOf<Any?>((((id and 0xffffffffL) + 0x100000000L shl 16) + (agen and 0xffff)), 2, "")
-                        params = Arrays.copyOf(params, params!!.size + next.size)
+                        params = params!!.copyOf(params.size + next.size)
                         arraycopy(next, 0, params, params.size - next.size, next.size)
                     }
                     refs.add(S57dat.Fparams(S57field.FFPT, params))

@@ -3,8 +3,6 @@ package s57
 
 import s57.S57map.Pflag.POINT
 import s57.S57obj.Obj
-import java.nio.charset.Charset
-
 
 import kotlin.math.abs
 import kotlin.system.exitProcess
@@ -479,7 +477,7 @@ object S57dat {
             try {
                 buffer = "$sval ".toByteArray(charset("ISO-8859-1"))
             } catch (e: Exception) {
-                System.err.println(e.message)
+                println(e.message)
                 exitProcess(-1)
             }
             if (conv.asc == 0) {
@@ -571,7 +569,7 @@ object S57dat {
         return fbuf
     }
 
-    private fun arraycopy(src: ByteArray, srcPos: Int, dest: ByteArray, destPos: Int, size: Int) {
+    fun arraycopy(src: ByteArray, srcPos: Int, dest: ByteArray, destPos: Int, size: Int) {
         src.copyInto(dest, destPos, srcPos,  size - srcPos)
     }
 
