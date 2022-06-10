@@ -25,6 +25,7 @@ import s57.S57val.TrfTRF
 import s57.S57val.UniHLU
 import s57.S57val.unknAtt
 import s57.deg2rad
+
 import s57.render.Renderer.LabelStyle
 import s57.render.Renderer.fillPattern
 import s57.render.Renderer.labelText
@@ -32,6 +33,7 @@ import s57.render.Renderer.lineSymbols
 import s57.render.Renderer.lineText
 import s57.render.Renderer.lineVector
 import s57.render.Renderer.symbol
+
 import s57.symbols.*
 import s57.symbols.Notices.getNotice
 import s57.symbols.Notices.getScheme

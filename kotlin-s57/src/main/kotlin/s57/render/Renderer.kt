@@ -2,7 +2,6 @@
 package s57.render
 
 import s57.S57map
-import s57.S57val
 import s57.S57val.UniHLU
 import s57.deg2rad
 import s57.symbols.Areas

@@ -8,6 +8,7 @@ import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Handle
 import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Symbol
+
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Color.*

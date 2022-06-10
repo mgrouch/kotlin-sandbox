@@ -7,6 +7,7 @@ import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol
+
 import java.awt.BasicStroke
 import java.awt.geom.*
 

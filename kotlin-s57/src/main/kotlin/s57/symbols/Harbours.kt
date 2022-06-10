@@ -5,6 +5,7 @@ import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol
+
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.*
@@ -92,7 +93,6 @@ object Harbours {
         Bollard.add(Instr(Form.ELPS, s))
     }
 
-
     val CallPoint1 = Symbol()
 
     init {
@@ -106,7 +106,6 @@ object Harbours {
         p.lineTo(16.0, -20.0)
         CallPoint1.add(Instr(Form.PLIN, p))
     }
-
 
     val CallPoint2 = Symbol()
 

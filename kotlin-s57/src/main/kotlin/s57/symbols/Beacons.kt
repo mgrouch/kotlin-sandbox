@@ -212,7 +212,7 @@ object Beacons {
     init {
         LightMajor.add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_NON_ZERO)
+        p.windingRule = GeneralPath.WIND_NON_ZERO
         p.moveTo(0.0, -7.0)
         p.curveTo(-9.3, -6.5, -9.3, 6.5, 0.0, 7.0)
         p.curveTo(9.3, 6.5, 9.3, -6.5, 0.0, -7.0)

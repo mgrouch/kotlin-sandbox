@@ -1,11 +1,12 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-import s57.S57val
+
 import s57.S57val.CatSCF
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Symbol
+
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.geom.*

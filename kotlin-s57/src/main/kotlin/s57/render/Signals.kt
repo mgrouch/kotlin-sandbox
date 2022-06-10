@@ -1,12 +1,10 @@
 // License: GPL. For details, see LICENSE file.
-@file:Suppress("RemoveRedundantQualifierName")
 
 package s57.render
 
 import s57.S57att.Att
 import s57.S57map
 import s57.S57obj.Obj
-import s57.S57val
 import s57.S57val.BoySHP
 import s57.S57val.CatFOG
 import s57.S57val.CatLIT

@@ -5,6 +5,7 @@ import s57.S57val
 import s57.S57val.BnkWTW
 import s57.S57val.CatNMK
 import s57.S57val.MarSYS
+import s57.deg2rad
 import s57.symbols.Symbols.Caption
 import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Instr
@@ -2882,7 +2883,6 @@ object Notices {
         }
         return scheme
     }
-
 
     fun getNotice(cat: CatNMK, sys: MarSYS?, bank: BnkWTW?): Symbol? {
         var symbol: Symbol? = null
