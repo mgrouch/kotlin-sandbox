@@ -1660,12 +1660,12 @@ object S57enc {
         var ds = arrayListOf(
             S57dat.Fparams(
                 S57field.DSID,
-                arrayOf<Any>(
+                arrayOf(
                     10,
                     1,
                     1,
                     intu,
-                    file,
+                    file as Any,
                     "1",
                     "0",
                     date,
@@ -1773,7 +1773,7 @@ object S57enc {
                     )
                 )
             )
-            val nodes: ArrayList<Any> = arrayListOf(0)
+            val nodes: ArrayList<Any> = arrayListOf()
             for (ref in edge.nodes!!) {
                 val nval = arrayOf<Any>(
                     rad2deg(map.nodes!![ref]!!.lat) * COMF, rad2deg(map.nodes!![ref]!!.lon) * COMF
@@ -1839,8 +1839,8 @@ object S57enc {
                         )
                     }
                 }
-                val objects = arrayListOf<ArrayList<S57dat.Fparams>?>(0)
-                val slaves = arrayListOf<Long?>(0)
+                val objects = arrayListOf<ArrayList<S57dat.Fparams>>()
+                val slaves = arrayListOf<Long?>()
                 var slaveid = feature.id + 0x0100000000000000L
                 for (objs in feature.objs!!.entries) {
                     val objobj = objs.key
@@ -1851,12 +1851,12 @@ object S57enc {
                         objatts.add(
                             S57dat.Fparams(
                                 S57field.FRID,
-                                arrayOf<Any>(100, id, prim, grup, S57obj.encodeType(objobj), 1, 1)
+                                arrayOf(100, id, prim, grup, S57obj.encodeType(objobj) as Any, 1, 1)
                             )
                         )
                         objatts.add(S57dat.Fparams(S57field.FOID, arrayOf(agen, id, 1)))
-                        var attf: Array<Any?>? = arrayOfNulls<Any?>(0)
-                        var natf: Array<Any?>? = arrayOfNulls<Any?>(0)
+                        val attf: ArrayList<Any> = arrayListOf()
+                        val natf: ArrayList<Any> = arrayListOf()
                         val atts = S57map.AttMap()
                         atts.putAll(o.value!!)
                         if (master) {
@@ -1865,23 +1865,21 @@ object S57enc {
                         for (att in atts.entries) {
                             if ((obj == Obj.SOUNDG && att.key) != Att.VALSOU) {
                                 val attl = S57att.encodeAttribute(att.key)!!.toLong()
-                                val next = arrayOf<Any?>(
-                                    attl, S57val.encodeValue(att.value, att.key)
+                                val next = arrayOf(
+                                    attl, S57val.encodeValue(att.value, att.key) as Any
                                 )
                                 if (attl < 300 || attl > 304) {
-                                    attf = attf!!.copyOf(attf.size + next.size)
-                                    arraycopy(next, 0, attf, attf.size - next.size, next.size)
+                                    attf.addAll(next)
                                 } else {
-                                    natf = Arrays.copyOf(natf, natf!!.size + next.size)
-                                    arraycopy(next, 0, natf, natf.size - next.size, next.size)
+                                    natf.addAll(next)
                                 }
                             }
                         }
-                        if (attf!!.isNotEmpty()) {
-                            objatts.add(S57dat.Fparams(S57field.ATTF, attf))
+                        if (attf.isNotEmpty()) {
+                            objatts.add(S57dat.Fparams(S57field.ATTF, attf.toTypedArray()))
                         }
-                        if (natf!!.isNotEmpty()) {
-                            objatts.add(S57dat.Fparams(S57field.NATF, attf))
+                        if (natf.isNotEmpty()) {
+                            objatts.add(S57dat.Fparams(S57field.NATF, attf.toTypedArray()))
                         }
                         if (master) {
                             objects.add(objatts)
@@ -1894,7 +1892,7 @@ object S57enc {
                 }
                 if (slaves.isNotEmpty()) {
                     val refs = arrayListOf<S57dat.Fparams>()
-                    val params: ArrayList<Any> = arrayListOf(0)
+                    val params: ArrayList<Any> = arrayListOf()
                     while (slaves.isNotEmpty()) {
                         val id = slaves.removeAt(0)!!
                         val next =
@@ -1902,10 +1900,10 @@ object S57enc {
                         params.addAll(next)
                     }
                     refs.add(S57dat.Fparams(S57field.FFPT, params.toTypedArray()))
-                    objects[objects.size - 1]!!.addAll(refs)
+                    objects[objects.size - 1].addAll(refs)
                 }
                 for (o in objects) {
-                    o!!.addAll(geom)
+                    o.addAll(geom)
                     record = S57dat.encRecord(recs++, o)
                     byteArrayCopy(record, 0, buf, idx, record.size)
                     idx += record.size
@@ -1919,12 +1917,12 @@ object S57enc {
         ds = arrayListOf(
             S57dat.Fparams(
                 S57field.DSID,
-                arrayOf<Any>(
+                arrayOf(
                     10,
                     1,
                     1,
                     intu,
-                    file,
+                    file as Any,
                     "1",
                     "0",
                     date,
@@ -1943,9 +1941,5 @@ object S57enc {
         record = S57dat.encRecord(1, ds)
         byteArrayCopy(record, 0, buf, header.size, record.size)
         return idx
-    }
-
-    private fun arraycopy(src: Array<Any>, srcPos: Int, dest: Array<Any>, destPos: Int, size: Int) {
-        src.copyInto(dest, destPos, srcPos,  size - srcPos)
     }
 }
