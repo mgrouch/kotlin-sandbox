@@ -5,7 +5,12 @@ import s57.S57att.Att
 import s57.S57dat.S57field
 import s57.S57dat.byteArrayCopy
 import s57.S57obj.Obj
-import kotlin.js.Date
+import java.nio.ByteBuffer
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+
+//import kotlin.js.Date
 
 /**
  * @author Malcolm Herring
@@ -1613,13 +1618,10 @@ object S57enc {
 
     @OptIn(ExperimentalUnsignedTypes::class)
     fun hash(value: Long): Long {
-/*
-        val bval: UByteArray = ByteBuffer.allocate(java.lang.Long.SIZE).putLong(value).array()
+        val bval: ByteArray = ByteBuffer.allocate(java.lang.Long.SIZE).putLong(value).array()
         val crc = CRC32()
-        crc.update(bval)
+        crc.update(bval.toUByteArray())
         return crc.value.toLong()
-*/
-        TODO("Not yet implemented")
     }
 
     fun encodeChart(map: S57map?, meta: HashMap<String?, String?>?, buf: ByteArray?): Int {
@@ -1657,9 +1659,9 @@ object S57enc {
         conns = metas
         isols = conns
         val now = Date()
-        val date = "${now.getFullYear()}" +
-                now.getMonth().toString().padStart(2, '0') +
-                now.getDay().toString().padStart(2, '0')
+        val date = "${now.getYear() + 1900}" +
+                (now.getMonth() + 1).toString().padStart(2, '0') +
+                (now.getDate()).toString().padStart(2, '0')
         var ds = arrayListOf(
             S57dat.Fparams(
                 S57field.DSID,
