@@ -55,14 +55,14 @@ object S57dec {
                 pos = String(record, idx + mapts + mapfl, mapfp).toInt()
                 if (!ddr) {
                     when (tag) {
-                        "0001" ->
-                            var  i8rn
-                            : Int = (S57dat.decSubf(
-                            record,
-                            fields + pos,
-                            S57field.I8RI,
-                            S57subf.I8RN
-                        ) as Long).toInt()
+                        "0001" -> {
+                            i8rn : Int = (S57dat.decSubf(
+                                record,
+                                fields + pos,
+                                S57field.I8RI,
+                                S57subf.I8RN
+                            ) as Long).toInt()
+                        }
                         "DSSI" -> {
                             S57dat.decSubf(record, fields + pos, S57field.DSSI, S57subf.AALL)
                             S57dat.decSubf(S57subf.NALL)
