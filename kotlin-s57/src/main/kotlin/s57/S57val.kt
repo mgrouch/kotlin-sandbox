@@ -2285,8 +2285,7 @@ object S57val {
         val s57key: S57key? = keys[att]
         val map = s57key!!.map
         var unkn: Enum<*>? = null
-        var i = 0
-        i = try {
+        val i = try {
             `val`!!.toInt()
         } catch (e: Exception) {
             return unkn
@@ -2294,7 +2293,7 @@ object S57val {
         if (map != null) {
             for (item in map.keys) {
                 if (unkn == null) unkn = item as Enum<*>
-                if ((map[item] as S57enum?)!!.atvl == i) return item as Enum<*>
+                if (map[item]!!.atvl == i) return item as Enum<*>
             }
         }
         return unkn
@@ -2304,8 +2303,7 @@ object S57val {
         `val`: String?,
         att: S57att.Att?
     ): AttVal<*>? { // Convert S57 attribute value string to SCM attribute value
-        val conv = keys[att]!!.conv
-        when (conv) {
+        when (val conv = keys[att]!!.conv) {
             Conv.A, Conv.S -> return AttVal<String?>(conv, `val`)
             Conv.E -> {
                 val list = ArrayList<Enum<*>?>()
@@ -2313,7 +2311,7 @@ object S57val {
                 return AttVal<ArrayList<*>?>(Conv.E, list)
             }
             Conv.L -> {
-                list = ArrayList<Enum<*>?>()
+                val list = ArrayList<Enum<*>?>()
                 for (item in `val`!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                     list.add(s57Enum(item, att))
                 }
@@ -2323,18 +2321,18 @@ object S57val {
                 return try {
                     AttVal<Long?>(Conv.I, `val`!!.toLong())
                 } catch (e: Exception) {
-                    break
+                    return null
                 }
                 return try {
                     AttVal<Double?>(Conv.F, `val`!!.toDouble())
                 } catch (e: Exception) {
-                    break
+                    return null
                 }
             }
             Conv.F -> return try {
                 AttVal<Double?>(Conv.F, `val`!!.toDouble())
             } catch (e: Exception) {
-                break
+                return null
             }
         }
         return null
@@ -2350,10 +2348,10 @@ object S57val {
                 val vals: Array<String?> = str!!.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                 str = ""
                 for (`val` in vals) {
-                    if (!str.isEmpty()) str += ","
+                    if (str.isNotEmpty()) str += ","
                     val map = keys[att]!!.map
                     for (item in map!!.keys) {
-                        if ((map[item] as S57enum?)!!.`val` == `val`) str += (map[item] as S57enum?)!!.atvl.toString()
+                        if (map[item]!!.`val` == `val`) str += map[item]!!.atvl.toString()
                     }
                 }
             }
@@ -2371,14 +2369,14 @@ object S57val {
                 Conv.A, Conv.S -> return attval.`val` as String?
                 Conv.E -> {
                     val map = keys[att]!!.map
-                    return (map!![(attval.`val` as ArrayList<*>?)!![0]] as S57enum?)!!.`val`
+                    return map!![(attval.`val` as ArrayList<*>?)!![0]]!!.`val`
                 }
                 Conv.L -> {
                     var str: String? = ""
-                    map = keys[att]!!.map
+                    val map = keys[att]!!.map
                     for (item in (attval.`val` as ArrayList<*>?)!!) {
-                        if (!str!!.isEmpty()) str += ";"
-                        if (item != null) str += (map.get(item) as S57enum).`val`
+                        if (str!!.isNotEmpty()) str += ";"
+                        if (item != null) str += (map?.get(item) as S57enum).`val`
                     }
                     return str
                 }
@@ -2395,7 +2393,7 @@ object S57val {
         if (map != null) {
             for (item in map.keys) {
                 if (unkn == null) unkn = item as Enum<*>
-                if ((map[item] as S57enum?)!!.`val` == `val`) return item as Enum<*>
+                if (map[item]!!.`val` == `val`) return item as Enum<*>
             }
         }
         return unkn
@@ -2413,7 +2411,7 @@ object S57val {
                 return AttVal<ArrayList<*>?>(Conv.E, list)
             }
             Conv.L -> {
-                list = ArrayList<Enum<*>?>()
+                val list = ArrayList<Enum<*>?>()
                 for (item in `val`!!.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                     list.add(osmEnum(item, att))
                 }
@@ -2423,26 +2421,27 @@ object S57val {
                 return try {
                     AttVal<Long?>(Conv.I, `val`!!.toLong())
                 } catch (e: Exception) {
-                    break
+                    return null
                 }
                 return try {
                     AttVal<Double?>(Conv.F, `val`!!.toDouble())
                 } catch (e: Exception) {
-                    break
+                    return null
                 }
             }
             Conv.F -> return try {
                 AttVal<Double?>(Conv.F, `val`!!.toDouble())
             } catch (e: Exception) {
-                break
+                return null
             }
         }
         return AttVal<Any?>(keys[att]!!.conv, null)
     }
 
     @JvmStatic
-    fun unknAtt(att: S57att.Att?): Enum<*>? {
-        return keys[att]!!.map!!.keys.toTypedArray()[0] as Enum<*>
+    fun unknAtt(att: S57att.Att?): Enum<*> {
+        val s57key: S57key? = keys[att]
+        return s57key!!.map!!.keys.toTypedArray()[0] as Enum<*>
     }
 
     // CHECKSTYLE.OFF: LineLength
@@ -2452,7 +2451,7 @@ object S57val {
         S, A, L, E, F, I
     }
 
-    internal class S57key(var conv: Conv?, map: Map<Any, S57enum>?)
+    internal data class S57key(val conv: Conv?, val map: Map<Any, S57enum>?)
 
     class AttVal<V> internal constructor(var conv: Conv?, var `val`: V?)
 
