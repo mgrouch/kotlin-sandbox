@@ -2446,16 +2446,18 @@ object S57val {
 
     // CHECKSTYLE.OFF: LineLength
     internal class S57enum(var atvl: Int?, var `val`: String?)
+
     enum class Conv {
         S, A, L, E, F, I
     }
 
     internal class S57key(var conv: Conv?, m = mapOf(
             map = m
-        }
-    }
+        )
+    )
 
     class AttVal<V> internal constructor(var conv: Conv?, var `val`: V?)
+
     enum class BcnSHP {
         BCN_UNKN, BCN_STAK, BCN_WTHY, BCN_TOWR, BCN_LATT, BCN_PILE, BCN_CARN, BCN_BUOY, BCN_POLE, BCN_PRCH, BCN_POST
     }
