@@ -397,13 +397,7 @@ object S57obj {
         Obj.M_NSYS to "system",
     )
 
-    private val StrObj: HashMap<String?, Obj?> = HashMap()
-
-    init {
-        for ((key, value) in ObjStr) {
-            if (!s57.entry.value.isEmpty()) StrObj[s57.entry.value] = s57.entry.key
-        }
-    }
+    private val StrObj: Map<String?, Obj?> = ObjStr.entries.associate{(k,v)-> v to k}
 
     fun decodeType(objl: Long): Obj { // Convert S57 feature code to SCM object enumeration
         for (obj in ObjS57.keys) {
@@ -415,9 +409,12 @@ object S57obj {
         return Obj.UNKOBJ
     }
 
-    fun encodeType(type: Obj?): Long { // Convert SCM object enumeration to S57 feature code
-        if (ObjS57.containsKey(type)) return ObjS57[type] else if (ObjIENC.containsKey(type)) return ObjIENC[type]
-        return 0
+    fun encodeType(type: Obj?): Int? { // Convert SCM object enumeration to S57 feature code
+        return when {
+            ObjS57.containsKey(type) -> ObjS57[type]
+            ObjIENC.containsKey(type) -> ObjIENC[type]
+            else -> 0
+        }
     }
 
     fun stringType(type: Obj?): String { // Convert SCM object enumeration to OSM object string
