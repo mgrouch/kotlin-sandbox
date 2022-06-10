@@ -1803,7 +1803,7 @@ object S57enc {
                     Obj.DEPARE, Obj.DRGARE, Obj.FLODOC, Obj.HULKES, Obj.LNDARE, Obj.PONTON, Obj.UNSARE -> 1
                     else -> 2
                 }
-                val geom = ArrayList<S57dat.Fparams?>()
+                val geom = ArrayList<S57dat.Fparams>()
                 var outers = if (feature.geom!!.prim == S57map.Pflag.POINT) 1 else feature.geom!!.comps!![0]!!.size
                 for (elem in feature.geom!!.elems!!) {
                     if (feature.geom!!.prim == S57map.Pflag.POINT) {
@@ -1845,7 +1845,7 @@ object S57enc {
                 for (objs in feature.objs!!.entries) {
                     val objobj = objs.key
                     for (o in objs.value!!.entries) {
-                        val objatts = ArrayList<S57dat.Fparams?>()
+                        val objatts = ArrayList<S57dat.Fparams>()
                         val master = feature.type == objobj && (o.key == 0 || o.key) == 1
                         val id = hash(if (master) feature.id else slaveid)
                         objatts.add(
@@ -1893,7 +1893,7 @@ object S57enc {
                     }
                 }
                 if (slaves.isNotEmpty()) {
-                    val refs = ArrayList<S57dat.Fparams?>()
+                    val refs = ArrayList<S57dat.Fparams>()
                     var params: Array<Any?>? = arrayOfNulls<Any?>(0)
                     while (slaves.isNotEmpty()) {
                         val id = slaves.removeAt(0)!!
