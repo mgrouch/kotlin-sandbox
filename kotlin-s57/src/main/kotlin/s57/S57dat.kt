@@ -404,8 +404,7 @@ object S57dat {
                     i++
                 }
                 try {
-                    var charset = ""
-                    charset = when (field) {
+                    val charset = when (field) {
                         S57field.ATTF -> aall
                         S57field.NATF -> nall
                         else -> "US-ASCII"
@@ -423,15 +422,15 @@ object S57dat {
         } else {
             var f = abs(conv.bin)
             if (f < 5) {
-                var `val` = buffer[offset + --f].toLong()
-                if (conv.bin > 0) `val` = `val` and 0xffL
+                var v = buffer[offset + --f].toLong()
+                if (conv.bin > 0) v = v and 0xffL
                 while (f > 0) {
-                    `val` = (`val` shl 8) + (buffer[offset + --f].toInt() and 0xff)
+                    v = (v shl 8) + (buffer[offset + --f].toInt() and 0xff)
                 }
                 offset += abs(conv.bin)
                 if (subf == S57subf.AALL || subf == S57subf.NALL) {
                     var charset = ""
-                    when (`val`.toInt()) {
+                    when (v.toInt()) {
                         0 -> charset = "US-ASCII"
                         1 -> charset = "ISO-8859-1"
                         2 -> charset = "UTF-16LE"
@@ -439,44 +438,44 @@ object S57dat {
                     if (subf == S57subf.NALL) nall = charset
                     else aall = charset
                 }
-                `val`
+                v
             } else {
                 if (f == 5) {
-                    var `val` = (buffer[offset++].toInt() and 0xff).toLong()
+                    var v = (buffer[offset++].toInt() and 0xff).toLong()
                     f--
                     while (f > 0) {
-                        `val` = (`val` shl 8) + (buffer[offset + --f].toInt() and 0xff)
+                        v = (v shl 8) + (buffer[offset + --f].toInt() and 0xff)
                     }
                     offset += 4
-                    `val`
+                    v
                 } else {
-                    var `val` = (buffer[offset++].toInt() and 0xff).toLong()
-                    `val` = (`val` shl 8) + (buffer[offset++].toInt() and 0xff)
+                    var v = (buffer[offset++].toInt() and 0xff).toLong()
+                    v = (v shl 8) + (buffer[offset++].toInt() and 0xff)
                     f = 4
                     while (f > 0) {
-                        `val` = (`val` shl 8) + (buffer[offset + --f].toInt() and 0xff)
+                        v = (v shl 8) + (buffer[offset + --f].toInt() and 0xff)
                     }
                     offset += 4
                     f = 2
                     while (f > 0) {
-                        `val` = (`val` shl 8) + (buffer[offset + --f].toInt() and 0xff)
+                        v = (v shl 8) + (buffer[offset + --f].toInt() and 0xff)
                     }
                     offset += 2
-                    `val`
+                    v
                 }
             }
         }
     }
 
-    fun encSubf(subf: S57subf, `val`: Any): ByteArray {
+    private fun encSubf(subf: S57subf, value: Any): ByteArray {
         val conv = convs[subf]
         if (conv!!.bin == 0 || asc) {
             var sval = ""
-            when (`val`) {
-                is String -> sval = `val`
-                is Int -> sval = `val`.toString()
-                is Long -> sval = `val`.toString()
-                is Double -> sval = `val`.toString()
+            when (value) {
+                is String -> sval = value
+                is Int -> sval = value.toString()
+                is Long -> sval = value.toString()
+                is Double -> sval = value.toString()
             }
             index = sval.length
             try {
@@ -496,11 +495,11 @@ object S57dat {
         } else {
             val f = abs(conv.bin)
             var lval: Long
-            when (`val`) {
-                is String -> lval = `val`.toLong()
-                is Double -> lval = `val`.toLong()
-                is Int -> lval = `val`.toLong()
-                else -> lval = `val` as Long
+            lval = when (value) {
+                is String -> value.toLong()
+                is Double -> value.toLong()
+                is Int -> value.toLong()
+                else -> value as Long
             }
             buffer = ByteArray(f)
             for (i in 0 until f) {
