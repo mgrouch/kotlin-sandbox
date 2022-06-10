@@ -4,6 +4,8 @@ package s57
 import java.io.UnsupportedEncodingException
 import java.nio.charset.StandardCharsets
 import java.util.*
+import kotlin.math.abs
+import kotlin.system.exitProcess
 
 /**
  * @author Malcolm Herring
@@ -145,9 +147,9 @@ object S57dat {
         convs[S57subf.CDPR] = S57conv(0, 0)
     }
 
-    private val S57i8ri = ArrayList(Arrays.asList(S57subf.I8RN))
+    private val S57i8ri = ArrayList(listOf(S57subf.I8RN))
     private val S57dsid = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM,
             S57subf.RCID,
             S57subf.EXPP,
@@ -167,31 +169,31 @@ object S57dat {
         )
     )
     private val S57dssi = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.DSTR, S57subf.AALL, S57subf.NALL, S57subf.NOMR, S57subf.NOCR, S57subf.NOGR, S57subf.NOLR,
             S57subf.NOIN, S57subf.NOCN, S57subf.NOED, S57subf.NOFA
         )
     )
     private val S57dspm = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM, S57subf.RCID, S57subf.HDAT, S57subf.VDAT, S57subf.SDAT, S57subf.CSCL, S57subf.DUNI,
             S57subf.HUNI, S57subf.PUNI, S57subf.COUN, S57subf.COMF, S57subf.SOMF, S57subf.COMT
         )
     )
     private val S57dspr = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.PROJ, S57subf.PRP1, S57subf.PRP2, S57subf.PRP3, S57subf.PRP4, S57subf.FEAS, S57subf.FNOR,
             S57subf.FPMF, S57subf.COMT
         )
     )
     private val S57dsrc = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RPID, S57subf.RYCO, S57subf.RXCO, S57subf.CURP, S57subf.FPMF, S57subf.RXVL, S57subf.RYVL,
             S57subf.COMT
         )
     )
     private val S57dsht = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM,
             S57subf.RCID,
             S57subf.PRCO,
@@ -203,7 +205,7 @@ object S57dat {
         )
     )
     private val S57dsac = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM,
             S57subf.RCID,
             S57subf.PACC,
@@ -214,21 +216,21 @@ object S57dat {
         )
     )
     private val S57catd = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM, S57subf.RCID, S57subf.FILE, S57subf.LFIL, S57subf.VOLM, S57subf.IMPL, S57subf.SLAT,
             S57subf.WLON, S57subf.NLAT, S57subf.ELON, S57subf.CRCS, S57subf.COMT
         )
     )
-    private val S57catx = ArrayList(Arrays.asList(S57subf.RCNM, S57subf.RCID, S57subf.NAM1, S57subf.NAM2, S57subf.COMT))
+    private val S57catx = ArrayList(listOf(S57subf.RCNM, S57subf.RCID, S57subf.NAM1, S57subf.NAM2, S57subf.COMT))
     private val S57dddf = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM, S57subf.RCID, S57subf.OORA, S57subf.OAAC, S57subf.OACO, S57subf.OALL, S57subf.OATY,
             S57subf.DEFN, S57subf.AUTH, S57subf.COMT
         )
     )
-    private val S57dddr = ArrayList(Arrays.asList(S57subf.RFTP, S57subf.RFVL))
+    private val S57dddr = ArrayList(listOf(S57subf.RFTP, S57subf.RFVL))
     private val S57dddi = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM,
             S57subf.RCID,
             S57subf.ATLB,
@@ -239,12 +241,12 @@ object S57dat {
             S57subf.COMT
         )
     )
-    private val S57ddom = ArrayList(Arrays.asList(S57subf.RAVA, S57subf.DVAL, S57subf.DVSD, S57subf.DEFN, S57subf.AUTH))
-    private val S57ddrf = ArrayList(Arrays.asList(S57subf.RFTP, S57subf.RFVL))
-    private val S57ddsi = ArrayList(Arrays.asList(S57subf.RCNM, S57subf.RCID, S57subf.OBLB))
-    private val S57ddsc = ArrayList(Arrays.asList(S57subf.ATLB, S57subf.ASET, S57subf.AUTH))
+    private val S57ddom = ArrayList(listOf(S57subf.RAVA, S57subf.DVAL, S57subf.DVSD, S57subf.DEFN, S57subf.AUTH))
+    private val S57ddrf = ArrayList(listOf(S57subf.RFTP, S57subf.RFVL))
+    private val S57ddsi = ArrayList(listOf(S57subf.RCNM, S57subf.RCID, S57subf.OBLB))
+    private val S57ddsc = ArrayList(listOf(S57subf.ATLB, S57subf.ASET, S57subf.AUTH))
     private val S57frid = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.RCNM,
             S57subf.RCID,
             S57subf.PRIM,
@@ -254,25 +256,25 @@ object S57dat {
             S57subf.RUIN
         )
     )
-    private val S57foid = ArrayList(Arrays.asList(S57subf.AGEN, S57subf.FIDN, S57subf.FIDS))
-    private val S57lnam = ArrayList(Arrays.asList(S57subf.LNAM))
-    private val S57attf = ArrayList(Arrays.asList(S57subf.ATTL, S57subf.ATVL))
-    private val S57natf = ArrayList(Arrays.asList(S57subf.ATTL, S57subf.ATVL))
-    private val S57ffpc = ArrayList(Arrays.asList(S57subf.FFUI, S57subf.FFIX, S57subf.NFPT))
-    private val S57ffpt = ArrayList(Arrays.asList(S57subf.LNAM, S57subf.RIND, S57subf.COMT))
-    private val S57fspc = ArrayList(Arrays.asList(S57subf.FSUI, S57subf.FSIX, S57subf.NSPT))
-    private val S57fspt = ArrayList(Arrays.asList(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.MASK))
-    private val S57vrid = ArrayList(Arrays.asList(S57subf.RCNM, S57subf.RCID, S57subf.RVER, S57subf.RUIN))
-    private val S57attv = ArrayList(Arrays.asList(S57subf.ATTL, S57subf.ATVL))
-    private val S57vrpc = ArrayList(Arrays.asList(S57subf.VPUI, S57subf.VPIX, S57subf.NVPT))
-    private val S57vrpt = ArrayList(Arrays.asList(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.TOPI, S57subf.MASK))
-    private val S57sgcc = ArrayList(Arrays.asList(S57subf.CCUI, S57subf.CCIX, S57subf.CCNC))
-    private val S57sg2d = ArrayList(Arrays.asList(S57subf.YCOO, S57subf.XCOO))
-    private val S57sg3d = ArrayList(Arrays.asList(S57subf.YCOO, S57subf.XCOO, S57subf.VE3D))
-    private val S57arcc = ArrayList(Arrays.asList(S57subf.ATYP, S57subf.SURF, S57subf.ORDR, S57subf.RESO, S57subf.FPMF))
-    private val S57ar2d = ArrayList(Arrays.asList(S57subf.STPT, S57subf.CTPT, S57subf.ENPT, S57subf.YCOO, S57subf.XCOO))
+    private val S57foid = ArrayList(listOf(S57subf.AGEN, S57subf.FIDN, S57subf.FIDS))
+    private val S57lnam = ArrayList(listOf(S57subf.LNAM))
+    private val S57attf = ArrayList(listOf(S57subf.ATTL, S57subf.ATVL))
+    private val S57natf = ArrayList(listOf(S57subf.ATTL, S57subf.ATVL))
+    private val S57ffpc = ArrayList(listOf(S57subf.FFUI, S57subf.FFIX, S57subf.NFPT))
+    private val S57ffpt = ArrayList(listOf(S57subf.LNAM, S57subf.RIND, S57subf.COMT))
+    private val S57fspc = ArrayList(listOf(S57subf.FSUI, S57subf.FSIX, S57subf.NSPT))
+    private val S57fspt = ArrayList(listOf(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.MASK))
+    private val S57vrid = ArrayList(listOf(S57subf.RCNM, S57subf.RCID, S57subf.RVER, S57subf.RUIN))
+    private val S57attv = ArrayList(listOf(S57subf.ATTL, S57subf.ATVL))
+    private val S57vrpc = ArrayList(listOf(S57subf.VPUI, S57subf.VPIX, S57subf.NVPT))
+    private val S57vrpt = ArrayList(listOf(S57subf.NAME, S57subf.ORNT, S57subf.USAG, S57subf.TOPI, S57subf.MASK))
+    private val S57sgcc = ArrayList(listOf(S57subf.CCUI, S57subf.CCIX, S57subf.CCNC))
+    private val S57sg2d = ArrayList(listOf(S57subf.YCOO, S57subf.XCOO))
+    private val S57sg3d = ArrayList(listOf(S57subf.YCOO, S57subf.XCOO, S57subf.VE3D))
+    private val S57arcc = ArrayList(listOf(S57subf.ATYP, S57subf.SURF, S57subf.ORDR, S57subf.RESO, S57subf.FPMF))
+    private val S57ar2d = ArrayList(listOf(S57subf.STPT, S57subf.CTPT, S57subf.ENPT, S57subf.YCOO, S57subf.XCOO))
     private val S57el2d = ArrayList(
-        Arrays.asList(
+        listOf(
             S57subf.STPT,
             S57subf.CTPT,
             S57subf.ENPT,
@@ -282,7 +284,7 @@ object S57dat {
             S57subf.XCOO
         )
     )
-    private val S57ct2d = ArrayList(Arrays.asList(S57subf.YCOO, S57subf.XCOO))
+    private val S57ct2d = ArrayList(listOf(S57subf.YCOO, S57subf.XCOO))
     private val fields = EnumMap<S57field?, ArrayList<S57subf>>(
         S57field::class.java
     )
@@ -371,7 +373,7 @@ object S57dat {
                     wrap = true
                 } else {
                     println("ERROR: Subfield not found " + subf.name + " in " + field!!.name + " in record " + rnum)
-                    System.exit(-1)
+                    exitProcess(-1)
                 }
             }
             val sub = subs[index++]
@@ -379,7 +381,7 @@ object S57dat {
             if (sub == subf) {
                 return conv
             } else {
-                offset += if (conv!!.bin != 0) if (conv.bin < 8) Math.abs(conv.bin) else conv.bin / 8 else conv.asc
+                offset += if (conv!!.bin != 0) if (conv.bin < 8) abs(conv.bin) else conv.bin / 8 else conv.asc
             }
         }
     }
@@ -433,14 +435,14 @@ object S57dat {
             }
             str
         } else {
-            var f = Math.abs(conv.bin)
+            var f = abs(conv.bin)
             if (f < 5) {
                 var `val` = buffer[offset + --f].toLong()
                 if (conv.bin > 0) `val` = `val` and 0xffL
                 while (f > 0) {
                     `val` = (`val` shl 8) + (buffer[offset + --f].toInt() and 0xff)
                 }
-                offset += Math.abs(conv.bin)
+                offset += abs(conv.bin)
                 if (subf == S57subf.AALL || subf == S57subf.NALL) {
                     var charset = ""
                     when (`val`.toInt()) {
@@ -501,18 +503,18 @@ object S57dat {
                 buffer = "$sval ".toByteArray(charset("ISO-8859-1"))
             } catch (e: Exception) {
                 System.err.println(e.message)
-                System.exit(-1)
+                exitProcess(-1)
             }
             if (conv.asc == 0) {
                 buffer[index] = 0x01f
             } else {
-                buffer = Arrays.copyOf(buffer, conv.asc)
+                buffer = buffer.copyOf(conv.asc)
                 while (index < buffer.size) {
                     buffer[index++] = ' '.code.toByte()
                 }
             }
         } else {
-            val f = Math.abs(conv.bin)
+            val f = abs(conv.bin)
             var lval: Long
             if (`val` is String) {
                 lval = `val`.toLong()
@@ -543,7 +545,7 @@ object S57dat {
         var offset = 3
         var maxlen = 3
         var buf = encSubf(S57subf.I8RN, i8rn)
-        buf = Arrays.copyOf(buf, 3)
+        buf = buf.copyOf(3)
         buf[2] = 0x1e
         index.add(Index("0001".toByteArray(), 3, 0))
         for (sfparams in fparams) {
@@ -551,11 +553,11 @@ object S57dat {
             while (ip < sfparams.params.size) {
                 for (subf in fields[sfparams.field]!!) {
                     val next = encSubf(subf, sfparams.params[ip++])
-                    buf = Arrays.copyOf(buf, buf.size + next.size)
+                    buf = buf.copyOf(buf.size + next.size)
                     System.arraycopy(next, 0, buf, buf.size - next.size, next.size)
                 }
             }
-            buf = Arrays.copyOf(buf, buf.size + 1)
+            buf = buf.copyOf(buf.size + 1)
             buf[buf.size - 1] = 0x1e
             val flen = buf.size - offset
             index.add(Index(sfparams.field.toString().toByteArray(StandardCharsets.UTF_8), flen, offset))
@@ -584,7 +586,7 @@ object S57dat {
             }
         }
         ibuf[i] = 0x1e
-        val fbuf = Arrays.copyOf(leader, leader.size + ibuf.size + buf.size)
+        val fbuf = leader.copyOf(leader.size + ibuf.size + buf.size)
         System.arraycopy(ibuf, 0, fbuf, leader.size, ibuf.size)
         System.arraycopy(buf, 0, fbuf, leader.size + ibuf.size, buf.size)
         fbuf[20] = (mlen + 0x30).toByte()

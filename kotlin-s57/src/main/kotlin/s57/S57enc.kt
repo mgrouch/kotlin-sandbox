@@ -6,7 +6,7 @@ package s57
  */
 object S57enc {
     // CHECKSTYLE.OFF: LineLength
-    private val header: ByteArray? = byteArrayOf(
+    private val header: ByteArray = byteArrayOf(
         '0'.code.toByte(),
         '1'.code.toByte(),
         '5'.code.toByte(),
