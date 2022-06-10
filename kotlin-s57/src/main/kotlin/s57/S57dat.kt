@@ -494,8 +494,7 @@ object S57dat {
             }
         } else {
             val f = abs(conv.bin)
-            var lval: Long
-            lval = when (value) {
+            var lval = when (value) {
                 is String -> value.toLong()
                 is Double -> value.toLong()
                 is Int -> value.toLong()
@@ -511,6 +510,7 @@ object S57dat {
     }
 
     var asc = false
+
     fun encRecord(i8rn: String, fparams: ArrayList<Fparams>): ByteArray {
         asc = true
         return encRecord(i8rn.toInt(), fparams)
