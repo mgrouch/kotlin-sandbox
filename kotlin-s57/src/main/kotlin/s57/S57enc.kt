@@ -1691,7 +1691,7 @@ object S57enc {
         recs = 3
 
         // Depths
-        var depths: Array<Any?>? = arrayOfNulls<Any?>(0)
+        var depths: Array<Any?> = arrayOfNulls(0)
         for (entry in map.nodes!!.entries) {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.DPTH) {
@@ -1699,11 +1699,11 @@ object S57enc {
                     rad2deg(node.lat) * COMF, rad2deg(node.lon) * COMF,
                     node.`val` * SOMF
                 )
-                depths = Arrays.copyOf(depths, depths!!.size + dval.size)
+                depths = Arrays.copyOf(depths, depths.size + dval.size)
                 arraycopy(dval, 0, depths, depths.size - dval.size, dval.size)
             }
         }
-        if (depths!!.size > 0) {
+        if (depths.isNotEmpty()) {
             fields = ArrayList()
             fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, -2, 1, 1)))
             fields.add(S57dat.Fparams(S57field.SG3D, depths))
@@ -1833,7 +1833,7 @@ object S57enc {
                         )
                     }
                 }
-                val objects = ArrayList<ArrayList<S57dat.Fparams?>?>()
+                val objects = ArrayList<ArrayList<S57dat.Fparams>?>()
                 val slaves = ArrayList<Long?>()
                 var slaveid = feature.id + 0x0100000000000000L
                 for (objs in feature.objs!!.entries) {
@@ -1901,16 +1901,13 @@ object S57enc {
                     refs.add(S57dat.Fparams(S57field.FFPT, params))
                     objects[objects.size - 1]!!.addAll(refs)
                 }
-                for (`object` in objects) {
-                    `object`!!.addAll(geom)
-                    record = S57dat.encRecord(recs++, `object`)
-                    arraycopy(record, 0, buf, idx, record!!.size)
+                for (o in objects) {
+                    o!!.addAll(geom)
+                    record = S57dat.encRecord(recs++, o)
+                    arraycopy(record, 0, buf, idx, record.size)
                     idx += record.size
-                    if (obj == Obj.M_COVR || obj == Obj.M_NSYS) {
-                        metas++
-                    } else {
-                        geos++
-                    }
+                    if (obj == Obj.M_COVR || obj == Obj.M_NSYS) metas++
+                    else geos++
                 }
             }
         }
