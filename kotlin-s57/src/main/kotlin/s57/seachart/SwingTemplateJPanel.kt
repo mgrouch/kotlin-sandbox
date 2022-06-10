@@ -29,7 +29,7 @@ class SwingTemplateJPanel : JPanel() {
         preferredSize = Dimension(CANVAS_WIDTH, CANVAS_HEIGHT)
         val input: FileInputStream
         try {
-            input = FileInputStream("D:\\Shipping\\Alte ENC zum Üben\\DE421070.000")
+            input = FileInputStream("D:\\kotlin-sandbox\\kotlin-introspection\\src\\main\\kotlin\\US5MA11M.000")
             map = S57map(true)
             decodeChart(input, map)
             rectangularBounds = this.bounds

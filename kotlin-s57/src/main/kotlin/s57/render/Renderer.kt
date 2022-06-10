@@ -50,6 +50,7 @@ object Renderer {
     var sScale = 0.0
     var g2: Graphics2D? = null
     var zoom = 0
+
     fun reRender(g: Graphics2D?, rect: Rectangle?, z: Int, factor: Double, m: S57map?, c: ChartContext?) {
         g2 = g
         zoom = z
@@ -62,7 +63,7 @@ object Renderer {
                 val br = context!!.getPoint(S57map.Snode(map!!.bounds!!.minlat, map!!.bounds!!.maxlon))
                 g2!!.clip(Rectangle2D.Double(tl!!.x, tl.y, br!!.x - tl.x, br.y - tl.y))
             }
-            g2!!.background = context!!.background(map)
+            g2!!.background = context!!.background(map!!)
             //XXX: commented out:
             //g2.clearRect(rect.x, rect.y, rect.width, rect.height);
             g2!!.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
@@ -513,7 +514,7 @@ object Renderer {
             UniHLU.HLU_NMIL -> {}
             else -> radius /= 1852.0
         }
-        radius *= context!!.mile(Rules.feature)
+        radius *= context!!.mile(Rules.feature!!)
         val circle = Symbol()
         if (style.fill != null) {
             circle.add(Instr(Form.FILL, style.fill))
@@ -527,7 +528,7 @@ object Renderer {
             )
         )
         circle.add(Instr(Form.ELPS, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2)))
-        val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
+        val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, circle, 1.0, point!!.x, point.y, null, null)
     }
 
@@ -537,7 +538,7 @@ object Renderer {
         var point: Point2D?
         when (Rules.feature!!.geom!!.prim) {
             S57map.Pflag.POINT -> {
-                point = context!!.getPoint(Rules.feature!!.geom!!.centre)
+                point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
                 g2!!.drawImage(
                     image,
                     AffineTransformOp(
@@ -555,7 +556,7 @@ object Renderer {
                     var newComp = true
                     while (git.hasEdge()) {
                         git.nextEdge()
-                        point = context!!.getPoint(git.next())
+                        point = context!!.getPoint(git.next()!!)
                         if (newComp) {
                             p.moveTo(point!!.x, point.y)
                             newComp = false
@@ -786,7 +787,7 @@ object Renderer {
                 )
             )
         )
-        val point = context!!.getPoint(Rules.feature!!.geom!!.centre)
+        val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, label, sScale, point!!.x, point.y, null, delta)
     }
 
@@ -799,7 +800,7 @@ object Renderer {
             val width = gv.visualBounds.width
             val height = gv.visualBounds.height
             val offset: Double =
-                (Rules.feature!!.geom!!.length * context!!.mile(Rules.feature) - width) / 2
+                (Rules.feature!!.geom!!.length * context!!.mile(Rules.feature!!) - width) / 2
             if (offset > 0) {
                 var before: Point2D? = null
                 var after: Point2D? = null
@@ -842,7 +843,7 @@ object Renderer {
                     val angle = atan2(after.y - before!!.y, after.x - before.x)
                     val rotate = if (abs(angle) < PI / 2) angle else angle + PI
                     val mid: Point2D = Point2D.Double((before.x + after.x) / 2, (before.y + after.y) / 2)
-                    val centre = context!!.getPoint(Rules.feature!!.geom!!.centre)
+                    val centre = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
                     val pos = AffineTransform.getTranslateInstance(-dy * sin(rotate), dy * cos(rotate))
                     pos.rotate(rotate)
                     pos.translate(mid.x - centre!!.x, mid.y - centre.y)
@@ -876,8 +877,8 @@ object Renderer {
             0f
         )
         g2!!.paint = Color.black
-        val centre = context!!.getPoint(Rules.feature!!.geom!!.centre) as Point2D.Double?
-        var radial = radius * context!!.mile(Rules.feature)
+        val centre = context!!.getPoint(Rules.feature!!.geom!!.centre!!) as Point2D.Double?
+        var radial = radius * context!!.mile(Rules.feature!!)
         if (dir != null) {
             g2!!.draw(
                 Line2D.Double(
