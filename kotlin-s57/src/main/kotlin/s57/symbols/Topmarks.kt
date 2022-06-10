@@ -12,7 +12,7 @@ import java.util.*
  */
 object Topmarks {
     // CHECKSTYLE.OFF: LineLength
-    @JvmField
+
     val RadarReflector = Symbols.Symbol()
 
     init {
@@ -129,7 +129,7 @@ object Topmarks {
         TopBoard.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val TopCan = Symbols.Symbol()
 
     init {
@@ -158,7 +158,7 @@ object Topmarks {
     val TopCanSphere = Symbols.Symbol()
     val TopCircle = Symbols.Symbol()
     val TopCircleTriangle = Symbols.Symbol()
-    @JvmField
+
     val TopCone = Symbols.Symbol()
 
     init {
@@ -216,7 +216,7 @@ object Topmarks {
         TopConeSphere.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val TopCross = Symbols.Symbol()
 
     init {
@@ -295,7 +295,7 @@ object Topmarks {
         TopCube.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val TopEast = Symbols.Symbol()
 
     init {
@@ -438,7 +438,7 @@ object Topmarks {
         TopIcone.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val TopIsol = Symbols.Symbol()
 
     init {
@@ -465,7 +465,7 @@ object Topmarks {
         TopIsol.add(Symbols.Instr(Symbols.Form.ELPS, Ellipse2D.Double(-13.0, -68.0, 26.0, 26.0)))
     }
 
-    @JvmField
+
     val TopMooring = Symbols.Symbol()
 
     init {
@@ -476,7 +476,7 @@ object Topmarks {
         TopMooring.add(Symbols.Instr(Symbols.Form.ELPS, Ellipse2D.Double(-8.5, -25.0, 17.0, 17.0)))
     }
 
-    @JvmField
+
     val TopNorth = Symbols.Symbol()
 
     init {
@@ -511,7 +511,7 @@ object Topmarks {
         TopNorth.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val TopSouth = Symbols.Symbol()
 
     init {
@@ -546,7 +546,7 @@ object Topmarks {
         TopSouth.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val TopSphere = Symbols.Symbol()
 
     init {
@@ -973,7 +973,7 @@ object Topmarks {
     }
 
     val TopTriangleCircle = Symbols.Symbol()
-    @JvmField
+
     val TopWest = Symbols.Symbol()
 
     init {
@@ -1008,7 +1008,7 @@ object Topmarks {
         TopWest.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val TopX = Symbols.Symbol()
 
     init {
@@ -1052,7 +1052,7 @@ object Topmarks {
     }
 
     val TopOther = Symbols.Symbol()
-    @JvmField
+
     val Shapes = EnumMap<S57val.TopSHP, Symbols.Symbol>(
         S57val.TopSHP::class.java
     )
@@ -1096,7 +1096,7 @@ object Topmarks {
     }
 
     // CHECKSTYLE.OFF: SingleSpaceSeparator
-    @JvmField
+
     val BuoyDeltas = EnumMap<S57val.BoySHP, Symbols.Delta>(
         S57val.BoySHP::class.java
     )
@@ -1132,11 +1132,11 @@ object Topmarks {
             Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
     }
 
-    @JvmField
+
     val FloatDelta = Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -42.0))
-    @JvmField
+
     val BeaconDelta = Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -70.0))
-    @JvmField
+
     val LightDelta = Symbols.Delta(
         Symbols.Handle.BC,
         AffineTransform.getTranslateInstance(0.0, -20.0)

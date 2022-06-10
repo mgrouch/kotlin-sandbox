@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage
  */
 object Areas {
     // CHECKSTYLE.OFF: LineLength
-    @JvmField
+
     val Plane = Symbols.Symbol()
 
     init {
@@ -34,7 +34,7 @@ object Areas {
         Plane.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val Cable = Symbols.Symbol()
 
     init {
@@ -48,7 +48,7 @@ object Areas {
         Cable.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val CableDot = Symbols.Symbol()
 
     init {
@@ -56,7 +56,7 @@ object Areas {
         CableDot.add(Symbols.Instr(Symbols.Form.RSHP, Ellipse2D.Double(-10.0, -40.0, 20.0, 20.0)))
     }
 
-    @JvmField
+
     val CableDash = Symbols.Symbol()
 
     init {
@@ -65,7 +65,7 @@ object Areas {
         CableDash.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(0.0, -15.0, 0.0, -45.0)))
     }
 
-    @JvmField
+
     val CableFlash = Symbols.Symbol()
 
     init {
@@ -81,7 +81,7 @@ object Areas {
         CableFlash.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val LaneArrow = Symbols.Symbol()
 
     init {
@@ -100,7 +100,7 @@ object Areas {
         LaneArrow.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val LineAnchor = Symbols.Symbol()
 
     init {
@@ -116,7 +116,7 @@ object Areas {
         )
     }
 
-    @JvmField
+
     val LinePlane = Symbols.Symbol()
 
     init {
@@ -133,7 +133,7 @@ object Areas {
         )
     }
 
-    @JvmField
+
     val MarineFarm = Symbols.Symbol()
 
     init {
@@ -164,7 +164,7 @@ object Areas {
         MarineFarm.add(Symbols.Instr(Symbols.Form.RSHP, Ellipse2D.Double(9.0, -2.0, 4.0, 4.0)))
     }
 
-    @JvmField
+
     val NoWake = Symbols.Symbol()
 
     init {
@@ -183,7 +183,7 @@ object Areas {
         NoWake.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-60.0, -60.0, 60.0, 60.0)))
     }
 
-    @JvmField
+
     val Pipeline = Symbols.Symbol()
 
     init {
@@ -194,7 +194,7 @@ object Areas {
         Pipeline.add(Symbols.Instr(Symbols.Form.RSHP, Ellipse2D.Double(-10.0, -60.0, 20.0, 20.0)))
     }
 
-    @JvmField
+
     val Restricted = Symbols.Symbol()
 
     init {
@@ -204,7 +204,7 @@ object Areas {
         Restricted.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(0.0, -15.0, 17.0, -15.0)))
     }
 
-    @JvmField
+
     val Rock = Symbols.Symbol()
 
     init {
@@ -223,7 +223,7 @@ object Areas {
         Rock.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(0.0, -20.0, 0.0, 20.0)))
     }
 
-    @JvmField
+
     val RockA = Symbols.Symbol()
 
     init {
@@ -246,7 +246,7 @@ object Areas {
         RockA.add(Symbols.Instr(Symbols.Form.RSHP, Ellipse2D.Double(9.0, 9.0, 8.0, 8.0)))
     }
 
-    @JvmField
+
     val RockC = Symbols.Symbol()
 
     init {
@@ -266,7 +266,7 @@ object Areas {
         RockC.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(10.0, 17.3, -10.0, -17.3)))
     }
 
-    @JvmField
+
     val Seaplane = Symbols.Symbol()
 
     init {
@@ -276,7 +276,7 @@ object Areas {
         Seaplane.add(Symbols.Instr(Symbols.Form.SYMB, Symbols.SubSymbol(Plane, 1.0, 0.0, 0.0, null, null)))
     }
 
-    @JvmField
+
     val WindFarm = Symbols.Symbol()
 
     init {
@@ -289,7 +289,7 @@ object Areas {
         WindFarm.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(0.0, -27.5, -13.8, -53.6)))
     }
 
-    @JvmField
+
     val WreckD = Symbols.Symbol()
 
     init {
@@ -310,7 +310,7 @@ object Areas {
         WreckD.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(20.0, -15.0, 20.0, 15.0)))
     }
 
-    @JvmField
+
     val WreckND = Symbols.Symbol()
 
     init {
@@ -321,7 +321,7 @@ object Areas {
         WreckND.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(20.0, -15.0, 20.0, 15.0)))
     }
 
-    @JvmField
+
     val WreckS = Symbols.Symbol()
 
     init {
@@ -343,7 +343,7 @@ object Areas {
         WreckS.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val Sandwaves = BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB)
 
     init {
@@ -397,7 +397,7 @@ object Areas {
         g2.draw(p)
     }
 
-    @JvmField
+
     val KelpS = Symbols.Symbol()
 
     init {
@@ -420,7 +420,7 @@ object Areas {
         KelpS.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val KelpA = BufferedImage(240, 240, BufferedImage.TYPE_INT_ARGB)
 
     init {

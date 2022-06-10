@@ -171,7 +171,7 @@ object Buoys {
         Cone.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val Float = Symbols.Symbol()
 
     init {
@@ -487,7 +487,7 @@ object Buoys {
         Sphere.add(Symbols.Instr(Symbols.Form.EARC, Arc2D.Double(-26.5, -39.4, 60.0, 60.0, -18.0, 216.0, Arc2D.OPEN)))
     }
 
-    @JvmField
+
     val Storage = Symbols.Symbol()
 
     init {
@@ -506,7 +506,7 @@ object Buoys {
         Storage.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val Super = Symbols.Symbol()
 
     init {
@@ -572,7 +572,7 @@ object Buoys {
         Super.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val Shapes = EnumMap<S57val.BoySHP, Symbols.Symbol>(
         S57val.BoySHP::class.java
     )

@@ -12,22 +12,21 @@ import java.awt.geom.*
  * @author Malcolm Herring
  */
 object Symbols {
-    // CHECKSTYLE.OFF: LineLength
-    @JvmField
+
     val Yland = Color(0xedbc0c)
 
     //    public static final Color Bwater = new Color(0x78acd2);
-    @JvmField
+
     val Bwater = Color(0x9bc5e3)
-    @JvmField
+
     val Gdries = Color(0x689868)
-    @JvmField
+
     val Mline = Color(0x9a6078)
-    @JvmField
+
     val Msymb = Color(0xa30075)
-    @JvmField
+
     val Mtss = Color(-0x3f3b7f01, true)
-    @JvmStatic
+
     fun drawSymbol(g2: Graphics2D, symbol: Symbol?, scale: Double, x: Double, y: Double, cs: Scheme?, dd: Delta?) {
         var pn = 0
         var cn = 0
@@ -300,13 +299,13 @@ object Symbols {
 
     class Caption(var string: String, var font: Font, var colour: Color?, var dd: Delta?)
     class LineStyle {
-        @JvmField
+    
         var line: Color?
-        @JvmField
+    
         var width: Float
-        @JvmField
+    
         var dash: FloatArray?
-        @JvmField
+    
         var fill: Color?
 
         constructor(ifill: Color?) {

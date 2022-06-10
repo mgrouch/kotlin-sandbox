@@ -87,7 +87,7 @@ object Beacons {
         Cairn.add(Symbols.Instr(Symbols.Form.ELPS, Ellipse2D.Double(-18.0, -70.0, 36.0, 36.0)))
     }
 
-    @JvmField
+
     val FogSignal = Symbols.Symbol()
 
     init {
@@ -189,7 +189,7 @@ object Beacons {
         Lattice.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val LightFlare = Symbols.Symbol()
 
     init {
@@ -203,7 +203,7 @@ object Beacons {
         LightFlare.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val LightMajor = Symbols.Symbol()
 
     init {
@@ -228,7 +228,7 @@ object Beacons {
         LightMajor.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val LightMinor = Symbols.Symbol()
 
     init {
@@ -248,7 +248,7 @@ object Beacons {
         LightMinor.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val PerchPort = Symbols.Symbol()
 
     init {
@@ -260,7 +260,7 @@ object Beacons {
         PerchPort.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-25.0, -70.0, 0.0, -40.0)))
     }
 
-    @JvmField
+
     val PerchStarboard = Symbols.Symbol()
 
     init {
@@ -277,7 +277,7 @@ object Beacons {
         PerchStarboard.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-25.0, -40.0, 0.0, -68.7)))
     }
 
-    @JvmField
+
     val RadarStation = Symbols.Symbol()
 
     init {
@@ -291,7 +291,7 @@ object Beacons {
         RadarStation.add(Symbols.Instr(Symbols.Form.ELPS, Ellipse2D.Double(-125.0, -125.0, 250.0, 250.0)))
     }
 
-    @JvmField
+
     val Stake = Symbols.Symbol()
 
     init {
@@ -404,7 +404,7 @@ object Beacons {
         Tower.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val WithyPort = Symbols.Symbol()
 
     init {
@@ -418,7 +418,7 @@ object Beacons {
         WithyPort.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-30.0, -35.0, 0.0, -21.0)))
     }
 
-    @JvmField
+
     val WithyStarboard = Symbols.Symbol()
 
     init {
@@ -437,7 +437,7 @@ object Beacons {
         WithyStarboard.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-30.0, -21.0, 0.0, -35.0)))
     }
 
-    @JvmField
+
     val Shapes = EnumMap<S57val.BcnSHP, Symbols.Symbol>(
         S57val.BcnSHP::class.java
     )

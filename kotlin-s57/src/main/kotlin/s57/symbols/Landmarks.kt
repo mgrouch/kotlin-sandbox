@@ -75,7 +75,7 @@ object Landmarks {
         Church.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val ChurchTower = Symbols.Symbol()
 
     init {
@@ -189,7 +189,7 @@ object Landmarks {
         )
     }
 
-    @JvmField
+
     val Platform = Symbols.Symbol()
 
     init {
@@ -198,7 +198,7 @@ object Landmarks {
         Platform.add(Symbols.Instr(Symbols.Form.RSHP, Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0)))
     }
 
-    @JvmField
+
     val RadioTV = Symbols.Symbol()
 
     init {
@@ -237,7 +237,7 @@ object Landmarks {
         Temple.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-35.0, 21.0, 35.0, -21.0)))
     }
 
-    @JvmField
+
     val WaterTower = Symbols.Symbol()
 
     init {
@@ -296,7 +296,7 @@ object Landmarks {
         Windsock.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val Shapes = EnumMap<S57val.CatLMK, Symbols.Symbol?>(
         S57val.CatLMK::class.java
     )
@@ -324,7 +324,7 @@ object Landmarks {
         Shapes[S57val.CatLMK.LMK_BLDR] = Beacons.Cairn
     }
 
-    @JvmField
+
     val Funcs = EnumMap<S57val.FncFNC, Symbols.Symbol?>(
         S57val.FncFNC::class.java
     )

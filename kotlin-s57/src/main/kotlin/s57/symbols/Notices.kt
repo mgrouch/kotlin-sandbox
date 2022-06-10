@@ -296,7 +296,7 @@ object Notices {
         NoticeE.add(Symbols.Instr(Symbols.Form.FILL, Color.white))
     }
 
-    @JvmField
+
     val Notice = Symbols.Symbol()
 
     init {
@@ -1980,7 +1980,7 @@ object Notices {
         )
     }
 
-    @JvmField
+
     val NoticeBoard = Symbols.Symbol()
 
     init {

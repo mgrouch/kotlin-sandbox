@@ -368,7 +368,7 @@ object Facilities {
         VisitorMooring.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val Cats = EnumMap<S57val.CatSCF, Symbols.Symbol>(
         S57val.CatSCF::class.java
     )

@@ -10,7 +10,7 @@ import java.awt.geom.*
  */
 object Harbours {
     // CHECKSTYLE.OFF: LineLength
-    @JvmField
+
     val Anchor = Symbols.Symbol()
 
     init {
@@ -67,7 +67,7 @@ object Harbours {
         Yacht.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val Anchorage = Symbols.Symbol()
 
     init {
@@ -79,7 +79,7 @@ object Harbours {
         )
     }
 
-    @JvmField
+
     val Bollard = Symbols.Symbol()
 
     init {
@@ -91,7 +91,7 @@ object Harbours {
         Bollard.add(Symbols.Instr(Symbols.Form.ELPS, s))
     }
 
-    @JvmField
+
     val CallPoint1 = Symbols.Symbol()
 
     init {
@@ -106,7 +106,7 @@ object Harbours {
         CallPoint1.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val CallPoint2 = Symbols.Symbol()
 
     init {
@@ -119,7 +119,7 @@ object Harbours {
         CallPoint2.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val ContainerCrane = Symbols.Symbol()
 
     init {
@@ -143,7 +143,7 @@ object Harbours {
         Customs.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-25.0, -5.0, 25.0, -5.0)))
     }
 
-    @JvmField
+
     val DeviationDolphin = Symbols.Symbol()
 
     init {
@@ -165,7 +165,7 @@ object Harbours {
         DeviationDolphin.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val DistanceI = Symbols.Symbol()
 
     init {
@@ -173,7 +173,7 @@ object Harbours {
         DistanceI.add(Symbols.Instr(Symbols.Form.ELPS, Ellipse2D.Double(-11.0, -11.0, 22.0, 22.0)))
     }
 
-    @JvmField
+
     val DistanceU = Symbols.Symbol()
 
     init {
@@ -182,7 +182,7 @@ object Harbours {
         DistanceU.add(Symbols.Instr(Symbols.Form.ELPS, Ellipse2D.Double(-11.0, -11.0, 22.0, 22.0)))
     }
 
-    @JvmField
+
     val Dolphin = Symbols.Symbol()
 
     init {
@@ -203,7 +203,7 @@ object Harbours {
         Dolphin.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val Explosives = Symbols.Symbol()
 
     init {
@@ -223,7 +223,7 @@ object Harbours {
         Explosives.add(Symbols.Instr(Symbols.Form.PLIN, p))
     }
 
-    @JvmField
+
     val Fishing = Symbols.Symbol()
 
     init {
@@ -251,7 +251,7 @@ object Harbours {
         Fishing.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val Harbour = Symbols.Symbol()
 
     init {
@@ -280,7 +280,7 @@ object Harbours {
         HarbourMaster.add(Symbols.Instr(Symbols.Form.SYMB, Symbols.SubSymbol(Anchor, 0.4, 0.0, 0.0, null, null)))
     }
 
-    @JvmField
+
     val Hospital = Symbols.Symbol()
 
     init {
@@ -323,7 +323,7 @@ object Harbours {
         LandingSteps.add(Symbols.Instr(Symbols.Form.PGON, p))
     }
 
-    @JvmField
+
     val Marina = Symbols.Symbol()
 
     init {
@@ -343,7 +343,7 @@ object Harbours {
         )
     }
 
-    @JvmField
+
     val MarinaNF = Symbols.Symbol()
 
     init {
@@ -355,7 +355,7 @@ object Harbours {
         )
     }
 
-    @JvmField
+
     val Pilot = Symbols.Symbol()
 
     init {
@@ -371,7 +371,7 @@ object Harbours {
         Pilot.add(Symbols.Instr(Symbols.Form.ELPS, Ellipse2D.Double(-58.0, -58.0, 116.0, 116.0)))
     }
 
-    @JvmField
+
     val PortCrane = Symbols.Symbol()
 
     init {
@@ -385,14 +385,14 @@ object Harbours {
         PortCrane.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -60.0)))
     }
 
-    @JvmField
+
     val Post = Symbols.Symbol()
 
     init {
         Post.add(Symbols.Instr(Symbols.Form.RSHP, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
     }
 
-    @JvmField
+
     val Rescue = Symbols.Symbol()
 
     init {
@@ -408,7 +408,7 @@ object Harbours {
         Rescue.add(Symbols.Instr(Symbols.Form.LINE, Line2D.Double(-15.0, 0.0, 15.0, 0.0)))
     }
 
-    @JvmField
+
     val SignalStation = Symbols.Symbol()
 
     init {
@@ -422,7 +422,7 @@ object Harbours {
         SignalStation.add(Symbols.Instr(Symbols.Form.RSHP, Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0)))
     }
 
-    @JvmField
+
     val TideGauge = Symbols.Symbol()
 
     init {
