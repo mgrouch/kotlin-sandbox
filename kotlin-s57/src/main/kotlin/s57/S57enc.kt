@@ -1699,22 +1699,21 @@ object S57enc {
         recs = 3
 
         // Depths
-        var depths: Array<Any?> = arrayOfNulls(0)
+        val depths: ArrayList<Any> = arrayListOf()
         for (entry in map.nodes!!.entries) {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.DPTH) {
-                val dval = arrayOf<Any?>(
+                val dval = arrayOf<Any>(
                     rad2deg(node.lat) * COMF, rad2deg(node.lon) * COMF,
                     node.value * SOMF
                 )
-                depths = depths.copyOf(depths.size + dval.size)
-                byteArrayCopy(dval, 0, depths, depths.size - dval.size, dval.size)
+                depths.addAll(dval)
             }
         }
         if (depths.isNotEmpty()) {
             fields = ArrayList()
             fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, -2, 1, 1)))
-            fields.add(S57dat.Fparams(S57field.SG3D, depths))
+            fields.add(S57dat.Fparams(S57field.SG3D, depths.toTypedArray()))
             record = S57dat.encRecord(recs++, fields)
             byteArrayCopy(record, 0, buf, idx, record.size)
             idx += record.size
@@ -1780,7 +1779,7 @@ object S57enc {
                     rad2deg(map.nodes!![ref]!!.lat) * COMF, rad2deg(map.nodes!![ref]!!.lon) * COMF
                 )
                 nodes = Arrays.copyOf(nodes, nodes!!.size + nval.size)
-                byteArrayCopy(nval, 0, nodes, nodes.size - nval.size, nval.size)
+                arraycopy(nval, 0, nodes, nodes.size - nval.size, nval.size)
             }
             if (nodes!!.isNotEmpty()) {
                 fields.add(S57dat.Fparams(S57field.SG2D, nodes))
@@ -1872,10 +1871,10 @@ object S57enc {
                                 )
                                 if (attl < 300 || attl > 304) {
                                     attf = attf!!.copyOf(attf.size + next.size)
-                                    byteArrayCopy(next, 0, attf, attf.size - next.size, next.size)
+                                    arraycopy(next, 0, attf, attf.size - next.size, next.size)
                                 } else {
                                     natf = Arrays.copyOf(natf, natf!!.size + next.size)
-                                    byteArrayCopy(next, 0, natf, natf.size - next.size, next.size)
+                                    arraycopy(next, 0, natf, natf.size - next.size, next.size)
                                 }
                             }
                         }
@@ -1902,7 +1901,7 @@ object S57enc {
                         val next =
                             arrayOf<Any?>((((id and 0xffffffffL) + 0x100000000L shl 16) + (agen and 0xffff)), 2, "")
                         params = params!!.copyOf(params.size + next.size)
-                        byteArrayCopy(next, 0, params, params.size - next.size, next.size)
+                        arraycopy(next, 0, params, params.size - next.size, next.size)
                     }
                     refs.add(S57dat.Fparams(S57field.FFPT, params))
                     objects[objects.size - 1]!!.addAll(refs)
@@ -1910,7 +1909,7 @@ object S57enc {
                 for (o in objects) {
                     o!!.addAll(geom)
                     record = S57dat.encRecord(recs++, o)
-                    byteArrayCopy(record, 0, buf, idx, record.size)
+                    arraycopy(record, 0, buf, idx, record.size)
                     idx += record.size
                     if (obj == Obj.M_COVR || obj == Obj.M_NSYS) metas++
                     else geos++
@@ -1946,5 +1945,9 @@ object S57enc {
         record = S57dat.encRecord(1, ds)
         byteArrayCopy(record, 0, buf, header.size, record.size)
         return idx
+    }
+
+    private fun arraycopy(src: Array<Any?>, srcPos: Int, dest: Array<Any?>, destPos: Int, size: Int) {
+        src.copyInto(dest, destPos, srcPos,  size - srcPos)
     }
 }
