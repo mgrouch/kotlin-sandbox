@@ -522,7 +522,7 @@ object S57dat {
                 for (subf in fields[sfparams.field]!!) {
                     val next = encSubf(subf, sfparams.params[ip++])
                     buf = buf.copyOf(buf.size + next.size)
-                    arraycopy(next, 0, buf, buf.size - next.size, next.size)
+                    byteArrayCopy(next, 0, buf, buf.size - next.size, next.size)
                 }
             }
             buf = buf.copyOf(buf.size + 1)
@@ -555,17 +555,17 @@ object S57dat {
         }
         ibuf[i] = 0x1e
         val fbuf = leader.copyOf(leader.size + ibuf.size + buf.size)
-        arraycopy(ibuf, 0, fbuf, leader.size, ibuf.size)
-        arraycopy(buf, 0, fbuf, leader.size + ibuf.size, buf.size)
+        byteArrayCopy(ibuf, 0, fbuf, leader.size, ibuf.size)
+        byteArrayCopy(buf, 0, fbuf, leader.size + ibuf.size, buf.size)
         fbuf[20] = (mlen + 0x30).toByte()
         fbuf[21] = (olen + 0x30).toByte()
-        arraycopy(String.format("%05d", fbuf.size).toByteArray(), 0, fbuf, 0, 5)
-        arraycopy(String.format("%05d", leader.size + ibuf.size).toByteArray(), 0, fbuf, 12, 5)
+        byteArrayCopy(String.format("%05d", fbuf.size).toByteArray(), 0, fbuf, 0, 5)
+        byteArrayCopy(String.format("%05d", leader.size + ibuf.size).toByteArray(), 0, fbuf, 12, 5)
         asc = false
         return fbuf
     }
 
-    fun arraycopy(src: ByteArray, srcPos: Int, dest: ByteArray, destPos: Int, size: Int) {
+    fun byteArrayCopy(src: ByteArray, srcPos: Int, dest: ByteArray, destPos: Int, size: Int) {
         src.copyInto(dest, destPos, srcPos,  size - srcPos)
     }
 
