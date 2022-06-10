@@ -12,7 +12,7 @@ import s57.S57map.Pflag.*
  */
 object S57dec {
 
-    fun decodeChart(`in`: FileInputStream, map: S57map) {
+    fun decodeChart(inp: FileInputStream, map: S57map) {
         S57dat.rnum = 0
         val leader = ByteArray(24)
         var record = ByteArray(0)
@@ -33,7 +33,7 @@ object S57dec {
         var nflag = Nflag.ANON
         var pflag = NOSP
         var objl: Long = 0
-        while (`in`.read(leader) == 24) {
+        while (inp.read(leader) == 24) {
             try {
                 length = String(leader, 0, 5).toInt() - 24
                 record = ByteArray(length)
@@ -47,7 +47,7 @@ object S57dec {
             mapfp = leader[21] - '0'.code.toByte()
             mapts = leader[23] - '0'.code.toByte()
             entry = mapfl + mapfp + mapts
-            if (`in`.read(record) != length) break
+            if (inp.read(record) != length) break
             var idx = 0
             while (idx < fields - 1) {
                 tag = String(record, idx, mapts)
@@ -200,7 +200,7 @@ object S57dec {
             }
         }
         map.endFile()
-        `in`.close()
+        inp.close()
         return
     }
 }

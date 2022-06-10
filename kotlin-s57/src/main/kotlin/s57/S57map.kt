@@ -39,34 +39,34 @@ class S57map(private val sea: Boolean) {
         var lon: Double // Longitude in radians
 
         var flg: Nflag? // Role of node
-        var `val`: Double // Optional value
+        var value: Double // Optional value
 
         constructor() {
             flg = Nflag.ANON
             lat = 0.0
             lon = 0.0
-            `val` = 0.0
+            value = 0.0
         }
 
         constructor(ilat: Double, ilon: Double) {
             flg = Nflag.ANON
             lat = ilat
             lon = ilon
-            `val` = 0.0
+            value = 0.0
         }
 
         constructor(ilat: Double, ilon: Double, iflg: Nflag?) {
             lat = ilat
             lon = ilon
             flg = iflg
-            `val` = 0.0
+            value = 0.0
         }
 
         constructor(ilat: Double, ilon: Double, ival: Double) {
             flg = Nflag.DPTH
             lat = ilat
             lon = ilon
-            `val` = ival
+            value = ival
         }
     }
 
@@ -219,8 +219,8 @@ class S57map(private val sea: Boolean) {
     fun endFeature() {}
     fun newAtt(attl: Long, atvl: String?) {
         val att = S57att.decodeAttribute(attl)
-        val `val` = S57val.decodeValue(atvl, att)
-        feature!!.atts!![att] = `val`
+        val value = S57val.decodeValue(atvl, att)
+        feature!!.atts!![att] = value
     }
 
     fun newPrim(id: Long, ornt: Long, usag: Long) {
@@ -332,7 +332,7 @@ class S57map(private val sea: Boolean) {
         feature!!.geom!!.elems!!.add(Prim(id, outer))
     }
 
-    fun addTag(key: String?, `val`: String?) {
+    fun addTag(key: String?, value: String?) {
         feature!!.reln = Rflag.MASTER
         val subkeys: Array<String?> = key!!.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         if (subkeys.size > 1 && subkeys[0] == "seamark") {
@@ -358,17 +358,17 @@ class S57map(private val sea: Boolean) {
                     atts = AttMap()
                     objs[idx] = atts
                 }
-                val attval = S57val.convertValue(`val`, att)
-                if (attval!!.`val` != null) {
+                val attval = S57val.convertValue(value, att)
+                if (attval!!.value != null) {
                     if (att == Att.VALSOU) {
                         val node = nodes!![feature!!.geom!!.elems!![0]!!.id]
-                        node!!.`val` = (attval.`val` as Double)
+                        node!!.value = (attval.value as Double)
                     }
                     atts[att] = attval
                 }
             } else {
                 if (subkeys[1] == "type") {
-                    obj = S57obj.enumType(`val`)
+                    obj = S57obj.enumType(value)
                     feature!!.type = obj
                     var objs = feature!!.objs!![obj]
                     if (objs == null) {
@@ -386,7 +386,7 @@ class S57map(private val sea: Boolean) {
                     }
                 } else {
                     if (obj != Obj.UNKOBJ) {
-                        if (`val` == "yes") {
+                        if (value == "yes") {
                             var objs = feature!!.objs!![obj]
                             if (objs == null) {
                                 objs = ObjTab()
@@ -396,14 +396,14 @@ class S57map(private val sea: Boolean) {
                     } else {
                         val att = S57att.enumAttribute(subkeys[1], Obj.UNKOBJ)
                         if (att != Att.UNKATT) {
-                            val attval = S57val.convertValue(`val`, att)
-                            if (attval!!.`val` != null) feature!!.atts!![att] = attval
+                            val attval = S57val.convertValue(value, att)
+                            if (attval!!.value != null) feature!!.atts!![att] = attval
                         }
                     }
                 }
             }
         } else if (!sea) {
-            S57osm.OSMtag(osm, key, `val`)
+            S57osm.OSMtag(osm, key, value)
         }
     }
 

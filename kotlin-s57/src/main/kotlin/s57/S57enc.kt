@@ -1697,7 +1697,7 @@ object S57enc {
             if (node!!.flg == S57map.Nflag.DPTH) {
                 val dval = arrayOf<Any?>(
                     rad2deg(node.lat) * COMF, rad2deg(node.lon) * COMF,
-                    node.`val` * SOMF
+                    node.value * SOMF
                 )
                 depths = Arrays.copyOf(depths, depths.size + dval.size)
                 arraycopy(dval, 0, depths, depths.size - dval.size, dval.size)

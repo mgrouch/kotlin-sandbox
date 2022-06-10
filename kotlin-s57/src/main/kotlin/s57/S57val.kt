@@ -2367,22 +2367,22 @@ object S57val {
     ): String? { // Convert SCM attribute value to OSM attribute value string
         if (attval != null) {
             when (attval.conv) {
-                Conv.A, Conv.S -> return attval.`val` as String?
+                Conv.A, Conv.S -> return attval.value as String?
                 Conv.E -> {
                     val map = keys[att]!!.map
-                    return map!![(attval.`val` as ArrayList<*>?)!![0]]!!.`val`
+                    return map!![(attval.value as ArrayList<*>?)!![0]]!!.`val`
                 }
                 Conv.L -> {
                     var str: String? = ""
                     val map = keys[att]!!.map
-                    for (item in (attval.`val` as ArrayList<*>?)!!) {
+                    for (item in (attval.value as ArrayList<*>?)!!) {
                         if (str!!.isNotEmpty()) str += ";"
                         if (item != null) str += (map?.get(item) as S57enum).`val`
                     }
                     return str
                 }
-                Conv.I -> return (attval.`val` as Long?).toString()
-                Conv.F -> return (attval.`val` as Double?).toString()
+                Conv.I -> return (attval.value as Long?).toString()
+                Conv.F -> return (attval.value as Double?).toString()
             }
         }
         return ""
@@ -2401,37 +2401,37 @@ object S57val {
     }
 
     fun convertValue(
-        `val`: String?,
+        value: String?,
         att: Att?
     ): AttVal<*>? { // Convert OSM attribute value string to SCM attribute value
         when (keys[att]!!.conv) {
-            Conv.A, Conv.S -> return AttVal<String?>(Conv.S, `val`)
+            Conv.A, Conv.S -> return AttVal<String?>(Conv.S, value)
             Conv.E -> {
                 val list = ArrayList<Enum<*>?>()
-                list.add(osmEnum(`val`, att))
+                list.add(osmEnum(value, att))
                 return AttVal<ArrayList<*>?>(Conv.E, list)
             }
             Conv.L -> {
                 val list = ArrayList<Enum<*>?>()
-                for (item in `val`!!.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
+                for (item in value!!.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) {
                     list.add(osmEnum(item, att))
                 }
                 return AttVal<ArrayList<*>?>(Conv.L, list)
             }
             Conv.I -> {
                 return try {
-                    AttVal<Long?>(Conv.I, `val`!!.toLong())
+                    AttVal<Long?>(Conv.I, value!!.toLong())
                 } catch (e: Exception) {
                     return null
                 }
                 return try {
-                    AttVal<Double?>(Conv.F, `val`!!.toDouble())
+                    AttVal<Double?>(Conv.F, value!!.toDouble())
                 } catch (e: Exception) {
                     return null
                 }
             }
             Conv.F -> return try {
-                AttVal<Double?>(Conv.F, `val`!!.toDouble())
+                AttVal<Double?>(Conv.F, value!!.toDouble())
             } catch (e: Exception) {
                 return null
             }
@@ -2452,7 +2452,7 @@ object S57val {
 
     internal data class S57key(val conv: Conv?, val map: Map<Any, S57enum>?)
 
-    class AttVal<V> internal constructor(var conv: Conv?, var `val`: V?)
+    class AttVal<V> internal constructor(var conv: Conv?, var value: V?)
 
     enum class BcnSHP {
         BCN_UNKN, BCN_STAK, BCN_WTHY, BCN_TOWR, BCN_LATT, BCN_PILE, BCN_CARN, BCN_BUOY, BCN_POLE, BCN_PRCH, BCN_POST
