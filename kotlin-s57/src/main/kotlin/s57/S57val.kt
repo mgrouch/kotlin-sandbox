@@ -2439,7 +2439,6 @@ object S57val {
         return AttVal<Any?>(keys[att]!!.conv, null)
     }
 
-    @JvmStatic
     fun unknAtt(att: Att?): Enum<*> {
         val s57key: S57key? = keys[att]
         return s57key!!.map!!.keys.toTypedArray()[0] as Enum<*>

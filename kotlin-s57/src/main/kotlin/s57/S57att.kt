@@ -755,8 +755,8 @@ object S57att {
     private val Water_level = mapOf(Obj.UNKOBJ to Att.WATLEV)
     private val Wavelength = mapOf(Obj.UNKOBJ to Att.RADWAL)
     private val Width = mapOf(Obj.UNKOBJ to Att.HORWID)
-
     private val Year = mapOf(Obj.UNKOBJ to Att.RYRMGV)
+
     private val StrAtt = mapOf(
         "accuracy" to Accuracy,
         "addition" to Addition,
@@ -914,12 +914,10 @@ object S57att {
         if (attribute != null && attribute.isNotEmpty()) {
             val map = StrAtt[attribute]
             if (map != null) {
-                return if (map.containsKey(obj)) {
-                    map[obj]
-                } else if (map.containsKey(Obj.UNKOBJ)) {
-                    map[Obj.UNKOBJ]
-                } else {
-                    Att.UNKATT
+                return when {
+                    map.containsKey(obj) -> map[obj]
+                    map.containsKey(Obj.UNKOBJ) -> map[Obj.UNKOBJ]
+                    else -> Att.UNKATT
                 }
             }
         }

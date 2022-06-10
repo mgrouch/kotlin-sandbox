@@ -10,16 +10,9 @@ class S57map(private val sea: Boolean) {
 
     // S57/OSM map generation methods
     class MapBounds {
-        @JvmField
         var minlat: Double = toRadians(90.0)
-
-        @JvmField
         var minlon: Double = toRadians(180.0)
-
-        @JvmField
         var maxlat: Double = toRadians(-90.0)
-
-        @JvmField
         var maxlon: Double = toRadians(-180.0)
     }
 
@@ -33,17 +26,11 @@ class S57map(private val sea: Boolean) {
 
     class Snode {
         // All coordinates in map
-        @JvmField
-        var lat // Latitude in radians
-                : Double
+        var lat: Double // Latitude in radians
+        var lon: Double // Longitude in radians
 
-        @JvmField
-        var lon // Longitude in radians
-                : Double
-        var flg // Role of node
-                : Nflag?
-        var `val` // Optional value
-                : Double
+        var flg: Nflag? // Role of node
+        var `val`: Double // Optional value
 
         constructor() {
             flg = Nflag.ANON
@@ -157,29 +144,15 @@ class S57map(private val sea: Boolean) {
     }
 
     class Geom(  // Geometric structure of feature
-        var prim // Geometry type
-        : Pflag?
+        var prim: Pflag? // Geometry type
     ) {
-        var elems // Ordered list of elements
-                : ArrayList<Prim?>? = ArrayList()
-        var outers // Number of outers
-                : Int
-        var inners // Number of inners
-                : Int = 0
-        var comps // Ordered list of compounds
-                : ArrayList<Comp?>?
-
-        @JvmField
-        var area // Area of feature
-                : Double
-
-        @JvmField
-        var length // Length of feature
-                : Double
-
-        @JvmField
-        var centre // Centre of feature
-                : Snode?
+        var elems: ArrayList<Prim?>? = ArrayList() // Ordered list of elements
+        var outers: Int // Number of outers
+        var inners: Int = 0 // Number of inners
+        var comps: ArrayList<Comp?>? // Ordered list of compounds
+        var area: Double // Area of feature
+        var length: Double // Length of feature
+        var centre: Snode? // Centre of feature
 
         init {
             outers = inners
@@ -191,30 +164,13 @@ class S57map(private val sea: Boolean) {
     }
 
     class Feature internal constructor() {
-        var id // Ref for this feature
-                : Long = 0
-
-        @JvmField
-        var reln // Relationship status
-                : Rflag? = Rflag.UNKN
-
-        @JvmField
-        var geom // Geometry data
-                : Geom? = Geom(Pflag.NOSP)
-
-        @JvmField
-        var type // Feature type
-                : S57obj.Obj?
-
-        @JvmField
-        var atts // Feature attributes
-                : AttMap?
-        var rels // Related objects
-                : RelTab?
-
-        @JvmField
-        var objs // Slave object attributes
-                : ObjMap?
+        var id: Long = 0 // Ref for this feature
+        var reln: Rflag? = Rflag.UNKN // Relationship status
+        var geom: Geom? = Geom(Pflag.NOSP) // Geometry data
+        var type: S57obj.Obj? // Feature type
+        var atts: AttMap? // Feature attributes
+        var rels: RelTab? // Related objects
+        var objs: ObjMap? // Slave object attributes
 
         init {
             type = S57obj.Obj.UNKOBJ
@@ -224,12 +180,9 @@ class S57map(private val sea: Boolean) {
         }
     }
 
-    @JvmField
     var bounds: MapBounds?
     var nodes: NodeTab? = NodeTab()
     var edges: EdgeTab? = EdgeTab()
-
-    @JvmField
     var features: FtrMap?
     var index: FtrTab?
     var xref: Long
@@ -736,7 +689,6 @@ class S57map(private val sea: Boolean) {
             return eit!!.hasNext()
         }
 
-        @JvmOverloads
         fun nextRef(all: Boolean = false): Long {
             var ref = eit!!.nextRef()
             if (!all && ref == lastref) {

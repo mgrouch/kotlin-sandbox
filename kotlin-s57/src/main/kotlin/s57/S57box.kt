@@ -10,17 +10,15 @@ import s57.S57obj.Obj
  * @author mgrouch
  */
 object S57box {
+
     fun getExt(map: S57map, lat: Double, lon: Double): Ext {
-        if (lat >= map.bounds!!.maxlat && lon < map.bounds!!.maxlon) {
-            return N
-        } else if (lon <= map.bounds!!.minlon) {
-            return W
-        } else if (lat <= map.bounds!!.minlat) {
-            return S
-        } else if (lon >= map.bounds!!.maxlon) {
-            return E
+        return when {
+            lat >= map.bounds!!.maxlat && lon < map.bounds!!.maxlon -> N
+            lon <= map.bounds!!.minlon -> W
+            lat <= map.bounds!!.minlat -> S
+            lon >= map.bounds!!.maxlon -> E
+            else -> I
         }
-        return Ext.I
     }
 
     fun bBox(map: S57map) {
@@ -43,7 +41,7 @@ object S57box {
                 first = last
                 end = null
                 start = end
-                ebound = Ext.I
+                ebound = I
                 sbound = ebound
             }
         }
