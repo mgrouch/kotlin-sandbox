@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("js") version "1.6.21"
+	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.serialization") version "1.6.21"
 }
 

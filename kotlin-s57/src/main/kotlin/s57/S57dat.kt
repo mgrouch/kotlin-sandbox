@@ -3,8 +3,10 @@ package s57
 
 import s57.S57map.Pflag.POINT
 import s57.S57obj.Obj
+import java.nio.charset.Charset
 
 import kotlin.math.abs
+import kotlin.text.Charsets.UTF_8
 
 /**
  * @author Malcolm Herring
