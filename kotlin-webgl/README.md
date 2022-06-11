@@ -23,3 +23,5 @@ S57 Parser in Java
 https://github.com/ChristianDenker/s57reader
 https://github.com/JOSM/josm-plugins/tree/master/seachart
 
+IndexedDb Kotlin wrapper
+https://github.com/JuulLabs/indexeddb
