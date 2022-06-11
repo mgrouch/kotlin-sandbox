@@ -4,6 +4,9 @@
 
 -t is required for Hot Module Replacement
 
+open URL in browser: http://localhost:3001/
+
+
 More cool libraries:
 
 https://github.com/Pozo/threejs-kotlin
