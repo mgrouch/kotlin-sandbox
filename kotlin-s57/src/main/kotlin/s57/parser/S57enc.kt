@@ -1,7 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package s57.parser
 
-import s57.CRC32
+import s57.parser.CRC32
 import s57.parser.S57att.Att
 import s57.parser.S57dat.S57field
 import s57.parser.S57dat.byteArrayCopy

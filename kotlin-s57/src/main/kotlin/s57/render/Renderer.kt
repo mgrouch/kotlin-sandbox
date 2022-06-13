@@ -9,7 +9,6 @@ import s57.symbols.Symbols
 import s57.symbols.Symbols.Caption
 import s57.symbols.Symbols.Delta
 import s57.symbols.Symbols.Form
-import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Symbol
 import s57.symbols.Symbols.drawSymbol
 

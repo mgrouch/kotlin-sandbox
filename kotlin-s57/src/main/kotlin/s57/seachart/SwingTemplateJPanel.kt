@@ -26,7 +26,7 @@ class SwingTemplateJPanel : JPanel() {
         preferredSize = Dimension(screenSize.width - 40, screenSize.height - 40)
         val input: FileInputStream
         try {
-            input = FileInputStream("D:\\ENC_ROOT\\US5NYCKG\\US5NYCKG.000")
+            input = FileInputStream("D:\\ENC_ROOT\\US5NYCDF\\US5NYCDF.000")
             map = S57map(true)
             decodeChart(input, map)
             rectangularBounds = this.bounds

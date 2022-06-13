@@ -236,12 +236,18 @@ object Signals : Rules() {
                     if (!astr.isEmpty()) {
                         bstr += "($astr)"
                     }
-                    val per = getAttVal(Obj.RTPBCN, Att.SIGPER) as Double
-                    val mxr = getAttVal(Obj.RTPBCN, Att.VALMXR) as Double
+                    val per = getAttVal(Obj.RTPBCN, Att.SIGPER)
+                    val mxr = getAttVal(Obj.RTPBCN, Att.VALMXR)
                     if (per != null || mxr != null) {
                         bstr += if (astr.isEmpty()) " " else ""
-                        if (per != null) bstr += if (per != 0.0) per.toString() + "s" else ""
-                        if (mxr != null) bstr += if (mxr != 0.0) mxr.toString() + "M" else ""
+                        if (per != null) {
+                            per as Double
+                            bstr += if (per != 0.0) per.toString() + "s" else ""
+                        }
+                        if (mxr != null) {
+                            mxr as Double
+                            bstr += if (mxr != 0.0) mxr.toString() + "M" else ""
+                        }
                     }
                 }
                 else -> {}
