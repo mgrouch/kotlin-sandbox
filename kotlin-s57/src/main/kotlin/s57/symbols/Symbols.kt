@@ -3,6 +3,7 @@ package s57.symbols
 
 import java.awt.BasicStroke
 import java.awt.Color
+import java.awt.Color.black
 import java.awt.Font
 import java.awt.Graphics2D
 import java.awt.font.TextLayout
@@ -25,7 +26,7 @@ object Symbols {
         var cn = 0
         var bpat = Patt.Z
         var bcol: Color? = null
-        g2.paint = Color.black
+        g2.paint = black
         if (cs != null) {
             if (cs.pat.size > 0 && cs.col!!.size > 0 && cs.pat[0] == Patt.B) {
                 bpat = cs.pat.removeAt(0)
@@ -92,7 +93,7 @@ object Symbols {
                     }
                     Form.COLR -> if (cs?.col != null) {
                         for (patch in (item.params as Symbol?)!!) {
-                            when (patch!!.type) {
+                            when (patch.type) {
                                 Form.N1 -> if (cn > 0) {
                                     val s = patch.params as Symbol?
                                     drawSymbol(g2, s, 1.0, 0.0, 0.0, Scheme(cs.col!![0]), null)
