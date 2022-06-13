@@ -92,20 +92,20 @@ object Signals : Rules() {
 
     val df: DecimalFormat = DecimalFormat("#.#")
     fun addSignals() {
-        if (Rules.feature!!.objs!!.containsKey(Obj.RADRFL)) reflectors()
-        if (Rules.feature!!.objs!!.containsKey(Obj.FOGSIG)) fogSignals()
-        if (Rules.feature!!.objs!!.containsKey(Obj.RTPBCN)) radarStations()
-        if (Rules.feature!!.objs!!.containsKey(Obj.RADSTA)) radarStations()
-        if (Rules.feature!!.objs!!.containsKey(Obj.RDOSTA)) radioStations()
-        if (Rules.feature!!.objs!!.containsKey(Obj.LIGHTS)) lights()
+        if (feature!!.objs!!.containsKey(Obj.RADRFL)) reflectors()
+        if (feature!!.objs!!.containsKey(Obj.FOGSIG)) fogSignals()
+        if (feature!!.objs!!.containsKey(Obj.RTPBCN)) radarStations()
+        if (feature!!.objs!!.containsKey(Obj.RADSTA)) radarStations()
+        if (feature!!.objs!!.containsKey(Obj.RDOSTA)) radioStations()
+        if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights()
     }
 
     fun reflectors() {
         if (Renderer.zoom >= 14) {
-            when (Rules.feature!!.type) {
-                Obj.BCNLAT, Obj.BCNCAR, Obj.BCNISD, Obj.BCNSAW, Obj.BCNSPP -> if (Rules.feature!!.objs!!.containsKey(
+            when (feature!!.type) {
+                Obj.BCNLAT, Obj.BCNCAR, Obj.BCNISD, Obj.BCNSAW, Obj.BCNSPP -> if (feature!!.objs!!.containsKey(
                         Obj.TOPMAR
-                    ) || Rules.feature!!.objs!!.containsKey(Obj.DAYMAR)
+                    ) || feature!!.objs!!.containsKey(Obj.DAYMAR)
                 ) {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
@@ -117,9 +117,9 @@ object Signals : Rules() {
                         Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -80.0))
                     )
                 }
-                Obj.LITFLT, Obj.LITVES, Obj.BOYINB -> if (Rules.feature!!.objs!!.containsKey(
+                Obj.LITFLT, Obj.LITVES, Obj.BOYINB -> if (feature!!.objs!!.containsKey(
                         Obj.TOPMAR
-                    ) || Rules.feature!!.objs!!.containsKey(Obj.DAYMAR)
+                    ) || feature!!.objs!!.containsKey(Obj.DAYMAR)
                 ) {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
@@ -131,7 +131,7 @@ object Signals : Rules() {
                         Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -60.0))
                     )
                 }
-                Obj.LITMAJ, Obj.LITMIN -> if (Rules.feature!!.objs!!.containsKey(Obj.TOPMAR) || Rules.feature!!.objs!!.containsKey(
+                Obj.LITMAJ, Obj.LITMIN -> if (feature!!.objs!!.containsKey(Obj.TOPMAR) || feature!!.objs!!.containsKey(
                         Obj.DAYMAR
                     )
                 ) {
@@ -145,16 +145,16 @@ object Signals : Rules() {
                         Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -30.0))
                     )
                 }
-                Obj.BOYLAT, Obj.BOYCAR, Obj.BOYISD, Obj.BOYSAW, Obj.BOYSPP -> if (Rules.feature!!.objs!!.containsKey(
+                Obj.BOYLAT, Obj.BOYCAR, Obj.BOYISD, Obj.BOYSAW, Obj.BOYSPP -> if (feature!!.objs!!.containsKey(
                         Obj.TOPMAR
-                    ) || Rules.feature!!.objs!!.containsKey(Obj.DAYMAR)
+                    ) || feature!!.objs!!.containsKey(Obj.DAYMAR)
                 ) {
-                    if (Rules.testAttribute(
-                            Rules.feature!!.type,
+                    if (testAttribute(
+                            feature!!.type,
                             Att.BOYSHP,
                             BoySHP.BOY_PILR
-                        ) || Rules.testAttribute(
-                            Rules.feature!!.type, Att.BOYSHP, BoySHP.BOY_SPAR
+                        ) || testAttribute(
+                            feature!!.type, Att.BOYSHP, BoySHP.BOY_SPAR
                         )
                     ) {
                         Renderer.symbol(
@@ -168,12 +168,12 @@ object Signals : Rules() {
                         )
                     }
                 } else {
-                    if (Rules.testAttribute(
-                            Rules.feature!!.type,
+                    if (testAttribute(
+                            feature!!.type,
                             Att.BOYSHP,
                             BoySHP.BOY_PILR
-                        ) || Rules.testAttribute(
-                            Rules.feature!!.type, Att.BOYSHP, BoySHP.BOY_SPAR
+                        ) || testAttribute(
+                            feature!!.type, Att.BOYSHP, BoySHP.BOY_SPAR
                         )
                     ) {
                         Renderer.symbol(
@@ -195,7 +195,7 @@ object Signals : Rules() {
     fun fogSignals() {
         if (Renderer.zoom >= 11) Renderer.symbol(Beacons.FogSignal)
         if (Renderer.zoom >= 15) {
-            val atts: S57map.AttMap? = Rules.feature!!.objs!![Obj.FOGSIG]!![0]
+            val atts: S57map.AttMap? = feature!!.objs!![Obj.FOGSIG]!![0]
             if (atts != null) {
                 var str: String? = ""
                 if (atts.containsKey(Att.CATFOG)) {
@@ -226,18 +226,18 @@ object Signals : Rules() {
         if (Renderer.zoom >= 11) Renderer.symbol(Beacons.RadarStation)
         if (Renderer.zoom >= 15) {
             var bstr = ""
-            val cat = Rules.getAttEnum(Obj.RTPBCN, Att.CATRTB) as CatRTB
-            val wal: String = Rules.getAttStr(Obj.RTPBCN, Att.RADWAL)
+            val cat = getAttEnum(Obj.RTPBCN, Att.CATRTB) as CatRTB
+            val wal: String = getAttStr(Obj.RTPBCN, Att.RADWAL)
             when (cat) {
                 CatRTB.RTB_RAMK -> bstr += " Ramark"
                 CatRTB.RTB_RACN -> {
                     bstr += " Racon"
-                    val astr: String = Rules.getAttStr(Obj.RTPBCN, Att.SIGGRP)
+                    val astr: String = getAttStr(Obj.RTPBCN, Att.SIGGRP)
                     if (!astr.isEmpty()) {
                         bstr += "($astr)"
                     }
-                    val per = Rules.getAttVal(Obj.RTPBCN, Att.SIGPER) as Double
-                    val mxr = Rules.getAttVal(Obj.RTPBCN, Att.VALMXR) as Double
+                    val per = getAttVal(Obj.RTPBCN, Att.SIGPER) as Double
+                    val mxr = getAttVal(Obj.RTPBCN, Att.VALMXR) as Double
                     if (per != null || mxr != null) {
                         bstr += if (astr.isEmpty()) " " else ""
                         if (per != null) bstr += if (per != 0.0) per.toString() + "s" else ""
@@ -265,7 +265,7 @@ object Signals : Rules() {
         var vais = false
         var bstr = ""
         if (Renderer.zoom >= 11) {
-            val cats = Rules.getAttList(Obj.RDOSTA, Att.CATROS) as ArrayList<CatROS?>
+            val cats = getAttList(Obj.RDOSTA, Att.CATROS) as ArrayList<CatROS?>
             for (ros in cats) {
                 when (ros) {
                     CatROS.ROS_OMNI -> bstr += " RC"
@@ -380,8 +380,8 @@ object Signals : Rules() {
 
     fun lights() {
         var col: Enum<ColCOL>? = null
-        var tcol: Enum<ColCOL>? = null
-        val lights = Rules.feature!!.objs!![Obj.LIGHTS]
+        var tcol: Enum<ColCOL>?
+        val lights = feature!!.objs!![Obj.LIGHTS]
         for (atts in lights!!.values) {
             if (atts!!.containsKey(Att.COLOUR)) {
                 val cols = atts[Att.COLOUR]!!.value as ArrayList<Enum<ColCOL>>?
@@ -404,10 +404,10 @@ object Signals : Rules() {
             Symbols.Delta(Symbols.Handle.BC, AffineTransform.getRotateInstance(deg2rad(120.0)))
         )
         if (Renderer.zoom >= 12) {
-            var str: String? = ""
+            var str: String?
             if (lights[1] != null) {
                 for (atts in lights.values) {
-                    var col1: Enum<ColCOL>? = null
+                    var col1: Enum<ColCOL>?
                     var col2: Enum<ColCOL>? = null
                     val radius = 0.2
                     var s1 = 361.0

@@ -210,7 +210,7 @@ object Harbours {
         Fishing.add(Instr(Form.EARC, Arc2D.Double(-50.0, -50.0, 100.0, 100.0, 15.0, 140.0, Arc2D.OPEN)))
         Fishing.add(Instr(Form.EARC, Arc2D.Double(-50.0, -50.0, 100.0, 100.0, -15.0, -140.0, Arc2D.OPEN)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-24.0, 3.0)
         p.curveTo(12.0, 24.0, 30.0, 15.0, 48.0, 0.0)
         p.curveTo(30.0, -15.0, 12.0, -24.0, -24.0, -3.0)

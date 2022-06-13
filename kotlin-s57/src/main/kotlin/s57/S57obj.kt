@@ -423,7 +423,7 @@ object S57obj {
     }
 
     fun enumType(type: String?): Obj? { // Convert OSM object string to SCM object enumeration
-        return if (type != null && !type.isEmpty() && StrObj.containsKey(type)) StrObj[type] else Obj.UNKOBJ
+        return if (type != null && type.isNotEmpty() && StrObj.containsKey(type)) StrObj[type] else Obj.UNKOBJ
     }
 
     enum class Obj {

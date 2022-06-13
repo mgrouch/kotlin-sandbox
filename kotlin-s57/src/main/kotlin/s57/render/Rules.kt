@@ -2,7 +2,6 @@
 package s57.render
 
 import s57.S57att.Att
-import s57.S57map
 import s57.S57map.*
 import s57.S57obj.Obj
 import s57.S57val
@@ -639,7 +638,7 @@ open class Rules {
                 if (trf !== TrfTRF.TRF_TWOW) {
                     symb = Harbours.CallPoint1
                 }
-                var orient: Double? = 0.0
+                var orient: Double?
                 if ((getAttVal(feature!!.type, Att.ORIENT) as Double?).also { orient = it } == null) {
                     orient = 0.0
                 }
@@ -1109,8 +1108,7 @@ open class Rules {
         private fun notices() {
             if (Renderer.zoom >= 14) {
                 val dx = 0.0
-                var dy = 0.0
-                dy = when (feature!!.type) {
+                val dy = when (feature!!.type) {
                     Obj.BCNCAR, Obj.BCNISD, Obj.BCNLAT, Obj.BCNSAW, Obj.BCNSPP -> if (testAttribute(
                             Obj.TOPMAR, Att.TOPSHP, TopSHP.TOP_BORD
                         )
@@ -1204,7 +1202,7 @@ open class Rules {
                 } else if (feature!!.type === Obj.PIPOHD) {
                     lineVector(LineStyle(black, 8f))
                     val atts = feature!!.atts
-                    var verclr = 0.0
+                    val verclr: Double
                     if (atts != null) {
                         verclr = if (atts.containsKey(Att.VERCLR)) {
                             (atts[Att.VERCLR]!!.value as Double?)!!
