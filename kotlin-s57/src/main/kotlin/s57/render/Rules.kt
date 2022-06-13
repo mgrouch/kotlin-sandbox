@@ -183,10 +183,10 @@ open class Rules {
             if (atts != null) {
                 val item = atts[att]
                 if (item != null) {
-                    when (item.conv) {
-                        S57val.Conv.S, S57val.Conv.A -> return item.value as String == value
-                        S57val.Conv.E, S57val.Conv.L -> return (item.value as ArrayList<*>).contains(value)
-                        S57val.Conv.F, S57val.Conv.I -> return item.value === value
+                    return when (item.conv) {
+                        S57val.Conv.S, S57val.Conv.A -> item.value as String == value
+                        S57val.Conv.E, S57val.Conv.L -> (item.value as ArrayList<*>).contains(value)
+                        S57val.Conv.F, S57val.Conv.I -> item.value === value
                     }
                 }
             }
@@ -579,12 +579,12 @@ open class Rules {
                             "$verccl/$vercop"
                         }
                     }
-                    if (hstr.isEmpty() && !vstr.isEmpty()) {
+                    if (hstr.isEmpty() && vstr.isNotEmpty()) {
                         labelText(
                             vstr, Font("Arial", PLAIN, 30), black, LabelStyle.VCLR,
                             black, Color.white, Delta(Handle.CC)
                         )
-                    } else if (!hstr.isEmpty() && !vstr.isEmpty()) {
+                    } else if (hstr.isNotEmpty() && vstr.isNotEmpty()) {
                         labelText(
                             vstr, Font("Arial", PLAIN, 30), black, LabelStyle.VCLR,
                             black, Color.white, Delta(Handle.BC)
@@ -593,7 +593,7 @@ open class Rules {
                             hstr, Font("Arial", PLAIN, 30), black, LabelStyle.HCLR,
                             black, Color.white, Delta(Handle.TC)
                         )
-                    } else if (!hstr.isEmpty() && vstr.isEmpty()) {
+                    } else if (hstr.isNotEmpty() && vstr.isEmpty()) {
                         labelText(
                             hstr, Font("Arial", PLAIN, 30), black, LabelStyle.HCLR,
                             black, Color.white, Delta(Handle.CC)
@@ -653,7 +653,7 @@ open class Rules {
                     )
                 )
                 var chn: String?
-                if (!getAttStr(feature!!.type, Att.COMCHA).also { chn = it }.isEmpty()) {
+                if (getAttStr(feature!!.type, Att.COMCHA).also { chn = it }.isNotEmpty()) {
                     labelText(
                         "Ch.$chn", Font("Arial", PLAIN, 50), black,
                         Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 50.0))
@@ -1138,8 +1138,7 @@ open class Rules {
                         Delta(Handle.CC, AffineTransform.getTranslateInstance(dx, dy))
                     )
                 } else {
-                    var i = 0
-                    for (atts in objs.values) {
+                    for ((i, atts) in objs.values.withIndex()) {
                         if (atts!![Att.MARSYS] != null) sys = (atts[Att.MARSYS]!!.value as ArrayList<MarSYS>?)!![0]
                         if (atts[Att.BNKWTW] != null) bnk = (atts[Att.BNKWTW]!!.value as ArrayList<BnkWTW>?)!![0]
 
@@ -1167,12 +1166,11 @@ open class Rules {
                         }
                         if (h != null) {
                             symbol(sym, sch, Delta(h, AffineTransform.getTranslateInstance(dx, dy)))
-                            if (!add!!.isEmpty()) symbol(
+                            if (add!!.isNotEmpty()) symbol(
                                 Notices.NoticeBoard,
                                 Delta(Handle.BC, AffineTransform.getTranslateInstance(ax, ay - 30))
                             )
                         }
-                        i++
                     }
                 }
             }
@@ -1429,7 +1427,7 @@ open class Rules {
                 var ort: Double?
                 if ((getAttVal(feature!!.type, Att.ORIENT) as Double?).also { ort = it } != null) {
                     str += df.format(ort) + "º"
-                    if (!str.isEmpty()) lineText(str, Font("Arial", PLAIN, 80), black, -20.0)
+                    if (str.isNotEmpty()) lineText(str, Font("Arial", PLAIN, 80), black, -20.0)
                 }
             }
         }
