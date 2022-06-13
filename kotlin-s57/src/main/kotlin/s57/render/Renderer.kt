@@ -98,8 +98,8 @@ object Renderer {
         var bbox: Rectangle2D.Double? = null
         if (symbols.size > 4) {
             for (instr in symbols[0]) {
-                if (instr!!.type === Form.BBOX) {
-                    bbox = instr!!.params as Rectangle2D.Double?
+                if (instr.type === Form.BBOX) {
+                    bbox = instr.params as Rectangle2D.Double?
                     break
                 }
             }
@@ -336,10 +336,10 @@ object Renderer {
         var ssymb = symbol
         while (ssymb != null) {
             for (item in symbol!!) {
-                if (item?.type === Form.BBOX) {
+                if (item.type === Form.BBOX) {
                     return item.params as Rectangle2D.Double?
                 }
-                if (item?.type === Form.SYMB) {
+                if (item.type === Form.SYMB) {
                     ssymb = (item.params as Symbols.SubSymbol?)!!.instr
                     break
                 }
@@ -737,7 +737,7 @@ object Renderer {
     }
 
     fun lineText(str: String, font: Font, colour: Color?, dy: Double) {
-        if (!str.isEmpty()) {
+        if (str.isNotEmpty()) {
             g2!!.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
             g2!!.paint = colour
             val frc = g2!!.fontRenderContext

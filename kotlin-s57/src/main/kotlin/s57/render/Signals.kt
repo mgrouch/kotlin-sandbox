@@ -672,11 +672,8 @@ object Signals : Rules() {
                     }
                     str += if (cats.contains(CatLIT.LIT_VERT)) "(vert)" else ""
                     str += if (cats.contains(CatLIT.LIT_HORI)) "(hor)" else ""
-                    str += if (str.isNotEmpty() && (atts.containsKey(Att.SIGPER) || atts.containsKey(Att.HEIGHT) || atts.containsKey(
-                            Att.VALMXR
-                        ))
-                        && !str.endsWith(")")
-                    ) "." else ""
+                    str += if (str.isNotEmpty() && (atts.containsKey(Att.SIGPER) || atts.containsKey(Att.HEIGHT)
+                                || atts.containsKey(Att.VALMXR)) && !str.endsWith(")")) "." else ""
                     str += if (atts.containsKey(Att.SIGPER)) df.format(atts[Att.SIGPER]!!.value) + "s" else ""
                     str += if (atts.containsKey(Att.HEIGHT)) df.format(atts[Att.HEIGHT]!!.value) + "m" else ""
                     str += if (atts.containsKey(Att.VALNMR)) df.format(atts[Att.VALNMR]!!.value) + "M" else ""

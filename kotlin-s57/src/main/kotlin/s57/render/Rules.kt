@@ -147,13 +147,14 @@ open class Rules {
         }
 
         fun getAttList(obj: Obj?, att: Att): ArrayList<*> {
-            var list = getAttVal(obj, att) as ArrayList<Enum<*>?>?
+            val list = getAttVal(obj, att)
             if (list != null) {
+                list as ArrayList<Enum<*>?>
                 return list
             }
-            list = ArrayList()
-            list.add(unknAtt(att))
-            return list
+            val listAlt = ArrayList<Enum<*>?>()
+            listAlt.add(unknAtt(att))
+            return listAlt
         }
 
         fun getScheme(obj: Obj?): Scheme {

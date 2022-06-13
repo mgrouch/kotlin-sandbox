@@ -150,14 +150,14 @@ class S57map(private val sea: Boolean) {
         }
     }
 
-    public class Feature internal constructor() {
+    class Feature internal constructor() {
         var id: Long = 0 // Ref for this feature
         var reln: Rflag? = Rflag.UNKN // Relationship status
         var geom: Geom? = Geom(NOSP) // Geometry data
         var type: Obj? = Obj.UNKOBJ // Feature type
         var atts: AttMap? = AttMap() // Feature attributes
         var rels: RelTab? = RelTab() // Related objects
-        public var objs: ObjMap? = ObjMap() // Slave object attributes
+        var objs: ObjMap? = ObjMap() // Slave object attributes
     }
 
     var bounds: MapBounds?
@@ -444,7 +444,7 @@ class S57map(private val sea: Boolean) {
                 val atts = AttMap()
                 objs[0] = atts
                 if (kvx.att != Att.UNKATT) {
-                    atts[kvx.att] = S57val.AttVal(kvx.conv, kvx.value)
+                    atts[kvx.att] = S57val.AttVal(kvx.conv!!, kvx.value)
                 }
                 index!![++xref] = base
                 if (features!![kvx.obj] == null) {

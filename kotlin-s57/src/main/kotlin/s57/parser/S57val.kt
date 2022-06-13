@@ -2296,10 +2296,7 @@ object S57val {
         return unkn
     }
 
-    fun decodeValue(
-        value: String?,
-        att: Att?
-    ): AttVal<*>? { // Convert S57 attribute value string to SCM attribute value
+    fun decodeValue(value: String?, att: Att?): AttVal<*>? { // Convert S57 attribute value string to SCM attribute value
         when (val conv = keys[att]!!.conv) {
             Conv.A, Conv.S -> return AttVal<String?>(conv, value)
             Conv.E -> {
@@ -2327,13 +2324,9 @@ object S57val {
                 return null
             }
         }
-        return null
     }
 
-    fun encodeValue(
-        attval: AttVal<*>?,
-        att: Att?
-    ): String? { // Convert SCM attribute value to S57 attribute value string
+    fun encodeValue(attval: AttVal<*>?, att: Att?): String? { // Convert SCM attribute value to S57 attribute value string
         if (attval != null) {
             var str = stringValue(attval, att)
             if (attval.conv == Conv.E || attval.conv == Conv.L) {
@@ -2422,23 +2415,22 @@ object S57val {
                 return AttVal<Any?>(Conv.F, null)
             }
         }
-        return AttVal<Any?>(keys[att]!!.conv, null)
     }
 
-    fun unknAtt(att: Att?): Enum<*> {
-        val s57key: S57key? = keys[att]
+    fun unknAtt(att: Att): Enum<*> {
+        val s57key = keys[att]
         return s57key!!.map!!.keys.toTypedArray()[0] as Enum<*>
     }
 
-    internal class S57enum(var atvl: Int?, var value: String?)
+    internal class S57enum(var atvl: Int, var value: String)
 
     enum class Conv {
         S, A, L, E, F, I
     }
 
-    internal data class S57key(val conv: Conv?, val map: Map<Any, S57enum>?)
+    internal data class S57key(val conv: Conv, val map: Map<Any, S57enum>?)
 
-    class AttVal<V> internal constructor(var conv: Conv?, var value: V?)
+    class AttVal<V> internal constructor(var conv: Conv, var value: V?)
 
     enum class BcnSHP {
         BCN_UNKN, BCN_STAK, BCN_WTHY, BCN_TOWR, BCN_LATT, BCN_PILE, BCN_CARN, BCN_BUOY, BCN_POLE, BCN_PRCH, BCN_POST
