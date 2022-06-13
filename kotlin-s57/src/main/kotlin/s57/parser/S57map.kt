@@ -583,7 +583,8 @@ class S57map(private val sea: Boolean) {
     }
 
     fun cmpGeoms(g1: Geom?, g2: Geom?): Boolean {
-        return g1!!.prim == g2!!.prim && g1.outers == g2.outers && g1.inners == g2.inners && g1.elems!!.size == g2.elems!!.size
+        return g1!!.prim == g2!!.prim && g1.outers == g2.outers
+                && g1.inners == g2.inners && g1.elems!!.size == g2.elems!!.size
     }
 
     inner class EdgeIterator(var edge: Edge?, var forward: Boolean) {
