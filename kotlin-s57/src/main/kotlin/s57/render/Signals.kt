@@ -212,7 +212,7 @@ object Signals : Rules() {
                 if (atts.containsKey(Att.VALMXR)) {
                     str += df.format(atts[Att.VALMXR]!!.value) + "M"
                 }
-                if (!str!!.isEmpty()) {
+                if (str!!.isNotEmpty()) {
                     Renderer.labelText(
                         str, Font("Arial", Font.PLAIN, 40), Color.black,
                         Symbols.Delta(Symbols.Handle.TR, AffineTransform.getTranslateInstance(-60.0, -30.0))
@@ -233,7 +233,7 @@ object Signals : Rules() {
                 CatRTB.RTB_RACN -> {
                     bstr += " Racon"
                     val astr: String = getAttStr(Obj.RTPBCN, Att.SIGGRP)
-                    if (!astr.isEmpty()) {
+                    if (astr.isNotEmpty()) {
                         bstr += "($astr)"
                     }
                     val per = getAttVal(Obj.RTPBCN, Att.SIGPER)
@@ -252,13 +252,13 @@ object Signals : Rules() {
                 }
                 else -> {}
             }
-            if (!wal.isEmpty()) {
+            if (wal.isNotEmpty()) {
                 when (wal) {
                     "0.03-X" -> bstr += "(3cm)"
                     "0.10-S" -> bstr += "(10cm)"
                 }
             }
-            if (!bstr.isEmpty()) {
+            if (bstr.isNotEmpty()) {
                 Renderer.labelText(
                     bstr, Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
                     Symbols.Delta(Symbols.Handle.TR, AffineTransform.getTranslateInstance(-30.0, -70.0))
@@ -375,7 +375,7 @@ object Signals : Rules() {
                     Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, 70.0))
                 )
             }
-            if (!bstr.isEmpty()) {
+            if (bstr.isNotEmpty()) {
                 Renderer.labelText(
                     bstr, Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
                     Symbols.Delta(Symbols.Handle.TR, AffineTransform.getTranslateInstance(-30.0, -110.0))
@@ -493,7 +493,7 @@ object Signals : Rules() {
                     }
                     if (atts.containsKey(Att.SIGGRP)) {
                         str += "(" + atts[Att.SIGGRP]!!.value + ")"
-                    } else if (!str.isEmpty()) {
+                    } else if (str.isNotEmpty()) {
                         str += "."
                     }
                     if (atts.containsKey(Att.COLOUR)) {
@@ -618,7 +618,7 @@ object Signals : Rules() {
                         val tmp = group[0]
                         str = if (tmp!!.dir) "Dir" else ""
                         str += LightCharacters[tmp.chr]
-                        str += if (!tmp.grp!!.isEmpty()) "(" + tmp.grp + ")" else "."
+                        str += if (tmp.grp!!.isNotEmpty()) "(" + tmp.grp + ")" else "."
                         for (cr in colrng) {
                             str += LightLetters[cr!!.col]
                         }
@@ -662,7 +662,7 @@ object Signals : Rules() {
                     if (atts.containsKey(Att.COLOUR)) {
                         val cols = atts[Att.COLOUR]!!.value as ArrayList<ColCOL>?
                         if (!(cols!!.size == 1 && cols[0] === ColCOL.COL_WHT)) {
-                            if (!str.isEmpty() && !str.endsWith(")")) {
+                            if (str.isNotEmpty() && !str.endsWith(")")) {
                                 str += "."
                             }
                             for (acol in cols) {
@@ -672,7 +672,7 @@ object Signals : Rules() {
                     }
                     str += if (cats.contains(CatLIT.LIT_VERT)) "(vert)" else ""
                     str += if (cats.contains(CatLIT.LIT_HORI)) "(hor)" else ""
-                    str += if (!str.isEmpty() && (atts.containsKey(Att.SIGPER) || atts.containsKey(Att.HEIGHT) || atts.containsKey(
+                    str += if (str.isNotEmpty() && (atts.containsKey(Att.SIGPER) || atts.containsKey(Att.HEIGHT) || atts.containsKey(
                             Att.VALMXR
                         ))
                         && !str.endsWith(")")
