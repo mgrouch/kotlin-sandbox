@@ -378,9 +378,7 @@ object S57dat {
         index = 0
     }
 
-    fun more(): Boolean {
-        return offset < maxoff
-    }
+    fun more(): Boolean = offset < maxoff
 
     fun decSubf(buf: ByteArray, off: Int, fld: S57field?, subf: S57subf): Any {
         buffer = buf

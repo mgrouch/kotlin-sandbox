@@ -110,9 +110,7 @@ open class Rules {
         }
 
         fun addName(
-            z: Int, font: Font, colour: Color? = black, delta: Delta? = Delta(
-                Handle.CC, AffineTransform()
-            )
+            z: Int, font: Font, colour: Color? = black, delta: Delta? = Delta(Handle.CC, AffineTransform())
         ) {
             if (Renderer.zoom >= z) {
                 val name = name
@@ -149,10 +147,10 @@ open class Rules {
         fun getAttList(obj: Obj?, att: Att): ArrayList<*> {
             val list = getAttVal(obj, att)
             if (list != null) {
-                list as ArrayList<Enum<*>?>
+                list as ArrayList<Enum<*>>
                 return list
             }
-            val listAlt = ArrayList<Enum<*>?>()
+            val listAlt = ArrayList<Enum<*>>()
             listAlt.add(unknAtt(att))
             return listAlt
         }
