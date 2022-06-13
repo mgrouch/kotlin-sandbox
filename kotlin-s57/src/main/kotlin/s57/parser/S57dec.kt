@@ -122,20 +122,20 @@ object S57dec {
                                 name = S57dat.decSubf(S57subf.NAME) as Long shl 16
                                 map.newPrim(
                                     name,
-                                    (S57dat.decSubf(S57subf.ORNT) as Long),
-                                    (S57dat.decSubf(S57subf.USAG) as Long)
+                                    S57dat.decSubf(S57subf.ORNT) as Long,
+                                    S57dat.decSubf(S57subf.USAG) as Long
                                 )
                                 S57dat.decSubf(S57subf.MASK)
                             } while (S57dat.more())
                         }
                         "VRID" -> {
                             inFeature = false
-                            name = (S57dat.decSubf(
+                            name = S57dat.decSubf(
                                 record,
                                 fields + pos,
                                 S57field.VRID,
                                 S57subf.RCNM
-                            ) as Long)
+                            ) as Long
                             nflag = when (name.toInt()) {
                                 110 -> Nflag.ISOL
                                 120 -> Nflag.CONN

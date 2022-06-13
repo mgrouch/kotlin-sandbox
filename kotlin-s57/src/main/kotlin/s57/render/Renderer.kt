@@ -13,6 +13,7 @@ import s57.symbols.Symbols.Symbol
 import s57.symbols.Symbols.drawSymbol
 
 import java.awt.*
+import java.awt.Color.black
 import java.awt.geom.*
 import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
@@ -824,7 +825,7 @@ object Renderer {
             floatArrayOf(20 * sScale.toFloat(), 20 * sScale.toFloat()),
             0f
         )
-        g2!!.paint = Color.black
+        g2!!.paint = black
         val centre = context!!.getPoint(Rules.feature!!.geom!!.centre!!) as Point2D.Double?
         var radial = radius * context!!.mile(Rules.feature!!)
         if (dir != null) {
@@ -879,12 +880,12 @@ object Renderer {
                 AffineTransform.getTranslateInstance(-radial * sin(phi) / sScale, radial * cos(phi) / sScale)
             if (font.size * sScale * str.length < awidth) {
                 at.rotate(deg2rad(mid + if (hand) 0 else 180))
-                labelText(str, font, Color.black, Delta(Symbols.Handle.CC, at))
+                labelText(str, font, black, Delta(Symbols.Handle.CC, at))
             } else if (font.size * sScale < awidth) {
                 hand = mid < 180
                 at.rotate(deg2rad(mid + if (hand) -90 else 90))
                 labelText(
-                    str, font, Color.black, if (hand) Delta(Symbols.Handle.RC, at) else Delta(
+                    str, font, black, if (hand) Delta(Symbols.Handle.RC, at) else Delta(
                         Symbols.Handle.LC, at
                     )
                 )
@@ -901,7 +902,7 @@ object Renderer {
                 )
                 at.rotate(deg2rad(dir + if (hand) 90 else -90))
                 labelText(
-                    str, font, Color.black, if (hand) Delta(Symbols.Handle.BR, at) else Delta(
+                    str, font, black, if (hand) Delta(Symbols.Handle.BR, at) else Delta(
                         Symbols.Handle.BL, at
                     )
                 )

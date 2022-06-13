@@ -753,12 +753,12 @@ object S57dat {
                 when (S57prims[feature!!.type]) {
                     Prims.N -> {}
                     Prims.P -> if (feature.geom!!.prim != POINT) {
-                        //                        Snode node = feature.geom.centre;
-                        //                        node.flg = Nflag.ISOL;
-                        //                        map.nodes.put(++map.xref, node);
-                        //                        feature.geom = map.new Geom(POINT);
-                        //                        feature.geom.centre = node;
-                        //                        feature.geom.elems.add(map.new Prim(map.xref));
+                        val node = feature.geom!!.centre
+                        node!!.flg = S57map.Nflag.ISOL
+                        map.nodes!![++map.xref] = node
+                        feature.geom = S57map.Geom(POINT)
+                        feature.geom!!.centre = node
+                        feature.geom!!.elems!!.add(S57map.Prim(map.xref))
                     }
                     Prims.L -> {}
                     Prims.A -> {}
