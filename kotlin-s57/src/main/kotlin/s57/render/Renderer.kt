@@ -504,8 +504,8 @@ object Renderer {
         }
     }
 
-    fun lineCircle(style: Symbols.LineStyle, radius: Double, units: UniHLU?) {
-        var radius = radius
+    fun lineCircle(style: Symbols.LineStyle, radiusArg: Double, units: UniHLU?) {
+        var radius = radiusArg
         when (units) {
             UniHLU.HLU_FEET -> radius /= 6076.0
             UniHLU.HLU_KMTR -> radius /= 1.852
@@ -517,17 +517,15 @@ object Renderer {
         radius *= context!!.mile(Rules.feature!!)
         val circle = Symbol()
         if (style.fill != null) {
-            circle.add(Instr(Form.FILL, style.fill))
-            circle.add(Instr(Form.RSHP, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2)))
+            circle.addInstr(Form.FILL, style.fill)
+            circle.addInstr(Form.RSHP, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
         }
-        circle.add(Instr(Form.FILL, style.line))
-        circle.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(style.width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, style.dash, 0f)
-            )
+        circle.addInstr(Form.FILL, style.line)
+        circle.addInstr(
+            Form.STRK,
+            BasicStroke(style.width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, style.dash, 0f)
         )
-        circle.add(Instr(Form.ELPS, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2)))
+        circle.addInstr(Form.ELPS, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
         val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, circle, 1.0, point!!.x, point.y, null, null)
     }
@@ -622,27 +620,16 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.34
                 ty = ly + height * 0.17
-                label.add(Instr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height)))
-                label.add(Instr(Form.FILL, bg))
-                label.add(
-                    Instr(
-                        Form.RSHP,
-                        RoundRectangle2D.Double(lx, ly, width, height, height, height)
+                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(Form.FILL, bg)
+                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(Form.FILL, fg)
+                label.addInstr(
+                    Form.STRK, BasicStroke(
+                        (1 + (height / 10).toInt()).toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER
                     )
                 )
-                label.add(Instr(Form.FILL, fg))
-                label.add(
-                    Instr(
-                        Form.STRK,
-                        BasicStroke((1 + (height / 10).toInt()).toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-                    )
-                )
-                label.add(
-                    Instr(
-                        Form.RRCT,
-                        RoundRectangle2D.Double(lx, ly, width, height, height, height)
-                    )
-                )
+                label.addInstr(Form.RRCT, RoundRectangle2D.Double(lx, ly, width, height, height, height))
             }
             LabelStyle.VCLR -> {
                 width += height * 1.0
@@ -652,23 +639,13 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.27
                 ty = ly + height * 0.25
-                label.add(Instr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height)))
-                label.add(Instr(Form.FILL, bg))
-                label.add(
-                    Instr(
-                        Form.RSHP,
-                        RoundRectangle2D.Double(lx, ly, width, height, height, height)
-                    )
-                )
-                label.add(Instr(Form.FILL, fg))
+                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(Form.FILL, bg)
+                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(Form.FILL, fg)
                 val sw = 1 + (height / 10).toInt()
                 val po = (sw / 2).toDouble()
-                label.add(
-                    Instr(
-                        Form.STRK,
-                        BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-                    )
-                )
+                label.addInstr(Form.STRK, BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER))
                 val p = Path2D.Double()
                 p.moveTo(-height * 0.2, -ly - po)
                 p.lineTo(height * 0.2, -ly - po)
@@ -678,7 +655,7 @@ object Renderer {
                 p.lineTo(height * 0.2, ly + po)
                 p.moveTo(0.0, ly + po)
                 p.lineTo(0.0, ly + po + height * 0.15)
-                label.add(Instr(Form.PLIN, p))
+                label.addInstr(Form.PLIN, p)
             }
             LabelStyle.PCLR -> {
                 width += height * 1.0
@@ -688,23 +665,13 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.27
                 ty = ly + height * 0.25
-                label.add(Instr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height)))
-                label.add(Instr(Form.FILL, bg))
-                label.add(
-                    Instr(
-                        Form.RSHP,
-                        RoundRectangle2D.Double(lx, ly, width, height, height, height)
-                    )
-                )
-                label.add(Instr(Form.FILL, fg))
+                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(Form.FILL, bg)
+                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(Form.FILL, fg)
                 val sw = 1 + (height / 10).toInt()
                 val po = (sw / 2).toDouble()
-                label.add(
-                    Instr(
-                        Form.STRK,
-                        BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-                    )
-                )
+                label.addInstr(Form.STRK, BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER))
                 val p = Path2D.Double()
                 p.moveTo(-height * 0.2, -ly - po)
                 p.lineTo(height * 0.2, -ly - po)
@@ -714,21 +681,17 @@ object Renderer {
                 p.lineTo(height * 0.2, ly + po)
                 p.moveTo(0.0, ly + po)
                 p.lineTo(0.0, ly + po + height * 0.15)
-                label.add(Instr(Form.PLIN, p))
-                label.add(
-                    Instr(
-                        Form.SYMB, Symbols.SubSymbol(
-                            Areas.CableFlash, 1.0, 0.0, 0.0, null,
-                            Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, -width / 2, 0.0))
-                        )
+                label.addInstr(Form.PLIN, p)
+                label.addInstr(
+                    Form.SYMB, Symbols.SubSymbol(
+                        Areas.CableFlash, 1.0, 0.0, 0.0, null,
+                        Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, -width / 2, 0.0))
                     )
                 )
-                label.add(
-                    Instr(
-                        Form.SYMB, Symbols.SubSymbol(
-                            Areas.CableFlash, 1.0, 0.0, 0.0, null,
-                            Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, width / 2, 0.0))
-                        )
+                label.addInstr(
+                    Form.SYMB, Symbols.SubSymbol(
+                        Areas.CableFlash, 1.0, 0.0, 0.0, null,
+                        Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, width / 2, 0.0))
                     )
                 )
             }
@@ -740,23 +703,13 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.5
                 ty = ly + height * 0.17
-                label.add(Instr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height)))
-                label.add(Instr(Form.FILL, bg))
-                label.add(
-                    Instr(
-                        Form.RSHP,
-                        RoundRectangle2D.Double(lx, ly, width, height, height, height)
-                    )
-                )
-                label.add(Instr(Form.FILL, fg))
+                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(Form.FILL, bg)
+                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(Form.FILL, fg)
                 val sw = 1 + (height / 10).toInt()
                 val vo = height / 4
-                label.add(
-                    Instr(
-                        Form.STRK,
-                        BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
-                    )
-                )
+                label.addInstr(Form.STRK, BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER))
                 val p = Path2D.Double()
                 p.moveTo(-width * 0.4 - sw, -ly - vo)
                 p.lineTo(-width * 0.4 - sw, ly + vo)
@@ -766,26 +719,19 @@ object Renderer {
                 p.lineTo(width * 0.4 + sw, ly + vo)
                 p.moveTo(width * 0.4 - sw, 0.0)
                 p.lineTo(width * 0.4 + sw, 0.0)
-                label.add(Instr(Form.PLIN, p))
+                label.addInstr(Form.PLIN, p)
             }
             else -> {
                 lx = -width / 2
                 ly = -height / 2
                 tx = lx
                 ty = ly
-                label.add(Instr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height)))
+                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
             }
         }
-        label.add(
-            Instr(
-                Form.TEXT,
-                Caption(
-                    str,
-                    font,
-                    tc,
-                    Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(tx, ty))
-                )
-            )
+        label.addInstr(
+            Form.TEXT,
+            Caption(str, font, tc, Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(tx, ty)))
         )
         val point = context!!.getPoint(Rules.feature!!.geom!!.centre!!)
         drawSymbol(g2!!, label, sScale, point!!.x, point.y, null, delta)
@@ -848,20 +794,23 @@ object Renderer {
                     pos.rotate(rotate)
                     pos.translate(mid.x - centre!!.x, mid.y - centre.y)
                     val label = Symbol()
-                    label.add(Instr(Form.BBOX, Rectangle2D.Double(-width / 2, -height, width, height)))
-                    label.add(
-                        Instr(
-                            Form.TEXT,
-                            Caption(str, font, colour, Delta(Symbols.Handle.BC))
-                        )
-                    )
+                    label.addInstr(Form.BBOX, Rectangle2D.Double(-width / 2, -height, width, height))
+                    label.addInstr(Form.TEXT, Caption(str, font, colour, Delta(Symbols.Handle.BC)))
                     drawSymbol(g2!!, label, sScale, centre.x, centre.y, null, Delta(Symbols.Handle.BC, pos))
                 }
             }
         }
     }
 
-    fun lightSector(col1: Color?, col2: Color?, radiusArg: Double, s1: Double, s2: Double, dir: Double?, strArg: String?) {
+    fun lightSector(
+        col1: Color?,
+        col2: Color?,
+        radiusArg: Double,
+        s1: Double,
+        s2: Double,
+        dir: Double?,
+        strArg: String?
+    ) {
         var radius = radiusArg
         var str = strArg
         if (zoom >= 16 && radius > 0.2) {

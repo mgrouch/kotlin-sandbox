@@ -42,7 +42,7 @@ object Symbols {
         g2.scale(scale, scale)
         if (symbol != null) {
             for (item in symbol) {
-                when (item!!.type) {
+                when (item.type) {
                     Form.BBOX -> {
                         val bbox = item.params as Rectangle2D.Double?
                         var dx = 0.0
@@ -339,8 +339,8 @@ object Symbols {
     }
 
     class Symbol : ArrayList<Instr>() {
-        fun addInstr(instr: Instr) {
-            add(instr)
+        fun addInstr(type: Form, params: Any?) {
+            add(Instr(type, params))
         }
     }
 
