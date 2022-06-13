@@ -3,17 +3,15 @@ package s57.seachart
 import s57.S57dec.decodeChart
 import s57.S57map
 import s57.render.Renderer.reRender
+
 import java.awt.*
 import java.io.FileInputStream
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
 
-
 /**
  * GUI Code
- *
- *
  */
 class SwingTemplateJPanel : JPanel() {
 
@@ -23,9 +21,6 @@ class SwingTemplateJPanel : JPanel() {
     private var chartImage: ChartImage? = null
     private lateinit var map: S57map
 
-    /**
-     * Ctor
-     */
     init {
         val screenSize = Toolkit.getDefaultToolkit().screenSize
         preferredSize = Dimension(screenSize.width - 40, screenSize.height - 40)
@@ -52,9 +47,6 @@ class SwingTemplateJPanel : JPanel() {
     }
 
     companion object {
-        private const val serialVersionUID = 1L
-        const val CANVAS_WIDTH = 640
-        const val CANVAS_HEIGHT = 480
         const val TITLE = "...Test..."
 
         @JvmStatic
