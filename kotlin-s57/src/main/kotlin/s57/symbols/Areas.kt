@@ -18,10 +18,8 @@ import java.awt.image.BufferedImage
  */
 object Areas {
 
-    val Plane = Symbol()
-
-    init {
-        Plane.add(Instr(Form.BBOX, Rectangle2D.Double(-60.0, -60.0, 120.0, 120.0)))
+    val Plane = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-60.0, -60.0, 120.0, 120.0)))
         val p = Path2D.Double()
         p.moveTo(40.0, 20.0)
         p.lineTo(50.0, 10.0)
@@ -37,45 +35,33 @@ object Areas {
         p.lineTo(21.7, 14.0)
         p.lineTo(-20.0, 20.0)
         p.closePath()
-        Plane.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
     }
 
-
-    val Cable = Symbol()
-
-    init {
-        Cable.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
-        Cable.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        Cable.add(Instr(Form.FILL, Color(0xc480ff)))
+    val Cable = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color(0xc480ff)))
         val p = Path2D.Double()
         p.moveTo(0.0, 0.0)
         p.curveTo(-13.0, -13.0, -13.0, -17.0, 0.0, -30.0)
         p.curveTo(13.0, -43.0, 13.0, -47.0, 0.0, -60.0)
-        Cable.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-
-    val CableDot = Symbol()
-
-    init {
-        CableDot.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
-        CableDot.add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -40.0, 20.0, 20.0)))
+    val CableDot = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -40.0, 20.0, 20.0)))
     }
 
-
-    val CableDash = Symbol()
-
-    init {
-        CableDash.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
-        CableDash.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        CableDash.add(Instr(Form.LINE, Line2D.Double(0.0, -15.0, 0.0, -45.0)))
+    val CableDash = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -15.0, 0.0, -45.0)))
     }
 
-
-    val CableFlash = Symbol()
-
-    init {
-        CableFlash.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
+    val CableFlash = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 60.0)))
         val p = Path2D.Double()
         p.moveTo(-30.0, -25.0)
         p.lineTo(-10.0, -40.0)
@@ -84,16 +70,13 @@ object Areas {
         p.lineTo(10.0, -20.0)
         p.lineTo(-10.0, -34.0)
         p.closePath()
-        CableFlash.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
     }
 
-
-    val LaneArrow = Symbol()
-
-    init {
-        LaneArrow.add(Instr(Form.BBOX, Rectangle2D.Double(-20.0, -240.0, 40.0, 240.0)))
-        LaneArrow.add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
-        LaneArrow.add(Instr(Form.FILL, Symbols.Mtss))
+    val LaneArrow = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-20.0, -240.0, 40.0, 240.0)))
+        add(Instr(Form.STRK, BasicStroke(10f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Symbols.Mtss))
         val p = Path2D.Double()
         p.moveTo(15.0, 0.0)
         p.lineTo(15.0, -195.0)
@@ -103,15 +86,12 @@ object Areas {
         p.lineTo(-15.0, -195.0)
         p.lineTo(-15.0, 0.0)
         p.closePath()
-        LaneArrow.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-
-    val LineAnchor = Symbol()
-
-    init {
-        LineAnchor.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 90.0)))
-        LineAnchor.add(
+    val LineAnchor = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 90.0)))
+        add(
             Instr(
                 Form.SYMB, SubSymbol(
                     Harbours.Anchor, 0.5, 0.0, 0.0, null, Delta(
@@ -122,13 +102,10 @@ object Areas {
         )
     }
 
-
-    val LinePlane = Symbol()
-
-    init {
-        LinePlane.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 90.0)))
-        LinePlane.add(Instr(Form.FILL, Color(0xc480ff)))
-        LinePlane.add(
+    val LinePlane = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -60.0, 60.0, 90.0)))
+        add(Instr(Form.FILL, Color(0xc480ff)))
+        add(
             Instr(
                 Form.SYMB, SubSymbol(
                     Plane, 0.5, 0.0, 0.0, null, Delta(
@@ -139,11 +116,8 @@ object Areas {
         )
     }
 
-
-    val MarineFarm = Symbol()
-
-    init {
-        MarineFarm.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+    val MarineFarm = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         val p = Path2D.Double()
         p.moveTo(-23.0, 12.0)
         p.lineTo(-23.0, 23.0)
@@ -166,16 +140,13 @@ object Areas {
         p.quadTo(-1.0, 14.0, -21.0, -8.0)
         p.moveTo(7.0, 6.0)
         p.quadTo(2.0, 0.0, 7.0, -6.0)
-        MarineFarm.add(Instr(Form.PLIN, p))
-        MarineFarm.add(Instr(Form.RSHP, Ellipse2D.Double(9.0, -2.0, 4.0, 4.0)))
+        add(Instr(Form.PLIN, p))
+        add(Instr(Form.RSHP, Ellipse2D.Double(9.0, -2.0, 4.0, 4.0)))
     }
 
-
-    val NoWake = Symbol()
-
-    init {
-        NoWake.add(Instr(Form.STRK, BasicStroke(12f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoWake.add(Instr(Form.FILL, Color(0xa30075)))
+    val NoWake = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(12f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0xa30075)))
         val p = Path2D.Double()
         p.moveTo(-60.0, 20.0)
         p.curveTo(-28.0, 20.0, -32.0, 0.0, 0.0, 0.0)
@@ -183,153 +154,128 @@ object Areas {
         p.moveTo(-60.0, 0.0)
         p.curveTo(-28.0, 0.0, -32.0, -20.0, 0.0, -20.0)
         p.curveTo(32.0, -20.0, 28.0, 0.0, 60.0, 0.0)
-        NoWake.add(Instr(Form.PLIN, p))
-        NoWake.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoWake.add(Instr(Form.LINE, Line2D.Double(-60.0, 60.0, 60.0, -60.0)))
-        NoWake.add(Instr(Form.LINE, Line2D.Double(-60.0, -60.0, 60.0, 60.0)))
+        add(Instr(Form.PLIN, p))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-60.0, 60.0, 60.0, -60.0)))
+        add(Instr(Form.LINE, Line2D.Double(-60.0, -60.0, 60.0, 60.0)))
     }
 
-
-    val Pipeline = Symbol()
-
-    init {
-        Pipeline.add(Instr(Form.BBOX, Rectangle2D.Double(-15.0, -60.0, 30.0, 60.0)))
-        Pipeline.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Pipeline.add(Instr(Form.FILL, Color(0xc480ff)))
-        Pipeline.add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -50.0)))
-        Pipeline.add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -60.0, 20.0, 20.0)))
+    val Pipeline = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-15.0, -60.0, 30.0, 60.0)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color(0xc480ff)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -50.0)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -60.0, 20.0, 20.0)))
     }
 
-
-    val Restricted = Symbol()
-
-    init {
-        Restricted.add(Instr(Form.BBOX, Rectangle2D.Double(-15.0, -30.0, 30.0, 30.0)))
-        Restricted.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Restricted.add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -30.0)))
-        Restricted.add(Instr(Form.LINE, Line2D.Double(0.0, -15.0, 17.0, -15.0)))
+    val Restricted = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-15.0, -30.0, 30.0, 30.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 0.0, 0.0, -30.0)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -15.0, 17.0, -15.0)))
     }
 
-
-    val Rock = Symbol()
-
-    init {
-        Rock.add(Instr(Form.FILL, Color(0x80c0ff)))
-        Rock.add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Rock.add(
+    val Rock = Symbol().apply {
+        add(Instr(Form.FILL, Color(0x80c0ff)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, floatArrayOf(5f, 5f), 0f)
             )
         )
-        Rock.add(Instr(Form.FILL, Color.black))
-        Rock.add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Rock.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Rock.add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
-        Rock.add(Instr(Form.LINE, Line2D.Double(0.0, -20.0, 0.0, 20.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -20.0, 0.0, 20.0)))
     }
 
-
-    val RockA = Symbol()
-
-    init {
-        RockA.add(Instr(Form.FILL, Color(0x80c0ff)))
-        RockA.add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        RockA.add(
+    val RockA = Symbol().apply {
+        add(Instr(Form.FILL, Color(0x80c0ff)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, floatArrayOf(5f, 5f), 0f)
             )
         )
-        RockA.add(Instr(Form.FILL, Color.black))
-        RockA.add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        RockA.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        RockA.add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
-        RockA.add(Instr(Form.LINE, Line2D.Double(0.0, -20.0, 0.0, 20.0)))
-        RockA.add(Instr(Form.RSHP, Ellipse2D.Double(-17.0, -17.0, 8.0, 8.0)))
-        RockA.add(Instr(Form.RSHP, Ellipse2D.Double(-17.0, 9.0, 8.0, 8.0)))
-        RockA.add(Instr(Form.RSHP, Ellipse2D.Double(9.0, -17.0, 8.0, 8.0)))
-        RockA.add(Instr(Form.RSHP, Ellipse2D.Double(9.0, 9.0, 8.0, 8.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -20.0, 0.0, 20.0)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-17.0, -17.0, 8.0, 8.0)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-17.0, 9.0, 8.0, 8.0)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(9.0, -17.0, 8.0, 8.0)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(9.0, 9.0, 8.0, 8.0)))
     }
 
-
-    val RockC = Symbol()
-
-    init {
-        RockC.add(Instr(Form.FILL, Color(0x80c0ff)))
-        RockC.add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        RockC.add(
+    val RockC = Symbol().apply {
+        add(Instr(Form.FILL, Color(0x80c0ff)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, floatArrayOf(5f, 5f), 0f)
             )
         )
-        RockC.add(Instr(Form.FILL, Color.black))
-        RockC.add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        RockC.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        RockC.add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
-        RockC.add(Instr(Form.LINE, Line2D.Double(-10.0, 17.3, 10.0, -17.3)))
-        RockC.add(Instr(Form.LINE, Line2D.Double(10.0, 17.3, -10.0, -17.3)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(-10.0, 17.3, 10.0, -17.3)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 17.3, -10.0, -17.3)))
     }
 
-
-    val Seaplane = Symbol()
-
-    init {
-        Seaplane.add(Instr(Form.BBOX, Rectangle2D.Double(-60.0, -60.0, 120.0, 120.0)))
-        Seaplane.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Seaplane.add(Instr(Form.ELPS, Ellipse2D.Double(-58.0, -58.0, 116.0, 116.0)))
-        Seaplane.add(Instr(Form.SYMB, SubSymbol(Plane, 1.0, 0.0, 0.0, null, null)))
+    val Seaplane = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-60.0, -60.0, 120.0, 120.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-58.0, -58.0, 116.0, 116.0)))
+        add(Instr(Form.SYMB, SubSymbol(Plane, 1.0, 0.0, 0.0, null, null)))
     }
 
-
-    val WindFarm = Symbol()
-
-    init {
-        WindFarm.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        WindFarm.add(Instr(Form.ELPS, Ellipse2D.Double(-100.0, -100.0, 200.0, 200.0)))
-        WindFarm.add(Instr(Form.LINE, Line2D.Double(-35.0, 50.0, 35.0, 50.0)))
-        WindFarm.add(Instr(Form.LINE, Line2D.Double(0.0, 50.0, 0.0, -27.5)))
-        WindFarm.add(Instr(Form.LINE, Line2D.Double(0.0, -27.5, 30.0, -27.5)))
-        WindFarm.add(Instr(Form.LINE, Line2D.Double(0.0, -27.5, -13.8, -3.8)))
-        WindFarm.add(Instr(Form.LINE, Line2D.Double(0.0, -27.5, -13.8, -53.6)))
+    val WindFarm = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-100.0, -100.0, 200.0, 200.0)))
+        add(Instr(Form.LINE, Line2D.Double(-35.0, 50.0, 35.0, 50.0)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 50.0, 0.0, -27.5)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -27.5, 30.0, -27.5)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -27.5, -13.8, -3.8)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -27.5, -13.8, -53.6)))
     }
 
-
-    val WreckD = Symbol()
-
-    init {
-        WreckD.add(Instr(Form.FILL, Color(0x80c0ff)))
-        WreckD.add(Instr(Form.RSHP, Ellipse2D.Double(-50.0, -40.0, 100.0, 80.0)))
-        WreckD.add(Instr(Form.STRK,BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, floatArrayOf(5f, 5f), 0f)))
-        WreckD.add(Instr(Form.FILL, Color.black))
-        WreckD.add(Instr(Form.ELPS, Ellipse2D.Double(-50.0, -40.0, 100.0, 80.0)))
-        WreckD.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        WreckD.add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, 40.0, 0.0)))
-        WreckD.add(Instr(Form.LINE, Line2D.Double(0.0, -30.0, 0.0, 30.0)))
-        WreckD.add(Instr(Form.LINE, Line2D.Double(-20.0, -15.0, -20.0, 15.0)))
-        WreckD.add(Instr(Form.LINE, Line2D.Double(20.0, -15.0, 20.0, 15.0)))
+    val WreckD = Symbol().apply {
+        add(Instr(Form.FILL, Color(0x80c0ff)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-50.0, -40.0, 100.0, 80.0)))
+        add(
+            Instr(
+                Form.STRK,
+                BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, floatArrayOf(5f, 5f), 0f)
+            )
+        )
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-50.0, -40.0, 100.0, 80.0)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, 40.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -30.0, 0.0, 30.0)))
+        add(Instr(Form.LINE, Line2D.Double(-20.0, -15.0, -20.0, 15.0)))
+        add(Instr(Form.LINE, Line2D.Double(20.0, -15.0, 20.0, 15.0)))
     }
 
-
-    val WreckND = Symbol()
-
-    init {
-        WreckND.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        WreckND.add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, 40.0, 0.0)))
-        WreckND.add(Instr(Form.LINE, Line2D.Double(0.0, -30.0, 0.0, 30.0)))
-        WreckND.add(Instr(Form.LINE, Line2D.Double(-20.0, -15.0, -20.0, 15.0)))
-        WreckND.add(Instr(Form.LINE, Line2D.Double(20.0, -15.0, 20.0, 15.0)))
+    val WreckND = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, 40.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -30.0, 0.0, 30.0)))
+        add(Instr(Form.LINE, Line2D.Double(-20.0, -15.0, -20.0, 15.0)))
+        add(Instr(Form.LINE, Line2D.Double(20.0, -15.0, 20.0, 15.0)))
     }
 
-
-    val WreckS = Symbol()
-
-    init {
-        WreckS.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        WreckS.add(Instr(Form.ELPS, Ellipse2D.Double(-6.0, -6.0, 12.0, 12.0)))
-        WreckS.add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, -6.0, 0.0)))
-        WreckS.add(Instr(Form.LINE, Line2D.Double(40.0, 0.0, 6.0, 0.0)))
+    val WreckS = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-6.0, -6.0, 12.0, 12.0)))
+        add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, -6.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(40.0, 0.0, 6.0, 0.0)))
         val p = Path2D.Double()
         p.moveTo(-30.0, 0.0)
         p.lineTo(-40.0, -25.0)
@@ -341,14 +287,11 @@ object Areas {
         p.lineTo(6.0, 0.0)
         p.curveTo(5.6, -8.0, -5.6, -8.0, -6.0, 0.0)
         p.closePath()
-        WreckS.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
     }
 
-
-    val Sandwaves = BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB)
-
-    init {
-        val g2 = Sandwaves.createGraphics()
+    val Sandwaves = BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB).apply {
+        val g2 = createGraphics()
         g2.stroke = BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)
         g2.background = Color(0, true)
         g2.clearRect(0, 0, 100, 100)
@@ -398,11 +341,8 @@ object Areas {
         g2.draw(p)
     }
 
-
-    val KelpS = Symbol()
-
-    init {
-        KelpS.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
+    val KelpS = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
         val p = Path2D.Double()
         p.moveTo(-60.0, 0.0)
         p.curveTo(-20.0, -20.0, -24.0, 40.0, 24.0, 20.0)
@@ -418,13 +358,11 @@ object Areas {
         p.quadTo(48.0, 24.0, 60.0, 16.0)
         p.moveTo(36.0, 8.0)
         p.quadTo(48.0, -8.0, 60.0, 0.0)
-        KelpS.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    val KelpA = BufferedImage(240, 240, BufferedImage.TYPE_INT_ARGB)
-
-    init {
-        val g2 = KelpA.createGraphics()
+    val KelpA = BufferedImage(240, 240, BufferedImage.TYPE_INT_ARGB).apply {
+        val g2 = createGraphics()
         g2.stroke = BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)
         g2.background = Color(0, true)
         g2.clearRect(0, 0, 240, 240)

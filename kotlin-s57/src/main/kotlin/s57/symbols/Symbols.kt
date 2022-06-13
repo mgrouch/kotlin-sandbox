@@ -338,7 +338,11 @@ object Symbols {
         }
     }
 
-    class Symbol : ArrayList<Instr?>()
+    class Symbol : ArrayList<Instr>() {
+        fun addInstr(instr: Instr) {
+            add(instr)
+        }
+    }
 
     class SubSymbol(
         var instr: Symbol?,

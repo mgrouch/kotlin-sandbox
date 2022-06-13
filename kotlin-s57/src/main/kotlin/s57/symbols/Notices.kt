@@ -22,9 +22,7 @@ import java.awt.geom.*
  */
 object Notices {
 
-    private val Bollard = Symbol()
-
-    init {
+    private val Bollard = Symbol().apply {
         val p = Path2D.Double()
         p.moveTo(20.0, 21.0)
         p.lineTo(20.0, 16.5)
@@ -47,12 +45,10 @@ object Notices {
         p.curveTo(-12.8, -16.7, -12.8, -15.0, -11.2, -13.0)
         p.curveTo(-9.0, -11.3, -8.7, -9.5, -8.4, -6.5)
         p.closePath()
-        Bollard.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
     }
 
-    private val Motor = Symbol()
-
-    init {
+    private val Motor = Symbol().apply {
         val p = Path2D.Double()
         p.moveTo(-5.0, 4.3)
         p.curveTo(-3.7, 5.5, -1.8, 5.7, -0.2, 4.9)
@@ -71,77 +67,69 @@ object Notices {
         p.curveTo(-7.0, 17.2, -6.6, 16.2, -7.2, 14.6)
         p.curveTo(-7.7, 12.4, -7.0, 7.7, -5.0, 4.3)
         p.closePath()
-        Motor.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
     }
 
-    private val Rowboat = Symbol()
-
-    init {
+    private val Rowboat = Symbol().apply {
         val p = Path2D.Double()
         p.moveTo(-17.5, -2.0)
         p.lineTo(17.5, -2.0)
         p.lineTo(15.0, 6.0)
         p.lineTo(-11.0, 6.0)
         p.closePath()
-        Rowboat.add(Instr(Form.PGON, p))
-        Rowboat.add(Instr(Form.RSHP, Ellipse2D.Double(-6.0, -17.5, 6.0, 6.0)))
-        Rowboat.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        Rowboat.add(Instr(Form.LINE, Line2D.Double(-5.5, -9.0, -8.0, 0.0)))
-        Rowboat.add(Instr(Form.LINE, Line2D.Double(-5.0, 10.0, -7.5, 14.0)))
-        Rowboat.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        Rowboat.add(Instr(Form.LINE, Line2D.Double(-5.5, -9.0, 7.0, -6.5)))
-        Rowboat.add(Instr(Form.LINE, Line2D.Double(7.3, -7.8, -5.0, 10.0)))
+        add(Instr(Form.PGON, p))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-6.0, -17.5, 6.0, 6.0)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(-5.5, -9.0, -8.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(-5.0, 10.0, -7.5, 14.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(-5.5, -9.0, 7.0, -6.5)))
+        add(Instr(Form.LINE, Line2D.Double(7.3, -7.8, -5.0, 10.0)))
     }
 
-    private val Sailboard = Symbol()
-
-    init {
+    private val Sailboard = Symbol().apply {
         var p = Path2D.Double()
         p.moveTo(-6.0, 19.0)
         p.quadTo(-4.0, -5.0, 1.5, -20.0)
         p.quadTo(14.0, -7.0, 15.5, 6.5)
         p.quadTo(7.0, 17.0, -6.0, 19.0)
         p.closePath()
-        Sailboard.add(Instr(Form.PGON, p))
-        Sailboard.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        Sailboard.add(Instr(Form.LINE, Line2D.Double(-2.0, 20.0, -10.0, 20.0)))
-        Sailboard.add(Instr(Form.LINE, Line2D.Double(-13.0, 2.5, -3.0, 2.5)))
-        Sailboard.add(Instr(Form.RSHP, Ellipse2D.Double(-15.0, -4.0, 5.0, 5.0)))
-        Sailboard.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.PGON, p))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(-2.0, 20.0, -10.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-13.0, 2.5, -3.0, 2.5)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-15.0, -4.0, 5.0, 5.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
         p = Path2D.Double()
         p.moveTo(-13.0, 2.5)
         p.lineTo(-12.0, 6.0)
         p.lineTo(-12.0, 9.5)
-        Sailboard.add(Instr(Form.PLIN, p))
-        Sailboard.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.PLIN, p))
+        add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
         p = Path2D.Double()
         p.moveTo(-12.0, 9.5)
         p.lineTo(-7.5, 13.0)
         p.lineTo(-6.0, 19.0)
-        Sailboard.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    private val Sailboat = Symbol()
-
-    init {
+    private val Sailboat = Symbol().apply {
         var p = Path2D.Double()
         p.moveTo(3.75, -20.5)
         p.lineTo(3.75, 8.5)
         p.lineTo(-19.5, 8.5)
         p.closePath()
-        Sailboat.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
         p = Path2D.Double()
         p.moveTo(-19.5, 12.0)
         p.lineTo(19.5, 12.0)
         p.lineTo(13.0, 20.5)
         p.lineTo(-16.0, 20.5)
         p.closePath()
-        Sailboat.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
     }
 
-    private val Slipway = Symbol()
-
-    init {
+    private val Slipway = Symbol().apply {
         var p = Path2D.Double()
         p.moveTo(-17.0, -5.5)
         p.lineTo(-13.5, 0.0)
@@ -153,27 +141,25 @@ object Notices {
         p.lineTo(20.0, 11.0)
         p.lineTo(20.0, 2.0)
         p.closePath()
-        Slipway.add(Instr(Form.PGON, p))
-        Slipway.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Slipway.add(Instr(Form.LINE, Line2D.Double(-14.0, 3.0, 20.0, -2.5)))
-        Slipway.add(Instr(Form.STRK, BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Slipway.add(Instr(Form.ELPS, Ellipse2D.Double(1.0, 1.5, 3.0, 3.0)))
+        add(Instr(Form.PGON, p))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-14.0, 3.0, 20.0, -2.5)))
+        add(Instr(Form.STRK, BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.ELPS, Ellipse2D.Double(1.0, 1.5, 3.0, 3.0)))
         p = Path2D.Double()
         p.moveTo(-21.0, 8.5)
         p.curveTo(-17.5, 5.0, -17.5, 12.0, -13.0, 7.2)
-        Slipway.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    private val Speedboat = Symbol()
-
-    init {
-        Speedboat.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Speedboat.add(Instr(Form.LINE, Line2D.Double(-21.0, 0.0, -17.0, -1.0)))
+    private val Speedboat = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-21.0, 0.0, -17.0, -1.0)))
         var p = Path2D.Double()
         p.moveTo(-17.5, 8.5)
         p.curveTo(-10.5, 13.0, -2.5, 2.0, 4.0, 6.0)
         p.curveTo(12.0, 2.0, 11.5, 9.5, 20.0, 6.0)
-        Speedboat.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
         p = Path2D.Double()
         p.moveTo(-18.5, 1.5)
         p.lineTo(-16.0, 6.0)
@@ -184,20 +170,18 @@ object Notices {
         p.lineTo(6.5, -8.0)
         p.lineTo(2.5, -4.0)
         p.closePath()
-        Speedboat.add(Instr(Form.PGON, p))
-        Speedboat.add(Instr(Form.RSHP, Ellipse2D.Double(-1.5, -13.0, 5.0, 5.0)))
-        Speedboat.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        Speedboat.add(Instr(Form.LINE, Line2D.Double(-2.0, -7.0, -5.0, 0.0)))
-        Speedboat.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        Speedboat.add(Instr(Form.LINE, Line2D.Double(-2.0, -7.0, 5.0, -5.0)))
+        add(Instr(Form.PGON, p))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-1.5, -13.0, 5.0, 5.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(-2.0, -7.0, -5.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(-2.0, -7.0, 5.0, -5.0)))
     }
 
-    private val Turn = Symbol()
-
-    init {
-        Turn.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Turn.add(Instr(Form.EARC, Arc2D.Double(-9.0, -9.0, 18.0, 18.0, 270.0, 230.0, Arc2D.OPEN)))
-        Turn.add(Instr(Form.EARC, Arc2D.Double(-20.0, -20.0, 40.0, 40.0, 315.0, -280.0, Arc2D.OPEN)))
+    private val Turn = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.EARC, Arc2D.Double(-9.0, -9.0, 18.0, 18.0, 270.0, 230.0, Arc2D.OPEN)))
+        add(Instr(Form.EARC, Arc2D.Double(-20.0, -20.0, 40.0, 40.0, 315.0, -280.0, Arc2D.OPEN)))
         val p = Path2D.Double()
         p.moveTo(21.8, -7.0)
         p.lineTo(18.8, -18.2)
@@ -207,17 +191,15 @@ object Notices {
         p.lineTo(-1.7, -2.3)
         p.lineTo(-9.9, -10.5)
         p.closePath()
-        Turn.add(Instr(Form.PGON, p))
+        add(Instr(Form.PGON, p))
     }
 
-    private val Waterbike = Symbol()
-
-    init {
+    private val Waterbike = Symbol().apply {
         var p = Path2D.Double()
         p.moveTo(-17.5, 13.0)
         p.curveTo(-10.5, 17.5, -2.5, 6.5, 4.0, 10.5)
         p.curveTo(12.0, 6.5, 11.5, 14.0, 20.0, 10.5)
-        Waterbike.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
         p = Path2D.Double()
         p.moveTo(-16.5, 9.5)
         p.lineTo(-16.0, 10.5)
@@ -232,125 +214,109 @@ object Notices {
         p.lineTo(-15.0, 4.0)
         p.lineTo(-16.0, 8.0)
         p.closePath()
-        Waterbike.add(Instr(Form.PGON, p))
-        Waterbike.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.PGON, p))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
         p = Path2D.Double()
         p.moveTo(-7.0, 1.0)
         p.lineTo(-7.5, -1.5)
         p.lineTo(-12.5, -3.5)
         p.lineTo(-11.5, -10.5)
-        Waterbike.add(Instr(Form.PLIN, p))
-        Waterbike.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        Waterbike.add(Instr(Form.LINE, Line2D.Double(-11.5, -10.5, -3.0, -8.5)))
-        Waterbike.add(Instr(Form.RSHP, Ellipse2D.Double(-11.5, -18.0, 5.0, 5.0)))
+        add(Instr(Form.PLIN, p))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(-11.5, -10.5, -3.0, -8.5)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-11.5, -18.0, 5.0, 5.0)))
     }
 
-    private val Waterski = Symbol()
-
-    init {
-        Waterski.add(Instr(Form.RSHP, Ellipse2D.Double(12.0, -18.0, 6.0, 6.0)))
-        Waterski.add(Instr(Form.STRK, BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Waterski.add(Instr(Form.LINE, Line2D.Double(-18.0, -6.0, 0.0, -6.0)))
-        Waterski.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+    private val Waterski = Symbol().apply {
+        add(Instr(Form.RSHP, Ellipse2D.Double(12.0, -18.0, 6.0, 6.0)))
+        add(Instr(Form.STRK, BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-18.0, -6.0, 0.0, -6.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
         var p = Path2D.Double()
         p.moveTo(6.5, 17.5)
         p.lineTo(-13.0, 14.5)
         p.curveTo(-15.0, 14.25, -16.0, 13.6, -17.5, 12.0)
-        Waterski.add(Instr(Form.PLIN, p))
-        Waterski.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.PLIN, p))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         p = Path2D.Double()
         p.moveTo(-1.5, -4.0)
         p.lineTo(14.0, -7.5)
         p.lineTo(9.5, 3.5)
         p.lineTo(2.0, 6.0)
         p.lineTo(-4.4, 15.8)
-        Waterski.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    private val NoticeA = Symbol()
-
-    init {
-        NoticeA.add(Instr(Form.FILL, Color(0xe80000)))
-        NoticeA.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeA.add(Instr(Form.FILL, Color.white))
-        NoticeA.add(Instr(Form.RSHP, Rectangle2D.Double(-21.0, -21.0, 42.0, 42.0)))
-        NoticeA.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
-        NoticeA.add(Instr(Form.FILL, Color(0xe80000)))
-        NoticeA.add(Instr(Form.LINE, Line2D.Double(-25.0, -25.0, 25.0, 25.0)))
-        NoticeA.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeA.add(Instr(Form.FILL, Color.black))
-        NoticeA.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+    private val NoticeA = Symbol().apply {
+        add(Instr(Form.FILL, Color(0xe80000)))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.FILL, Color.white))
+        add(Instr(Form.RSHP, Rectangle2D.Double(-21.0, -21.0, 42.0, 42.0)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0xe80000)))
+        add(Instr(Form.LINE, Line2D.Double(-25.0, -25.0, 25.0, 25.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
     }
 
-    private val NoticeB = Symbol()
-
-    init {
-        NoticeB.add(Instr(Form.FILL, Color(0xe80000)))
-        NoticeB.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeB.add(Instr(Form.FILL, Color.white))
-        NoticeB.add(Instr(Form.RSHP, Rectangle2D.Double(-21.0, -21.0, 42.0, 42.0)))
-        NoticeB.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeB.add(Instr(Form.FILL, Color.black))
-        NoticeB.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+    private val NoticeB = Symbol().apply {
+        add(Instr(Form.FILL, Color(0xe80000)))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.FILL, Color.white))
+        add(Instr(Form.RSHP, Rectangle2D.Double(-21.0, -21.0, 42.0, 42.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
     }
 
-    private val NoticeE = Symbol()
-
-    init {
-        NoticeE.add(Instr(Form.FILL, Color(0x0000a0)))
-        NoticeE.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeE.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE.add(Instr(Form.FILL, Color.black))
-        NoticeE.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeE.add(Instr(Form.FILL, Color.white))
+    private val NoticeE = Symbol().apply {
+        add(Instr(Form.FILL, Color(0x0000a0)))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.FILL, Color.white))
     }
 
 
-    val Notice = Symbol()
-
-    init {
-        Notice.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        Notice.add(Instr(Form.FILL, Color(0xe80000)))
-        Notice.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        Notice.add(Instr(Form.FILL, Color(0x0000a0)))
-        Notice.add(Instr(Form.RSHP, Rectangle2D.Double(-21.0, -21.0, 42.0, 42.0)))
-        Notice.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Notice.add(Instr(Form.FILL, Color.black))
-        Notice.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+    val Notice = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color(0xe80000)))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.FILL, Color(0x0000a0)))
+        add(Instr(Form.RSHP, Rectangle2D.Double(-21.0, -21.0, 42.0, 42.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
     }
 
-    val NoticeA1 = Symbol()
-
-    init {
-        NoticeA1.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA1.add(Instr(Form.FILL, Color(0xe80000)))
-        NoticeA1.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeA1.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeA1.add(Instr(Form.FILL, Color.white))
-        NoticeA1.add(Instr(Form.RSHP, Rectangle2D.Double(-30.0, -10.0, 60.0, 20.0)))
-        NoticeA1.add(Instr(Form.FILL, Color.black))
-        NoticeA1.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+    val NoticeA1 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color(0xe80000)))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.white))
+        add(Instr(Form.RSHP, Rectangle2D.Double(-30.0, -10.0, 60.0, 20.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
     }
 
-    val NoticeA1a = Symbol()
-
-    init {
-        NoticeA1a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA1a.add(Instr(Form.FILL, Color(0xe80000)))
-        NoticeA1a.add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA1a.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeA1a.add(Instr(Form.FILL, Color.white))
-        NoticeA1a.add(Instr(Form.RSHP, Rectangle2D.Double(-29.0, -10.0, 58.0, 20.0)))
-        NoticeA1a.add(Instr(Form.FILL, Color.black))
-        NoticeA1a.add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeA1a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color(0xe80000)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.white))
+        add(Instr(Form.RSHP, Rectangle2D.Double(-29.0, -10.0, 58.0, 20.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
     }
 
-    val NoticeA2 = Symbol()
-
-    init {
-        NoticeA2.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA2.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA2.add(Instr(Form.FILL, Color.black))
+    val NoticeA2 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(-10.0, 23.0)
         p.lineTo(-10.0, 0.0)
@@ -368,14 +334,12 @@ object Notices {
         p.lineTo(15.0, -15.0)
         p.lineTo(15.0, 8.0)
         p.closePath()
-        NoticeA2.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeA3 = Symbol()
-
-    init {
-        NoticeA3.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA3.add(Instr(Form.SYMB, SubSymbol(NoticeA2, 1.0, 0.0, 0.0, null, null)))
+    val NoticeA3 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA2, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-10.0, 12.0)
         p.lineTo(-6.0, 12.0)
@@ -387,15 +351,13 @@ object Notices {
         p.lineTo(12.5, -11.0)
         p.lineTo(19.0, -3.0)
         p.closePath()
-        NoticeA3.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeA4 = Symbol()
-
-    init {
-        NoticeA4.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA4.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA4.add(Instr(Form.FILL, Color.black))
+    val NoticeA4 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(-10.0, -15.0)
         p.lineTo(-10.0, 8.0)
@@ -413,14 +375,12 @@ object Notices {
         p.lineTo(15.0, -8.0)
         p.lineTo(15.0, 15.0)
         p.closePath()
-        NoticeA4.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeA4_1 = Symbol()
-
-    init {
-        NoticeA4_1.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA4_1.add(Instr(Form.SYMB, SubSymbol(NoticeA4, 1.0, 0.0, 0.0, null, null)))
+    val NoticeA4_1 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA4, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-10.0, -4.0)
         p.lineTo(-6.0, -4.0)
@@ -432,14 +392,12 @@ object Notices {
         p.lineTo(12.5, -3.0)
         p.lineTo(19.0, 5.0)
         p.closePath()
-        NoticeA4_1.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeA5 = Symbol()
-
-    init {
-        NoticeA5.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA5.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+    val NoticeA5 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-5.3, 14.6)
@@ -456,22 +414,18 @@ object Notices {
         p.curveTo(6.5, -1.0, 6.5, -9.0, 0.0, -9.0)
         p.lineTo(-5.3, -9.0)
         p.closePath()
-        NoticeA5.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeA5_1 = Symbol()
-
-    init {
-        NoticeA5_1.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA5_1.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+    val NoticeA5_1 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticeA6 = Symbol()
-
-    init {
-        NoticeA6.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA6.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA6.add(
+    val NoticeA6 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB, SubSymbol(
                     Harbours.Anchor, 0.4, 0.0, 0.0, Symbols.Scheme(
@@ -482,12 +436,10 @@ object Notices {
         )
     }
 
-    val NoticeA7 = Symbol()
-
-    init {
-        NoticeA7.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA7.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA7.add(
+    val NoticeA7 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Bollard, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -495,12 +447,10 @@ object Notices {
         )
     }
 
-    val NoticeA8 = Symbol()
-
-    init {
-        NoticeA8.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA8.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA8.add(
+    val NoticeA8 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Turn, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -508,13 +458,11 @@ object Notices {
         )
     }
 
-    val NoticeA9 = Symbol()
-
-    init {
-        NoticeA9.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA9.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA9.add(Instr(Form.STRK, BasicStroke(7f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeA9.add(Instr(Form.FILL, Color.black))
+    val NoticeA9 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(7f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(-23.0, 10.0)
         p.curveTo(-11.0, 10.0, -12.0, 4.0, 0.0, 4.0)
@@ -522,43 +470,39 @@ object Notices {
         p.moveTo(-23.0, -3.0)
         p.curveTo(-11.0, -3.0, -12.0, -9.0, 0.0, -9.0)
         p.curveTo(12.0, -9.0, 11.0, -3.0, 23.0, -3.0)
-        NoticeA9.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeA10a = Symbol()
-
-    init {
-        NoticeA10a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA10a.add(Instr(Form.FILL, Color.white))
+    val NoticeA10a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.white))
         var p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.closePath()
-        NoticeA10a.add(Instr(Form.PGON, p))
-        NoticeA10a.add(Instr(Form.FILL, Color(0xe80000)))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.FILL, Color(0xe80000)))
         p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.closePath()
-        NoticeA10a.add(Instr(Form.PGON, p))
-        NoticeA10a.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeA10a.add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.FILL, Color.black))
         p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.lineTo(30.0, 0.0)
         p.closePath()
-        NoticeA10a.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeA10b = Symbol()
-
-    init {
-        NoticeA10b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA10b.add(
+    val NoticeA10b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(
             Instr(
                 Form.SYMB, SubSymbol(
                     NoticeA10a, 1.0, 0.0, 0.0, null, Symbols.Delta(
@@ -569,12 +513,10 @@ object Notices {
         )
     }
 
-    val NoticeA12 = Symbol()
-
-    init {
-        NoticeA12.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA12.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA12.add(
+    val NoticeA12 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Motor, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -582,12 +524,10 @@ object Notices {
         )
     }
 
-    val NoticeA13 = Symbol()
-
-    init {
-        NoticeA13.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA13.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA13.add(
+    val NoticeA13 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.TEXT, Caption(
                     "SPORT", Font("Arial", Font.BOLD, 15), Color.black, Symbols.Delta(
@@ -598,12 +538,10 @@ object Notices {
         )
     }
 
-    val NoticeA14 = Symbol()
-
-    init {
-        NoticeA14.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA14.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA14.add(
+    val NoticeA14 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Waterski, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -611,12 +549,10 @@ object Notices {
         )
     }
 
-    val NoticeA15 = Symbol()
-
-    init {
-        NoticeA15.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA15.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA15.add(
+    val NoticeA15 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Sailboat, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -624,12 +560,10 @@ object Notices {
         )
     }
 
-    val NoticeA16 = Symbol()
-
-    init {
-        NoticeA16.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA16.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA16.add(
+    val NoticeA16 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Rowboat, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -637,12 +571,10 @@ object Notices {
         )
     }
 
-    val NoticeA17 = Symbol()
-
-    init {
-        NoticeA17.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA17.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA17.add(
+    val NoticeA17 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Sailboard, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -650,12 +582,10 @@ object Notices {
         )
     }
 
-    val NoticeA18 = Symbol()
-
-    init {
-        NoticeA18.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA18.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA18.add(
+    val NoticeA18 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Speedboat, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -663,12 +593,10 @@ object Notices {
         )
     }
 
-    val NoticeA19 = Symbol()
-
-    init {
-        NoticeA19.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA19.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA19.add(
+    val NoticeA19 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Slipway, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -676,12 +604,10 @@ object Notices {
         )
     }
 
-    val NoticeA20 = Symbol()
-
-    init {
-        NoticeA20.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeA20.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
-        NoticeA20.add(
+    val NoticeA20 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Waterbike, 1.0, 0.0, 0.0, Symbols.Scheme(Color.black), null)
@@ -689,11 +615,9 @@ object Notices {
         )
     }
 
-    val NoticeB1a = Symbol()
-
-    init {
-        NoticeB1a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB1a.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeB1a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(21.0, 8.0)
         p.lineTo(-8.0, 8.0)
@@ -703,14 +627,12 @@ object Notices {
         p.lineTo(-8.0, -8.0)
         p.lineTo(21.0, -8.0)
         p.closePath()
-        NoticeB1a.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB1b = Symbol()
-
-    init {
-        NoticeB1b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB1b.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeB1b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-21.0, 8.0)
         p.lineTo(8.0, 8.0)
@@ -720,112 +642,102 @@ object Notices {
         p.lineTo(8.0, -8.0)
         p.lineTo(-21.0, -8.0)
         p.closePath()
-        NoticeB1b.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB2a = Symbol()
-
-    init {
-        NoticeB2a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB2a.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB2a.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+    val NoticeB2a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         var p = Path2D.Double()
         p.moveTo(18.0, 21.0)
         p.lineTo(18.0, 10.0)
         p.lineTo(-15.0, -10.0)
         p.lineTo(-15.0, -15.0)
-        NoticeB2a.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
         p = Path2D.Double()
         p.moveTo(-15.0, -21.0)
         p.lineTo(-21.0, -15.0)
         p.lineTo(-9.0, -15.0)
         p.closePath()
-        NoticeB2a.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB2b = Symbol()
-
-    init {
-        NoticeB2b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB2b.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB2b.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB2b.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+    val NoticeB2b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         var p = Path2D.Double()
         p.moveTo(-18.0, 21.0)
         p.lineTo(-18.0, 10.0)
         p.lineTo(15.0, -10.0)
         p.lineTo(15.0, -15.0)
-        NoticeB2b.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
         p = Path2D.Double()
         p.moveTo(15.0, -21.0)
         p.lineTo(21.0, -15.0)
         p.lineTo(9.0, -15.0)
         p.closePath()
-        NoticeB2b.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB3a = Symbol()
-
-    init {
-        NoticeB3a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB3a.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB3a.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeB3a.add(Instr(Form.LINE, Line2D.Double(-15.0, 21.0, -15.0, -15.0)))
+    val NoticeB3a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-15.0, 21.0, -15.0, -15.0)))
         var p = Path2D.Double()
         p.moveTo(-15.0, -21.0)
         p.lineTo(-21.0, -15.0)
         p.lineTo(-9.0, -15.0)
         p.closePath()
-        NoticeB3a.add(Instr(Form.PGON, p))
-        NoticeB3a.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.0f, floatArrayOf(5.5f, 2.4f), 0.0f)
+            add(Instr(Form.PGON, p))
+            add(
+                Instr(
+                    Form.STRK,
+                    BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.0f, floatArrayOf(5.5f, 2.4f), 0.0f)
+                )
             )
-        )
-        NoticeB3a.add(Instr(Form.LINE, Line2D.Double(15.0, -21.0, 15.0, 15.0)))
+            add(Instr(Form.LINE, Line2D.Double(15.0, -21.0, 15.0, 15.0)))
         p = Path2D.Double()
         p.moveTo(15.0, 21.0)
         p.lineTo(21.0, 15.0)
         p.lineTo(9.0, 15.0)
         p.closePath()
-        NoticeB3a.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB3b = Symbol()
-
-    init {
-        NoticeB3b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB3b.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB3b.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeB3b.add(Instr(Form.LINE, Line2D.Double(15.0, 21.0, 15.0, -15.0)))
+    val NoticeB3b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(15.0, 21.0, 15.0, -15.0)))
         var p = Path2D.Double()
         p.moveTo(15.0, -21.0)
         p.lineTo(21.0, -15.0)
         p.lineTo(9.0, -15.0)
         p.closePath()
-        NoticeB3b.add(Instr(Form.PGON, p))
-        NoticeB3b.add(
-            Instr(
-                Form.STRK,
-                BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.0f, floatArrayOf(5.5f, 2.4f), 0.0f)
+            add(Instr(Form.PGON, p))
+            add(
+                Instr(
+                    Form.STRK,
+                    BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.0f, floatArrayOf(5.5f, 2.4f), 0.0f)
+                )
             )
-        )
-        NoticeB3b.add(Instr(Form.LINE, Line2D.Double(-15.0, -21.0, -15.0, 15.0)))
+            add(Instr(Form.LINE, Line2D.Double(-15.0, -21.0, -15.0, 15.0)))
         p = Path2D.Double()
         p.moveTo(-15.0, 21.0)
         p.lineTo(-21.0, 15.0)
         p.lineTo(-9.0, 15.0)
         p.closePath()
-        NoticeB3b.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB4a = Symbol()
-
-    init {
-        NoticeB4a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB4a.add(Instr(Form.SYMB, SubSymbol(NoticeB2a, 1.0, 0.0, 0.0, null, null)))
-        NoticeB4a.add(
+    val NoticeB4a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB2a, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.0f, floatArrayOf(5.5f, 2.4f), 0.0f)
@@ -836,21 +748,19 @@ object Notices {
         p.lineTo(18.0, -10.0)
         p.lineTo(-15.0, 10.0)
         p.lineTo(-15.0, 15.0)
-        NoticeB4a.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
         p = Path2D.Double()
         p.moveTo(-15.0, 21.0)
         p.lineTo(-21.0, 15.0)
         p.lineTo(-9.0, 15.0)
         p.closePath()
-        NoticeB4a.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB4b = Symbol()
-
-    init {
-        NoticeB4b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB4b.add(Instr(Form.SYMB, SubSymbol(NoticeB2b, 1.0, 0.0, 0.0, null, null)))
-        NoticeB4b.add(
+    val NoticeB4b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB2b, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.0f, floatArrayOf(5.5f, 2.4f), 0.0f)
@@ -861,76 +771,62 @@ object Notices {
         p.lineTo(-18.0, -10.0)
         p.lineTo(15.0, 10.0)
         p.lineTo(15.0, 15.0)
-        NoticeB4b.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
         p = Path2D.Double()
         p.moveTo(15.0, 21.0)
         p.lineTo(21.0, 15.0)
         p.lineTo(9.0, 15.0)
         p.closePath()
-        NoticeB4b.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeB5 = Symbol()
-
-    init {
-        NoticeB5.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB5.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB5.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
-        NoticeB5.add(Instr(Form.LINE, Line2D.Double(15.0, 0.0, -15.0, 0.0)))
+    val NoticeB5 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(15.0, 0.0, -15.0, 0.0)))
     }
 
-    val NoticeB6 = Symbol()
-
-    init {
-        NoticeB6.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB6.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeB6 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticeB7 = Symbol()
-
-    init {
-        NoticeB7.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB7.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB7.add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+    val NoticeB7 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.RSHP, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
     }
 
-    val NoticeB8 = Symbol()
-
-    init {
-        NoticeB8.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB8.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB8.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
-        NoticeB8.add(Instr(Form.LINE, Line2D.Double(0.0, 15.0, 0.0, -15.0)))
+    val NoticeB8 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 15.0, 0.0, -15.0)))
     }
 
-    val NoticeB9a = Symbol()
-
-    init {
-        NoticeB9a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB9a.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB9a.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeB9a.add(Instr(Form.LINE, Line2D.Double(-21.0, 0.0, 21.0, 0.0)))
-        NoticeB9a.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeB9a.add(Instr(Form.LINE, Line2D.Double(0.0, 21.0, 0.0, 0.0)))
+    val NoticeB9a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-21.0, 0.0, 21.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 21.0, 0.0, 0.0)))
     }
 
-    val NoticeB9b = Symbol()
-
-    init {
-        NoticeB9b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB9b.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB9b.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeB9b.add(Instr(Form.LINE, Line2D.Double(-21.0, 0.0, 21.0, 0.0)))
-        NoticeB9b.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeB9b.add(Instr(Form.LINE, Line2D.Double(0.0, 21.0, 0.0, -21.0)))
+    val NoticeB9b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-21.0, 0.0, 21.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 21.0, 0.0, -21.0)))
     }
 
-    val NoticeB11 = Symbol()
-
-    init {
-        NoticeB11.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeB11.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
-        NoticeB11.add(
+    val NoticeB11 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.TEXT, Caption(
                     "VHF", Font("Arial", Font.BOLD, 20), Color.black, Symbols.Delta(
@@ -941,37 +837,31 @@ object Notices {
         )
     }
 
-    val NoticeC1 = Symbol()
-
-    init {
-        NoticeC1.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeC1.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeC1 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-15.0, 21.0)
         p.lineTo(0.0, 12.0)
         p.lineTo(15.0, 21.0)
         p.closePath()
-        NoticeC1.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeC2 = Symbol()
-
-    init {
-        NoticeC2.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeC2.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeC2 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-15.0, -21.0)
         p.lineTo(0.0, -12.0)
         p.lineTo(15.0, -21.0)
         p.closePath()
-        NoticeC2.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeC3 = Symbol()
-
-    init {
-        NoticeC3.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeC3.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeC3 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(21.0, -15.0)
         p.lineTo(12.0, 0.0)
@@ -981,21 +871,17 @@ object Notices {
         p.lineTo(-12.0, 0.0)
         p.lineTo(-21.0, 15.0)
         p.closePath()
-        NoticeC3.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeC4 = Symbol()
-
-    init {
-        NoticeC4.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeC4.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeC4 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticeC5a = Symbol()
-
-    init {
-        NoticeC5a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeC5a.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeC5a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-21.0, -21.0)
         p.lineTo(10.0, -21.0)
@@ -1003,14 +889,12 @@ object Notices {
         p.lineTo(10.0, 21.0)
         p.lineTo(-21.0, 21.0)
         p.closePath()
-        NoticeC5a.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeC5b = Symbol()
-
-    init {
-        NoticeC5b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeC5b.add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
+    val NoticeC5b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeB, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(21.0, -21.0)
         p.lineTo(-10.0, -21.0)
@@ -1018,31 +902,27 @@ object Notices {
         p.lineTo(-10.0, 21.0)
         p.lineTo(21.0, 21.0)
         p.closePath()
-        NoticeC5b.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeD1a = Symbol()
-
-    init {
-        NoticeD1a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeD1a.add(Instr(Form.FILL, Color.yellow))
+    val NoticeD1a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.yellow))
         val p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.lineTo(30.0, 0.0)
         p.closePath()
-        NoticeD1a.add(Instr(Form.PGON, p))
-        NoticeD1a.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeD1a.add(Instr(Form.FILL, Color.black))
-        NoticeD1a.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeD1b = Symbol()
-
-    init {
-        NoticeD1b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeD1b.add(Instr(Form.FILL, Color.yellow))
+    val NoticeD1b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.yellow))
         val p = Path2D.Double()
         p.moveTo(-30.0, 0.0)
         p.lineTo(-15.0, 25.0)
@@ -1051,54 +931,54 @@ object Notices {
         p.lineTo(15.0, 25.0)
         p.lineTo(-15.0, -25.0)
         p.closePath()
-        NoticeD1b.add(Instr(Form.PGON, p))
-        NoticeD1b.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeD1b.add(Instr(Form.FILL, Color.black))
-        NoticeD1b.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeD2a = Symbol()
-
-    init {
-        NoticeD2a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeD2a.add(Instr(Form.FILL, Color.white))
+    val NoticeD2a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.white))
         var p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.closePath()
-        NoticeD2a.add(Instr(Form.PGON, p))
-        NoticeD2a.add(Instr(Form.FILL, Color(0x00e800)))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.FILL, Color(0x00e800)))
         p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.closePath()
-        NoticeD2a.add(Instr(Form.PGON, p))
-        NoticeD2a.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeD2a.add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.FILL, Color.black))
         p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.lineTo(30.0, 0.0)
         p.closePath()
-        NoticeD2a.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeD2b = Symbol()
-
-    init {
-        NoticeD2b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeD2b.add(Instr(Form.SYMB, SubSymbol(NoticeD2a, 1.0, 0.0, 0.0, null,
-            Symbols.Delta(Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0))))))
+    val NoticeD2b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(
+            Instr(
+                Form.SYMB, SubSymbol(
+                    NoticeD2a, 1.0, 0.0, 0.0, null,
+                    Symbols.Delta(Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0)))
+                )
+            )
+        )
     }
 
-    val NoticeD3a = Symbol()
-
-    init {
-        NoticeD3a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeD3a.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeD3a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(28.0, 10.0)
         p.lineTo(-10.0, 10.0)
@@ -1108,14 +988,12 @@ object Notices {
         p.lineTo(-10.0, -10.0)
         p.lineTo(28.0, -10.0)
         p.closePath()
-        NoticeD3a.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeD3b = Symbol()
-
-    init {
-        NoticeD3b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeD3b.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeD3b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-28.0, 10.0)
         p.lineTo(10.0, 10.0)
@@ -1125,27 +1003,23 @@ object Notices {
         p.lineTo(10.0, -10.0)
         p.lineTo(-28.0, -10.0)
         p.closePath()
-        NoticeD3b.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE1 = Symbol()
-
-    init {
-        NoticeE1.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE1.add(Instr(Form.FILL, Color(0x00e800)))
-        NoticeE1.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeE1.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE1.add(Instr(Form.FILL, Color.white))
-        NoticeE1.add(Instr(Form.RSHP, Rectangle2D.Double(-10.0, -30.0, 20.0, 60.0)))
-        NoticeE1.add(Instr(Form.FILL, Color.black))
-        NoticeE1.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+    val NoticeE1 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color(0x00e800)))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.white))
+        add(Instr(Form.RSHP, Rectangle2D.Double(-10.0, -30.0, 20.0, 60.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
     }
 
-    val NoticeE2 = Symbol()
-
-    init {
-        NoticeE2.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE2.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE2 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(5.0, -25.0)
         p.lineTo(-10.0, -1.0)
@@ -1159,31 +1033,27 @@ object Notices {
         p.lineTo(-14.0, 1.0)
         p.lineTo(2.0, -25.0)
         p.closePath()
-        NoticeE2.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE3 = Symbol()
-
-    init {
-        NoticeE3.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE3.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE3.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(25.0, -20.0, 25.0, 20.0)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(-25.0, -20.0, -25.0, 20.0)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(-15.0, -15.0, -15.0, 20.0)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(-5.0, -15.0, -5.0, 20.0)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(5.0, -15.0, 5.0, 20.0)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(15.0, -15.0, 15.0, 20.0)))
-        NoticeE3.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(-26.0, 18.5, 26.0, 18.5)))
-        NoticeE3.add(Instr(Form.LINE, Line2D.Double(-26.0, -15.0, 26.0, -15.0)))
+    val NoticeE3 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(25.0, -20.0, 25.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-25.0, -20.0, -25.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-15.0, -15.0, -15.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-5.0, -15.0, -5.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(5.0, -15.0, 5.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(15.0, -15.0, 15.0, 20.0)))
+        add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-26.0, 18.5, 26.0, 18.5)))
+        add(Instr(Form.LINE, Line2D.Double(-26.0, -15.0, 26.0, -15.0)))
     }
 
-    val NoticeE4a = Symbol()
-
-    init {
-        NoticeE4a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE4a.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE4a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-20.0, -10.0)
         p.lineTo(-5.0, -10.0)
@@ -1199,14 +1069,12 @@ object Notices {
         p.lineTo(25.0, 10.0)
         p.lineTo(-25.0, 10.0)
         p.closePath()
-        NoticeE4a.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE4b = Symbol()
-
-    init {
-        NoticeE4b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE4b.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE4b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-20.0, 0.0)
         p.lineTo(-5.0, 0.0)
@@ -1217,14 +1085,12 @@ object Notices {
         p.lineTo(15.0, 10.0)
         p.lineTo(-15.0, 10.0)
         p.closePath()
-        NoticeE4b.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5 = Symbol()
-
-    init {
-        NoticeE5.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-5.3, 14.6)
@@ -1241,49 +1107,39 @@ object Notices {
         p.curveTo(6.5, -1.0, 6.5, -9.0, 0.0, -9.0)
         p.lineTo(-5.3, -9.0)
         p.closePath()
-        NoticeE5.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_1 = Symbol()
-
-    init {
-        NoticeE5_1.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_1.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_1 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticeE5_2 = Symbol()
-
-    init {
-        NoticeE5_2.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_2.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_2 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticeE5_3 = Symbol()
-
-    init {
-        NoticeE5_3.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_3.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_3 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticeE5_4 = Symbol()
-
-    init {
-        NoticeE5_4.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_4.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_4 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
         p.lineTo(0.0, -28.0)
         p.lineTo(28.0, 25.0)
         p.closePath()
-        NoticeE5_4.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_5 = Symbol()
-
-    init {
-        NoticeE5_5.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_5.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_5 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
@@ -1294,14 +1150,12 @@ object Notices {
         p.lineTo(-15.0, 2.0)
         p.lineTo(15.0, 2.0)
         p.closePath()
-        NoticeE5_5.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_6 = Symbol()
-
-    init {
-        NoticeE5_6.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_6.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_6 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
@@ -1316,14 +1170,12 @@ object Notices {
         p.lineTo(-10.0, 9.0)
         p.lineTo(10.0, 9.0)
         p.closePath()
-        NoticeE5_6.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_7 = Symbol()
-
-    init {
-        NoticeE5_7.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_7.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_7 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
@@ -1342,28 +1194,24 @@ object Notices {
         p.lineTo(-8.0, 13.0)
         p.lineTo(8.0, 13.0)
         p.closePath()
-        NoticeE5_7.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_8 = Symbol()
-
-    init {
-        NoticeE5_8.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_8.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_8 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, -25.0)
         p.closePath()
-        NoticeE5_8.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_9 = Symbol()
-
-    init {
-        NoticeE5_9.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_9.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_9 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
@@ -1374,14 +1222,12 @@ object Notices {
         p.lineTo(-15.0, -14.0)
         p.lineTo(15.0, -14.0)
         p.closePath()
-        NoticeE5_9.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_10 = Symbol()
-
-    init {
-        NoticeE5_10.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_10.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_10 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
@@ -1396,14 +1242,12 @@ object Notices {
         p.lineTo(-10.0, 0.0)
         p.lineTo(10.0, 0.0)
         p.closePath()
-        NoticeE5_10.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_11 = Symbol()
-
-    init {
-        NoticeE5_11.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_11.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_11 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
@@ -1422,14 +1266,12 @@ object Notices {
         p.lineTo(-8.0, 8.0)
         p.lineTo(8.0, 8.0)
         p.closePath()
-        NoticeE5_11.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_12 = Symbol()
-
-    init {
-        NoticeE5_12.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_12.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_12 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
@@ -1437,14 +1279,12 @@ object Notices {
         p.lineTo(28.0, 0.0)
         p.lineTo(0.0, -28.0)
         p.closePath()
-        NoticeE5_12.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_13 = Symbol()
-
-    init {
-        NoticeE5_13.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_13.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_13 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
@@ -1456,14 +1296,12 @@ object Notices {
         p.lineTo(-15.0, -7.0)
         p.lineTo(15.0, -7.0)
         p.closePath()
-        NoticeE5_13.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_14 = Symbol()
-
-    init {
-        NoticeE5_14.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_14.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_14 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
@@ -1479,14 +1317,12 @@ object Notices {
         p.lineTo(-10.0, 5.0)
         p.lineTo(10.0, 5.0)
         p.closePath()
-        NoticeE5_14.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE5_15 = Symbol()
-
-    init {
-        NoticeE5_15.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE5_15.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE5_15 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
@@ -1506,24 +1342,24 @@ object Notices {
         p.lineTo(-8.0, 13.0)
         p.lineTo(8.0, 13.0)
         p.closePath()
-        NoticeE5_15.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE6 = Symbol()
-
-    init {
-        NoticeE6.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE6.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE6.add(Instr(Form.SYMB,
-            SubSymbol(Harbours.Anchor, 0.4, 0.0, 0.0, Symbols.Scheme(Color.white), null)))
+    val NoticeE6 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
+            Instr(
+                Form.SYMB,
+                SubSymbol(Harbours.Anchor, 0.4, 0.0, 0.0, Symbols.Scheme(Color.white), null)
+            )
+        )
     }
 
-    val NoticeE7 = Symbol()
-
-    init {
-        NoticeE7.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE7.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE7.add(
+    val NoticeE7 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Bollard, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1531,16 +1367,14 @@ object Notices {
         )
     }
 
-    val NoticeE7_1 = Symbol()
-
-    init {
-        NoticeE7_1.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE7_1.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE7_1.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE7_1.add(Instr(Form.LINE, Line2D.Double(20.0, 25.0, 20.0, -10.0)))
-        NoticeE7_1.add(Instr(Form.LINE, Line2D.Double(22.0, -8.0, -15.0, -20.0)))
-        NoticeE7_1.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE7_1.add(Instr(Form.LINE, Line2D.Double(20.0, 8.0, 0.0, -15.0)))
+    val NoticeE7_1 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(20.0, 25.0, 20.0, -10.0)))
+        add(Instr(Form.LINE, Line2D.Double(22.0, -8.0, -15.0, -20.0)))
+        add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(20.0, 8.0, 0.0, -15.0)))
         val p = Path2D.Double()
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-17.0, 2.0)
@@ -1563,18 +1397,16 @@ object Notices {
         p.lineTo(6.0, 11.0)
         p.quadTo(-5.0, 9.0, -16.0, 11.0)
         p.closePath()
-        NoticeE7_1.add(Instr(Form.PGON, p))
-        NoticeE7_1.add(Instr(Form.FILL, Color(0x0000a0)))
-        NoticeE7_1.add(Instr(Form.RSHP, Ellipse2D.Double(-16.0, 13.0, 4.0, 4.0)))
-        NoticeE7_1.add(Instr(Form.RSHP, Ellipse2D.Double(2.0, 13.0, 4.0, 4.0)))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.FILL, Color(0x0000a0)))
+            add(Instr(Form.RSHP, Ellipse2D.Double(-16.0, 13.0, 4.0, 4.0)))
+            add(Instr(Form.RSHP, Ellipse2D.Double(2.0, 13.0, 4.0, 4.0)))
     }
 
-    val NoticeE8 = Symbol()
-
-    init {
-        NoticeE8.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE8.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE8.add(
+    val NoticeE8 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Turn, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1582,199 +1414,165 @@ object Notices {
         )
     }
 
-    val NoticeE9a = Symbol()
-
-    init {
-        NoticeE9a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9a.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9a.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9a.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
-        NoticeE9a.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9a.add(Instr(Form.LINE, Line2D.Double(-29.0, 0.0, 29.0, 0.0)))
+    val NoticeE9a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-29.0, 0.0, 29.0, 0.0)))
     }
 
-    val NoticeE9b = Symbol()
-
-    init {
-        NoticeE9b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9b.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9b.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9b.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
-        NoticeE9b.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9b.add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
+    val NoticeE9b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
     }
 
-    val NoticeE9c = Symbol()
-
-    init {
-        NoticeE9c.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9c.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9c.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9c.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
-        NoticeE9c.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9c.add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
+    val NoticeE9c = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
     }
 
-    val NoticeE9d = Symbol()
-
-    init {
-        NoticeE9d.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9d.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9d.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9d.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
-        NoticeE9d.add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
-        NoticeE9d.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9d.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
+    val NoticeE9d = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
+        add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
     }
 
-    val NoticeE9e = Symbol()
-
-    init {
-        NoticeE9e.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9e.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9e.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9e.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
-        NoticeE9e.add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
-        NoticeE9e.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9e.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
+    val NoticeE9e = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
+        add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
     }
 
-    val NoticeE9f = Symbol()
-
-    init {
-        NoticeE9f.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9f.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9f.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9f.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
-        NoticeE9f.add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
-        NoticeE9f.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9f.add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
+    val NoticeE9f = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
+        add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
     }
 
-    val NoticeE9g = Symbol()
-
-    init {
-        NoticeE9g.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9g.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9g.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9g.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
-        NoticeE9g.add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
-        NoticeE9g.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9g.add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
+    val NoticeE9g = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
+        add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
     }
 
-    val NoticeE9h = Symbol()
-
-    init {
-        NoticeE9h.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9h.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9h.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9h.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
-        NoticeE9h.add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
-        NoticeE9h.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9h.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
-        NoticeE9h.add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
+    val NoticeE9h = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
+        add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
+        add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
     }
 
-    val NoticeE9i = Symbol()
-
-    init {
-        NoticeE9i.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE9i.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE9i.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9i.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
-        NoticeE9i.add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
-        NoticeE9i.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE9i.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
-        NoticeE9i.add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
+    val NoticeE9i = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -4.0)))
+        add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 2.0)))
+        add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
     }
 
-    val NoticeE10a = Symbol()
-
-    init {
-        NoticeE10a.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE10a.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE10a.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10a.add(Instr(Form.LINE, Line2D.Double(-29.0, 0.0, 29.0, 0.0)))
-        NoticeE10a.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10a.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
+    val NoticeE10a = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-29.0, 0.0, 29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -29.0)))
     }
 
-    val NoticeE10b = Symbol()
-
-    init {
-        NoticeE10b.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE10b.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE10b.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10b.add(Instr(Form.LINE, Line2D.Double(-29.0, 0.0, 29.0, 0.0)))
-        NoticeE10b.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10b.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
+    val NoticeE10b = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-29.0, 0.0, 29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
     }
 
-    val NoticeE10c = Symbol()
-
-    init {
-        NoticeE10c.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE10c.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE10c.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10c.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
-        NoticeE10c.add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
-        NoticeE10c.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10c.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
+    val NoticeE10c = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
+        add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
     }
 
-    val NoticeE10d = Symbol()
-
-    init {
-        NoticeE10d.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE10d.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE10d.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10d.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
-        NoticeE10d.add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
-        NoticeE10d.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10d.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
+    val NoticeE10d = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
+        add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
     }
 
-    val NoticeE10e = Symbol()
-
-    init {
-        NoticeE10e.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE10e.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE10e.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10e.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
-        NoticeE10e.add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
-        NoticeE10e.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10e.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
-        NoticeE10e.add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
+    val NoticeE10e = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
+        add(Instr(Form.LINE, Line2D.Double(-4.0, 0.0, 29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
+        add(Instr(Form.LINE, Line2D.Double(2.0, 0.0, -29.0, 0.0)))
     }
 
-    val NoticeE10f = Symbol()
-
-    init {
-        NoticeE10f.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE10f.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE10f.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10f.add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
-        NoticeE10f.add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
-        NoticeE10f.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeE10f.add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
-        NoticeE10f.add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
+    val NoticeE10f = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -29.0, 0.0, 4.0)))
+        add(Instr(Form.LINE, Line2D.Double(4.0, 0.0, -29.0, 0.0)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 29.0, 0.0, -2.0)))
+        add(Instr(Form.LINE, Line2D.Double(-2.0, 0.0, 29.0, 0.0)))
     }
 
-    val NoticeE11 = Symbol()
-
-    init {
-        NoticeE11.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE11.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE11.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
-        NoticeE11.add(Instr(Form.LINE, Line2D.Double(-27.0, -27.0, 27.0, 27.0)))
+    val NoticeE11 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.LINE, Line2D.Double(-27.0, -27.0, 27.0, 27.0)))
     }
 
-    val NoticeE13 = Symbol()
-
-    init {
-        NoticeE13.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE13.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE13 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-4.0, -16.0)
         p.lineTo(9.0, -16.0)
@@ -1808,14 +1606,12 @@ object Notices {
         p.lineTo(1.5, -14.0)
         p.lineTo(-4.0, -14.0)
         p.closePath()
-        NoticeE13.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE14 = Symbol()
-
-    init {
-        NoticeE14.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE14.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+    val NoticeE14 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
         p.moveTo(-18.0, -18.0)
         p.lineTo(-11.0, -7.0)
@@ -1836,15 +1632,13 @@ object Notices {
         p.curveTo(15.5, 23.0, 1.0, 18.5, -9.0, 12.0)
         p.curveTo(-18.0, 6.0, -28.5, -7.0, -19.0, -16.5)
         p.closePath()
-        NoticeE14.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeE15 = Symbol()
-
-    init {
-        NoticeE15.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE15.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE15.add(
+    val NoticeE15 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Motor, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1852,12 +1646,10 @@ object Notices {
         )
     }
 
-    val NoticeE16 = Symbol()
-
-    init {
-        NoticeE16.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE16.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE16.add(
+    val NoticeE16 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.TEXT, Caption(
                     "SPORT", Font("Arial", Font.BOLD, 15), Color.white, Symbols.Delta(
@@ -1868,12 +1660,10 @@ object Notices {
         )
     }
 
-    val NoticeE17 = Symbol()
-
-    init {
-        NoticeE17.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE17.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE17.add(
+    val NoticeE17 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Waterski, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1881,12 +1671,10 @@ object Notices {
         )
     }
 
-    val NoticeE18 = Symbol()
-
-    init {
-        NoticeE18.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE18.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE18.add(
+    val NoticeE18 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Sailboat, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1894,12 +1682,10 @@ object Notices {
         )
     }
 
-    val NoticeE19 = Symbol()
-
-    init {
-        NoticeE19.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE19.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE19.add(
+    val NoticeE19 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Rowboat, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1907,12 +1693,10 @@ object Notices {
         )
     }
 
-    val NoticeE20 = Symbol()
-
-    init {
-        NoticeE20.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE20.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE20.add(
+    val NoticeE20 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Sailboard, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1920,12 +1704,10 @@ object Notices {
         )
     }
 
-    val NoticeE21 = Symbol()
-
-    init {
-        NoticeE21.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE21.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE21.add(
+    val NoticeE21 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Speedboat, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1933,12 +1715,10 @@ object Notices {
         )
     }
 
-    val NoticeE22 = Symbol()
-
-    init {
-        NoticeE22.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE22.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE22.add(
+    val NoticeE22 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Slipway, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1946,12 +1726,10 @@ object Notices {
         )
     }
 
-    val NoticeE23 = Symbol()
-
-    init {
-        NoticeE23.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE23.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE23.add(
+    val NoticeE23 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.TEXT, Caption(
                     "VHF", Font("Arial", Font.BOLD, 20), Color.white, Symbols.Delta(
@@ -1962,12 +1740,10 @@ object Notices {
         )
     }
 
-    val NoticeE24 = Symbol()
-
-    init {
-        NoticeE24.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeE24.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
-        NoticeE24.add(
+    val NoticeE24 = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB,
                 SubSymbol(Waterbike, 1.0, 0.0, 0.0, Symbols.Scheme(Color.white), null)
@@ -1976,28 +1752,24 @@ object Notices {
     }
 
 
-    val NoticeBoard = Symbol()
-
-    init {
-        NoticeBoard.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 30.0)))
-        NoticeBoard.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+    val NoticeBoard = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 30.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         val p = Path2D.Double()
         p.moveTo(-20.0, 0.0)
         p.lineTo(20.0, 0.0)
         p.lineTo(20.0, -15.0)
         p.lineTo(-20.0, -15.0)
         p.closePath()
-        NoticeBoard.add(Instr(Form.FILL, Color.white))
-        NoticeBoard.add(Instr(Form.PGON, p))
-        NoticeBoard.add(Instr(Form.FILL, Color.black))
-        NoticeBoard.add(Instr(Form.PLIN, p))
+            add(Instr(Form.FILL, Color.white))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeTriangle = Symbol()
-
-    init {
-        NoticeTriangle.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 30.0)))
-        NoticeTriangle.add(
+    val NoticeTriangle = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 30.0)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
@@ -2008,10 +1780,10 @@ object Notices {
         p.lineTo(20.0, 0.0)
         p.lineTo(0.0, -15.0)
         p.closePath()
-        NoticeTriangle.add(Instr(Form.FILL, Color.white))
-        NoticeTriangle.add(Instr(Form.PGON, p))
-        NoticeTriangle.add(Instr(Form.FILL, Color.black))
-        NoticeTriangle.add(Instr(Form.PLIN, p))
+            add(Instr(Form.FILL, Color.white))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PLIN, p))
     }
 
     val NmkCevni = mapOf(
@@ -2122,263 +1894,235 @@ object Notices {
     )
 
     // CHECKSTYLE.ON: SingleSpaceSeparator
-    private val NoticeBB = Symbol()
-
-    init {
-        NoticeBB.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeBB.add(Instr(Form.LINE, Line2D.Double(-29.0, -29.0, -29.0, 29.0)))
-        NoticeBB.add(Instr(Form.LINE, Line2D.Double(29.0, -29.0, 29.0, 29.0)))
-        NoticeBB.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeBB.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+    private val NoticeBB = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.LINE, Line2D.Double(-29.0, -29.0, -29.0, 29.0)))
+        add(Instr(Form.LINE, Line2D.Double(29.0, -29.0, 29.0, 29.0)))
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
     }
 
-    private val NoticeBP = Symbol()
-
-    init {
-        NoticeBP.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeBP.add(Instr(Form.FILL, Color.white))
-        NoticeBP.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeBP.add(Instr(Form.FILL, Color.black))
-        NoticeBP.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+    private val NoticeBP = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.white))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
     }
 
-    private val NoticeCR = Symbol()
-
-    init {
-        NoticeCR.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeCR.add(Instr(Form.FILL, Color.white))
+    private val NoticeCR = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.white))
         val p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 0.0)
         p.lineTo(0.0, 30.0)
         p.lineTo(30.0, 0.0)
         p.closePath()
-        NoticeCR.add(Instr(Form.PGON, p))
-        NoticeCR.add(Instr(Form.FILL, Color.black))
-        NoticeCR.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PLIN, p))
     }
 
-    private val NoticeKT = Symbol()
-
-    init {
-        NoticeKT.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeKT.add(Instr(Form.FILL, Color.white))
+    private val NoticeKT = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.white))
         val p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 30.0)
         p.lineTo(30.0, 30.0)
         p.closePath()
-        NoticeKT.add(Instr(Form.PGON, p))
-        NoticeKT.add(Instr(Form.FILL, Color.black))
-        NoticeKT.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.FILL, Color.black))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeBnank = Symbol()
-
-    init {
-        NoticeBnank.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBnank = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
-        ss.add(Instr(Form.SYMB, SubSymbol(Harbours.Anchor, 0.4, 0.0, 0.0, null, null)))
-        ss.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.LINE, Line2D.Double(-27.0, -27.0, 27.0, 27.0)))
-        ss.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBnank.add(Instr(Form.COLR, colours))
+            add(Instr(Form.SYMB, SubSymbol(Harbours.Anchor, 0.4, 0.0, 0.0, null, null)))
+            add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.LINE, Line2D.Double(-27.0, -27.0, 27.0, 27.0)))
+            add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBlmhr = Symbol()
-
-    init {
-        NoticeBlmhr.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBlmhr = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
-        ss.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)))
         val p = Path2D.Double()
         p.moveTo(-29.0, -29.0)
         p.lineTo(29.0, -29.0)
         p.lineTo(0.0, 0.0)
         p.closePath()
-        ss.add(Instr(Form.PGON, p))
-        ss.add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBlmhr.add(Instr(Form.COLR, colours))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.RRCT, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBktpm = Symbol()
-
-    init {
-        NoticeBktpm.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBktpm = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
         val p = Path2D.Double()
         p.moveTo(-14.0, -26.0)
         p.lineTo(-20.0, -12.0)
         p.lineTo(-8.0, -12.0)
         p.closePath()
-        ss.add(Instr(Form.PGON, p))
-        ss.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.LINE, Line2D.Double(-14.0, -16.0, -14.0, 25.0)))
-        ss.add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBktpm.add(Instr(Form.COLR, colours))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.LINE, Line2D.Double(-14.0, -16.0, -14.0, 25.0)))
+            add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBktsm = Symbol()
-
-    init {
-        NoticeBktsm.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBktsm = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
         val p = Path2D.Double()
         p.moveTo(14.0, -26.0)
         p.lineTo(20.0, -12.0)
         p.lineTo(8.0, -12.0)
         p.closePath()
-        ss.add(Instr(Form.PGON, p))
-        ss.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.LINE, Line2D.Double(14.0, -16.0, 14.0, 25.0)))
-        ss.add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBktsm.add(Instr(Form.COLR, colours))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.LINE, Line2D.Double(14.0, -16.0, 14.0, 25.0)))
+            add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBktmr = Symbol()
-
-    init {
-        NoticeBktmr.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBktmr = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
         val p = Path2D.Double()
         p.moveTo(0.0, -26.0)
         p.lineTo(-6.0, -12.0)
         p.lineTo(6.0, -12.0)
         p.closePath()
-        ss.add(Instr(Form.PGON, p))
-        ss.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.LINE, Line2D.Double(0.0, -16.0, 0.0, 25.0)))
-        ss.add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBktmr.add(Instr(Form.COLR, colours))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.LINE, Line2D.Double(0.0, -16.0, 0.0, 25.0)))
+            add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBcrtp = Symbol()
-
-    init {
-        NoticeBcrtp.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBcrtp = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
         var p = Path2D.Double()
         p.moveTo(-14.0, -26.0)
         p.lineTo(-20.0, -12.0)
         p.lineTo(-8.0, -12.0)
         p.closePath()
-        ss.add(Instr(Form.PGON, p))
-        ss.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         p = Path2D.Double()
         p.moveTo(-14.0, -16.0)
         p.lineTo(-14.0, 0.0)
         p.lineTo(14.0, 10.0)
         p.lineTo(14.0, 25.0)
-        ss.add(Instr(Form.PLIN, p))
-        ss.add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBcrtp.add(Instr(Form.COLR, colours))
+            add(Instr(Form.PLIN, p))
+            add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBcrts = Symbol()
-
-    init {
-        NoticeBcrts.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBcrts = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
         var p = Path2D.Double()
         p.moveTo(14.0, -26.0)
         p.lineTo(20.0, -12.0)
         p.lineTo(8.0, -12.0)
         p.closePath()
-        ss.add(Instr(Form.PGON, p))
-        ss.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.PGON, p))
+            add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         p = Path2D.Double()
         p.moveTo(14.0, -16.0)
         p.lineTo(14.0, 0.0)
         p.lineTo(-14.0, 10.0)
         p.lineTo(-14.0, 25.0)
-        ss.add(Instr(Form.PLIN, p))
-        ss.add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBcrts.add(Instr(Form.COLR, colours))
+            add(Instr(Form.PLIN, p))
+            add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBtrbm = Symbol()
-
-    init {
-        NoticeBtrbm.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBtrbm = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
-        ss.add(Instr(Form.STRK, BasicStroke(15f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.LINE, Line2D.Double(0.0, -25.0, 0.0, 25.0)))
-        ss.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        ss.add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
-        ss.add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBtrbm.add(Instr(Form.COLR, colours))
+            add(Instr(Form.STRK, BasicStroke(15f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.LINE, Line2D.Double(0.0, -25.0, 0.0, 25.0)))
+            add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+            add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, 20.0, 0.0)))
+            add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticeBrspd = Symbol()
-
-    init {
-        NoticeBrspd.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeBrspd = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         val colours = Symbol()
         var ss = Symbol()
-        ss.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        colours.add(Instr(Form.N1, ss))
+            add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+            add(Instr(Form.N1, ss))
         ss = Symbol()
-        ss.add(
-            Instr(
-                Form.TEXT, Caption(
-                    "R", Font("Arial", Font.BOLD, 60), null, Symbols.Delta(
-                        Symbols.Handle.CC, null
+            add(
+                Instr(
+                    Form.TEXT, Caption(
+                        "R", Font("Arial", Font.BOLD, 60), null, Symbols.Delta(
+                            Symbols.Handle.CC, null
+                        )
                     )
                 )
             )
-        )
-        ss.add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
-        colours.add(Instr(Form.N2, ss))
-        NoticeBrspd.add(Instr(Form.COLR, colours))
+            add(Instr(Form.SYMB, SubSymbol(NoticeBB, 1.0, 0.0, 0.0, null, null)))
+            add(Instr(Form.N2, ss))
+            add(Instr(Form.COLR, colours))
     }
 
-    val NoticePBwral = Symbol()
-
-    init {
-        NoticePBwral.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePBwral.add(Instr(Form.FILL, Color(0xffff00)))
+    val NoticePBwral = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color(0xffff00)))
         val p = Path2D.Double()
         p.moveTo(-20.0, -25.0)
         p.lineTo(-8.0, -5.0)
@@ -2390,25 +2134,21 @@ object Notices {
         p.lineTo(-5.0, -10.0)
         p.lineTo(-15.0, -25.0)
         p.closePath()
-        NoticePBwral.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeBwral = Symbol()
-
-    init {
-        NoticeBwral.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeBwral.add(Instr(Form.FILL, Color.black))
-        NoticeBwral.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeBwral.add(Instr(Form.SYMB, SubSymbol(NoticePBwral, 1.0, 0.0, 0.0, null, null)))
+    val NoticeBwral = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticePBwral, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticeBwlar = Symbol()
-
-    init {
-        NoticeBwlar.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeBwlar.add(Instr(Form.FILL, Color.black))
-        NoticeBwlar.add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
-        NoticeBwlar.add(
+    val NoticeBwlar = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.RSHP, RoundRectangle2D.Double(-30.0, -30.0, 60.0, 60.0, 4.0, 4.0)))
+        add(
             Instr(
                 Form.SYMB, SubSymbol(
                     NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
@@ -2419,27 +2159,23 @@ object Notices {
         )
     }
 
-    val NoticeBoptr = Symbol()
-
-    init {
-        NoticeBoptr.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeBoptr.add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
-        NoticeBoptr.add(Instr(Form.FILL, Color(0x00a000)))
-        NoticeBoptr.add(Instr(Form.RSHP, Rectangle2D.Double(-20.0, -20.0, 40.0, 40.0)))
+    val NoticeBoptr = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color(0x00a000)))
+        add(Instr(Form.RSHP, Rectangle2D.Double(-20.0, -20.0, 40.0, 40.0)))
     }
 
-    val NoticeBoptl = Symbol()
-
-    init {
-        NoticeBoptl.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeBoptl.add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
-        NoticeBoptl.add(Instr(Form.FILL, Color(0xf00000)))
+    val NoticeBoptl = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color(0xf00000)))
         val p = Path2D.Double()
         p.moveTo(0.0, -20.0)
         p.lineTo(-20.0, 20.0)
         p.lineTo(20.0, 20.0)
         p.closePath()
-        NoticeBoptl.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
     val NmkBniwr = mapOf(
@@ -2458,164 +2194,138 @@ object Notices {
         CatNMK.NMK_RSPD to NoticeBrspd,
     )
 
-    val NoticePwralL = Symbol()
-
-    init {
-        NoticePwralL.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePwralL.add(Instr(Form.FILL, Color.black))
+    val NoticePwralL = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 30.0)
         p.lineTo(30.0, 30.0)
         p.closePath()
-        NoticePwralL.add(Instr(Form.PGON, p))
-        NoticePwralL.add(
-            Instr(
-                Form.SYMB, SubSymbol(
-                    NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                        Symbols.Handle.TC, AffineTransform.getScaleInstance(0.5, 0.5)
+            add(Instr(Form.PGON, p))
+            add(
+                Instr(
+                    Form.SYMB, SubSymbol(
+                        NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
+                            Symbols.Handle.TC, AffineTransform.getScaleInstance(0.5, 0.5)
+                        )
                     )
                 )
             )
-        )
     }
 
-    val NoticePwralR = Symbol()
-
-    init {
-        NoticePwralR.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePwralR.add(Instr(Form.SYMB, SubSymbol(NoticeBwral, 1.0, 0.0, 0.0, null, null)))
+    val NoticePwralR = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeBwral, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticePwlarL = Symbol()
-
-    init {
-        NoticePwlarL.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePwlarL.add(Instr(Form.FILL, Color.black))
+    val NoticePwlarL = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 30.0)
         p.lineTo(30.0, 30.0)
         p.closePath()
-        NoticePwlarL.add(Instr(Form.PGON, p))
-        NoticePwlarL.add(
-            Instr(
-                Form.SYMB, SubSymbol(
-                    NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                        Symbols.Handle.TC, AffineTransform.getScaleInstance(-0.5, 0.5)
+            add(Instr(Form.PGON, p))
+            add(
+                Instr(
+                    Form.SYMB, SubSymbol(
+                        NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
+                            Symbols.Handle.TC, AffineTransform.getScaleInstance(-0.5, 0.5)
+                        )
                     )
                 )
             )
-        )
     }
 
-    val NoticePwlarR = Symbol()
-
-    init {
-        NoticePwlarR.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePwlarR.add(Instr(Form.SYMB, SubSymbol(NoticeBwlar, 1.0, 0.0, 0.0, null, null)))
+    val NoticePwlarR = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeBwlar, 1.0, 0.0, 0.0, null, null)))
     }
 
-    val NoticePktmR = Symbol()
-
-    init {
-        NoticePktmR.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePktmR.add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
-        NoticePktmR.add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticePktmR.add(Instr(Form.FILL, Color(0x00d400)))
-        NoticePktmR.add(Instr(Form.RECT, Rectangle2D.Double(-20.0, -20.0, 40.0, 40.0)))
+    val NoticePktmR = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0x00d400)))
+        add(Instr(Form.RECT, Rectangle2D.Double(-20.0, -20.0, 40.0, 40.0)))
     }
 
-    val NoticePktmL = Symbol()
-
-    init {
-        NoticePktmL.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePktmL.add(Instr(Form.SYMB, SubSymbol(NoticeKT, 1.0, 0.0, 0.0, null, null)))
-        NoticePktmL.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticePktmL.add(Instr(Form.FILL, Color(0xd40000)))
-        NoticePktmL.add(Instr(Form.RECT, Rectangle2D.Double(-12.0, 2.0, 24.0, 24.0)))
+    val NoticePktmL = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeKT, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0xd40000)))
+        add(Instr(Form.RECT, Rectangle2D.Double(-12.0, 2.0, 24.0, 24.0)))
     }
 
-    val NoticePktmrL = Symbol()
-
-    init {
-        NoticePktmrL.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePktmrL.add(Instr(Form.SYMB, SubSymbol(NoticeKT, 1.0, 0.0, 0.0, null, null)))
-        NoticePktmrL.add(
+    val NoticePktmrL = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeKT, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
             )
         )
-        NoticePktmrL.add(Instr(Form.FILL, Color(0xd40000)))
-        NoticePktmrL.add(Instr(Form.LINE, Line2D.Double(-12.0, 2.0, -12.0, 28.0)))
-        NoticePktmrL.add(Instr(Form.LINE, Line2D.Double(12.0, 2.0, 12.0, 28.0)))
-        NoticePktmrL.add(Instr(Form.LINE, Line2D.Double(-12.0, 15.0, 12.0, 15.0)))
+        add(Instr(Form.FILL, Color(0xd40000)))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, 2.0, -12.0, 28.0)))
+        add(Instr(Form.LINE, Line2D.Double(12.0, 2.0, 12.0, 28.0)))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, 15.0, 12.0, 15.0)))
     }
 
-    val NoticePktmrR = Symbol()
-
-    init {
-        NoticePktmrR.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePktmrR.add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
-        NoticePktmrR.add(
+    val NoticePktmrR = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeBP, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(8f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
             )
         )
-        NoticePktmrR.add(Instr(Form.FILL, Color(0x00d400)))
-        NoticePktmrR.add(Instr(Form.LINE, Line2D.Double(-15.0, -20.0, -15.0, 20.0)))
-        NoticePktmrR.add(Instr(Form.LINE, Line2D.Double(15.0, -20.0, 15.0, 20.0)))
-        NoticePktmrR.add(Instr(Form.LINE, Line2D.Double(-15.0, 0.0, 15.0, 0.0)))
+        add(Instr(Form.FILL, Color(0x00d400)))
+        add(Instr(Form.LINE, Line2D.Double(-15.0, -20.0, -15.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(15.0, -20.0, 15.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-15.0, 0.0, 15.0, 0.0)))
     }
 
-    val NoticePcrL = Symbol()
-
-    init {
-        NoticePcrL.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePcrL.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePcrL.add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
-        NoticePcrL.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticePcrL.add(Instr(Form.FILL, Color(0xd40000)))
-        NoticePcrL.add(Instr(Form.LINE, Line2D.Double(-12.0, -12.0, 12.0, 12.0)))
-        NoticePcrL.add(Instr(Form.LINE, Line2D.Double(-12.0, 12.0, 12.0, -12.0)))
+    val NoticePcrL = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0xd40000)))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, -12.0, 12.0, 12.0)))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, 12.0, 12.0, -12.0)))
     }
 
-    val NoticePcrR = Symbol()
-
-    init {
-        NoticePcrR.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticePcrR.add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
-        NoticePcrR.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticePcrR.add(Instr(Form.FILL, Color(0x00d400)))
-        NoticePcrR.add(Instr(Form.LINE, Line2D.Double(-12.0, -12.0, 12.0, 12.0)))
-        NoticePcrR.add(Instr(Form.LINE, Line2D.Double(-12.0, 12.0, 12.0, -12.0)))
+    val NoticePcrR = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0x00d400)))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, -12.0, 12.0, 12.0)))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, 12.0, 12.0, -12.0)))
     }
 
-    val NoticeRphib = Symbol()
-
-    init {
-        NoticeRphib.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeRphib.add(Instr(Form.FILL, Color(0xd40000)))
-        NoticeRphib.add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRphib.add(Instr(Form.LINE, Line2D.Double(-20.0, -20.0, 20.0, 20.0)))
+    val NoticeRphib = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0xd40000)))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.LINE, Line2D.Double(-20.0, -20.0, 20.0, 20.0)))
     }
 
-    val NoticeRinfo = Symbol()
-
-    init {
-        NoticeRinfo.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeRinfo.add(Instr(Form.FILL, Color(0xd40000)))
-        NoticeRinfo.add(Instr(Form.RECT, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+    val NoticeRinfo = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color(0xd40000)))
+        add(Instr(Form.RECT, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
     }
 
-    val NoticeRnpas = Symbol()
-
-    init {
-        NoticeRnpas.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRnpas.add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
-        NoticeRnpas.add(Instr(Form.FILL, Color.black))
+    val NoticeRnpas = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(-10.0, -15.0)
         p.lineTo(-10.0, 8.0)
@@ -2633,15 +2343,13 @@ object Notices {
         p.lineTo(15.0, -8.0)
         p.lineTo(15.0, 15.0)
         p.closePath()
-        NoticeRnpas.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeRnank = Symbol()
-
-    init {
-        NoticeRnank.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRnank.add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
-        NoticeRnank.add(
+    val NoticeRnank = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.SYMB, SubSymbol(
                     Harbours.Anchor, 0.4, 0.0, 0.0, Symbols.Scheme(
@@ -2652,12 +2360,10 @@ object Notices {
         )
     }
 
-    val NoticeRnwsh = Symbol()
-
-    init {
-        NoticeRnwsh.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRnwsh.add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
-        NoticeRnwsh.add(Instr(Form.FILL, Color.black))
+    val NoticeRnwsh = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(-23.0, 10.0)
         p.curveTo(-11.0, 10.0, -12.0, 4.0, 0.0, 4.0)
@@ -2665,30 +2371,26 @@ object Notices {
         p.moveTo(-23.0, -3.0)
         p.curveTo(-11.0, -3.0, -12.0, -9.0, 0.0, -9.0)
         p.curveTo(12.0, -9.0, 11.0, -3.0, 23.0, -3.0)
-        NoticeRnwsh.add(Instr(Form.PLIN, p))
+            add(Instr(Form.PLIN, p))
     }
 
-    val NoticeRlmhr = Symbol()
-
-    init {
-        NoticeRlmhr.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRlmhr.add(Instr(Form.SYMB, SubSymbol(NoticeRinfo, 1.0, 0.0, 0.0, null, null)))
-        NoticeRlmhr.add(Instr(Form.FILL, Color.black))
+    val NoticeRlmhr = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRinfo, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(0.0, -10.0)
         p.lineTo(27.0, -27.0)
         p.lineTo(-27.0, -27.0)
         p.closePath()
-        NoticeRlmhr.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeRtrna = Symbol()
-
-    init {
-        NoticeRtrna.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRtrna.add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
-        NoticeRtrna.add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeRtrna.add(
+    val NoticeRtrna = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(
             Instr(
                 Form.EARC,
                 Arc2D.Double(-15.0, -15.0, 30.0, 30.0, 315.0, -280.0, Arc2D.OPEN)
@@ -2699,15 +2401,13 @@ object Notices {
         p.lineTo(15.8, -13.2)
         p.lineTo(7.5, -5.0)
         p.closePath()
-        NoticeRtrna.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeRncps = Symbol()
-
-    init {
-        NoticeRncps.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRncps.add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
-        NoticeRncps.add(Instr(Form.FILL, Color.black))
+    val NoticeRncps = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(-10.0, 0.0)
         p.lineTo(-10.0, 8.0)
@@ -2725,15 +2425,13 @@ object Notices {
         p.lineTo(15.0, -8.0)
         p.lineTo(15.0, 0.0)
         p.closePath()
-        NoticeRncps.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeRnsmc = Symbol()
-
-    init {
-        NoticeRnsmc.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRnsmc.add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
-        NoticeRnsmc.add(Instr(Form.FILL, Color.black))
+    val NoticeRnsmc = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRphib, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(-15.0, 5.0)
         p.lineTo(15.0, 5.0)
@@ -2746,26 +2444,22 @@ object Notices {
         p.lineTo(-18.0, 8.0)
         p.lineTo(-20.0, 0.0)
         p.closePath()
-        NoticeRnsmc.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeRattn = Symbol()
-
-    init {
-        NoticeRattn.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRattn.add(Instr(Form.SYMB, SubSymbol(NoticeRinfo, 1.0, 0.0, 0.0, null, null)))
-        NoticeRattn.add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        NoticeRattn.add(Instr(Form.FILL, Color.black))
-        NoticeRattn.add(Instr(Form.LINE, Line2D.Double(0.0, -20.0, 0.0, 10.0)))
-        NoticeRattn.add(Instr(Form.LINE, Line2D.Double(0.0, 15.0, 0.0, 20.0)))
+    val NoticeRattn = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRinfo, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.STRK, BasicStroke(6f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.LINE, Line2D.Double(0.0, -20.0, 0.0, 10.0)))
+        add(Instr(Form.LINE, Line2D.Double(0.0, 15.0, 0.0, 20.0)))
     }
 
-    val NoticeRfwcr = Symbol()
-
-    init {
-        NoticeRfwcr.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRfwcr.add(Instr(Form.SYMB, SubSymbol(NoticeRinfo, 1.0, 0.0, 0.0, null, null)))
-        NoticeRfwcr.add(Instr(Form.FILL, Color.black))
+    val NoticeRfwcr = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeRinfo, 1.0, 0.0, 0.0, null, null)))
+        add(Instr(Form.FILL, Color.black))
         val p = Path2D.Double()
         p.moveTo(0.0, -25.0)
         p.lineTo(-8.0, -15.0)
@@ -2781,32 +2475,30 @@ object Notices {
         p.lineTo(8.0, 5.0)
         p.lineTo(8.0, -15.0)
         p.closePath()
-        NoticeRfwcr.add(Instr(Form.PGON, p))
+            add(Instr(Form.PGON, p))
     }
 
-    val NoticeRship = Symbol()
-
-    init {
-        NoticeRship.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
-        NoticeRship.add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
-        NoticeRship.add(
+    val NoticeRship = Symbol().apply {
+        add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
+        add(Instr(Form.SYMB, SubSymbol(NoticeCR, 1.0, 0.0, 0.0, null, null)))
+        add(
             Instr(
                 Form.STRK,
                 BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER)
             )
         )
-        NoticeRship.add(Instr(Form.FILL, Color.black))
-        NoticeRship.add(Instr(Form.LINE, Line2D.Double(-12.0, -12.0, 10.0, 10.0)))
-        NoticeRship.add(Instr(Form.LINE, Line2D.Double(-12.0, -8.0, -8.0, -12.0)))
-        NoticeRship.add(Instr(Form.LINE, Line2D.Double(12.0, -12.0, -10.0, 10.0)))
-        NoticeRship.add(Instr(Form.LINE, Line2D.Double(12.0, -8.0, 8.0, -12.0)))
-        NoticeRship.add(
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, -12.0, 10.0, 10.0)))
+        add(Instr(Form.LINE, Line2D.Double(-12.0, -8.0, -8.0, -12.0)))
+        add(Instr(Form.LINE, Line2D.Double(12.0, -12.0, -10.0, 10.0)))
+        add(Instr(Form.LINE, Line2D.Double(12.0, -8.0, 8.0, -12.0)))
+        add(
             Instr(
                 Form.EARC,
                 Arc2D.Double(-17.0, -13.0, 30.0, 30.0, 185.0, 80.0, Arc2D.OPEN)
             )
         )
-        NoticeRship.add(
+        add(
             Instr(
                 Form.EARC,
                 Arc2D.Double(-13.0, -13.0, 30.0, 30.0, 275.0, 80.0, Arc2D.OPEN)

@@ -18,9 +18,7 @@ import java.awt.geom.Path2D
  */
 object Buoys {
 
-    val Barrel = Symbol()
-
-    init {
+    val Barrel = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-50.0, 0.0)
@@ -31,12 +29,12 @@ object Buoys {
         p.curveTo(8.0, -11.0, -8.0, -11.0, -8.0, 0.0)
         p.closePath()
         colours.add(Instr(Form.P1, p))
-        Barrel.add(Instr(Form.COLR, colours))
-        Barrel.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Barrel.add(Instr(Form.FILL, Color.black))
-        Barrel.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Barrel.add(Instr(Form.LINE, Line2D.Double(-57.0, 0.0, -10.0, 0.0)))
-        Barrel.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 50.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-57.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 50.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-50.0, 0.0)
         p.curveTo(-50.0, -11.0, -45.0, -32.0, -32.0, -36.0)
@@ -44,12 +42,10 @@ object Buoys {
         p.curveTo(38.0, -32.0, 43.0, -11.0, 43.0, 0.0)
         p.moveTo(-32.0, -36.0)
         p.curveTo(-23.0, -25.0, -21.0, -12.0, -21.0, 0.0)
-        Barrel.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    val Can = Symbol()
-
-    init {
+    val Can = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-31.6, 0.0)
@@ -98,23 +94,21 @@ object Buoys {
         p.quadTo(8.0, -6.0, 2.5, -7.6)
         p.closePath()
         colours.add(Instr(Form.V2, p))
-        Can.add(Instr(Form.COLR, colours))
-        Can.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Can.add(Instr(Form.FILL, Color.black))
-        Can.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Can.add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, -10.0, 0.0)))
-        Can.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 40.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 40.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-31.6, 0.0)
         p.lineTo(-15.7, -47.4)
         p.lineTo(41.1, -28.4)
         p.lineTo(31.6, 0.0)
-        Can.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    val Cone = Symbol()
-
-    init {
+    val Cone = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-31.6, 0.0)
@@ -161,23 +155,20 @@ object Buoys {
         p.quadTo(8.0, -6.0, 2.5, -7.6)
         p.closePath()
         colours.add(Instr(Form.V2, p))
-        Cone.add(Instr(Form.COLR, colours))
-        Cone.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Cone.add(Instr(Form.FILL, Color.black))
-        Cone.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Cone.add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, -10.0, 0.0)))
-        Cone.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 40.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-40.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 40.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-31.6, 0.0)
         p.curveTo(-24.9, -32.2, 1.4, -38.7, 12.7, -37.9)
         p.curveTo(21.9, -30.5, 32.8, -18.4, 32.1, 0.0)
-        Cone.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-
-    val Float = Symbol()
-
-    init {
+    val Float = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-36.0, 0.0)
@@ -242,12 +233,12 @@ object Buoys {
         p.quadTo(7.7, -7.7, 0.0, -8.0)
         p.closePath()
         colours.add(Instr(Form.V2, p))
-        Float.add(Instr(Form.COLR, colours))
-        Float.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Float.add(Instr(Form.FILL, Color.black))
-        Float.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Float.add(Instr(Form.LINE, Line2D.Double(-54.0, 0.0, -10.0, 0.0)))
-        Float.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 54.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-54.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 54.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-36.0, 0.0)
         p.lineTo(-47.0, -33.0)
@@ -257,12 +248,10 @@ object Buoys {
         p.lineTo(-12.0, -42.0)
         p.lineTo(12.0, -42.0)
         p.lineTo(19.0, -23.0)
-        Float.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    val Ice = Symbol()
-
-    init {
+    val Ice = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-15.0, 0.0)
@@ -275,12 +264,12 @@ object Buoys {
         p.curveTo(8.0, -11.0, -8.0, -11.0, -8.0, 0.0)
         p.closePath()
         colours.add(Instr(Form.P1, p))
-        Ice.add(Instr(Form.COLR, colours))
-        Ice.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Ice.add(Instr(Form.FILL, Color.black))
-        Ice.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Ice.add(Instr(Form.LINE, Line2D.Double(-35.0, 0.0, -10.0, 0.0)))
-        Ice.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 35.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-35.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 35.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-15.0, 0.0)
         p.quadTo(-30.0, 0.0, -30.0, -15.0)
@@ -288,18 +277,16 @@ object Buoys {
         p.lineTo(30.0, -25.0)
         p.lineTo(30.0, -15.0)
         p.quadTo(30.0, 0.0, 15.0, 0.0)
-        Ice.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
         p = Path2D.Double()
         p.moveTo(-6.0, 8.0)
         p.lineTo(-6.0, 40.0)
         p.lineTo(6.0, 40.0)
         p.lineTo(6.0, 8.0)
-        Ice.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    val Pillar = Symbol()
-
-    init {
+    val Pillar = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-32.0, 0.0)
@@ -356,12 +343,12 @@ object Buoys {
         p.quadTo(8.0, -6.0, 2.5, -7.6)
         p.closePath()
         colours.add(Instr(Form.V2, p))
-        Pillar.add(Instr(Form.COLR, colours))
-        Pillar.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Pillar.add(Instr(Form.FILL, Color.black))
-        Pillar.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Pillar.add(Instr(Form.LINE, Line2D.Double(-42.0, 0.0, -10.0, 0.0)))
-        Pillar.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 36.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-42.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 36.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-32.0, 0.0)
         p.lineTo(-2.8, -32.5)
@@ -369,12 +356,10 @@ object Buoys {
         p.lineTo(37.0, -92.9)
         p.lineTo(21.8, -24.3)
         p.lineTo(25.0, 0.0)
-        Pillar.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    val Spar = Symbol()
-
-    init {
+    val Spar = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-3.2, -9.5)
@@ -418,23 +403,21 @@ object Buoys {
         p.lineTo(8.2, -5.7)
         p.closePath()
         colours.add(Instr(Form.V2, p))
-        Spar.add(Instr(Form.COLR, colours))
-        Spar.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Spar.add(Instr(Form.FILL, Color.black))
-        Spar.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Spar.add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, -10.0, 0.0)))
-        Spar.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 20.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-20.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 20.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-3.2, -9.5)
         p.lineTo(25.6, -96.7)
         p.lineTo(37.0, -92.9)
         p.lineTo(8.2, -5.7)
-        Spar.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-    val Sphere = Symbol()
-
-    init {
+    val Sphere = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-25.0, 0.0)
@@ -481,22 +464,20 @@ object Buoys {
         p.quadTo(8.0, -6.0, 2.5, -7.6)
         p.closePath()
         colours.add(Instr(Form.V2, p))
-        Sphere.add(Instr(Form.COLR, colours))
-        Sphere.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Sphere.add(Instr(Form.FILL, Color.black))
-        Sphere.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Sphere.add(Instr(Form.LINE, Line2D.Double(-33.0, 0.0, -10.0, 0.0)))
-        Sphere.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 40.0, 0.0)))
-        Sphere.add(Instr(Form.EARC, Arc2D.Double(-26.5, -39.4, 60.0, 60.0, -18.0, 216.0, Arc2D.OPEN)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-33.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 40.0, 0.0)))
+        add(Instr(Form.EARC, Arc2D.Double(-26.5, -39.4, 60.0, 60.0, -18.0, 216.0, Arc2D.OPEN)))
     }
 
 
-    val Storage = Symbol()
-
-    init {
-        Storage.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
-        Storage.add(Instr(Form.FILL, Color.black))
-        Storage.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+    val Storage = Symbol().apply {
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
         val p = Path2D.Double()
         p.moveTo(-50.0, 0.0)
         p.lineTo(-40.0, -20.0)
@@ -506,13 +487,10 @@ object Buoys {
         p.lineTo(40.0, 20.0)
         p.lineTo(-40.0, 20.0)
         p.closePath()
-        Storage.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
-
-    val Super = Symbol()
-
-    init {
+    val Super = Symbol().apply {
         val colours = Symbol()
         var p = Path2D.Double()
         p.moveTo(-48.0, 0.0)
@@ -561,18 +539,18 @@ object Buoys {
         p.quadTo(7.7, -7.7, 0.0, -8.0)
         p.closePath()
         colours.add(Instr(Form.V2, p))
-        Super.add(Instr(Form.COLR, colours))
-        Super.add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
-        Super.add(Instr(Form.FILL, Color.black))
-        Super.add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
-        Super.add(Instr(Form.LINE, Line2D.Double(-54.0, 0.0, -10.0, 0.0)))
-        Super.add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 54.0, 0.0)))
+        add(Instr(Form.COLR, colours))
+        add(Instr(Form.STRK, BasicStroke(4f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
+        add(Instr(Form.FILL, Color.black))
+        add(Instr(Form.ELPS, Ellipse2D.Double(-10.0, -10.0, 20.0, 20.0)))
+        add(Instr(Form.LINE, Line2D.Double(-54.0, 0.0, -10.0, 0.0)))
+        add(Instr(Form.LINE, Line2D.Double(10.0, 0.0, 54.0, 0.0)))
         p = Path2D.Double()
         p.moveTo(-48.0, 0.0)
         p.lineTo(-28.0, -42.0)
         p.lineTo(28.0, -42.0)
         p.lineTo(48.0, 0.0)
-        Super.add(Instr(Form.PLIN, p))
+        add(Instr(Form.PLIN, p))
     }
 
     val Shapes = mapOf(
