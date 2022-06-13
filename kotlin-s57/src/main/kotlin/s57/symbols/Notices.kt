@@ -1,7 +1,6 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-
 import s57.S57val.BnkWTW
 import s57.S57val.CatNMK
 import s57.S57val.MarSYS
@@ -12,6 +11,7 @@ import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Scheme
 import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol
+
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Color.black

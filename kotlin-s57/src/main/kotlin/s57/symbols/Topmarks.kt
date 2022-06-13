@@ -5,16 +5,13 @@ import s57.S57val.BoySHP
 import s57.S57val.TopSHP
 import s57.symbols.Symbols.Delta
 import s57.symbols.Symbols.Form.*
-import s57.symbols.Symbols.Form
 import s57.symbols.Symbols.Handle
-import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol
 
 import java.awt.BasicStroke
 import java.awt.Color.*
 import java.awt.geom.*
-
 
 /**
  * @author Malcolm Herring

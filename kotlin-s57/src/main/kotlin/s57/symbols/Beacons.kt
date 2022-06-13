@@ -3,8 +3,6 @@ package s57.symbols
 
 import s57.S57val.BcnSHP
 import s57.symbols.Symbols.Form.*
-import s57.symbols.Symbols.Form
-import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Symbol
 
 import java.awt.BasicStroke

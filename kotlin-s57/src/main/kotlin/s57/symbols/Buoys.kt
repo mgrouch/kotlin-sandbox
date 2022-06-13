@@ -3,12 +3,9 @@ package s57.symbols
 
 import s57.S57val.BoySHP
 import s57.symbols.Symbols.Form.*
-import s57.symbols.Symbols.Form
-import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Symbol
 
 import java.awt.BasicStroke
-import java.awt.Color
 import java.awt.Color.black
 import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
