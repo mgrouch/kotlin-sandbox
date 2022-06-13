@@ -1,5 +1,7 @@
 package s57
 
+import s57.parser.S57dec
+import s57.parser.S57map
 import java.io.FileInputStream
 import java.io.IOException
 

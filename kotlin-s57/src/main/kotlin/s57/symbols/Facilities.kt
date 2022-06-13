@@ -1,7 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-import s57.S57val.CatSCF
+import s57.parser.S57val.CatSCF
 import s57.symbols.Symbols.Form.*
 import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol

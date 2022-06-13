@@ -1,9 +1,9 @@
 // License: GPL. For details, see LICENSE file.
 package s57.render
 
-import s57.S57map
-import s57.S57val.UniHLU
-import s57.deg2rad
+import s57.parser.S57map
+import s57.parser.S57val.UniHLU
+import s57.parser.deg2rad
 import s57.symbols.Areas
 import s57.symbols.Symbols
 import s57.symbols.Symbols.Caption

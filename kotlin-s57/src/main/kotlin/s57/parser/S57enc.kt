@@ -1,10 +1,11 @@
 // License: GPL. For details, see LICENSE file.
-package s57
+package s57.parser
 
-import s57.S57att.Att
-import s57.S57dat.S57field
-import s57.S57dat.byteArrayCopy
-import s57.S57obj.Obj
+import s57.CRC32
+import s57.parser.S57att.Att
+import s57.parser.S57dat.S57field
+import s57.parser.S57dat.byteArrayCopy
+import s57.parser.S57obj.Obj
 import java.nio.ByteBuffer
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap

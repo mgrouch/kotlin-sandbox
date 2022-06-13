@@ -1,4 +1,4 @@
-package s57
+package s57.parser
 
 // https://github.com/quickbirdstudios/crc-kotlin
 

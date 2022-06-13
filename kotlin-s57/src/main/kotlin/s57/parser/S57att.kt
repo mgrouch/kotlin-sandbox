@@ -1,7 +1,7 @@
 // License: GPL. For details, see LICENSE file.
-package s57
+package s57.parser
 
-import s57.S57obj.Obj
+import s57.parser.S57obj.Obj
 
 /**
  * @author Malcolm Herring

@@ -1,8 +1,8 @@
 // License: GPL. For details, see LICENSE file.
-package s57
+package s57.parser
 
-import s57.S57map.Pflag.POINT
-import s57.S57obj.Obj
+import s57.parser.S57map.Pflag.POINT
+import s57.parser.S57obj.Obj
 import java.nio.charset.Charset
 
 import kotlin.math.abs

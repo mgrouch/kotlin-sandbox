@@ -1,7 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package s57.render
 
-import s57.S57map
+import s57.parser.S57map
 
 import java.awt.Color
 import java.awt.geom.Point2D

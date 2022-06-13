@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package s57
+package s57.parser
 
 
 /**
@@ -397,7 +397,7 @@ object S57obj {
         Obj.M_NSYS to "system",
     )
 
-    private val StrObj: Map<String?, Obj?> = ObjStr.entries.associate{(k,v)-> v to k}
+    private val StrObj: Map<String?, Obj?> = ObjStr.entries.associate{ (k,v)-> v to k}
 
     fun decodeType(objl: Long): Obj { // Convert S57 feature code to SCM object enumeration
         for (obj in ObjS57.keys) {

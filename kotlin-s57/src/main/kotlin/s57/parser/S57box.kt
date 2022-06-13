@@ -1,11 +1,11 @@
 // License: GPL. For details, see LICENSE file.
-package s57
+package s57.parser
 
-import s57.S57box.Ext.*
-import s57.S57map.*
-import s57.S57map.Pflag.AREA
-import s57.S57map.Pflag.LINE
-import s57.S57obj.Obj
+import s57.parser.S57box.Ext.*
+import s57.parser.S57map.*
+import s57.parser.S57map.Pflag.AREA
+import s57.parser.S57map.Pflag.LINE
+import s57.parser.S57obj.Obj
 
 /**
  * @author Malcolm Herring

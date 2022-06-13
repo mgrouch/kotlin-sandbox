@@ -1,7 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-import s57.deg2rad
+import s57.parser.deg2rad
 import s57.symbols.Symbols.Delta
 import s57.symbols.Symbols.Form.*
 import s57.symbols.Symbols.SubSymbol

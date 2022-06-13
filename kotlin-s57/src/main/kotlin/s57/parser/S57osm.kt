@@ -1,11 +1,11 @@
 // License: GPL. For details, see LICENSE file.
-package s57
+package s57.parser
 
-import s57.S57att.Att
-import s57.S57map.Snode
-import s57.S57obj.Obj
-import s57.S57val.CatROD
-import s57.S57val.Conv
+import s57.parser.S57att.Att
+import s57.parser.S57map.Snode
+import s57.parser.S57obj.Obj
+import s57.parser.S57val.CatROD
+import s57.parser.S57val.Conv
 
 import java.io.BufferedReader
 

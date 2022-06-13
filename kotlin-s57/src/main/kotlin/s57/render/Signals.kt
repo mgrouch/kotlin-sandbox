@@ -2,17 +2,17 @@
 
 package s57.render
 
-import s57.S57att.Att
-import s57.S57map
-import s57.S57obj.Obj
-import s57.S57val.BoySHP
-import s57.S57val.CatFOG
-import s57.S57val.CatLIT
-import s57.S57val.CatROS
-import s57.S57val.CatRTB
-import s57.S57val.ColCOL
-import s57.S57val.LitCHR
-import s57.deg2rad
+import s57.parser.S57att.Att
+import s57.parser.S57map
+import s57.parser.S57obj.Obj
+import s57.parser.S57val.BoySHP
+import s57.parser.S57val.CatFOG
+import s57.parser.S57val.CatLIT
+import s57.parser.S57val.CatROS
+import s57.parser.S57val.CatRTB
+import s57.parser.S57val.ColCOL
+import s57.parser.S57val.LitCHR
+import s57.parser.deg2rad
 import s57.symbols.Beacons
 import s57.symbols.Symbols
 import s57.symbols.Topmarks

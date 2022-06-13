@@ -1,10 +1,10 @@
 // License: GPL. For details, see LICENSE file.
 package s57.symbols
 
-import s57.S57val.BnkWTW
-import s57.S57val.CatNMK
-import s57.S57val.MarSYS
-import s57.deg2rad
+import s57.parser.S57val.BnkWTW
+import s57.parser.S57val.CatNMK
+import s57.parser.S57val.MarSYS
+import s57.parser.deg2rad
 import s57.symbols.Symbols.Caption
 import s57.symbols.Symbols.Form.*
 import s57.symbols.Symbols.Instr

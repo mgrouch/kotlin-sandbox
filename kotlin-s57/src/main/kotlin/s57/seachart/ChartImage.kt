@@ -1,9 +1,9 @@
 // License: GPL. For details, see LICENSE file.
 package s57.seachart
 
-import s57.S57map
-import s57.S57obj.Obj
-import s57.rad2deg
+import s57.parser.S57map
+import s57.parser.S57obj.Obj
+import s57.parser.rad2deg
 import s57.render.ChartContext
 import s57.render.ChartContext.RuleSet
 import s57.symbols.Symbols

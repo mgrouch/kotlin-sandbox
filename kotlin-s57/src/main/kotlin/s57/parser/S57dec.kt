@@ -1,10 +1,10 @@
 // License: GPL. For details, see LICENSE file.
-package s57
+package s57.parser
 
-import s57.S57dat.S57field
-import s57.S57dat.S57subf
-import s57.S57map.Nflag
-import s57.S57map.Pflag.*
+import s57.parser.S57dat.S57field
+import s57.parser.S57dat.S57subf
+import s57.parser.S57map.Nflag
+import s57.parser.S57map.Pflag.*
 
 import java.io.InputStream
 
@@ -61,7 +61,8 @@ object S57dec {
                                 record,
                                 fields + pos,
                                 S57field.I8RI,
-                                S57subf.I8RN) as Long).toInt()
+                                S57subf.I8RN
+                            ) as Long).toInt()
                         }
                         "DSSI" -> {
                             S57dat.decSubf(record, fields + pos, S57field.DSSI, S57subf.AALL)
