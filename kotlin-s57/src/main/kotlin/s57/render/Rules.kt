@@ -616,13 +616,13 @@ open class Rules {
                     if (atts != null) {
                         if (atts.containsKey(Att.VERCLR)) {
                             labelText(
-                                java.lang.String.valueOf(atts[Att.VERCLR]!!.value), Font("Arial", PLAIN, 50),
+                                "$atts[Att.VERCLR]!!.value)", Font("Arial", PLAIN, 50),
                                 black, LabelStyle.VCLR, black,
                                 Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
                             )
                         } else if (atts.containsKey(Att.VERCSA)) {
                             labelText(
-                                java.lang.String.valueOf(atts[Att.VERCSA]!!.value), Font("Arial", PLAIN, 50),
+                                "$atts[Att.VERCSA]!!.value)", Font("Arial", PLAIN, 50),
                                 black, LabelStyle.PCLR, black,
                                 Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
                             )

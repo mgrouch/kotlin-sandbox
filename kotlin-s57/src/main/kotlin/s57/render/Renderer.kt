@@ -17,7 +17,7 @@ import java.awt.*
 import java.awt.geom.*
 import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
-import java.lang.Math.PI
+
 import kotlin.math.*
 
 /**
