@@ -90,7 +90,7 @@ object Symbols {
                             g2.translate(dx, dy)
                         }
                     }
-                    Form.COLR -> if (cs != null && cs.col != null) {
+                    Form.COLR -> if (cs?.col != null) {
                         for (patch in (item.params as Symbol?)!!) {
                             when (patch!!.type) {
                                 Form.N1 -> if (cn > 0) {

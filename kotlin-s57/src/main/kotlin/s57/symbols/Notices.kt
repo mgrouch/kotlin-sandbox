@@ -441,7 +441,7 @@ object Notices {
         NoticeA5.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeA5.add(Instr(Form.SYMB, SubSymbol(NoticeA, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-5.3, 14.6)
         p.lineTo(-5.3, 4.0)
         p.lineTo(0.0, 4.0)
@@ -1226,7 +1226,7 @@ object Notices {
         NoticeE5.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-5.3, 14.6)
         p.lineTo(-5.3, 4.0)
         p.lineTo(0.0, 4.0)
@@ -1271,7 +1271,7 @@ object Notices {
         NoticeE5_4.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_4.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
         p.lineTo(0.0, -28.0)
         p.lineTo(28.0, 25.0)
@@ -1285,7 +1285,7 @@ object Notices {
         NoticeE5_5.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_5.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
         p.lineTo(0.0, -28.0)
         p.lineTo(28.0, 25.0)
@@ -1303,7 +1303,7 @@ object Notices {
         NoticeE5_6.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_6.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
         p.lineTo(0.0, -28.0)
         p.lineTo(28.0, 25.0)
@@ -1325,7 +1325,7 @@ object Notices {
         NoticeE5_7.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_7.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 25.0)
         p.lineTo(0.0, -28.0)
         p.lineTo(28.0, 25.0)
@@ -1351,7 +1351,7 @@ object Notices {
         NoticeE5_8.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_8.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, -25.0)
@@ -1365,7 +1365,7 @@ object Notices {
         NoticeE5_9.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_9.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, -25.0)
@@ -1383,7 +1383,7 @@ object Notices {
         NoticeE5_10.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_10.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, -25.0)
@@ -1405,7 +1405,7 @@ object Notices {
         NoticeE5_11.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_11.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, -25.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, -25.0)
@@ -1431,7 +1431,7 @@ object Notices {
         NoticeE5_12.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_12.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, 0.0)
@@ -1446,7 +1446,7 @@ object Notices {
         NoticeE5_13.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_13.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, 0.0)
@@ -1465,7 +1465,7 @@ object Notices {
         NoticeE5_14.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_14.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, 0.0)
@@ -1488,7 +1488,7 @@ object Notices {
         NoticeE5_15.add(Instr(Form.BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0)))
         NoticeE5_15.add(Instr(Form.SYMB, SubSymbol(NoticeE, 1.0, 0.0, 0.0, null, null)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-28.0, 0.0)
         p.lineTo(0.0, 28.0)
         p.lineTo(28.0, 0.0)
@@ -1542,7 +1542,7 @@ object Notices {
         NoticeE7_1.add(Instr(Form.STRK, BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)))
         NoticeE7_1.add(Instr(Form.LINE, Line2D.Double(20.0, 8.0, 0.0, -15.0)))
         val p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-17.0, 2.0)
         p.quadTo(-5.0, 0.0, 7.0, 2.0)
         p.lineTo(9.0, 12.0)

@@ -80,7 +80,7 @@ object Facilities {
         Fuel.add(Instr(Form.STRK, BasicStroke(2.5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND)))
         Fuel.add(Instr(Form.FILL, Color(0xa30075)))
         var p = Path2D.Double()
-        p.setWindingRule(GeneralPath.WIND_EVEN_ODD)
+        p.windingRule = GeneralPath.WIND_EVEN_ODD
         p.moveTo(-15.6, 22.1)
         p.lineTo(-15.6, -19.4)
         p.quadTo(-15.5, -22.7, -12.2, -22.8)

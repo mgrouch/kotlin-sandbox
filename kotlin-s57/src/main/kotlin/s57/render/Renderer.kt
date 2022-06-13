@@ -861,9 +861,9 @@ object Renderer {
         }
     }
 
-    fun lightSector(col1: Color?, col2: Color?, radius: Double, s1: Double, s2: Double, dir: Double?, str: String?) {
-        var radius = radius
-        var str = str
+    fun lightSector(col1: Color?, col2: Color?, radiusArg: Double, s1: Double, s2: Double, dir: Double?, strArg: String?) {
+        var radius = radiusArg
+        var str = strArg
         if (zoom >= 16 && radius > 0.2) {
             radius /= 2.0.pow((zoom - 15).toDouble())
         }

@@ -349,10 +349,10 @@ object Areas {
 
     init {
         val g2 = Sandwaves.createGraphics()
-        g2.setStroke(BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND))
-        g2.setBackground(Color(0, true))
+        g2.stroke = BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)
+        g2.background = Color(0, true)
         g2.clearRect(0, 0, 100, 100)
-        g2.setPaint(Color(0xffd400))
+        g2.paint = Color(0xffd400)
         val p = Path2D.Double()
         p.moveTo(0.0, 34.5)
         p.lineTo(03.3, 30.8)
@@ -425,10 +425,10 @@ object Areas {
 
     init {
         val g2 = KelpA.createGraphics()
-        g2.setStroke(BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND))
-        g2.setBackground(Color(0, true))
+        g2.stroke = BasicStroke(8f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)
+        g2.background = Color(0, true)
         g2.clearRect(0, 0, 240, 240)
-        g2.setPaint(Color.black)
+        g2.paint = Color.black
         val p = Path2D.Double()
         p.moveTo(0.0, 60.0)
         p.curveTo(40.0, 40.0, 44.0, 100.0, 84.0, 80.0)

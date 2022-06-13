@@ -671,7 +671,7 @@ open class Rules {
                         .toTypedArray()
                     var ul = ""
                     var id = tok[0]
-                    var dd: String? = ""
+                    var dd: String?
                     if (tok[0] == "") {
                         var i = 0
                         while (i < tok[1]!!.length) {
@@ -1400,7 +1400,7 @@ open class Rules {
                     Obj.RSCSTA -> symbol(Harbours.Rescue)
                     else -> {}
                 }
-                if (Renderer.zoom >= 15 && !str.isEmpty()) {
+                if (Renderer.zoom >= 15 && str.isNotEmpty()) {
                     labelText(
                         str, Font("Arial", PLAIN, 40), black,
                         Delta(Handle.LC, AffineTransform.getTranslateInstance(40.0, 0.0))
