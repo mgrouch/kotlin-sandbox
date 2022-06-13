@@ -3,7 +3,7 @@ package s57.render
 
 import s57.S57att.Att
 import s57.S57map
-import s57.S57map.Feature
+import s57.S57map.*
 import s57.S57obj.Obj
 import s57.S57val
 import s57.S57val.AddMRK
@@ -123,17 +123,16 @@ open class Rules {
             }
         }
 
-        fun getAtts(obj: Obj, idx: Int): S57map.AttMap? {
+        fun getAtts(obj: Obj, idx: Int): AttMap? {
             val objs = feature!!.objs!![obj]
             return objs?.get(idx)
         }
 
         fun getAttVal(obj: Obj?, att: Att): Any? {
-            val atts: S57map.AttMap?
-            var objs: S57map.ObjTab?
-            var item: S57val.AttVal<*>
-            if (feature!!.objs!![obj].also { objs = it!! } != null) atts = objs!![0] else return null
-            return if (atts!![att].also { item = it!! } == null) null else item.value
+            val objs = feature!!.objs!![obj]
+            val atts = if (objs != null) objs[0]
+            else return null
+            return atts!![att]?.value
         }
 
         fun getAttStr(obj: Obj?, att: Att): String {
@@ -171,8 +170,8 @@ open class Rules {
         }
 
         fun hasAttribute(obj: Obj, att: Att): Boolean {
-            var atts: S57map.AttMap
-            if (getAtts(obj, 0).also { atts = it!! } != null) {
+            val atts = getAtts(obj, 0)
+            if (atts != null) {
                 val item = atts[att]
                 return item != null
             }
@@ -180,8 +179,8 @@ open class Rules {
         }
 
         fun testAttribute(obj: Obj?, att: Att, value: Any): Boolean {
-            var atts: S57map.AttMap
-            if (getAtts(obj!!, 0).also { atts = it!! } != null) {
+            val atts = getAtts(obj!!, 0)
+            if (atts != null) {
                 val item = atts[att]
                 if (item != null) {
                     when (item.conv) {
@@ -210,105 +209,103 @@ open class Rules {
         }
 
         fun rules(): Boolean {
-            try {
-                if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL || Renderer.context!!.ruleset() === ChartContext.RuleSet.BASE) {
-                    if (testObject(Obj.LNDARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.BUAARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.HRBFAC)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.HRBBSN)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.LOKBSN)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.LKBSPT)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.LAKARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.RIVERS)) for (f in objects!!) if (testFeature(f)) waterways()
-                    if (testObject(Obj.CANALS)) for (f in objects!!) if (testFeature(f)) waterways()
-                    if (testObject(Obj.DEPARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.COALNE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.ROADWY)) for (f in objects!!) if (testFeature(f)) highways()
-                    if (testObject(Obj.RAILWY)) for (f in objects!!) if (testFeature(f)) highways()
-                }
-                if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL) {
-                    if (testObject(Obj.SOUNDG)) for (f in objects!!) if (testFeature(f)) depths()
-                    if (testObject(Obj.DEPCNT)) for (f in objects!!) if (testFeature(f)) depths()
-                }
-                if (testObject(Obj.SLCONS)) for (f in objects!!) if (testFeature(f)) shoreline()
-                if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL || Renderer.context!!.ruleset() === ChartContext.RuleSet.SEAMARK) {
-                    if (testObject(Obj.PIPSOL)) for (f in objects!!) if (testFeature(f)) pipelines()
-                    if (testObject(Obj.CBLSUB)) for (f in objects!!) if (testFeature(f)) cables()
-                    if (testObject(Obj.PIPOHD)) for (f in objects!!) if (testFeature(f)) pipelines()
-                    if (testObject(Obj.CBLOHD)) for (f in objects!!) if (testFeature(f)) cables()
-                    if (testObject(Obj.TSEZNE)) for (f in objects!!) if (testFeature(f)) separation()
-                    if (testObject(Obj.TSSCRS)) for (f in objects!!) if (testFeature(f)) separation()
-                    if (testObject(Obj.TSSRON)) for (f in objects!!) if (testFeature(f)) separation()
-                    if (testObject(Obj.TSELNE)) for (f in objects!!) if (testFeature(f)) separation()
-                    if (testObject(Obj.TSSLPT)) for (f in objects!!) if (testFeature(f)) separation()
-                    if (testObject(Obj.TSSBND)) for (f in objects!!) if (testFeature(f)) separation()
-                    if (testObject(Obj.ISTZNE)) for (f in objects!!) if (testFeature(f)) separation()
-                    if (testObject(Obj.SNDWAV)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.WEDKLP)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.OSPARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.FAIRWY)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.DRGARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.RESARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.PRCARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.SPLARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.SEAARE)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.OBSTRN)) for (f in objects!!) if (testFeature(f)) obstructions()
-                    if (testObject(Obj.UWTROC)) for (f in objects!!) if (testFeature(f)) obstructions()
-                    if (testObject(Obj.MARCUL)) for (f in objects!!) if (testFeature(f)) areas()
-                    if (testObject(Obj.RECTRC)) for (f in objects!!) if (testFeature(f)) transits()
-                    if (testObject(Obj.NAVLNE)) for (f in objects!!) if (testFeature(f)) transits()
-                    if (testObject(Obj.HRBFAC)) for (f in objects!!) if (testFeature(f)) harbours()
-                    if (testObject(Obj.ACHARE)) for (f in objects!!) if (testFeature(f)) harbours()
-                    if (testObject(Obj.ACHBRT)) for (f in objects!!) if (testFeature(f)) harbours()
-                    if (testObject(Obj.BERTHS)) for (f in objects!!) if (testFeature(f)) harbours()
-                    if (testObject(Obj.DISMAR)) for (f in objects!!) if (testFeature(f)) distances()
-                    if (testObject(Obj.HULKES)) for (f in objects!!) if (testFeature(f)) ports()
-                    if (testObject(Obj.CRANES)) for (f in objects!!) if (testFeature(f)) ports()
-                    if (testObject(Obj.LNDMRK)) for (f in objects!!) if (testFeature(f)) landmarks()
-                    if (testObject(Obj.SILTNK)) for (f in objects!!) if (testFeature(f)) landmarks()
-                    if (testObject(Obj.BUISGL)) for (f in objects!!) if (testFeature(f)) harbours()
-                    if (testObject(Obj.MORFAC)) for (f in objects!!) if (testFeature(f)) moorings()
-                    if (testObject(Obj.NOTMRK)) for (f in objects!!) if (testFeature(f)) notices()
-                    if (testObject(Obj.SMCFAC)) for (f in objects!!) if (testFeature(f)) marinas()
-                    if (testObject(Obj.BRIDGE)) for (f in objects!!) if (testFeature(f)) bridges()
-                    if (testObject(Obj.PILPNT)) for (f in objects!!) if (testFeature(f)) points()
-                    if (testObject(Obj.TOPMAR)) for (f in objects!!) if (testFeature(f)) points()
-                    if (testObject(Obj.DAYMAR)) for (f in objects!!) if (testFeature(f)) points()
-                    if (testObject(Obj.FOGSIG)) for (f in objects!!) if (testFeature(f)) points()
-                    if (testObject(Obj.RDOCAL)) for (f in objects!!) if (testFeature(f)) callpoint()
-                    if (testObject(Obj.LITMIN)) for (f in objects!!) if (testFeature(f)) lights()
-                    if (testObject(Obj.LITMAJ)) for (f in objects!!) if (testFeature(f)) lights()
-                    if (testObject(Obj.LIGHTS)) for (f in objects!!) if (testFeature(f)) lights()
-                    if (testObject(Obj.SISTAT)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.SISTAW)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.CGUSTA)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.RDOSTA)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.RADRFL)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.RADSTA)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.RTPBCN)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.RSCSTA)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.PILBOP)) for (f in objects!!) if (testFeature(f)) stations()
-                    if (testObject(Obj.WTWGAG)) for (f in objects!!) if (testFeature(f)) gauges()
-                    if (testObject(Obj.OFSPLF)) for (f in objects!!) if (testFeature(f)) platforms()
-                    if (testObject(Obj.WRECKS)) for (f in objects!!) if (testFeature(f)) wrecks()
-                    if (testObject(Obj.LITVES)) for (f in objects!!) if (testFeature(f)) floats()
-                    if (testObject(Obj.LITFLT)) for (f in objects!!) if (testFeature(f)) floats()
-                    if (testObject(Obj.BOYINB)) for (f in objects!!) if (testFeature(f)) floats()
-                    if (testObject(Obj.BOYLAT)) for (f in objects!!) if (testFeature(f)) buoys()
-                    if (testObject(Obj.BOYCAR)) for (f in objects!!) if (testFeature(f)) buoys()
-                    if (testObject(Obj.BOYISD)) for (f in objects!!) if (testFeature(f)) buoys()
-                    if (testObject(Obj.BOYSAW)) for (f in objects!!) if (testFeature(f)) buoys()
-                    if (testObject(Obj.BOYSPP)) for (f in objects!!) if (testFeature(f)) buoys()
-                    if (testObject(Obj.BCNLAT)) for (f in objects!!) if (testFeature(f)) beacons()
-                    if (testObject(Obj.BCNCAR)) for (f in objects!!) if (testFeature(f)) beacons()
-                    if (testObject(Obj.BCNISD)) for (f in objects!!) if (testFeature(f)) beacons()
-                    if (testObject(Obj.BCNSAW)) for (f in objects!!) if (testFeature(f)) beacons()
-                    if (testObject(Obj.BCNSPP)) for (f in objects!!) if (testFeature(f)) beacons()
-                }
-            } catch (e: ConcurrentModificationException) {
-                return false
-            } catch (e: Exception) {
-                return true
+            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL
+                || Renderer.context!!.ruleset() === ChartContext.RuleSet.BASE
+            ) {
+                if (testObject(Obj.LNDARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.BUAARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.HRBFAC)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.HRBBSN)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.LOKBSN)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.LKBSPT)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.LAKARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.RIVERS)) for (f in objects!!) if (testFeature(f)) waterways()
+                if (testObject(Obj.CANALS)) for (f in objects!!) if (testFeature(f)) waterways()
+                if (testObject(Obj.DEPARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.COALNE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.ROADWY)) for (f in objects!!) if (testFeature(f)) highways()
+                if (testObject(Obj.RAILWY)) for (f in objects!!) if (testFeature(f)) highways()
+            }
+            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL) {
+                if (testObject(Obj.SOUNDG)) for (f in objects!!) if (testFeature(f)) depths()
+                if (testObject(Obj.DEPCNT)) for (f in objects!!) if (testFeature(f)) depths()
+            }
+            if (testObject(Obj.SLCONS)) for (f in objects!!) if (testFeature(f)) shoreline()
+            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL
+                || Renderer.context!!.ruleset() === ChartContext.RuleSet.SEAMARK
+            ) {
+                if (testObject(Obj.PIPSOL)) for (f in objects!!) if (testFeature(f)) pipelines()
+                if (testObject(Obj.CBLSUB)) for (f in objects!!) if (testFeature(f)) cables()
+                if (testObject(Obj.PIPOHD)) for (f in objects!!) if (testFeature(f)) pipelines()
+                if (testObject(Obj.CBLOHD)) for (f in objects!!) if (testFeature(f)) cables()
+                if (testObject(Obj.TSEZNE)) for (f in objects!!) if (testFeature(f)) separation()
+                if (testObject(Obj.TSSCRS)) for (f in objects!!) if (testFeature(f)) separation()
+                if (testObject(Obj.TSSRON)) for (f in objects!!) if (testFeature(f)) separation()
+                if (testObject(Obj.TSELNE)) for (f in objects!!) if (testFeature(f)) separation()
+                if (testObject(Obj.TSSLPT)) for (f in objects!!) if (testFeature(f)) separation()
+                if (testObject(Obj.TSSBND)) for (f in objects!!) if (testFeature(f)) separation()
+                if (testObject(Obj.ISTZNE)) for (f in objects!!) if (testFeature(f)) separation()
+                if (testObject(Obj.SNDWAV)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.WEDKLP)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.OSPARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.FAIRWY)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.DRGARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.RESARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.PRCARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.SPLARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.SEAARE)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.OBSTRN)) for (f in objects!!) if (testFeature(f)) obstructions()
+                if (testObject(Obj.UWTROC)) for (f in objects!!) if (testFeature(f)) obstructions()
+                if (testObject(Obj.MARCUL)) for (f in objects!!) if (testFeature(f)) areas()
+                if (testObject(Obj.RECTRC)) for (f in objects!!) if (testFeature(f)) transits()
+                if (testObject(Obj.NAVLNE)) for (f in objects!!) if (testFeature(f)) transits()
+                if (testObject(Obj.HRBFAC)) for (f in objects!!) if (testFeature(f)) harbours()
+                if (testObject(Obj.ACHARE)) for (f in objects!!) if (testFeature(f)) harbours()
+                if (testObject(Obj.ACHBRT)) for (f in objects!!) if (testFeature(f)) harbours()
+                if (testObject(Obj.BERTHS)) for (f in objects!!) if (testFeature(f)) harbours()
+                if (testObject(Obj.DISMAR)) for (f in objects!!) if (testFeature(f)) distances()
+                if (testObject(Obj.HULKES)) for (f in objects!!) if (testFeature(f)) ports()
+                if (testObject(Obj.CRANES)) for (f in objects!!) if (testFeature(f)) ports()
+                if (testObject(Obj.LNDMRK)) for (f in objects!!) if (testFeature(f)) landmarks()
+                if (testObject(Obj.SILTNK)) for (f in objects!!) if (testFeature(f)) landmarks()
+                if (testObject(Obj.BUISGL)) for (f in objects!!) if (testFeature(f)) harbours()
+                if (testObject(Obj.MORFAC)) for (f in objects!!) if (testFeature(f)) moorings()
+                if (testObject(Obj.NOTMRK)) for (f in objects!!) if (testFeature(f)) notices()
+                if (testObject(Obj.SMCFAC)) for (f in objects!!) if (testFeature(f)) marinas()
+                if (testObject(Obj.BRIDGE)) for (f in objects!!) if (testFeature(f)) bridges()
+                if (testObject(Obj.PILPNT)) for (f in objects!!) if (testFeature(f)) points()
+                if (testObject(Obj.TOPMAR)) for (f in objects!!) if (testFeature(f)) points()
+                if (testObject(Obj.DAYMAR)) for (f in objects!!) if (testFeature(f)) points()
+                if (testObject(Obj.FOGSIG)) for (f in objects!!) if (testFeature(f)) points()
+                if (testObject(Obj.RDOCAL)) for (f in objects!!) if (testFeature(f)) callpoint()
+                if (testObject(Obj.LITMIN)) for (f in objects!!) if (testFeature(f)) lights()
+                if (testObject(Obj.LITMAJ)) for (f in objects!!) if (testFeature(f)) lights()
+                if (testObject(Obj.LIGHTS)) for (f in objects!!) if (testFeature(f)) lights()
+                if (testObject(Obj.SISTAT)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.SISTAW)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.CGUSTA)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.RDOSTA)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.RADRFL)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.RADSTA)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.RTPBCN)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.RSCSTA)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.PILBOP)) for (f in objects!!) if (testFeature(f)) stations()
+                if (testObject(Obj.WTWGAG)) for (f in objects!!) if (testFeature(f)) gauges()
+                if (testObject(Obj.OFSPLF)) for (f in objects!!) if (testFeature(f)) platforms()
+                if (testObject(Obj.WRECKS)) for (f in objects!!) if (testFeature(f)) wrecks()
+                if (testObject(Obj.LITVES)) for (f in objects!!) if (testFeature(f)) floats()
+                if (testObject(Obj.LITFLT)) for (f in objects!!) if (testFeature(f)) floats()
+                if (testObject(Obj.BOYINB)) for (f in objects!!) if (testFeature(f)) floats()
+                if (testObject(Obj.BOYLAT)) for (f in objects!!) if (testFeature(f)) buoys()
+                if (testObject(Obj.BOYCAR)) for (f in objects!!) if (testFeature(f)) buoys()
+                if (testObject(Obj.BOYISD)) for (f in objects!!) if (testFeature(f)) buoys()
+                if (testObject(Obj.BOYSAW)) for (f in objects!!) if (testFeature(f)) buoys()
+                if (testObject(Obj.BOYSPP)) for (f in objects!!) if (testFeature(f)) buoys()
+                if (testObject(Obj.BCNLAT)) for (f in objects!!) if (testFeature(f)) beacons()
+                if (testObject(Obj.BCNCAR)) for (f in objects!!) if (testFeature(f)) beacons()
+                if (testObject(Obj.BCNISD)) for (f in objects!!) if (testFeature(f)) beacons()
+                if (testObject(Obj.BCNSAW)) for (f in objects!!) if (testFeature(f)) beacons()
+                if (testObject(Obj.BCNSPP)) for (f in objects!!) if (testFeature(f)) beacons()
             }
             return true
         }
@@ -319,10 +316,8 @@ open class Rules {
                 Obj.BUAARE -> lineVector(LineStyle(Color(0x20000000, true)))
                 Obj.COALNE -> if (Renderer.zoom >= 12) lineVector(LineStyle(black, 10f))
                 Obj.DEPARE -> {
-                    var depmax: Double
-                    if ((getAttVal(Obj.DEPARE, Att.DRVAL2) as Double?).also {
-                            depmax = it!!
-                        } != null && depmax <= 0.0) {
+                    val depmax = getAttVal(Obj.DEPARE, Att.DRVAL2) as Double?
+                    if (depmax != null && depmax <= 0.0) {
                         lineVector(LineStyle(Symbols.Gdries))
                     }
                 }
@@ -370,7 +365,8 @@ open class Rules {
                     }
 
                     if (feature!!.geom!!.area > 0.2 || (feature!!.geom!!.area > 0.05 && Renderer.zoom >= 14) ||
-                                (feature!!.geom!!.area > 0.005 && Renderer.zoom >= 16)) {
+                        (feature!!.geom!!.area > 0.005 && Renderer.zoom >= 16)
+                    ) {
                         lineVector(LineStyle(black, 4f, floatArrayOf(10f, 10f)))
                     }
                 }
@@ -470,7 +466,8 @@ open class Rules {
         private fun beacons() {
             if (Renderer.zoom >= 14
                 || (Renderer.zoom >= 12 && (feature!!.type === Obj.BCNLAT || feature!!.type === Obj.BCNCAR))
-                || (Renderer.zoom >= 11 && (feature!!.type === Obj.BCNSAW || hasObject(Obj.RTPBCN)))) {
+                || (Renderer.zoom >= 11 && (feature!!.type === Obj.BCNSAW || hasObject(Obj.RTPBCN)))
+            ) {
                 var shape = getAttEnum(feature!!.type, Att.BCNSHP) as BcnSHP
                 if (shape === BcnSHP.BCN_UNKN) shape = BcnSHP.BCN_PILE
                 if (shape === BcnSHP.BCN_WTHY && feature!!.type === Obj.BCNLAT) {
@@ -519,7 +516,8 @@ open class Rules {
         private fun buoys() {
             if (Renderer.zoom >= 14
                 || (Renderer.zoom >= 12 && (feature!!.type == Obj.BOYLAT || feature!!.type == Obj.BOYCAR))
-                || (Renderer.zoom >= 11 && (feature!!.type == Obj.BOYSAW || hasObject(Obj.RTPBCN)))) {
+                || (Renderer.zoom >= 11 && (feature!!.type == Obj.BOYSAW || hasObject(Obj.RTPBCN)))
+            ) {
                 var shape = getAttEnum(feature!!.type, Att.BOYSHP) as BoySHP
                 if (shape === BoySHP.BOY_UNKN) shape = BoySHP.BOY_PILR
                 symbol(Buoys.Shapes[shape], getScheme(feature!!.type))
@@ -671,7 +669,7 @@ open class Rules {
                         .toTypedArray()
                     var ul = ""
                     var id = tok[0]
-                    var dd: String?
+                    val dd: String?
                     if (tok[0] == "") {
                         var i = 0
                         while (i < tok[1]!!.length) {
