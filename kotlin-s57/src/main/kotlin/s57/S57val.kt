@@ -2324,11 +2324,6 @@ object S57val {
                 } catch (e: Exception) {
                     return null
                 }
-                return try {
-                    AttVal<Double?>(Conv.F, value!!.toDouble())
-                } catch (e: Exception) {
-                    return null
-                }
             }
             Conv.F -> return try {
                 AttVal<Double?>(Conv.F, value!!.toDouble())
