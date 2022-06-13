@@ -1,14 +1,14 @@
 package s57.seachart
 
-import s57.render.Renderer.reRender
 import s57.S57dec.decodeChart
 import s57.S57map
-
+import s57.render.Renderer.reRender
 import java.awt.*
 import java.io.FileInputStream
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
+
 
 /**
  * GUI Code
@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities
  *
  */
 class SwingTemplateJPanel : JPanel() {
+
     private var rectangularBounds: Rectangle? = null
     private var zoom = 0
     private var factor = 0.0
@@ -26,10 +27,11 @@ class SwingTemplateJPanel : JPanel() {
      * Ctor
      */
     init {
-        preferredSize = Dimension(CANVAS_WIDTH, CANVAS_HEIGHT)
+        val screenSize = Toolkit.getDefaultToolkit().screenSize
+        preferredSize = Dimension(screenSize.width - 40, screenSize.height - 40)
         val input: FileInputStream
         try {
-            input = FileInputStream("D:\\kotlin-sandbox\\kotlin-introspection\\src\\main\\kotlin\\US5MA11M.000")
+            input = FileInputStream("D:\\ENC_ROOT\\US5NYCKG\\US5NYCKG.000")
             map = S57map(true)
             decodeChart(input, map)
             rectangularBounds = this.bounds

@@ -551,7 +551,8 @@ open class Rules {
                 val verccl: Double
                 val vercop: Double
                 val horclr: Double
-                val atts = feature!!.objs!![Obj.BRIDGE]!![0]
+                val objTab = feature!!.objs!![Obj.BRIDGE]
+                val atts = objTab?.let { objTab[0] }
                 var vstr = ""
                 var hstr = ""
                 if (atts != null) {
@@ -606,7 +607,8 @@ open class Rules {
                 if (feature!!.type === Obj.CBLSUB) {
                     lineSymbols(Areas.Cable, 0.0, null, null, 0, Symbols.Mline)
                 } else if (feature!!.type === Obj.CBLOHD) {
-                    val atts = feature!!.objs!![Obj.CBLOHD]!![0]
+                    val objTab = feature!!.objs!![Obj.CBLOHD]
+                    val atts = objTab?.let { objTab[0] }
                     if (atts != null && atts.containsKey(Att.CATCBL) && atts[Att.CATCBL]!!.value === S57val.CatCBL.CBL_POWR) {
                         lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, Areas.CableFlash, 2, black)
                     } else {
@@ -916,7 +918,7 @@ open class Rules {
                     val symbols = ArrayList<Symbols.Symbol>()
                     val fncs = getAttList(Obj.BUISGL, Att.FUNCTN) as ArrayList<FncFNC?>
                     for (fnc in fncs) {
-                        symbols.add(Landmarks.Funcs[fnc]!!)
+                        Landmarks.Funcs[fnc]?.let { symbols.add(it) }
                     }
                     if (feature!!.objs!!.containsKey(Obj.SMCFAC)) {
                         val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
