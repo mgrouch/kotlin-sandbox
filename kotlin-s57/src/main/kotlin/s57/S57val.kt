@@ -2417,18 +2417,13 @@ object S57val {
                 return try {
                     AttVal<Long?>(Conv.I, value!!.toLong())
                 } catch (e: Exception) {
-                    return null
-                }
-                return try {
-                    AttVal<Double?>(Conv.F, value!!.toDouble())
-                } catch (e: Exception) {
-                    return null
+                    return AttVal<Any?>(Conv.I, null)
                 }
             }
             Conv.F -> return try {
                 AttVal<Double?>(Conv.F, value!!.toDouble())
             } catch (e: Exception) {
-                return null
+                return AttVal<Any?>(Conv.F, null)
             }
         }
         return AttVal<Any?>(keys[att]!!.conv, null)
