@@ -205,7 +205,7 @@ open class Rules {
         }
 
         fun testFeature(f: Feature?): Boolean {
-            return f.also { feature = it }!!.reln === S57map.Rflag.MASTER
+            return f.also { feature = it }!!.reln === Rflag.MASTER
         }
 
         fun rules(): Boolean {
@@ -388,7 +388,7 @@ open class Rules {
                     lineVector(LineStyle(Symbols.Mline, 10f, floatArrayOf(40f, 40f)))
                 }
                 Obj.SEAARE -> when (getAttEnum(feature!!.type, Att.CATSEA) as CatSEA) {
-                    CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
+                    CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom!!.prim === Pflag.LINE) {
                         lineText(name, Font("Arial", PLAIN, 150), black, -40.0)
                     } else {
                         labelText(
@@ -396,7 +396,7 @@ open class Rules {
                             Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                         )
                     }
-                    CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
+                    CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom!!.prim === Pflag.LINE) {
                         lineText(name, Font("Arial", PLAIN, 150), black, -40.0)
                     } else {
                         labelText(
@@ -405,7 +405,7 @@ open class Rules {
                         )
                     }
                     CatSEA.SEA_SHOL -> if (Renderer.zoom >= 14) {
-                        if (feature!!.geom!!.prim === S57map.Pflag.AREA) {
+                        if (feature!!.geom!!.prim === Pflag.AREA) {
                             lineVector(LineStyle(Color(0xc480ff), 4f, floatArrayOf(25f, 25f)))
                             if (name != null) {
                                 labelText(
@@ -417,7 +417,7 @@ open class Rules {
                                     Delta(Handle.BC)
                                 )
                             }
-                        } else if (feature!!.geom!!.prim === S57map.Pflag.LINE) {
+                        } else if (feature!!.geom!!.prim === Pflag.LINE) {
                             if (name != null) {
                                 lineText(name, Font("Arial", Font.ITALIC, 75), black, -40.0)
                                 lineText("(Shoal)", Font("Arial", PLAIN, 60), black, 0.0)
@@ -441,7 +441,7 @@ open class Rules {
                 Obj.SNDWAV -> if (Renderer.zoom >= 12) fillPattern(Areas.Sandwaves)
                 Obj.WEDKLP -> if (Renderer.zoom >= 12) {
                     when (getAttEnum(feature!!.type, Att.CATWED) as CatWED) {
-                        CatWED.WED_KELP -> if (feature!!.geom!!.prim === S57map.Pflag.AREA) {
+                        CatWED.WED_KELP -> if (feature!!.geom!!.prim === Pflag.AREA) {
                             fillPattern(Areas.KelpA)
                         } else {
                             symbol(Areas.KelpS)
@@ -821,7 +821,7 @@ open class Rules {
                     }
                 }
                 Obj.ACHARE -> if (Renderer.zoom >= 12) {
-                    if (feature!!.geom!!.prim !== S57map.Pflag.AREA) {
+                    if (feature!!.geom!!.prim !== Pflag.AREA) {
                         symbol(Harbours.Anchorage, Scheme(black))
                     } else {
                         symbol(Harbours.Anchorage, Scheme(Symbols.Mline))
@@ -1438,7 +1438,7 @@ open class Rules {
                 LineStyle(
                     Symbols.Bwater,
                     20f,
-                    if (feature!!.geom!!.prim === S57map.Pflag.AREA) Symbols.Bwater else null
+                    if (feature!!.geom!!.prim === Pflag.AREA) Symbols.Bwater else null
                 )
             )
         }
