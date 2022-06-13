@@ -2285,11 +2285,7 @@ object S57val {
     private fun s57Enum(value: String?, att: Att?): Enum<*>? { // Convert S57 attribute value string to SCM enumeration
         val s57key: S57key? = keys[att]
         val map = s57key!!.map
-        val i = try {
-            value!!.toInt()
-        } catch (e: Exception) {
-            return null
-        }
+        val i = value!!.toInt()
         var unkn: Enum<*>? = null
         if (map != null) {
             for (item in map.keys) {

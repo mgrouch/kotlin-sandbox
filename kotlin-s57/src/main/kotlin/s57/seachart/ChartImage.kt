@@ -18,12 +18,10 @@ class ChartImage : ChartContext {
     var debug = false
 
     override fun getPoint(coord: S57map.Snode): Point2D.Double {
-        println(rad2deg(coord.lat).toString() + " " + rad2deg(coord.lon))
         val point = Point2D.Double(
             (rad2deg(coord.lat) - 50) / 8 * 10000 - 4000,
             (rad2deg(coord.lon) - 8) / 8 * 10000 - 0
         )
-        println(point)
         return point //MainApplication.getMap().mapView.getPoint2D(new LatLon(rad2deg(coord.lat), rad2deg(coord.lon)));
     }
 

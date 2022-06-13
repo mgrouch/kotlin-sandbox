@@ -463,127 +463,123 @@ class S57map(private val sea: Boolean) {
 
     // Utility methods
     fun sortGeom(feature: Feature?): Boolean {
-        return try {
-            val sort = Geom(feature!!.geom!!.prim)
-            var first: Long = 0
-            var last: Long = 0
-            var comp: Comp? = null
-            var next = true
-            feature.geom!!.length = 0.0
-            feature.geom!!.area = 0.0
-            if (feature.geom!!.elems!!.isEmpty()) {
-                return false
+        val sort = Geom(feature!!.geom!!.prim)
+        var first: Long = 0
+        var last: Long = 0
+        var comp: Comp? = null
+        var next = true
+        feature.geom!!.length = 0.0
+        feature.geom!!.area = 0.0
+        if (feature.geom!!.elems!!.isEmpty()) {
+            return false
+        }
+        if (feature.geom!!.prim == POINT) {
+            feature.geom!!.centre = nodes!![feature.geom!!.elems!![0]!!.id]
+            return true
+        }
+        var outer: Geom? = Geom(feature.geom!!.prim)
+        val inner = Geom(feature.geom!!.prim)
+        for (prim in feature.geom!!.elems!!) {
+            if (prim!!.outer) {
+                outer!!.elems!!.add(prim)
+            } else {
+                inner.elems!!.add(prim)
             }
-            if (feature.geom!!.prim == POINT) {
-                feature.geom!!.centre = nodes!![feature.geom!!.elems!![0]!!.id]
-                return true
-            }
-            var outer: Geom? = Geom(feature.geom!!.prim)
-            val inner = Geom(feature.geom!!.prim)
-            for (prim in feature.geom!!.elems!!) {
-                if (prim!!.outer) {
-                    outer!!.elems!!.add(prim)
+        }
+        var outin = true
+        var sweep = outer!!.elems!!.size
+        if (sweep == 0) {
+            return false
+        }
+        var prev = sweep
+        var top = 0
+        while (outer!!.elems!!.isNotEmpty()) {
+            val prim = outer.elems!!.removeAt(0)
+            val edge = edges!![prim!!.id] ?: return false
+            if (next == true) {
+                next = false
+                first = edge.first
+                last = edge.last
+                prim.forward = true
+                sort.elems!!.add(prim)
+                if (prim.outer) {
+                    sort.outers++
                 } else {
-                    inner.elems!!.add(prim)
+                    sort.inners++
                 }
-            }
-            var outin = true
-            var sweep = outer!!.elems!!.size
-            if (sweep == 0) {
-                return false
-            }
-            var prev = sweep
-            var top = 0
-            while (outer!!.elems!!.isNotEmpty()) {
-                val prim = outer.elems!!.removeAt(0)
-                val edge = edges!![prim!!.id] ?: return false
-                if (next == true) {
-                    next = false
-                    first = edge.first
+                comp = Comp(cref++, 1)
+                sort.comps!!.add(comp)
+            } else {
+                if (edge.first == last) {
+                    sort.elems!!.add(prim)
                     last = edge.last
                     prim.forward = true
+                    comp!!.size++
+                } else if (edge.last == first) {
+                    sort.elems!!.add(top, prim)
+                    first = edge.first
+                    prim.forward = true
+                    comp!!.size++
+                } else if (edge.last == last) {
                     sort.elems!!.add(prim)
-                    if (prim.outer) {
-                        sort.outers++
-                    } else {
-                        sort.inners++
-                    }
-                    comp = Comp(cref++, 1)
-                    sort.comps!!.add(comp)
+                    last = edge.first
+                    prim.forward = false
+                    comp!!.size++
+                } else if (edge.first == first) {
+                    sort.elems!!.add(top, prim)
+                    first = edge.last
+                    prim.forward = false
+                    comp!!.size++
                 } else {
-                    if (edge.first == last) {
-                        sort.elems!!.add(prim)
-                        last = edge.last
-                        prim.forward = true
-                        comp!!.size++
-                    } else if (edge.last == first) {
-                        sort.elems!!.add(top, prim)
-                        first = edge.first
-                        prim.forward = true
-                        comp!!.size++
-                    } else if (edge.last == last) {
-                        sort.elems!!.add(prim)
-                        last = edge.first
-                        prim.forward = false
-                        comp!!.size++
-                    } else if (edge.first == first) {
-                        sort.elems!!.add(top, prim)
-                        first = edge.last
-                        prim.forward = false
-                        comp!!.size++
-                    } else {
-                        outer.elems!!.add(prim)
-                    }
+                    outer.elems!!.add(prim)
                 }
-                if (--sweep == 0) {
-                    sweep = outer.elems!!.size
-                    if (sweep == 0 || sweep == prev) {
-                        if (sort.prim == AREA && first != last) {
+            }
+            if (--sweep == 0) {
+                sweep = outer.elems!!.size
+                if (sweep == 0 || sweep == prev) {
+                    if (sort.prim == AREA && first != last) {
+                        return false
+                    }
+                    if (outin) {
+                        if (sweep != 0) {
                             return false
                         }
-                        if (outin) {
-                            if (sweep != 0) {
-                                return false
-                            }
-                            outer = inner
-                            outin = false
-                            sweep = outer.elems!!.size
-                        }
-                        next = true
-                        top = sort.elems!!.size
+                        outer = inner
+                        outin = false
+                        sweep = outer.elems!!.size
                     }
-                    prev = sweep
+                    next = true
+                    top = sort.elems!!.size
                 }
+                prev = sweep
             }
-            if (sort.prim == LINE && sort.outers == 1 && sort.inners == 0 && first == last) {
-                sort.prim = AREA
-            }
-            feature.geom = sort
-            if (feature.geom!!.prim == AREA) {
-                var ie = 0
-                var ic = 0
-                while (ie < feature.geom!!.elems!!.size) {
-                    val area = calcArea(feature.geom, ic)
-                    if (ie == 0) feature.geom!!.area = abs(area) * 3444 * 3444
-                    if (ie == 0 && area < 0.0 || ie > 0 && area >= 0.0) {
-                        val tmp = ArrayList<Prim?>()
-                        for (i in 0 until feature.geom!!.comps!![ic]!!.size) {
-                            val p = feature.geom!!.elems!!.removeAt(ie)
-                            p!!.forward = !p.forward
-                            tmp.add(0, p)
-                        }
-                        feature.geom!!.elems!!.addAll(ie, tmp)
-                    }
-                    ie += feature.geom!!.comps!![ic]!!.size
-                    ic++
-                }
-            }
-            feature.geom!!.length = calcLength(feature.geom)
-            feature.geom!!.centre = calcCentroid(feature)
-            true
-        } catch (e: Exception) {
-            false
         }
+        if (sort.prim == LINE && sort.outers == 1 && sort.inners == 0 && first == last) {
+            sort.prim = AREA
+        }
+        feature.geom = sort
+        if (feature.geom!!.prim == AREA) {
+            var ie = 0
+            var ic = 0
+            while (ie < feature.geom!!.elems!!.size) {
+                val area = calcArea(feature.geom, ic)
+                if (ie == 0) feature.geom!!.area = abs(area) * 3444 * 3444
+                if (ie == 0 && area < 0.0 || ie > 0 && area >= 0.0) {
+                    val tmp = ArrayList<Prim?>()
+                    for (i in 0 until feature.geom!!.comps!![ic]!!.size) {
+                        val p = feature.geom!!.elems!!.removeAt(ie)
+                        p!!.forward = !p.forward
+                        tmp.add(0, p)
+                    }
+                    feature.geom!!.elems!!.addAll(ie, tmp)
+                }
+                ie += feature.geom!!.comps!![ic]!!.size
+                ic++
+            }
+        }
+        feature.geom!!.length = calcLength(feature.geom)
+        feature.geom!!.centre = calcCentroid(feature)
+        return true
     }
 
     fun cmpGeoms(g1: Geom?, g2: Geom?): Boolean {

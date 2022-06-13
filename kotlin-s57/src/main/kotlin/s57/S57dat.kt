@@ -473,11 +473,7 @@ object S57dat {
                 is Double -> sval = value.toString()
             }
             index = sval.length
-            try {
-                buffer = "$sval ".toByteArray(charset("ISO-8859-1"))
-            } catch (e: Exception) {
-                throw Exception(e.message)
-            }
+            buffer = "$sval ".toByteArray(charset("ISO-8859-1"))
             if (conv.asc == 0) {
                 buffer[index] = 0x01f
             } else {
