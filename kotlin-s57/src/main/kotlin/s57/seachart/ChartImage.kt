@@ -15,7 +15,7 @@ import kotlin.math.*
 /**
  * contains code from Malcolm Herring
  */
-class ChartImage(val map: S57map, val zoom: Double) : ChartContext {
+class ChartImage(val map: S57map, val zoom: Double, val x: Int = 0, val y: Int = 0) : ChartContext {
 
     val top = (1.0 - ln(tan(map.bounds!!.maxlat) + 1.0 / cos(map.bounds!!.maxlat)) / PI) / 2.0 * 256.0 * 4096.0 *
             2.0.pow((zoom - 12))
@@ -30,7 +30,8 @@ class ChartImage(val map: S57map, val zoom: Double) : ChartContext {
                 2.0.pow(zoom - 12) / 180.0
         val y: Double = ((1.0 - ln(Math.tan(coord.lat) + 1.0 / cos(coord.lat)) / PI) /
                 2.0) * 256.0 * 4096.0 * 2.0.pow(zoom - 12) - top
-        return Point2D.Double(x, y)    }
+        return Point2D.Double(x - this.x, y - this.y)
+    }
 
     override fun mile(feature: S57map.Feature): Double {
         return mile

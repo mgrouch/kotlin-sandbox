@@ -35,9 +35,9 @@ class SwingTemplateJPanel : JPanel() {
             map = S57map(true)
             decodeChart(input, map)
             rectangularBounds = this.bounds
-            zoom = 14
-            factor = 3.0
-            chartImage = ChartImage(map, zoom.toDouble())
+            zoom = 16
+            factor = 20.0
+            chartImage = ChartImage(map, zoom.toDouble(), 2000, 1500)
             println("ChartImage() done")
         } catch (e: Exception) {
             e.printStackTrace()
