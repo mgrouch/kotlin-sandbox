@@ -31,8 +31,8 @@ class Symbology : JPanel() {
             addAll(Topmarks.AllTopmarks)
         }
         for ((idx, s) in all.withIndex()) {
-            val x = 100.0 + idx.mod(10) * 150
-            val y = 100.0 + idx.div(10) * 150
+            val x = 100.0 + idx.mod(8) * 150
+            val y = 100.0 + idx.div(8) * 150
             Symbols.drawSymbol(g as Graphics2D, s, 0.5, x, y, null, null)
         }
     }
