@@ -384,4 +384,21 @@ object Beacons {
         BcnSHP.BCN_POST to Stake,
         BcnSHP.BCN_PRCH to Stake,
     )
+
+    val AllBeacons: List<Symbol> = listOf(
+        Beacon,
+        Cairn,
+        FogSignal,
+        Lattice,
+        LightFlare,
+        LightMajor,
+        LightMinor,
+        PerchPort,
+        PerchStarboard,
+        RadarStation,
+        Stake,
+        Tower,
+        WithyPort,
+        WithyStarboard,
+    )
 }

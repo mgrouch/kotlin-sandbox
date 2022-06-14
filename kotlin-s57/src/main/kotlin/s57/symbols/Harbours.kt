@@ -313,4 +313,33 @@ object Harbours {
         addInstr(LINE, Line2D.Double(-25.0, -45.0, 25.0, -45.0))
         addInstr(LINE, Line2D.Double(-15.0, -65.0, 15.0, -65.0))
     }
+
+    val AllHarbourSymbols: List<Symbol> = listOf(
+        Anchor,
+        Yacht,
+        Anchorage,
+        Bollard,
+        CallPoint1,
+        CallPoint2,
+        ContainerCrane,
+        Customs,
+        DeviationDolphin,
+        DistanceI,
+        DistanceU,
+        Dolphin,
+        Explosives,
+        Fishing,
+        Harbour,
+        HarbourMaster,
+        Hospital,
+        LandingSteps,
+        Marina,
+        MarinaNF,
+        Pilot,
+        PortCrane,
+        Post,
+        Rescue,
+        SignalStation,
+        TideGauge,
+    )
 }

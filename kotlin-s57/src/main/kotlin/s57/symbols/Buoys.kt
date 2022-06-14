@@ -563,4 +563,17 @@ object Buoys {
         BoySHP.BOY_SUPR to Super,
         BoySHP.BOY_ICE to Ice,
     )
+
+    val AllBuoys: List<Symbol> = listOf(
+        Barrel,
+        Can,
+        Cone,
+        Float,
+        Ice,
+        Pillar,
+        Spar,
+        Sphere,
+        Storage,
+        Super,
+    )
 }

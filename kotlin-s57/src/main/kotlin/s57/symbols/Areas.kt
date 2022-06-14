@@ -386,4 +386,28 @@ object Areas {
         p.quadTo(228.0, 172.0, 240.0, 180.0)
         g2.draw(p)
     }
+
+    val AllAreas: List<Symbol> = listOf(
+        Plane,
+        Cable,
+        CableDot,
+        CableDash,
+        CableFlash,
+        LaneArrow,
+        LineAnchor,
+        LinePlane,
+        MarineFarm,
+        NoWake,
+        Pipeline,
+        Restricted,
+        Rock,
+        RockA,
+        RockC,
+        Seaplane,
+        WindFarm,
+        WreckD,
+        WreckND,
+        WreckS,
+        KelpS,
+    )
 }

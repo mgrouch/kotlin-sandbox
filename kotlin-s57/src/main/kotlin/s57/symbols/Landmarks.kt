@@ -292,4 +292,28 @@ object Landmarks {
         FncFNC.FNC_HLTH to Harbours.Hospital,
         FncFNC.FNC_HOSP to Harbours.Hospital,
     )
+
+    val AllLandmarks: List<Symbol> = listOf(
+        Base,
+        Chimney,
+        Church,
+        ChurchTower,
+        Cross,
+        DishAerial,
+        Dome,
+        Flagstaff,
+        FlareStack,
+        LandTower,
+        Mast,
+        Monument,
+        Platform,
+        RadioTV,
+        Spire,
+        Minaret,
+        Temple,
+        WaterTower,
+        WindMotor,
+        Windmill,
+        Windsock,
+    )
 }

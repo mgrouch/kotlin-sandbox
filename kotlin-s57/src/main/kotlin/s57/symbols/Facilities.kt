@@ -345,4 +345,20 @@ object Facilities {
         CatSCF.SCF_VBTH to VisitorBerth,
         CatSCF.SCF_VMOR to VisitorMooring,
     )
+
+    val AllFacilities: List<Symbol> = listOf(
+        Facility,
+        Boatlift,
+        Boatyard,
+        Chandler,
+        Fuel,
+        Laundrette,
+        PumpOut,
+        SailingClub,
+        Shower,
+        Slipway,
+        Toilet,
+        VisitorBerth,
+        VisitorMooring,
+    )
 }
