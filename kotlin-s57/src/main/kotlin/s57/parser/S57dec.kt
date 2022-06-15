@@ -169,10 +169,10 @@ object S57dec {
                                 }
                                 lat = deg2rad(lat)
                                 lon = deg2rad(lon)
-                                if (lat < map.bounds!!.minlat) map.bounds!!.minlat = lat
-                                if (lat > map.bounds!!.maxlat) map.bounds!!.maxlat = lat
-                                if (lon < map.bounds!!.minlon) map.bounds!!.minlon = lon
-                                if (lon > map.bounds!!.maxlon) map.bounds!!.maxlon = lon
+                                if (lat < map.bounds.minlat) map.bounds.minlat = lat
+                                if (lat > map.bounds.maxlat) map.bounds.maxlat = lat
+                                if (lon < map.bounds.minlon) map.bounds.minlon = lon
+                                if (lon > map.bounds.maxlon) map.bounds.maxlon = lon
                             } while (S57dat.more())
                         }
                         "SG3D" -> {
@@ -184,10 +184,10 @@ object S57dec {
                                 map.newNode(name++, lat, lon, depth)
                                 lat = deg2rad(lat)
                                 lon = deg2rad(lon)
-                                if (lat < map.bounds!!.minlat) map.bounds!!.minlat = lat
-                                if (lat > map.bounds!!.maxlat) map.bounds!!.maxlat = lat
-                                if (lon < map.bounds!!.minlon) map.bounds!!.minlon = lon
-                                if (lon > map.bounds!!.maxlon) map.bounds!!.maxlon = lon
+                                if (lat < map.bounds.minlat) map.bounds.minlat = lat
+                                if (lat > map.bounds.maxlat) map.bounds.maxlat = lat
+                                if (lon < map.bounds.minlon) map.bounds.minlon = lon
+                                if (lon > map.bounds.maxlon) map.bounds.maxlon = lon
                             } while (S57dat.more())
                         }
                         else -> {}

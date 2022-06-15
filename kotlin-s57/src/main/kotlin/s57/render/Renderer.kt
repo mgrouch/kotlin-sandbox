@@ -59,8 +59,8 @@ object Renderer {
         sScale = symbolScale[zoom] * factor
         if (map != null) {
             if (context!!.clip()) {
-                val tl = context!!.getPoint(S57map.Snode(map!!.bounds!!.maxlat, map!!.bounds!!.minlon))
-                val br = context!!.getPoint(S57map.Snode(map!!.bounds!!.minlat, map!!.bounds!!.maxlon))
+                val tl = context!!.getPoint(S57map.Snode(map!!.bounds.maxlat, map!!.bounds.minlon))
+                val br = context!!.getPoint(S57map.Snode(map!!.bounds.minlat, map!!.bounds.maxlon))
                 g2!!.clip(Rectangle2D.Double(tl!!.x, tl.y, br!!.x - tl.x, br.y - tl.y))
             }
             g2!!.background = context!!.background(map!!)

@@ -133,10 +133,10 @@ class S57map(private val sea: Boolean) {
     class Geom(  // Geometric structure of feature
         var prim: Pflag // Geometry type
     ) {
-        var elems: ArrayList<Prim?>? = ArrayList() // Ordered list of elements
+        var elems: ArrayList<Prim?> = ArrayList() // Ordered list of elements
         var outers: Int // Number of outers
         var inners: Int = 0 // Number of inners
-        var comps: ArrayList<Comp?>? // Ordered list of compounds
+        var comps: ArrayList<Comp?> // Ordered list of compounds
         var area: Double // Area of feature
         var length: Double // Length of feature
         var centre: Snode? // Centre of feature
@@ -160,7 +160,7 @@ class S57map(private val sea: Boolean) {
         var objs: ObjMap = ObjMap() // Slave object attributes
     }
 
-    var bounds: MapBounds?
+    var bounds: MapBounds
     var nodes: NodeTab = NodeTab()
     var edges: EdgeTab = EdgeTab()
     var features: FtrMap
@@ -224,7 +224,7 @@ class S57map(private val sea: Boolean) {
     }
 
     fun newPrim(id: Long, ornt: Long, usag: Long) {
-        feature.geom.elems!!.add(Prim(id, ornt != 2L, usag != 2L))
+        feature.geom.elems.add(Prim(id, ornt != 2L, usag != 2L))
     }
 
     fun addConn(id: Long, topi: Int) {
@@ -243,8 +243,8 @@ class S57map(private val sea: Boolean) {
     fun endFile() {
         for (id in index.keys) {
             val feature = index[id]
-            sortGeom(feature)
-            for (reln in feature!!.rels) {
+            sortGeom(feature!!)
+            for (reln in feature.rels) {
                 val rel = index[reln.id]
                 if (cmpGeoms(feature.geom, rel!!.geom)) {
                     when (reln.reln) {
@@ -292,7 +292,7 @@ class S57map(private val sea: Boolean) {
         feature.id = id
         feature.reln = Rflag.UNKN
         feature.geom.prim = POINT
-        feature.geom.elems!!.add(Prim(id))
+        feature.geom.elems.add(Prim(id))
         edge = null
         osm = ArrayList()
     }
@@ -302,7 +302,7 @@ class S57map(private val sea: Boolean) {
         feature.id = id
         feature.reln = Rflag.UNKN
         feature.geom.prim = LINE
-        feature.geom.elems!!.add(Prim(id))
+        feature.geom.elems.add(Prim(id))
         edge = Edge()
         osm = ArrayList()
     }
@@ -329,7 +329,7 @@ class S57map(private val sea: Boolean) {
     }
 
     fun addToArea(id: Long, outer: Boolean) {
-        feature.geom.elems!!.add(Prim(id, outer))
+        feature.geom.elems.add(Prim(id, outer))
     }
 
     fun addTag(key: String, value: String) {
@@ -361,7 +361,7 @@ class S57map(private val sea: Boolean) {
                 val attval = S57val.convertValue(value, att)
                 if (attval!!.value != null) {
                     if (att == Att.VALSOU) {
-                        val node = nodes[feature.geom.elems!![0]!!.id]
+                        val node = nodes[feature.geom.elems[0]!!.id]
                         node!!.value = (attval.value as Double)
                     }
                     atts[att] = attval
@@ -381,7 +381,7 @@ class S57map(private val sea: Boolean) {
                         objs[0] = atts
                     }
                     if (obj == Obj.SOUNDG && feature.geom.prim == POINT) {
-                        val node = nodes[feature.geom.elems!![0]!!.id]
+                        val node = nodes[feature.geom.elems[0]!!.id]
                         node!!.flg = Nflag.DPTH
                     }
                 } else {
@@ -462,80 +462,80 @@ class S57map(private val sea: Boolean) {
     }
 
     // Utility methods
-    fun sortGeom(feature: Feature?): Boolean {
-        val sort = Geom(feature!!.geom.prim)
+    fun sortGeom(feature: Feature): Boolean {
+        val sort = Geom(feature.geom.prim)
         var first: Long = 0
         var last: Long = 0
         var comp: Comp? = null
         var next = true
         feature.geom.length = 0.0
         feature.geom.area = 0.0
-        if (feature.geom.elems!!.isEmpty()) {
+        if (feature.geom.elems.isEmpty()) {
             return false
         }
         if (feature.geom.prim == POINT) {
-            feature.geom.centre = nodes[feature.geom.elems!![0]!!.id]
+            feature.geom.centre = nodes[feature.geom.elems[0]!!.id]
             return true
         }
         var outer: Geom? = Geom(feature.geom.prim)
         val inner = Geom(feature.geom.prim)
-        for (prim in feature.geom.elems!!) {
+        for (prim in feature.geom.elems) {
             if (prim!!.outer) {
-                outer!!.elems!!.add(prim)
+                outer!!.elems.add(prim)
             } else {
-                inner.elems!!.add(prim)
+                inner.elems.add(prim)
             }
         }
         var outin = true
-        var sweep = outer!!.elems!!.size
+        var sweep = outer!!.elems.size
         if (sweep == 0) {
             return false
         }
         var prev = sweep
         var top = 0
-        while (outer!!.elems!!.isNotEmpty()) {
-            val prim = outer.elems!!.removeAt(0)
+        while (outer!!.elems.isNotEmpty()) {
+            val prim = outer.elems.removeAt(0)
             val edge = edges[prim!!.id] ?: return false
-            if (next == true) {
+            if (next) {
                 next = false
                 first = edge.first
                 last = edge.last
                 prim.forward = true
-                sort.elems!!.add(prim)
+                sort.elems.add(prim)
                 if (prim.outer) {
                     sort.outers++
                 } else {
                     sort.inners++
                 }
                 comp = Comp(cref++, 1)
-                sort.comps!!.add(comp)
+                sort.comps.add(comp)
             } else {
                 if (edge.first == last) {
-                    sort.elems!!.add(prim)
+                    sort.elems.add(prim)
                     last = edge.last
                     prim.forward = true
                     comp!!.size++
                 } else if (edge.last == first) {
-                    sort.elems!!.add(top, prim)
+                    sort.elems.add(top, prim)
                     first = edge.first
                     prim.forward = true
                     comp!!.size++
                 } else if (edge.last == last) {
-                    sort.elems!!.add(prim)
+                    sort.elems.add(prim)
                     last = edge.first
                     prim.forward = false
                     comp!!.size++
                 } else if (edge.first == first) {
-                    sort.elems!!.add(top, prim)
+                    sort.elems.add(top, prim)
                     first = edge.last
                     prim.forward = false
                     comp!!.size++
                 } else {
-                    outer.elems!!.add(prim)
+                    outer.elems.add(prim)
                 }
             }
             if (--sweep == 0) {
-                sweep = outer.elems!!.size
+                sweep = outer.elems.size
                 if (sweep == 0 || sweep == prev) {
                     if (sort.prim == AREA && first != last) {
                         return false
@@ -546,10 +546,10 @@ class S57map(private val sea: Boolean) {
                         }
                         outer = inner
                         outin = false
-                        sweep = outer.elems!!.size
+                        sweep = outer.elems.size
                     }
                     next = true
-                    top = sort.elems!!.size
+                    top = sort.elems.size
                 }
                 prev = sweep
             }
@@ -561,19 +561,19 @@ class S57map(private val sea: Boolean) {
         if (feature.geom.prim == AREA) {
             var ie = 0
             var ic = 0
-            while (ie < feature.geom.elems!!.size) {
+            while (ie < feature.geom.elems.size) {
                 val area = calcArea(feature.geom, ic)
                 if (ie == 0) feature.geom.area = abs(area) * 3444 * 3444
                 if (ie == 0 && area < 0.0 || ie > 0 && area >= 0.0) {
                     val tmp = ArrayList<Prim?>()
-                    for (i in 0 until feature.geom.comps!![ic]!!.size) {
-                        val p = feature.geom.elems!!.removeAt(ie)
+                    for (i in 0 until feature.geom.comps[ic]!!.size) {
+                        val p = feature.geom.elems.removeAt(ie)
                         p!!.forward = !p.forward
                         tmp.add(0, p)
                     }
-                    feature.geom.elems!!.addAll(ie, tmp)
+                    feature.geom.elems.addAll(ie, tmp)
                 }
-                ie += feature.geom.comps!![ic]!!.size
+                ie += feature.geom.comps[ic]!!.size
                 ic++
             }
         }
@@ -584,7 +584,7 @@ class S57map(private val sea: Boolean) {
 
     fun cmpGeoms(g1: Geom?, g2: Geom?): Boolean {
         return g1!!.prim == g2!!.prim && g1.outers == g2.outers
-                && g1.inners == g2.inners && g1.elems!!.size == g2.elems!!.size
+                && g1.inners == g2.inners && g1.elems.size == g2.elems.size
     }
 
     inner class EdgeIterator(var edge: Edge?, var forward: Boolean) {
@@ -631,8 +631,8 @@ class S57map(private val sea: Boolean) {
     inner class GeomIterator(var geom: Geom?) {
         var prim: Prim? = null
         var eit: EdgeIterator? = null
-        var ite: ListIterator<Prim?>? = geom!!.elems!!.listIterator()
-        var itc: ListIterator<Comp?>? = geom!!.comps!!.listIterator()
+        var ite: ListIterator<Prim?>? = geom!!.elems.listIterator()
+        var itc: ListIterator<Comp?>? = geom!!.comps.listIterator()
         var comp: Comp? = null
         var ec = 0
         var lastref: Long = 0
@@ -767,10 +767,10 @@ class S57map(private val sea: Boolean) {
         var sarc = 0.0
         var first = true
         when (feature!!.geom.prim) {
-            POINT -> return nodes[feature.geom.elems!![0]!!.id]
+            POINT -> return nodes[feature.geom.elems[0]!!.id]
             LINE -> {
-                var git: GeomIterator? = GeomIterator(feature.geom)
-                while (git!!.hasComp()) {
+                var git = GeomIterator(feature.geom)
+                while (git.hasComp()) {
                     git.nextComp()
                     while (git.hasEdge()) {
                         git.nextEdge()

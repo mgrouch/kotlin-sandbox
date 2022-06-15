@@ -758,7 +758,7 @@ object S57dat {
                         map.nodes[++map.xref] = node
                         feature.geom = S57map.Geom(POINT)
                         feature.geom.centre = node
-                        feature.geom.elems!!.add(S57map.Prim(map.xref))
+                        feature.geom.elems.add(S57map.Prim(map.xref))
                     }
                     Prims.L -> {}
                     Prims.A -> {}

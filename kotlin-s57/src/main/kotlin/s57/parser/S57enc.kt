@@ -1773,7 +1773,7 @@ object S57enc {
                 )
             )
             val nodes: ArrayList<Any> = arrayListOf()
-            for (ref in edge.nodes!!) {
+            for (ref in edge.nodes) {
                 val nval = arrayOf<Any>(
                     rad2deg(map.nodes[ref]!!.lat) * COMF, rad2deg(map.nodes[ref]!!.lon) * COMF
                 )
@@ -1796,15 +1796,15 @@ object S57enc {
                 if (obj == Obj.SOUNDG) {
                     soundings = if (soundings) continue else true
                 }
-                var prim = feature!!.geom.prim!!.ordinal
+                var prim = feature!!.geom.prim.ordinal
                 prim = if (prim == 0) 255 else prim
                 val grup = when (obj) {
                     Obj.DEPARE, Obj.DRGARE, Obj.FLODOC, Obj.HULKES, Obj.LNDARE, Obj.PONTON, Obj.UNSARE -> 1
                     else -> 2
                 }
                 val geom = arrayListOf<S57dat.Fparams>()
-                var outers = if (feature.geom.prim == S57map.Pflag.POINT) 1 else feature.geom.comps!![0]!!.size
-                for (elem in feature.geom.elems!!) {
+                var outers = if (feature.geom.prim == S57map.Pflag.POINT) 1 else feature.geom.comps[0]!!.size
+                for (elem in feature.geom.elems) {
                     if (feature.geom.prim == S57map.Pflag.POINT) {
                         if (obj == Obj.SOUNDG) {
                             geom.add(
