@@ -82,14 +82,14 @@ class S57map(private val sea: Boolean) {
     }
 
     class Reln(var id: Long, var reln: Rflag?)
-    class RelTab : ArrayList<Reln?>()
-    class ObjTab : HashMap<Int?, AttMap?>()
+    class RelTab : ArrayList<Reln>()
+    class ObjTab : HashMap<Int, AttMap?>()
     class ObjMap : HashMap<Obj?, ObjTab?>()
     class AttMap : HashMap<Att?, S57val.AttVal<*>?>()
-    class NodeTab : HashMap<Long?, Snode?>()
-    class EdgeTab : HashMap<Long?, Edge?>()
+    class NodeTab : HashMap<Long, Snode?>()
+    class EdgeTab : HashMap<Long, Edge?>()
     class FtrMap : HashMap<Obj?, ArrayList<Feature?>?>()
-    class FtrTab : HashMap<Long?, Feature?>()
+    class FtrTab : HashMap<Long, Feature?>()
 
     class Prim {
         // Spatial element
@@ -245,7 +245,7 @@ class S57map(private val sea: Boolean) {
             val feature = index[id]
             sortGeom(feature)
             for (reln in feature!!.rels) {
-                val rel = index[reln!!.id]
+                val rel = index[reln.id]
                 if (cmpGeoms(feature.geom, rel!!.geom)) {
                     when (reln.reln) {
                         Rflag.SLAVE -> feature.reln = Rflag.MASTER
@@ -272,7 +272,7 @@ class S57map(private val sea: Boolean) {
         for (id in index.keys) {
             val feature = index[id]
             for (reln in feature!!.rels) {
-                val rel = index[reln!!.id]
+                val rel = index[reln.id]
                 if (rel!!.reln == Rflag.SLAVE) {
                     if (feature.objs[rel.type] == null) {
                         feature.objs[rel.type] = ObjTab()

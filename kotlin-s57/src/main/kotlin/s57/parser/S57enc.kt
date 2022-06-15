@@ -6,6 +6,7 @@ import s57.parser.S57dat.S57field
 import s57.parser.S57dat.byteArrayCopy
 import s57.parser.S57obj.Obj
 import java.nio.ByteBuffer
+
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -1729,7 +1730,7 @@ object S57enc {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.ISOL) {
                 fields = arrayListOf()
-                fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, hash(entry.key!!), 1, 1)))
+                fields.add(S57dat.Fparams(S57field.VRID, arrayOf(110, hash(entry.key), 1, 1)))
                 fields.add(
                     S57dat.Fparams(
                         S57field.SG2D, arrayOf(
@@ -1749,7 +1750,7 @@ object S57enc {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.CONN) {
                 fields = arrayListOf()
-                fields.add(S57dat.Fparams(S57field.VRID, arrayOf(120, hash(entry.key!!), 1, 1)))
+                fields.add(S57dat.Fparams(S57field.VRID, arrayOf(120, hash(entry.key), 1, 1)))
                 fields.add(
                     S57dat.Fparams(
                         S57field.SG2D, arrayOf(
@@ -1768,7 +1769,7 @@ object S57enc {
         for (entry in map.edges.entries) {
             val edge = entry.value
             fields = arrayListOf()
-            fields.add(S57dat.Fparams(S57field.VRID, arrayOf(130, hash(entry.key!!), 1, 1)))
+            fields.add(S57dat.Fparams(S57field.VRID, arrayOf(130, hash(entry.key), 1, 1)))
             fields.add(
                 S57dat.Fparams(
                     S57field.VRPT, arrayOf(
