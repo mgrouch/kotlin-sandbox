@@ -1,6 +1,8 @@
 package s57.seachart
 
 import s57.symbols.*
+import s57.symbols.Symbols.Symbol
+import s57.symbols.Symbols.drawSymbol
 
 import java.awt.*
 import javax.swing.JFrame
@@ -20,7 +22,7 @@ class Symbology : JPanel() {
     public override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
         background = Color.WHITE
-        val all = arrayListOf<Symbols.Symbol>()
+        val all = arrayListOf<Symbol>()
         with(all) {
             addAll(Areas.AllAreas)
             addAll(Beacons.AllBeacons)
@@ -34,7 +36,7 @@ class Symbology : JPanel() {
         for ((idx, s) in all.withIndex()) {
             val x = 100.0 + idx.mod(8) * 150
             val y = 100.0 + idx.div(8) * 150
-            Symbols.drawSymbol(g as Graphics2D, s, 0.5, x, y, null, null)
+            drawSymbol(g as Graphics2D, s, 0.5, x, y, null, null)
         }
     }
 
