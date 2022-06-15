@@ -9,13 +9,17 @@ import s57.symbols.Areas
 import s57.symbols.Symbols
 import s57.symbols.Symbols.Caption
 import s57.symbols.Symbols.Delta
-import s57.symbols.Symbols.Form
+import s57.symbols.Symbols.Form.*
+import s57.symbols.Symbols.Handle
+import s57.symbols.Symbols.SubSymbol
 import s57.symbols.Symbols.Symbol
 import s57.symbols.Symbols.drawSymbol
 
 import java.awt.*
+import java.awt.BasicStroke.*
 import java.awt.Color.black
 import java.awt.geom.*
+import java.awt.geom.AffineTransform.getTranslateInstance
 import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
 
@@ -70,7 +74,7 @@ object Renderer {
             g2!!.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
             g2!!.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP)
             g2!!.stroke =
-                BasicStroke(0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER)
+                BasicStroke(0f, CAP_BUTT, JOIN_MITER)
             do {
             } while (!Rules.rules())
         }
@@ -100,7 +104,7 @@ object Renderer {
         var bbox: Rectangle2D.Double? = null
         if (symbols.size > 4) {
             for (instr in symbols[0]) {
-                if (instr.type === Form.BBOX) {
+                if (instr.type === BBOX) {
                     bbox = instr.params as Rectangle2D.Double?
                     break
                 }
@@ -108,228 +112,66 @@ object Renderer {
             if (bbox == null) return
         }
         when (symbols.size) {
-            1 -> symbol(symbols[0], Delta(Symbols.Handle.CC, AffineTransform()))
+            1 -> symbol(symbols[0], Delta(Handle.CC, AffineTransform()))
             2 -> {
-                symbol(symbols[0], Delta(Symbols.Handle.RC, AffineTransform()))
-                symbol(symbols[1], Delta(Symbols.Handle.LC, AffineTransform()))
+                symbol(symbols[0], Delta(Handle.RC, AffineTransform()))
+                symbol(symbols[1], Delta(Handle.LC, AffineTransform()))
             }
             3 -> {
-                symbol(symbols[0], Delta(Symbols.Handle.BC, AffineTransform()))
-                symbol(symbols[1], Delta(Symbols.Handle.TR, AffineTransform()))
-                symbol(symbols[2], Delta(Symbols.Handle.TL, AffineTransform()))
+                symbol(symbols[0], Delta(Handle.BC, AffineTransform()))
+                symbol(symbols[1], Delta(Handle.TR, AffineTransform()))
+                symbol(symbols[2], Delta(Handle.TL, AffineTransform()))
             }
             4 -> {
-                symbol(symbols[0], Delta(Symbols.Handle.BR, AffineTransform()))
-                symbol(symbols[1], Delta(Symbols.Handle.BL, AffineTransform()))
-                symbol(symbols[2], Delta(Symbols.Handle.TR, AffineTransform()))
-                symbol(symbols[3], Delta(Symbols.Handle.TL, AffineTransform()))
+                symbol(symbols[0], Delta(Handle.BR, AffineTransform()))
+                symbol(symbols[1], Delta(Handle.BL, AffineTransform()))
+                symbol(symbols[2], Delta(Handle.TR, AffineTransform()))
+                symbol(symbols[3], Delta(Handle.TL, AffineTransform()))
             }
             5 -> {
-                symbol(symbols[0], Delta(Symbols.Handle.BR, AffineTransform()))
-                symbol(symbols[1], Delta(Symbols.Handle.BL, AffineTransform()))
-                symbol(
-                    symbols[2],
-                    Delta(
-                        Symbols.Handle.TR,
-                        AffineTransform.getTranslateInstance(-bbox!!.width / 2, 0.0)
-                    )
-                )
-                symbol(symbols[3], Delta(Symbols.Handle.TC, AffineTransform()))
-                symbol(
-                    symbols[4], Delta(
-                        Symbols.Handle.TL, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, 0.0
-                        )
-                    )
-                )
+                symbol(symbols[0], Delta(Handle.BR, AffineTransform()))
+                symbol(symbols[1], Delta(Handle.BL, AffineTransform()))
+                symbol(symbols[2], Delta(Handle.TR, getTranslateInstance(-bbox!!.width / 2, 0.0)))
+                symbol(symbols[3], Delta(Handle.TC, AffineTransform()))
+                symbol(symbols[4], Delta(Handle.TL, getTranslateInstance(bbox.width / 2, 0.0)))
             }
             6 -> {
-                symbol(
-                    symbols[0],
-                    Delta(
-                        Symbols.Handle.BR,
-                        AffineTransform.getTranslateInstance(-bbox!!.width / 2, 0.0)
-                    )
-                )
-                symbol(symbols[1], Delta(Symbols.Handle.BC, AffineTransform()))
-                symbol(
-                    symbols[2], Delta(
-                        Symbols.Handle.BL, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, 0.0
-                        )
-                    )
-                )
-                symbol(
-                    symbols[3],
-                    Delta(
-                        Symbols.Handle.TR,
-                        AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
-                    )
-                )
-                symbol(symbols[4], Delta(Symbols.Handle.TC, AffineTransform()))
-                symbol(
-                    symbols[5], Delta(
-                        Symbols.Handle.TL, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, 0.0
-                        )
-                    )
-                )
+                symbol(symbols[0], Delta(Handle.BR, getTranslateInstance(-bbox!!.width / 2, 0.0)))
+                symbol(symbols[1], Delta(Handle.BC, AffineTransform()))
+                symbol(symbols[2], Delta(Handle.BL, getTranslateInstance(bbox.width / 2, 0.0)))
+                symbol(symbols[3], Delta(Handle.TR, getTranslateInstance(-bbox.width / 2, 0.0)))
+                symbol(symbols[4], Delta(Handle.TC, AffineTransform()))
+                symbol(symbols[5], Delta(Handle.TL, getTranslateInstance(bbox.width / 2, 0.0)))
             }
             7 -> {
-                symbol(
-                    symbols[0],
-                    Delta(
-                        Symbols.Handle.BC,
-                        AffineTransform.getTranslateInstance(0.0, -bbox!!.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[1],
-                    Delta(
-                        Symbols.Handle.RC,
-                        AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
-                    )
-                )
-                symbol(symbols[2], Delta(Symbols.Handle.CC, AffineTransform()))
-                symbol(
-                    symbols[3], Delta(
-                        Symbols.Handle.LC, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, 0.0
-                        )
-                    )
-                )
-                symbol(
-                    symbols[4],
-                    Delta(
-                        Symbols.Handle.TR,
-                        AffineTransform.getTranslateInstance(-bbox.width / 2, bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[5],
-                    Delta(
-                        Symbols.Handle.TC,
-                        AffineTransform.getTranslateInstance(0.0, bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[6], Delta(
-                        Symbols.Handle.TL, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, bbox.height / 2
-                        )
-                    )
-                )
+                symbol(symbols[0], Delta(Handle.BC, getTranslateInstance(0.0, -bbox!!.height / 2)))
+                symbol(symbols[1], Delta(Handle.RC, getTranslateInstance(-bbox.width / 2, 0.0)))
+                symbol(symbols[2], Delta(Handle.CC, AffineTransform()))
+                symbol(symbols[3], Delta(Handle.LC, getTranslateInstance(bbox.width / 2, 0.0)))
+                symbol(symbols[4], Delta(Handle.TR, getTranslateInstance(-bbox.width / 2, bbox.height / 2)))
+                symbol(symbols[5], Delta(Handle.TC, getTranslateInstance(0.0, bbox.height / 2)))
+                symbol(symbols[6], Delta(Handle.TL, getTranslateInstance(bbox.width / 2, bbox.height / 2)))
             }
             8 -> {
-                symbol(
-                    symbols[0],
-                    Delta(
-                        Symbols.Handle.BR,
-                        AffineTransform.getTranslateInstance(0.0, -bbox!!.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[1],
-                    Delta(
-                        Symbols.Handle.BL,
-                        AffineTransform.getTranslateInstance(0.0, -bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[2],
-                    Delta(
-                        Symbols.Handle.RC,
-                        AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
-                    )
-                )
-                symbol(symbols[3], Delta(Symbols.Handle.CC, AffineTransform()))
-                symbol(
-                    symbols[4], Delta(
-                        Symbols.Handle.LC, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, 0.0
-                        )
-                    )
-                )
-                symbol(
-                    symbols[5],
-                    Delta(
-                        Symbols.Handle.TR,
-                        AffineTransform.getTranslateInstance(-bbox.width / 2, bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[6],
-                    Delta(
-                        Symbols.Handle.TC,
-                        AffineTransform.getTranslateInstance(0.0, bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[7], Delta(
-                        Symbols.Handle.TL, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, bbox.height / 2
-                        )
-                    )
-                )
+                symbol(symbols[0], Delta(Handle.BR, getTranslateInstance(0.0, -bbox!!.height / 2)))
+                symbol(symbols[1], Delta(Handle.BL, getTranslateInstance(0.0, -bbox.height / 2)))
+                symbol(symbols[2], Delta(Handle.RC, getTranslateInstance(-bbox.width / 2, 0.0)))
+                symbol(symbols[3], Delta(Handle.CC, AffineTransform()))
+                symbol(symbols[4], Delta(Handle.LC, getTranslateInstance(bbox.width / 2, 0.0)))
+                symbol(symbols[5], Delta(Handle.TR, getTranslateInstance(-bbox.width / 2, bbox.height / 2)))
+                symbol(symbols[6], Delta(Handle.TC, getTranslateInstance(0.0, bbox.height / 2)))
+                symbol(symbols[7], Delta(Handle.TL, getTranslateInstance(bbox.width / 2, bbox.height / 2)))
             }
             9 -> {
-                symbol(
-                    symbols[0],
-                    Delta(
-                        Symbols.Handle.BR,
-                        AffineTransform.getTranslateInstance(-bbox!!.width / 2, -bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[1],
-                    Delta(
-                        Symbols.Handle.BC,
-                        AffineTransform.getTranslateInstance(0.0, -bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[2], Delta(
-                        Symbols.Handle.BL, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, -bbox.height / 2
-                        )
-                    )
-                )
-                symbol(
-                    symbols[3],
-                    Delta(
-                        Symbols.Handle.RC,
-                        AffineTransform.getTranslateInstance(-bbox.width / 2, 0.0)
-                    )
-                )
-                symbol(symbols[4], Delta(Symbols.Handle.CC, AffineTransform()))
-                symbol(
-                    symbols[5], Delta(
-                        Symbols.Handle.LC, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, 0.0
-                        )
-                    )
-                )
-                symbol(
-                    symbols[6],
-                    Delta(
-                        Symbols.Handle.TR,
-                        AffineTransform.getTranslateInstance(-bbox.width / 2, bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[7],
-                    Delta(
-                        Symbols.Handle.TC,
-                        AffineTransform.getTranslateInstance(0.0, bbox.height / 2)
-                    )
-                )
-                symbol(
-                    symbols[8], Delta(
-                        Symbols.Handle.TL, AffineTransform.getTranslateInstance(
-                            bbox.width / 2, bbox.height / 2
-                        )
-                    )
-                )
+                symbol(symbols[0], Delta(Handle.BR, getTranslateInstance(-bbox!!.width / 2, -bbox.height / 2)))
+                symbol(symbols[1], Delta(Handle.BC, getTranslateInstance(0.0, -bbox.height / 2)))
+                symbol(symbols[2], Delta(Handle.BL, getTranslateInstance(bbox.width / 2, -bbox.height / 2)))
+                symbol(symbols[3], Delta(Handle.RC, getTranslateInstance(-bbox.width / 2, 0.0)))
+                symbol(symbols[4], Delta(Handle.CC, AffineTransform()))
+                symbol(symbols[5], Delta(Handle.LC, getTranslateInstance(bbox.width / 2, 0.0)))
+                symbol(symbols[6], Delta(Handle.TR, getTranslateInstance(-bbox.width / 2, bbox.height / 2)))
+                symbol(symbols[7], Delta(Handle.TC, getTranslateInstance(0.0, bbox.height / 2)))
+                symbol(symbols[8], Delta(Handle.TL, getTranslateInstance(bbox.width / 2, bbox.height / 2)))
             }
         }
     }
@@ -338,11 +180,11 @@ object Renderer {
         var ssymb = symbol
         while (ssymb != null) {
             for (item in symbol!!) {
-                if (item.type === Form.BBOX) {
+                if (item.type === BBOX) {
                     return item.params as Rectangle2D.Double?
                 }
-                if (item.type === Form.SYMB) {
-                    ssymb = (item.params as Symbols.SubSymbol?)!!.instr
+                if (item.type === SYMB) {
+                    ssymb = (item.params as SubSymbol?)!!.instr
                     break
                 }
             }
@@ -423,7 +265,7 @@ object Renderer {
                                     drawSymbol(
                                         g2!!, symbol, sScale, curr.x, curr.y, Symbols.Scheme(col),
                                         Delta(
-                                            Symbols.Handle.BC, AffineTransform.getRotateInstance(
+                                            Handle.BC, AffineTransform.getRotateInstance(
                                                 atan2(succ.getY() - curr.y, succ.getX() - curr.x) + deg2rad(
                                                     90.0
                                                 )
@@ -487,8 +329,8 @@ object Renderer {
                 }
                 g2!!.stroke = BasicStroke(
                     (style.width * sScale).toFloat(),
-                    BasicStroke.CAP_BUTT,
-                    BasicStroke.JOIN_ROUND,
+                    CAP_BUTT,
+                    JOIN_ROUND,
                     1f,
                     dash,
                     0f
@@ -496,8 +338,8 @@ object Renderer {
             } else {
                 g2!!.stroke = BasicStroke(
                     (style.width * sScale).toFloat(),
-                    BasicStroke.CAP_ROUND,
-                    BasicStroke.JOIN_ROUND
+                    CAP_ROUND,
+                    JOIN_ROUND
                 )
             }
             g2!!.paint = style.line
@@ -518,15 +360,15 @@ object Renderer {
         radius *= context.mile(Rules.feature!!)
         val circle = Symbol()
         if (style.fill != null) {
-            circle.addInstr(Form.FILL, style.fill)
-            circle.addInstr(Form.RSHP, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
+            circle.addInstr(FILL, style.fill)
+            circle.addInstr(RSHP, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
         }
-        circle.addInstr(Form.FILL, style.line)
+        circle.addInstr(FILL, style.line)
         circle.addInstr(
-            Form.STRK,
-            BasicStroke(style.width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, style.dash, 0f)
+            STRK,
+            BasicStroke(style.width, CAP_BUTT, JOIN_MITER, 1f, style.dash, 0f)
         )
-        circle.addInstr(Form.ELPS, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
+        circle.addInstr(ELPS, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
         val point = context.getPoint(Rules.feature!!.geom.centre!!)
         drawSymbol(g2!!, circle, 1.0, point!!.x, point.y, null, null)
     }
@@ -599,7 +441,7 @@ object Renderer {
         var str = strArg
         var bg = bgArg
         var delta = deltaArg
-        if (delta == null) delta = Delta(Symbols.Handle.CC)
+        if (delta == null) delta = Delta(Handle.CC)
         if (bg == null) bg = Color(0x00000000, true)
         if (str == null || str.isEmpty()) str = " "
         val frc = g2!!.fontRenderContext
@@ -621,16 +463,16 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.34
                 ty = ly + height * 0.17
-                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
-                label.addInstr(Form.FILL, bg)
-                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
-                label.addInstr(Form.FILL, fg)
+                label.addInstr(BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(FILL, bg)
+                label.addInstr(RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(FILL, fg)
                 label.addInstr(
-                    Form.STRK, BasicStroke(
-                        (1 + (height / 10).toInt()).toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER
+                    STRK, BasicStroke(
+                        (1 + (height / 10).toInt()).toFloat(), CAP_BUTT, JOIN_MITER
                     )
                 )
-                label.addInstr(Form.RRCT, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(RRCT, RoundRectangle2D.Double(lx, ly, width, height, height, height))
             }
             LabelStyle.VCLR -> {
                 width += height * 1.0
@@ -640,13 +482,13 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.27
                 ty = ly + height * 0.25
-                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
-                label.addInstr(Form.FILL, bg)
-                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
-                label.addInstr(Form.FILL, fg)
+                label.addInstr(BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(FILL, bg)
+                label.addInstr(RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(FILL, fg)
                 val sw = 1 + (height / 10).toInt()
                 val po = (sw / 2).toDouble()
-                label.addInstr(Form.STRK, BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER))
+                label.addInstr(STRK, BasicStroke(sw.toFloat(), CAP_BUTT, JOIN_MITER))
                 val p = Path2D.Double()
                 p.moveTo(-height * 0.2, -ly - po)
                 p.lineTo(height * 0.2, -ly - po)
@@ -656,7 +498,7 @@ object Renderer {
                 p.lineTo(height * 0.2, ly + po)
                 p.moveTo(0.0, ly + po)
                 p.lineTo(0.0, ly + po + height * 0.15)
-                label.addInstr(Form.PLIN, p)
+                label.addInstr(PLIN, p)
             }
             LabelStyle.PCLR -> {
                 width += height * 1.0
@@ -666,13 +508,13 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.27
                 ty = ly + height * 0.25
-                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
-                label.addInstr(Form.FILL, bg)
-                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
-                label.addInstr(Form.FILL, fg)
+                label.addInstr(BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(FILL, bg)
+                label.addInstr(RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(FILL, fg)
                 val sw = 1 + (height / 10).toInt()
                 val po = (sw / 2).toDouble()
-                label.addInstr(Form.STRK, BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER))
+                label.addInstr(STRK, BasicStroke(sw.toFloat(), CAP_BUTT, JOIN_MITER))
                 val p = Path2D.Double()
                 p.moveTo(-height * 0.2, -ly - po)
                 p.lineTo(height * 0.2, -ly - po)
@@ -682,17 +524,17 @@ object Renderer {
                 p.lineTo(height * 0.2, ly + po)
                 p.moveTo(0.0, ly + po)
                 p.lineTo(0.0, ly + po + height * 0.15)
-                label.addInstr(Form.PLIN, p)
+                label.addInstr(PLIN, p)
                 label.addInstr(
-                    Form.SYMB, Symbols.SubSymbol(
+                    SYMB, SubSymbol(
                         Areas.CableFlash, 1.0, 0.0, 0.0, null,
-                        Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, -width / 2, 0.0))
+                        Delta(Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, -width / 2, 0.0))
                     )
                 )
                 label.addInstr(
-                    Form.SYMB, Symbols.SubSymbol(
+                    SYMB, SubSymbol(
                         Areas.CableFlash, 1.0, 0.0, 0.0, null,
-                        Delta(Symbols.Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, width / 2, 0.0))
+                        Delta(Handle.CC, AffineTransform(0.0, -1.0, 1.0, 0.0, width / 2, 0.0))
                     )
                 )
             }
@@ -704,13 +546,13 @@ object Renderer {
                 ly = -height / 2
                 tx = lx + height * 0.5
                 ty = ly + height * 0.17
-                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
-                label.addInstr(Form.FILL, bg)
-                label.addInstr(Form.RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
-                label.addInstr(Form.FILL, fg)
+                label.addInstr(BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(FILL, bg)
+                label.addInstr(RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
+                label.addInstr(FILL, fg)
                 val sw = 1 + (height / 10).toInt()
                 val vo = height / 4
-                label.addInstr(Form.STRK, BasicStroke(sw.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER))
+                label.addInstr(STRK, BasicStroke(sw.toFloat(), CAP_BUTT, JOIN_MITER))
                 val p = Path2D.Double()
                 p.moveTo(-width * 0.4 - sw, -ly - vo)
                 p.lineTo(-width * 0.4 - sw, ly + vo)
@@ -720,19 +562,19 @@ object Renderer {
                 p.lineTo(width * 0.4 + sw, ly + vo)
                 p.moveTo(width * 0.4 - sw, 0.0)
                 p.lineTo(width * 0.4 + sw, 0.0)
-                label.addInstr(Form.PLIN, p)
+                label.addInstr(PLIN, p)
             }
             else -> {
                 lx = -width / 2
                 ly = -height / 2
                 tx = lx
                 ty = ly
-                label.addInstr(Form.BBOX, Rectangle2D.Double(lx, ly, width, height))
+                label.addInstr(BBOX, Rectangle2D.Double(lx, ly, width, height))
             }
         }
         label.addInstr(
-            Form.TEXT,
-            Caption(str, font, tc, Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(tx, ty)))
+            TEXT,
+            Caption(str, font, tc, Delta(Handle.TL, getTranslateInstance(tx, ty)))
         )
         val point = context.getPoint(Rules.feature!!.geom.centre!!)
         drawSymbol(g2!!, label, sScale, point!!.x, point.y, null, delta)
@@ -791,13 +633,13 @@ object Renderer {
                     val rotate = if (abs(angle) < PI / 2) angle else angle + PI
                     val mid: Point2D = Point2D.Double((before.x + after.x) / 2, (before.y + after.y) / 2)
                     val centre = context.getPoint(Rules.feature!!.geom.centre!!)
-                    val pos = AffineTransform.getTranslateInstance(-dy * sin(rotate), dy * cos(rotate))
+                    val pos = getTranslateInstance(-dy * sin(rotate), dy * cos(rotate))
                     pos.rotate(rotate)
                     pos.translate(mid.x - centre!!.x, mid.y - centre.y)
                     val label = Symbol()
-                    label.addInstr(Form.BBOX, Rectangle2D.Double(-width / 2, -height, width, height))
-                    label.addInstr(Form.TEXT, Caption(str, font, colour, Delta(Symbols.Handle.BC)))
-                    drawSymbol(g2!!, label, sScale, centre.x, centre.y, null, Delta(Symbols.Handle.BC, pos))
+                    label.addInstr(BBOX, Rectangle2D.Double(-width / 2, -height, width, height))
+                    label.addInstr(TEXT, Caption(str, font, colour, Delta(Handle.BC)))
+                    drawSymbol(g2!!, label, sScale, centre.x, centre.y, null, Delta(Handle.BC, pos))
                 }
             }
         }
@@ -820,8 +662,8 @@ object Renderer {
         val mid = ((s1 + s2) / 2 + if (s1 > s2) 180 else 0) % 360
         g2!!.stroke = BasicStroke(
             (3.0 * sScale).toFloat(),
-            BasicStroke.CAP_BUTT,
-            BasicStroke.JOIN_ROUND,
+            CAP_BUTT,
+            JOIN_ROUND,
             1f,
             floatArrayOf(20 * sScale.toFloat(), 20 * sScale.toFloat()),
             0f
@@ -853,7 +695,7 @@ object Renderer {
             }
         }
         val arcWidth = 10.0 * sScale
-        g2!!.stroke = BasicStroke(arcWidth.toFloat(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f)
+        g2!!.stroke = BasicStroke(arcWidth.toFloat(), CAP_BUTT, JOIN_MITER, 1f)
         g2!!.paint = col1
         g2!!.draw(
             Arc2D.Double(
@@ -877,18 +719,16 @@ object Renderer {
             var hand = mid > 270 || mid < 90
             var phi = deg2rad(mid)
             radial += 30 * sScale
-            var at =
-                AffineTransform.getTranslateInstance(-radial * sin(phi) / sScale, radial * cos(phi) / sScale)
+            var at = getTranslateInstance(-radial * sin(phi) / sScale, radial * cos(phi) / sScale)
             if (font.size * sScale * str.length < awidth) {
                 at.rotate(deg2rad(mid + if (hand) 0 else 180))
-                labelText(str, font, black, Delta(Symbols.Handle.CC, at))
+                labelText(str, font, black, Delta(Handle.CC, at))
             } else if (font.size * sScale < awidth) {
                 hand = mid < 180
                 at.rotate(deg2rad(mid + if (hand) -90 else 90))
                 labelText(
-                    str, font, black, if (hand) Delta(Symbols.Handle.RC, at) else Delta(
-                        Symbols.Handle.LC, at
-                    )
+                    str, font, black,
+                    if (hand) Delta(Handle.RC, at) else Delta(Handle.LC, at)
                 )
             }
             if (dir != null) {
@@ -897,14 +737,14 @@ object Renderer {
                 hand = dir > 180
                 phi = deg2rad(dir + if (hand) -0.5 else 0.5)
                 radial -= 70 * sScale
-                at = AffineTransform.getTranslateInstance(
+                at = getTranslateInstance(
                     -radial * sin(phi) / sScale,
                     radial * cos(phi) / sScale
                 )
                 at.rotate(deg2rad(dir + if (hand) 90 else -90))
                 labelText(
                     str, font, black,
-                    if (hand) Delta(Symbols.Handle.BR, at) else Delta(Symbols.Handle.BL, at)
+                    if (hand) Delta(Handle.BR, at) else Delta(Handle.BL, at)
                 )
             }
         }
