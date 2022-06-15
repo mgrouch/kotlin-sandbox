@@ -749,7 +749,7 @@ object S57dat {
 
     fun S57geoms(map: S57map) {
         for (list in map.features.values) {
-            for (feature in list!!) {
+            for (feature in list) {
                 when (S57prims[feature!!.type]) {
                     Prims.N -> {}
                     Prims.P -> if (feature.geom.prim != POINT) {

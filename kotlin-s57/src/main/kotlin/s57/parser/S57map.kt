@@ -83,13 +83,13 @@ class S57map(private val sea: Boolean) {
 
     class Reln(var id: Long, var reln: Rflag?)
     class RelTab : ArrayList<Reln>()
-    class ObjTab : HashMap<Int, AttMap?>()
-    class ObjMap : HashMap<Obj?, ObjTab?>()
+    class ObjTab : HashMap<Int, AttMap>()
+    class ObjMap : HashMap<Obj?, ObjTab>()
     class AttMap : HashMap<Att?, S57val.AttVal<*>?>()
-    class NodeTab : HashMap<Long, Snode?>()
+    class NodeTab : HashMap<Long, Snode>()
     class EdgeTab : HashMap<Long, Edge?>()
-    class FtrMap : HashMap<Obj?, ArrayList<Feature?>?>()
-    class FtrTab : HashMap<Long, Feature?>()
+    class FtrMap : HashMap<Obj?, ArrayList<Feature?>>()
+    class FtrTab : HashMap<Long, Feature>()
 
     class Prim {
         // Spatial element
