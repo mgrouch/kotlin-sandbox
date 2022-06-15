@@ -199,11 +199,13 @@ open class Rules {
         var objects: ArrayList<Feature?>? = null
 
         fun testObject(obj: Obj): Boolean {
-            return Renderer.map!!.features[obj].also { objects = it } != null
+            objects = Renderer.map!!.features[obj]
+            return objects != null
         }
 
         fun testFeature(f: Feature?): Boolean {
-            return f.also { feature = it }!!.reln === Rflag.MASTER
+            feature = f
+            return feature!!.reln === Rflag.MASTER
         }
 
         fun rules(): Boolean {
