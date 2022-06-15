@@ -15,9 +15,11 @@ import s57.parser.S57val.LitCHR
 import s57.parser.deg2rad
 import s57.symbols.Beacons
 import s57.symbols.Symbols
+import s57.symbols.Symbols.Handle
 import s57.symbols.Topmarks
 
 import java.awt.Color
+import java.awt.Color.black
 import java.awt.Font
 import java.awt.geom.AffineTransform
 import java.text.DecimalFormat
@@ -109,12 +111,12 @@ object Signals : Rules() {
                 ) {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
-                        Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -140.0))
+                        Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -140.0))
                     )
                 } else {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
-                        Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -80.0))
+                        Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -80.0))
                     )
                 }
                 Obj.LITFLT, Obj.LITVES, Obj.BOYINB -> if (feature!!.objs.containsKey(
@@ -123,12 +125,12 @@ object Signals : Rules() {
                 ) {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
-                        Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -110.0))
+                        Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -110.0))
                     )
                 } else {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
-                        Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -60.0))
+                        Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -60.0))
                     )
                 }
                 Obj.LITMAJ, Obj.LITMIN -> if (feature!!.objs.containsKey(Obj.TOPMAR) || feature!!.objs.containsKey(
@@ -137,12 +139,12 @@ object Signals : Rules() {
                 ) {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
-                        Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -90.0))
+                        Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -90.0))
                     )
                 } else {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
-                        Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -30.0))
+                        Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -30.0))
                     )
                 }
                 Obj.BOYLAT, Obj.BOYCAR, Obj.BOYISD, Obj.BOYSAW, Obj.BOYSPP -> if (feature!!.objs.containsKey(
@@ -159,12 +161,12 @@ object Signals : Rules() {
                     ) {
                         Renderer.symbol(
                             Topmarks.RadarReflector,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(50.0, -160.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(50.0, -160.0))
                         )
                     } else {
                         Renderer.symbol(
                             Topmarks.RadarReflector,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(25.0, -80.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(25.0, -80.0))
                         )
                     }
                 } else {
@@ -178,12 +180,12 @@ object Signals : Rules() {
                     ) {
                         Renderer.symbol(
                             Topmarks.RadarReflector,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(30.0, -100.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(30.0, -100.0))
                         )
                     } else {
                         Renderer.symbol(
                             Topmarks.RadarReflector,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(10.0, -50.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(10.0, -50.0))
                         )
                     }
                 }
@@ -214,8 +216,8 @@ object Signals : Rules() {
                 }
                 if (str!!.isNotEmpty()) {
                     Renderer.labelText(
-                        str, Font("Arial", Font.PLAIN, 40), Color.black,
-                        Symbols.Delta(Symbols.Handle.TR, AffineTransform.getTranslateInstance(-60.0, -30.0))
+                        str, Font("Arial", Font.PLAIN, 40), black,
+                        Symbols.Delta(Handle.TR, AffineTransform.getTranslateInstance(-60.0, -30.0))
                     )
                 }
             }
@@ -261,7 +263,7 @@ object Signals : Rules() {
             if (bstr.isNotEmpty()) {
                 Renderer.labelText(
                     bstr, Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
-                    Symbols.Delta(Symbols.Handle.TR, AffineTransform.getTranslateInstance(-30.0, -70.0))
+                    Symbols.Delta(Handle.TR, AffineTransform.getTranslateInstance(-30.0, -70.0))
                 )
             }
         }
@@ -295,70 +297,70 @@ object Signals : Rules() {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopNorth,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VASC -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopSouth,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VAEC -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopEast,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VAWC -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopWest,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VAPL -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopCan,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VASL -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopCone,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VAID -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopIsol,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VASW -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopSphere,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VASP -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopX,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     CatROS.ROS_VAWK -> {
                         vais = true
                         Renderer.symbol(
                             Topmarks.TopCross,
-                            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
+                            Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0))
                         )
                     }
                     else -> {}
@@ -372,13 +374,13 @@ object Signals : Rules() {
             if (vais) {
                 Renderer.labelText(
                     "V-AIS", Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
-                    Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, 70.0))
+                    Symbols.Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, 70.0))
                 )
             }
             if (bstr.isNotEmpty()) {
                 Renderer.labelText(
                     bstr, Font("Arial", Font.PLAIN, 40), Symbols.Msymb,
-                    Symbols.Delta(Symbols.Handle.TR, AffineTransform.getTranslateInstance(-30.0, -110.0))
+                    Symbols.Delta(Handle.TR, AffineTransform.getTranslateInstance(-30.0, -110.0))
                 )
             }
         }
@@ -407,7 +409,7 @@ object Signals : Rules() {
         }
         Renderer.symbol(
             Beacons.LightFlare, Symbols.Scheme(LightColours[col]),
-            Symbols.Delta(Symbols.Handle.BC, AffineTransform.getRotateInstance(deg2rad(120.0)))
+            Symbols.Delta(Handle.BC, AffineTransform.getRotateInstance(deg2rad(120.0)))
         )
         if (Renderer.zoom >= 12) {
             var str: String?
@@ -629,8 +631,8 @@ object Signals : Rules() {
                             colrng[colrng.size - 1]!!.rng
                         ) else "/" + df.format(colrng[1]!!.rng) else "") + "M"
                         Renderer.labelText(
-                            str, Font("Arial", Font.PLAIN, 40), Color.black,
-                            Symbols.Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(60.0, y.toDouble()))
+                            str, Font("Arial", Font.PLAIN, 40), black,
+                            Symbols.Delta(Handle.TL, AffineTransform.getTranslateInstance(60.0, y.toDouble()))
                         )
                         y += 40
                         str = ""
@@ -682,8 +684,8 @@ object Signals : Rules() {
                     str += if (cats.contains(CatLIT.LIT_UPPR)) "(Upper)" else ""
                     str += if (cats.contains(CatLIT.LIT_LOWR)) "(Lower)" else ""
                     Renderer.labelText(
-                        str, Font("Arial", Font.PLAIN, 40), Color.black,
-                        Symbols.Delta(Symbols.Handle.TL, AffineTransform.getTranslateInstance(60.0, -30.0))
+                        str, Font("Arial", Font.PLAIN, 40), black,
+                        Symbols.Delta(Handle.TL, AffineTransform.getTranslateInstance(60.0, -30.0))
                     )
                 }
             }
