@@ -46,6 +46,7 @@ import s57.parser.deg2rad
 import s57.render.ChartContext.RuleSet
 
 import s57.render.Renderer.LabelStyle
+import s57.render.Renderer.cluster
 import s57.render.Renderer.fillPattern
 import s57.render.Renderer.labelText
 import s57.render.Renderer.lineSymbols
@@ -56,11 +57,18 @@ import s57.render.Renderer.symbol
 import s57.symbols.*
 import s57.symbols.Notices.getNotice
 import s57.symbols.Notices.getScheme
+import s57.symbols.Symbols.Bwater
 import s57.symbols.Symbols.Delta
+import s57.symbols.Symbols.Gdries
 import s57.symbols.Symbols.Handle
 import s57.symbols.Symbols.LineStyle
+import s57.symbols.Symbols.Mline
+import s57.symbols.Symbols.Msymb
+import s57.symbols.Symbols.Mtss
 import s57.symbols.Symbols.Patt
 import s57.symbols.Symbols.Scheme
+import s57.symbols.Symbols.Symbol
+import s57.symbols.Symbols.Yland
 
 import java.awt.Color
 import java.awt.Color.black
@@ -69,6 +77,7 @@ import java.awt.Font
 import java.awt.Font.BOLD
 import java.awt.Font.PLAIN
 import java.awt.geom.AffineTransform
+import java.awt.geom.AffineTransform.getTranslateInstance
 import java.text.DecimalFormat
 
 /**
@@ -333,11 +342,11 @@ open class Rules {
                 Obj.DEPARE -> {
                     val depmax = getAttVal(Obj.DEPARE, Att.DRVAL2) as Double?
                     if (depmax != null && depmax <= 0.0) {
-                        lineVector(LineStyle(Symbols.Gdries))
+                        lineVector(LineStyle(Gdries))
                     }
                 }
                 Obj.LAKARE -> if (Renderer.zoom >= 12 || feature!!.geom.area > 10.0) lineVector(
-                    LineStyle(Symbols.Bwater)
+                    LineStyle(Bwater)
                 )
                 Obj.DRGARE -> {
                     if (Renderer.zoom < 16) lineVector(
@@ -354,26 +363,26 @@ open class Rules {
                 }
                 Obj.FAIRWY -> if (feature!!.geom.area > 2.0) {
                     if (Renderer.zoom < 16) lineVector(
-                        LineStyle(Symbols.Mline, 8f, floatArrayOf(50f, 50f), Color(0x40ffffff, true))
+                        LineStyle(Mline, 8f, floatArrayOf(50f, 50f), Color(0x40ffffff, true))
                     ) else lineVector(
-                        LineStyle(Symbols.Mline, 8f, floatArrayOf(50f, 50f))
+                        LineStyle(Mline, 8f, floatArrayOf(50f, 50f))
                     )
                 } else {
                     if (Renderer.zoom >= 14) lineVector(LineStyle(Color(0x40ffffff, true)))
                 }
                 Obj.LKBSPT, Obj.LOKBSN, Obj.HRBBSN -> if (Renderer.zoom >= 12) {
-                    lineVector(LineStyle(black, 10f, Symbols.Bwater))
+                    lineVector(LineStyle(black, 10f, Bwater))
                 } else {
-                    lineVector(LineStyle(Symbols.Bwater))
+                    lineVector(LineStyle(Bwater))
                 }
                 Obj.HRBFAC -> if (feature!!.objs[Obj.HRBBSN] != null) {
                     if (Renderer.zoom >= 12) {
-                        lineVector(LineStyle(black, 10f, Symbols.Bwater))
+                        lineVector(LineStyle(black, 10f, Bwater))
                     } else {
-                        lineVector(LineStyle(Symbols.Bwater))
+                        lineVector(LineStyle(Bwater))
                     }
                 }
-                Obj.LNDARE -> lineVector(LineStyle(Symbols.Yland))
+                Obj.LNDARE -> lineVector(LineStyle(Yland))
                 Obj.MARCUL -> if (Renderer.zoom >= 12) {
                     if (Renderer.zoom >= 14) {
                         symbol(Areas.MarineFarm)
@@ -390,17 +399,17 @@ open class Rules {
                     lineVector(LineStyle(black, 20f, floatArrayOf(40f, 40f)))
                     addName(
                         15, Font("Arial", BOLD, 80),
-                        Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 10.0))
+                        Delta(Handle.TC, getTranslateInstance(0.0, 10.0))
                     )
                 }
                 Obj.RESARE, Obj.MIPARE -> if (Renderer.zoom >= 12) {
-                    lineSymbols(Areas.Restricted, 1.0, null, null, 0, Symbols.Mline)
+                    lineSymbols(Areas.Restricted, 1.0, null, null, 0, Mline)
                     if (testAttribute(feature!!.type, Att.CATREA, CatREA.REA_NWAK)) {
                         symbol(Areas.NoWake)
                     }
                 }
                 Obj.PRCARE -> if (Renderer.zoom >= 12) {
-                    lineVector(LineStyle(Symbols.Mline, 10f, floatArrayOf(40f, 40f)))
+                    lineVector(LineStyle(Mline, 10f, floatArrayOf(40f, 40f)))
                 }
                 Obj.SEAARE -> when (getAttEnum(feature!!.type, Att.CATSEA) as CatSEA) {
                     CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom.prim === Pflag.LINE) {
@@ -408,7 +417,7 @@ open class Rules {
                     } else {
                         labelText(
                             name, Font("Arial", PLAIN, 150), black,
-                            Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                            Delta(Handle.BC, getTranslateInstance(0.0, -40.0))
                         )
                     }
                     CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom.prim === Pflag.LINE) {
@@ -416,7 +425,7 @@ open class Rules {
                     } else {
                         labelText(
                             name, Font("Arial", PLAIN, 150), black,
-                            Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                            Delta(Handle.BC, getTranslateInstance(0.0, -40.0))
                         )
                     }
                     CatSEA.SEA_SHOL -> if (Renderer.zoom >= 14) {
@@ -425,7 +434,7 @@ open class Rules {
                             if (name != null) {
                                 labelText(
                                     name, Font("Arial", Font.ITALIC, 75), black,
-                                    Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                                    Delta(Handle.BC, getTranslateInstance(0.0, -40.0))
                                 )
                                 labelText(
                                     "(Shoal)", Font("Arial", PLAIN, 60), black,
@@ -441,7 +450,7 @@ open class Rules {
                             if (name != null) {
                                 labelText(
                                     name, Font("Arial", Font.ITALIC, 75), black,
-                                    Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
+                                    Delta(Handle.BC, getTranslateInstance(0.0, -40.0))
                                 )
                                 labelText(
                                     "(Shoal)", Font("Arial", PLAIN, 60), black,
@@ -466,12 +475,12 @@ open class Rules {
                 }
                 Obj.SPLARE -> {
                     if (Renderer.zoom >= 12) {
-                        symbol(Areas.Plane, Scheme(Symbols.Msymb))
-                        lineSymbols(Areas.Restricted, 0.5, Areas.LinePlane, null, 10, Symbols.Mline)
+                        symbol(Areas.Plane, Scheme(Msymb))
+                        lineSymbols(Areas.Restricted, 0.5, Areas.LinePlane, null, 10, Mline)
                     }
                     addName(
                         15, Font("Arial", BOLD, 80),
-                        Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -90.0))
+                        Delta(Handle.BC, getTranslateInstance(0.0, -90.0))
                     )
                 }
                 else -> {}
@@ -522,7 +531,7 @@ open class Rules {
                 if (hasObject(Obj.NOTMRK)) notices()
                 addName(
                     15, Font("Arial", BOLD, 40),
-                    Delta(Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
+                    Delta(Handle.BL, getTranslateInstance(60.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -555,7 +564,7 @@ open class Rules {
                 }
                 addName(
                     15, Font("Arial", BOLD, 40),
-                    Delta(Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
+                    Delta(Handle.BL, getTranslateInstance(60.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -609,7 +618,7 @@ open class Rules {
         private fun cables() {
             if (Renderer.zoom >= 16 && feature!!.geom.length < 2) {
                 if (feature!!.type === Obj.CBLSUB) {
-                    lineSymbols(Areas.Cable, 0.0, null, null, 0, Symbols.Mline)
+                    lineSymbols(Areas.Cable, 0.0, null, null, 0, Mline)
                 } else if (feature!!.type === Obj.CBLOHD) {
                     val objTab = feature!!.objs[Obj.CBLOHD]
                     val atts = objTab?.let { objTab[0] }
@@ -623,13 +632,13 @@ open class Rules {
                             labelText(
                                 "$atts[Att.VERCLR]!!.value)", Font("Arial", PLAIN, 50),
                                 black, LabelStyle.VCLR, black,
-                                Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
+                                Delta(Handle.TC, getTranslateInstance(0.0, 25.0))
                             )
                         } else if (atts.containsKey(Att.VERCSA)) {
                             labelText(
                                 "$atts[Att.VERCSA]!!.value)", Font("Arial", PLAIN, 50),
                                 black, LabelStyle.PCLR, black,
-                                Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
+                                Delta(Handle.TC, getTranslateInstance(0.0, 25.0))
                             )
                         }
                     }
@@ -649,17 +658,13 @@ open class Rules {
                     orient = 0.0
                 }
                 symbol(
-                    symb, Delta(
-                        Handle.CC, AffineTransform.getRotateInstance(
-                            deg2rad(orient!!)
-                        )
-                    )
+                    symb, Delta(Handle.CC, AffineTransform.getRotateInstance(deg2rad(orient!!)))
                 )
                 var chn: String?
                 if (getAttStr(feature!!.type, Att.COMCHA).also { chn = it }.isNotEmpty()) {
                     labelText(
                         "Ch.$chn", Font("Arial", PLAIN, 50), black,
-                        Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 50.0))
+                        Delta(Handle.TC, getTranslateInstance(0.0, 50.0))
                     )
                 }
             }
@@ -688,15 +693,15 @@ open class Rules {
                     }
                     labelText(
                         ul, mkFont(), black,
-                        Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 15.0))
+                        Delta(Handle.RC, getTranslateInstance(10.0, 15.0))
                     )
                     labelText(
                         id, mkFont(), black,
-                        Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 0.0))
+                        Delta(Handle.RC, getTranslateInstance(10.0, 0.0))
                     )
                     labelText(
                         dd, Font("Arial", PLAIN, 20), black,
-                        Delta(Handle.LC, AffineTransform.getTranslateInstance(15.0, 10.0))
+                        Delta(Handle.LC, getTranslateInstance(15.0, 10.0))
                     )
                 }
                 Obj.DEPCNT -> {}
@@ -730,7 +735,7 @@ open class Rules {
                         str += String.format("%1.0f", dist)
                         labelText(
                             str, Font("Arial", PLAIN, 40), black,
-                            Delta(Handle.CC, AffineTransform.getTranslateInstance(0.0, 45.0))
+                            Delta(Handle.CC, getTranslateInstance(0.0, 45.0))
                         )
                     }
                 }
@@ -766,7 +771,7 @@ open class Rules {
                 }
                 addName(
                     15, Font("Arial", BOLD, 40),
-                    Delta(Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
+                    Delta(Handle.BL, getTranslateInstance(20.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -777,7 +782,7 @@ open class Rules {
                 symbol(Harbours.TideGauge)
                 addName(
                     15, Font("Arial", BOLD, 40),
-                    Delta(Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
+                    Delta(Handle.BL, getTranslateInstance(20.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -788,11 +793,11 @@ open class Rules {
             when (feature!!.type) {
                 Obj.ACHBRT -> {
                     if (Renderer.zoom >= 14) {
-                        symbol(Harbours.Anchor, Scheme(Symbols.Msymb))
+                        symbol(Harbours.Anchor, Scheme(Msymb))
                         if (Renderer.zoom >= 15) {
                             labelText(
-                                name ?: "", mkFont(), Symbols.Msymb,
-                                LabelStyle.RRCT, Symbols.Msymb, white, Delta(Handle.BC)
+                                name ?: "", mkFont(), Msymb,
+                                LabelStyle.RRCT, Msymb, white, Delta(Handle.BC)
                             )
                         }
                     }
@@ -804,8 +809,9 @@ open class Rules {
                                 units = UniHLU.HLU_METR
                             }
                             Renderer.lineCircle(
-                                LineStyle(Symbols.Mline, 4f, floatArrayOf(10f, 10f), null),
-                                radius, units)
+                                LineStyle(Mline, 4f, floatArrayOf(10f, 10f), null),
+                                radius, units
+                            )
                         }
                     }
                 }
@@ -813,18 +819,18 @@ open class Rules {
                     if (feature!!.geom.prim !== Pflag.AREA) {
                         symbol(Harbours.Anchorage, Scheme(black))
                     } else {
-                        symbol(Harbours.Anchorage, Scheme(Symbols.Mline))
-                        lineSymbols(Areas.Restricted, 1.0, Areas.LineAnchor, null, 10, Symbols.Mline)
+                        symbol(Harbours.Anchorage, Scheme(Mline))
+                        lineSymbols(Areas.Restricted, 1.0, Areas.LineAnchor, null, 10, Mline)
                     }
                     addName(
-                        15, Font("Arial", BOLD, 60), Symbols.Mline,
-                        Delta(Handle.LC, AffineTransform.getTranslateInstance(70.0, 0.0))
+                        15, Font("Arial", BOLD, 60), Mline,
+                        Delta(Handle.LC, getTranslateInstance(70.0, 0.0))
                     )
                     val sts = getAttList(Obj.ACHARE, Att.STATUS) as ArrayList<StsSTS?>
                     if (Renderer.zoom >= 15 && sts.contains(StsSTS.STS_RESV)) {
                         labelText(
-                            "Reserved", Font("Arial", PLAIN, 50), Symbols.Mline,
-                            Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 60.0))
+                            "Reserved", Font("Arial", PLAIN, 50), Mline,
+                            Delta(Handle.TC, getTranslateInstance(0.0, 60.0))
                         )
                     }
                     val cats = getAttList(Obj.ACHARE, Att.CATACH) as ArrayList<CatACH?>
@@ -833,61 +839,43 @@ open class Rules {
                         when (cat) {
                             CatACH.ACH_DEEP -> {
                                 labelText(
-                                    "DW", Font("Arial", BOLD, 50), Symbols.Msymb,
-                                    Delta(
-                                        Handle.RC,
-                                        AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
-                                    )
+                                    "DW", Font("Arial", BOLD, 50), Msymb,
+                                    Delta(Handle.RC, getTranslateInstance(-60.0, dy.toDouble()))
                                 )
                                 dy += 60
                             }
                             CatACH.ACH_TANK -> {
                                 labelText(
-                                    "Tanker", Font("Arial", BOLD, 50), Symbols.Msymb,
-                                    Delta(
-                                        Handle.RC,
-                                        AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
-                                    )
+                                    "Tanker", Font("Arial", BOLD, 50), Msymb,
+                                    Delta(Handle.RC, getTranslateInstance(-60.0, dy.toDouble()))
                                 )
                                 dy += 60
                             }
                             CatACH.ACH_H24P -> {
                                 labelText(
-                                    "24h", Font("Arial", BOLD, 50), Symbols.Msymb,
-                                    Delta(
-                                        Handle.RC,
-                                        AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
-                                    )
+                                    "24h", Font("Arial", BOLD, 50), Msymb,
+                                    Delta(Handle.RC, getTranslateInstance(-60.0, dy.toDouble()))
                                 )
                                 dy += 60
                             }
                             CatACH.ACH_EXPL -> {
                                 symbol(
-                                    Harbours.Explosives, Scheme(Symbols.Msymb),
-                                    Delta(
-                                        Handle.RC,
-                                        AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
-                                    )
+                                    Harbours.Explosives, Scheme(Msymb),
+                                    Delta(Handle.RC, getTranslateInstance(-60.0, dy.toDouble()))
                                 )
                                 dy += 60
                             }
                             CatACH.ACH_QUAR -> {
                                 symbol(
-                                    Harbours.Hospital, Scheme(Symbols.Msymb),
-                                    Delta(
-                                        Handle.RC,
-                                        AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
-                                    )
+                                    Harbours.Hospital, Scheme(Msymb),
+                                    Delta(Handle.RC, getTranslateInstance(-60.0, dy.toDouble()))
                                 )
                                 dy += 60
                             }
                             CatACH.ACH_SEAP -> {
                                 symbol(
-                                    Areas.Seaplane, Scheme(Symbols.Msymb),
-                                    Delta(
-                                        Handle.RC,
-                                        AffineTransform.getTranslateInstance(-60.0, dy.toDouble())
-                                    )
+                                    Areas.Seaplane, Scheme(Msymb),
+                                    Delta(Handle.RC, getTranslateInstance(-60.0, dy.toDouble()))
                                 )
                                 dy += 60
                             }
@@ -896,14 +884,14 @@ open class Rules {
                     }
                 }
                 Obj.BERTHS -> if (Renderer.zoom >= 14) {
-                    lineVector(LineStyle(Symbols.Mline, 6f, floatArrayOf(20f, 20f)))
+                    lineVector(LineStyle(Mline, 6f, floatArrayOf(20f, 20f)))
                     labelText(
-                        name ?: " ", Font("Arial", PLAIN, 40), Symbols.Msymb,
-                        LabelStyle.RRCT, Symbols.Mline, white
+                        name ?: " ", Font("Arial", PLAIN, 40), Msymb,
+                        LabelStyle.RRCT, Mline, white
                     )
                 }
                 Obj.BUISGL -> if (Renderer.zoom >= 16) {
-                    val symbols = ArrayList<Symbols.Symbol>()
+                    val symbols = ArrayList<Symbol>()
                     val fncs = getAttList(Obj.BUISGL, Att.FUNCTN) as ArrayList<FncFNC?>
                     for (fnc in fncs) {
                         Landmarks.Funcs[fnc]?.let { symbols.add(it) }
@@ -914,7 +902,7 @@ open class Rules {
                             symbols.add(Facilities.Cats[scf]!!)
                         }
                     }
-                    Renderer.cluster(symbols)
+                    cluster(symbols)
                 }
                 Obj.HRBFAC -> if (Renderer.zoom >= 12) {
                     val cathaf = getAttList(Obj.HRBFAC, Att.CATHAF) as ArrayList<CatHAF?>
@@ -973,8 +961,7 @@ open class Rules {
                         var catSym = Landmarks.Shapes[cats[0]]
                         val fncs = getAttList(feature!!.type, Att.FUNCTN) as ArrayList<FncFNC?>
                         var fncSym = Landmarks.Funcs[fncs[0]]
-                        if (fncs[0] === FncFNC.FNC_CHCH && cats[0] === CatLMK.LMK_TOWR) catSym =
-                            Landmarks.ChurchTower
+                        if (fncs[0] === FncFNC.FNC_CHCH && cats[0] === CatLMK.LMK_TOWR) catSym = Landmarks.ChurchTower
                         if (cats[0] === CatLMK.LMK_RADR) fncSym = Landmarks.RadioTV
                         symbol(catSym)
                         symbol(fncSym)
@@ -984,14 +971,12 @@ open class Rules {
                             Att.CATSIL,
                             CatSIL.SIL_WTRT
                         )
-                    ) symbol(
-                        Landmarks.WaterTower
-                    )
+                    ) symbol(Landmarks.WaterTower)
                     else -> {}
                 }
                 if (Renderer.zoom >= 15) addName(
                     15, Font("Arial", BOLD, 40),
-                    Delta(Handle.BL, AffineTransform.getTranslateInstance(60.0, -50.0))
+                    Delta(Handle.BL, getTranslateInstance(60.0, -50.0))
                 )
                 Signals.addSignals()
             }
@@ -1068,12 +1053,12 @@ open class Rules {
 
         private fun marinas() {
             if (Renderer.zoom >= 16) {
-                val symbols = ArrayList<Symbols.Symbol>()
+                val symbols = ArrayList<Symbol>()
                 val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
                 for (scf in scfs) {
                     symbols.add(Facilities.Cats[scf]!!)
                 }
-                Renderer.cluster(symbols)
+                cluster(symbols)
             }
         }
 
@@ -1124,7 +1109,7 @@ open class Rules {
                 if (n > 5) {
                     symbol(
                         Notices.Notice,
-                        Delta(Handle.CC, AffineTransform.getTranslateInstance(dx, dy))
+                        Delta(Handle.CC, getTranslateInstance(dx, dy))
                     )
                 } else {
                     for ((i, atts) in objs.values.withIndex()) {
@@ -1154,10 +1139,10 @@ open class Rules {
                             4 -> h = Handle.TL
                         }
                         if (h != null) {
-                            symbol(sym, sch, Delta(h, AffineTransform.getTranslateInstance(dx, dy)))
+                            symbol(sym, sch, Delta(h, getTranslateInstance(dx, dy)))
                             if (add!!.isNotEmpty()) symbol(
                                 Notices.NoticeBoard,
-                                Delta(Handle.BC, AffineTransform.getTranslateInstance(ax, ay - 30))
+                                Delta(Handle.BC, getTranslateInstance(ax, ay - 30))
                             )
                         }
                     }
@@ -1188,7 +1173,7 @@ open class Rules {
         private fun pipelines() {
             if (Renderer.zoom >= 16 && feature!!.geom.length < 2) {
                 if (feature!!.type === Obj.PIPSOL) {
-                    lineSymbols(Areas.Pipeline, 1.0, null, null, 0, Symbols.Mline)
+                    lineSymbols(Areas.Pipeline, 1.0, null, null, 0, Mline)
                 } else if (feature!!.type === Obj.PIPOHD) {
                     lineVector(LineStyle(black, 8f))
                     val atts = feature!!.atts
@@ -1203,7 +1188,7 @@ open class Rules {
                             labelText(
                                 verclr.toString(), Font("Arial", PLAIN, 50), black,
                                 LabelStyle.VCLR, black,
-                                Delta(Handle.TC, AffineTransform.getTranslateInstance(0.0, 25.0))
+                                Delta(Handle.TC, getTranslateInstance(0.0, 25.0))
                             )
                         }
                     }
@@ -1216,7 +1201,7 @@ open class Rules {
             if (cats[0] === CatOFP.OFP_FPSO) symbol(Buoys.Storage) else symbol(Landmarks.Platform)
             addName(
                 15, Font("Arial", BOLD, 40),
-                Delta(Handle.BL, AffineTransform.getTranslateInstance(20.0, -50.0))
+                Delta(Handle.BL, getTranslateInstance(20.0, -50.0))
             )
             Signals.addSignals()
         }
@@ -1224,13 +1209,10 @@ open class Rules {
         private fun ports() {
             if (Renderer.zoom >= 14) {
                 if (feature!!.type === Obj.CRANES) {
-                    if (getAttEnum(
-                            feature!!.type,
-                            Att.CATCRN
-                        ) as CatCRN === CatCRN.CRN_CONT
-                    ) symbol(
-                        Harbours.ContainerCrane
-                    ) else symbol(Harbours.PortCrane)
+                    if (getAttEnum(feature!!.type, Att.CATCRN) as CatCRN === CatCRN.CRN_CONT)
+                        symbol(Harbours.ContainerCrane)
+                    else
+                        symbol(Harbours.PortCrane)
                 } else if (feature!!.type === Obj.HULKES) {
                     lineVector(LineStyle(black, 4f, null, Color(0xffe000)))
                     addName(15, Font("Arial", BOLD, 40))
@@ -1241,22 +1223,21 @@ open class Rules {
         private fun separation() {
             when (feature!!.type) {
                 Obj.TSEZNE, Obj.TSSCRS, Obj.TSSRON -> {
-                    if (Renderer.zoom <= 15) lineVector(LineStyle(Symbols.Mtss)) else lineVector(
-                        LineStyle(Symbols.Mtss, 20f, null, null)
-                    )
-                    addName(10, Font("Arial", BOLD, 150), Symbols.Mline)
+                    if (Renderer.zoom <= 15) lineVector(LineStyle(Mtss))
+                    else lineVector(LineStyle(Mtss, 20f, null, null))
+                    addName(10, Font("Arial", BOLD, 150), Mline)
                 }
-                Obj.TSELNE -> lineVector(LineStyle(Symbols.Mtss, 20f, null, null))
-                Obj.TSSLPT -> lineSymbols(Areas.LaneArrow, 0.5, null, null, 0, Symbols.Mtss)
+                Obj.TSELNE -> lineVector(LineStyle(Mtss, 20f, null, null))
+                Obj.TSSLPT -> lineSymbols(Areas.LaneArrow, 0.5, null, null, 0, Mtss)
                 Obj.TSSBND -> lineVector(
                     LineStyle(
-                        Symbols.Mtss,
+                        Mtss,
                         20f,
                         floatArrayOf(40f, 40f),
                         null
                     )
                 )
-                Obj.ISTZNE -> lineSymbols(Areas.Restricted, 1.0, null, null, 0, Symbols.Mtss)
+                Obj.ISTZNE -> lineSymbols(Areas.Restricted, 1.0, null, null, 0, Mtss)
                 else -> {}
             }
         }
@@ -1266,9 +1247,9 @@ open class Rules {
             if (Renderer.context.ruleset() === RuleSet.ALL || Renderer.context.ruleset() === RuleSet.BASE) {
                 if (cat !== CatSLC.SLC_SWAY && cat !== CatSLC.SLC_TWAL) {
                     if (Renderer.zoom >= 12) {
-                        lineVector(LineStyle(black, 10f, Symbols.Yland))
+                        lineVector(LineStyle(black, 10f, Yland))
                     } else {
-                        lineVector(LineStyle(Symbols.Yland))
+                        lineVector(LineStyle(Yland))
                     }
                 }
             }
@@ -1298,12 +1279,12 @@ open class Rules {
                         CatSLC.SLC_SWAY -> {
                             lineVector(LineStyle(black, 2f, null, Color(0xffe000)))
                             if (Renderer.zoom >= 16 && feature!!.objs.containsKey(Obj.SMCFAC)) {
-                                val symbols = ArrayList<Symbols.Symbol>()
+                                val symbols = ArrayList<Symbol>()
                                 val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
                                 for (scf in scfs) {
                                     symbols.add(Facilities.Cats[scf]!!)
                                 }
-                                Renderer.cluster(symbols)
+                                cluster(symbols)
                             }
                         }
                         else -> {}
@@ -1357,21 +1338,21 @@ open class Rules {
                         symbol(Harbours.SignalStation)
                         symbol(Beacons.RadarStation)
                         labelText(
-                            "Ra", Font("Arial", PLAIN, 40), Symbols.Msymb,
-                            Delta(Handle.TR, AffineTransform.getTranslateInstance(-30.0, -70.0))
+                            "Ra", Font("Arial", PLAIN, 40), Msymb,
+                            Delta(Handle.TR, getTranslateInstance(-30.0, -70.0))
                         )
                     }
                     Obj.PILBOP -> {
                         symbol(Harbours.Pilot)
                         addName(
-                            15, Font("Arial", BOLD, 40), Symbols.Msymb,
-                            Delta(Handle.LC, AffineTransform.getTranslateInstance(70.0, -40.0))
+                            15, Font("Arial", BOLD, 40), Msymb,
+                            Delta(Handle.LC, getTranslateInstance(70.0, -40.0))
                         )
                         val cat = getAttEnum(feature!!.type, Att.CATPIL) as CatPIL
                         if (cat === CatPIL.PIL_HELI) {
                             labelText(
-                                "H", Font("Arial", PLAIN, 40), Symbols.Msymb,
-                                Delta(Handle.LC, AffineTransform.getTranslateInstance(70.0, 0.0))
+                                "H", Font("Arial", PLAIN, 40), Msymb,
+                                Delta(Handle.LC, getTranslateInstance(70.0, 0.0))
                             )
                         }
                     }
@@ -1380,7 +1361,7 @@ open class Rules {
                         str = "CG"
                         if (feature!!.objs.containsKey(Obj.RSCSTA)) symbol(
                             Harbours.Rescue,
-                            Delta(Handle.CC, AffineTransform.getTranslateInstance(130.0, 0.0))
+                            Delta(Handle.CC, getTranslateInstance(130.0, 0.0))
                         )
                     }
                     Obj.RSCSTA -> symbol(Harbours.Rescue)
@@ -1389,7 +1370,7 @@ open class Rules {
                 if (Renderer.zoom >= 15 && str.isNotEmpty()) {
                     labelText(
                         str, Font("Arial", PLAIN, 40), black,
-                        Delta(Handle.LC, AffineTransform.getTranslateInstance(40.0, 0.0))
+                        Delta(Handle.LC, getTranslateInstance(40.0, 0.0))
                     )
                 }
                 Signals.addSignals()
@@ -1424,9 +1405,9 @@ open class Rules {
         private fun waterways() {
             lineVector(
                 LineStyle(
-                    Symbols.Bwater,
+                    Bwater,
                     20f,
-                    if (feature!!.geom.prim === Pflag.AREA) Symbols.Bwater else null
+                    if (feature!!.geom.prim === Pflag.AREA) Bwater else null
                 )
             )
         }
