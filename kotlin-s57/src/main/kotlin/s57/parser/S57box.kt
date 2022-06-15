@@ -47,33 +47,33 @@ object S57box {
                 sbound = ebound
             }
         }
-        if (map.features!![Obj.COALNE] != null) {
+        if (map.features[Obj.COALNE] != null) {
             val coasts = arrayListOf<Feature>()
             val lands = arrayListOf<Land>()
-            if (map.features!![Obj.LNDARE] == null) {
-                map.features!![Obj.LNDARE] = arrayListOf()
+            if (map.features[Obj.LNDARE] == null) {
+                map.features[Obj.LNDARE] = arrayListOf()
             }
-            for (feature in map.features!![Obj.COALNE]!!) {
+            for (feature in map.features[Obj.COALNE]!!) {
                 val land = Feature()
                 land.id = ++map.xref
                 land.type = Obj.LNDARE
                 land.reln = Rflag.MASTER
-                land.objs!![Obj.LNDARE] = ObjTab()
-                land.objs!![Obj.LNDARE]!![0] = AttMap()
-                if (feature!!.geom!!.prim == AREA) {
+                land.objs[Obj.LNDARE] = ObjTab()
+                land.objs[Obj.LNDARE]!![0] = AttMap()
+                if (feature!!.geom.prim == AREA) {
                     land.geom = feature.geom
-                    map.features!![Obj.LNDARE]!!.add(land)
-                } else if (feature.geom!!.prim == LINE) {
-                    land.geom!!.prim = LINE
-                    land.geom!!.elems!!.addAll(feature.geom!!.elems!!)
+                    map.features[Obj.LNDARE]!!.add(land)
+                } else if (feature.geom.prim == LINE) {
+                    land.geom.prim = LINE
+                    land.geom.elems!!.addAll(feature.geom.elems!!)
                     coasts.add(land)
                 }
             }
             while (coasts.size > 0) {
                 val land = coasts.removeAt(0)
-                val fedge = map.edges!![land.geom!!.elems!![0]!!.id]
+                val fedge = map.edges[land.geom.elems!![0]!!.id]
                 var first = fedge!!.first
-                var last = map.edges!![land.geom!!.elems!![land.geom!!.elems!!.size - 1]!!.id]!!.last
+                var last = map.edges[land.geom.elems!![land.geom.elems!!.size - 1]!!.id]!!.last
                 if (coasts.size > 0) {
                     var added = true
                     while (added) {
@@ -81,14 +81,14 @@ object S57box {
                         var i = 0
                         while (i < coasts.size) {
                             val coast = coasts[i]
-                            val edge = map.edges!![coast.geom!!.elems!![0]!!.id]
+                            val edge = map.edges[coast.geom.elems!![0]!!.id]
                             if (edge!!.first == last) {
-                                land.geom!!.elems!!.add(coast.geom!!.elems!![0])
+                                land.geom.elems!!.add(coast.geom.elems!![0])
                                 last = edge.last
                                 coasts.removeAt(i--)
                                 added = true
                             } else if (edge.last == first) {
-                                land.geom!!.elems!!.add(0, coast.geom!!.elems!![0])
+                                land.geom.elems!!.add(0, coast.geom.elems!![0])
                                 first = edge.first
                                 coasts.removeAt(i--)
                                 added = true
@@ -102,20 +102,20 @@ object S57box {
             var islands = arrayListOf<Land>()
             for (land in lands) {
                 map.sortGeom(land.land)
-                if (land.land.geom!!.prim == AREA) {
+                if (land.land.geom.prim == AREA) {
                     islands.add(land)
-                    map.features!![Obj.LNDARE]!!.add(land.land)
+                    map.features[Obj.LNDARE]!!.add(land.land)
                 }
             }
             for (island in islands) {
                 lands.remove(island)
             }
             for (land in lands) {
-                land.first = map.edges!![land.land.geom!!.elems!![0]!!.id]!!.first
-                land.start = map.nodes!![land.first]
+                land.first = map.edges[land.land.geom.elems!![0]!!.id]!!.first
+                land.start = map.nodes[land.first]
                 land.sbound = getExt(map, land.start!!.lat, land.start!!.lon)
-                land.last = map.edges!![land.land.geom!!.elems!![land.land.geom!!.comps!![0]!!.size - 1]!!.id]!!.last
-                land.end = map.nodes!![land.last]
+                land.last = map.edges[land.land.geom.elems!![land.land.geom.comps!![0]!!.size - 1]!!.id]!!.last
+                land.end = map.nodes[land.last]
                 land.ebound = getExt(map, land.end!!.lat, land.end!!.lon)
             }
             islands = arrayListOf()
@@ -153,11 +153,11 @@ object S57box {
                         else -> continue
                     }
                 }
-                map.edges!![++map.xref] = nedge
-                land.land.geom!!.elems!!.add(Prim(map.xref))
-                land.land.geom!!.comps!![0]!!.size++
-                land.land.geom!!.prim = AREA
-                map.features!![Obj.LNDARE]!!.add(land.land)
+                map.edges[++map.xref] = nedge
+                land.land.geom.elems!!.add(Prim(map.xref))
+                land.land.geom.comps!![0]!!.size++
+                land.land.geom.prim = AREA
+                map.features[Obj.LNDARE]!!.add(land.land)
             }
         }
         return

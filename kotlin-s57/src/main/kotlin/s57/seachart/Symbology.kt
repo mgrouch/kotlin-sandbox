@@ -1,6 +1,7 @@
 package s57.seachart
 
 import s57.symbols.*
+
 import java.awt.*
 import javax.swing.JFrame
 import javax.swing.JPanel

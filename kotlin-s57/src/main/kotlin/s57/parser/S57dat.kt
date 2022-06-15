@@ -748,23 +748,23 @@ object S57dat {
     )
 
     fun S57geoms(map: S57map) {
-        for (list in map.features!!.values) {
+        for (list in map.features.values) {
             for (feature in list!!) {
                 when (S57prims[feature!!.type]) {
                     Prims.N -> {}
-                    Prims.P -> if (feature.geom!!.prim != POINT) {
-                        val node = feature.geom!!.centre
+                    Prims.P -> if (feature.geom.prim != POINT) {
+                        val node = feature.geom.centre
                         node!!.flg = S57map.Nflag.ISOL
-                        map.nodes!![++map.xref] = node
+                        map.nodes[++map.xref] = node
                         feature.geom = S57map.Geom(POINT)
-                        feature.geom!!.centre = node
-                        feature.geom!!.elems!!.add(S57map.Prim(map.xref))
+                        feature.geom.centre = node
+                        feature.geom.elems!!.add(S57map.Prim(map.xref))
                     }
                     Prims.L -> {}
                     Prims.A -> {}
                     Prims.PA -> {}
                     Prims.PL -> {}
-                    Prims.LA -> if (feature.geom!!.prim == POINT) {
+                    Prims.LA -> if (feature.geom.prim == POINT) {
                         //                        list.remove(feature);
                     }
                     Prims.PLA -> {}

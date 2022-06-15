@@ -1646,7 +1646,7 @@ object S57enc {
         }
 
         //M_COVR & MNSYS in BB if not in map
-        if (!map!!.features!!.containsKey(Obj.M_COVR)) {
+        if (!map!!.features.containsKey(Obj.M_COVR)) {
             S57osm.OSMmeta(map)
         }
         S57dat.S57geoms(map)
@@ -1704,7 +1704,7 @@ object S57enc {
 
         // Depths
         val depths: ArrayList<Any> = arrayListOf()
-        for (entry in map.nodes!!.entries) {
+        for (entry in map.nodes.entries) {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.DPTH) {
                 val dval = arrayOf<Any>(
@@ -1725,7 +1725,7 @@ object S57enc {
         }
 
         // Isolated nodes
-        for (entry in map.nodes!!.entries) {
+        for (entry in map.nodes.entries) {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.ISOL) {
                 fields = arrayListOf()
@@ -1745,7 +1745,7 @@ object S57enc {
         }
 
         // Connected nodes
-        for (entry in map.nodes!!.entries) {
+        for (entry in map.nodes.entries) {
             val node = entry.value
             if (node!!.flg == S57map.Nflag.CONN) {
                 fields = arrayListOf()
@@ -1765,7 +1765,7 @@ object S57enc {
         }
 
         // Edges
-        for (entry in map.edges!!.entries) {
+        for (entry in map.edges.entries) {
             val edge = entry.value
             fields = arrayListOf()
             fields.add(S57dat.Fparams(S57field.VRID, arrayOf(130, hash(entry.key!!), 1, 1)))
@@ -1780,7 +1780,7 @@ object S57enc {
             val nodes: ArrayList<Any> = arrayListOf()
             for (ref in edge.nodes!!) {
                 val nval = arrayOf<Any>(
-                    rad2deg(map.nodes!![ref]!!.lat) * COMF, rad2deg(map.nodes!![ref]!!.lon) * COMF
+                    rad2deg(map.nodes[ref]!!.lat) * COMF, rad2deg(map.nodes[ref]!!.lon) * COMF
                 )
                 nodes.addAll(nval)
             }
@@ -1795,22 +1795,22 @@ object S57enc {
 
         // Meta & Geo objects
         var soundings = false
-        for (entry in map.features!!.entries) {
+        for (entry in map.features.entries) {
             val obj = entry.key
             for (feature in entry.value!!) {
                 if (obj == Obj.SOUNDG) {
                     soundings = if (soundings) continue else true
                 }
-                var prim = feature!!.geom!!.prim!!.ordinal
+                var prim = feature!!.geom.prim!!.ordinal
                 prim = if (prim == 0) 255 else prim
                 val grup = when (obj) {
                     Obj.DEPARE, Obj.DRGARE, Obj.FLODOC, Obj.HULKES, Obj.LNDARE, Obj.PONTON, Obj.UNSARE -> 1
                     else -> 2
                 }
                 val geom = arrayListOf<S57dat.Fparams>()
-                var outers = if (feature.geom!!.prim == S57map.Pflag.POINT) 1 else feature.geom!!.comps!![0]!!.size
-                for (elem in feature.geom!!.elems!!) {
-                    if (feature.geom!!.prim == S57map.Pflag.POINT) {
+                var outers = if (feature.geom.prim == S57map.Pflag.POINT) 1 else feature.geom.comps!![0]!!.size
+                for (elem in feature.geom.elems!!) {
+                    if (feature.geom.prim == S57map.Pflag.POINT) {
                         if (obj == Obj.SOUNDG) {
                             geom.add(
                                 S57dat.Fparams(
@@ -1823,7 +1823,7 @@ object S57enc {
                                 S57dat.Fparams(
                                     S57field.FSPT, arrayOf(
                                         (hash(elem!!.id) shl 8)
-                                                + if (map.nodes!![elem.id]!!.flg == S57map.Nflag.CONN) 120L else 110L,
+                                                + if (map.nodes[elem.id]!!.flg == S57map.Nflag.CONN) 120L else 110L,
                                         255, 255, 255
                                     )
                                 )
@@ -1846,7 +1846,7 @@ object S57enc {
                 val objects = arrayListOf<ArrayList<S57dat.Fparams>>()
                 val slaves = arrayListOf<Long?>()
                 var slaveid = feature.id + 0x0100000000000000L
-                for (objs in feature.objs!!.entries) {
+                for (objs in feature.objs.entries) {
                     val objobj = objs.key
                     for (o in objs.value!!.entries) {
                         val objatts = arrayListOf<S57dat.Fparams>()
@@ -1864,7 +1864,7 @@ object S57enc {
                         val atts = S57map.AttMap()
                         atts.putAll(o.value!!)
                         if (master) {
-                            atts.putAll(feature.atts!!)
+                            atts.putAll(feature.atts)
                         }
                         for (att in atts.entries) {
                             if (obj != Obj.SOUNDG || att.key != Att.VALSOU) {

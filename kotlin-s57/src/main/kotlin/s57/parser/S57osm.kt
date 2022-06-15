@@ -93,10 +93,10 @@ object S57osm {
         var inWay = false
         var inRel = false
 
-        map!!.nodes!![1L] = Snode()
-        map.nodes!![2L] = Snode()
-        map.nodes!![3L] = Snode()
-        map.nodes!![4L] = Snode()
+        map!!.nodes[1L] = Snode()
+        map.nodes[2L] = Snode()
+        map.nodes[3L] = Snode()
+        map.nodes[4L] = Snode()
 
         var ln: String?
         while (inp!!.readLine().also { ln = it } != null) {
@@ -107,26 +107,26 @@ object S57osm {
                             map.bounds!!.minlat =
                                 deg2rad(token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()[1].toDouble())
-                            map.nodes!![2L]!!.lat = map.bounds!!.minlat
-                            map.nodes!![3L]!!.lat = map.bounds!!.minlat
+                            map.nodes[2L]!!.lat = map.bounds!!.minlat
+                            map.nodes[3L]!!.lat = map.bounds!!.minlat
                         } else if (token.matches("^minlon=.+".toRegex())) {
                             map.bounds!!.minlon =
                                 deg2rad(token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()[1].toDouble())
-                            map.nodes!![1L]!!.lon = map.bounds!!.minlon
-                            map.nodes!![2L]!!.lon = map.bounds!!.minlon
+                            map.nodes[1L]!!.lon = map.bounds!!.minlon
+                            map.nodes[2L]!!.lon = map.bounds!!.minlon
                         } else if (token.matches("^maxlat=.+".toRegex())) {
                             map.bounds!!.maxlat =
                                 deg2rad(token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()[1].toDouble())
-                            map.nodes!![1L]!!.lat = map.bounds!!.maxlat
-                            map.nodes!![4L]!!.lat = map.bounds!!.maxlat
+                            map.nodes[1L]!!.lat = map.bounds!!.maxlat
+                            map.nodes[4L]!!.lat = map.bounds!!.maxlat
                         } else if (token.matches("^maxlon=.+".toRegex())) {
                             map.bounds!!.maxlon =
                                 deg2rad(token.split("[\"\']".toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()[1].toDouble())
-                            map.nodes!![3L]!!.lon = map.bounds!!.maxlon
-                            map.nodes!![4L]!!.lon = map.bounds!!.maxlon
+                            map.nodes[3L]!!.lon = map.bounds!!.maxlon
+                            map.nodes[4L]!!.lon = map.bounds!!.maxlon
                         }
                     }
                 } else {
