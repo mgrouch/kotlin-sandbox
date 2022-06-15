@@ -50,6 +50,7 @@ import s57.symbols.Symbols.Scheme
 
 import java.awt.Color
 import java.awt.Color.black
+import java.awt.Color.white
 import java.awt.Font
 import java.awt.Font.BOLD
 import java.awt.Font.PLAIN
@@ -580,24 +581,12 @@ open class Rules {
                         }
                     }
                     if (hstr.isEmpty() && vstr.isNotEmpty()) {
-                        labelText(
-                            vstr, Font("Arial", PLAIN, 30), black, LabelStyle.VCLR,
-                            black, Color.white, Delta(Handle.CC)
-                        )
+                        labelText(vstr, mkFont(), black, LabelStyle.VCLR, black, white, Delta(Handle.CC))
                     } else if (hstr.isNotEmpty() && vstr.isNotEmpty()) {
-                        labelText(
-                            vstr, Font("Arial", PLAIN, 30), black, LabelStyle.VCLR,
-                            black, Color.white, Delta(Handle.BC)
-                        )
-                        labelText(
-                            hstr, Font("Arial", PLAIN, 30), black, LabelStyle.HCLR,
-                            black, Color.white, Delta(Handle.TC)
-                        )
+                        labelText(vstr, mkFont(), black, LabelStyle.VCLR, black, white, Delta(Handle.BC))
+                        labelText(hstr, mkFont(), black, LabelStyle.HCLR, black, white, Delta(Handle.TC))
                     } else if (hstr.isNotEmpty() && vstr.isEmpty()) {
-                        labelText(
-                            hstr, Font("Arial", PLAIN, 30), black, LabelStyle.HCLR,
-                            black, Color.white, Delta(Handle.CC)
-                        )
+                        labelText(hstr, mkFont(), black, LabelStyle.HCLR, black, white, Delta(Handle.CC))
                     }
                 }
             }
@@ -684,11 +673,11 @@ open class Rules {
                         dd = if (tok.size == 2) tok[1] else ""
                     }
                     labelText(
-                        ul, Font("Arial", PLAIN, 30), black,
+                        ul, mkFont(), black,
                         Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 15.0))
                     )
                     labelText(
-                        id, Font("Arial", PLAIN, 30), black,
+                        id, mkFont(), black,
                         Delta(Handle.RC, AffineTransform.getTranslateInstance(10.0, 0.0))
                     )
                     labelText(
@@ -736,26 +725,12 @@ open class Rules {
 
         private fun floats() {
             if (Renderer.zoom >= 12 || (Renderer.zoom >= 11
-                        && (feature!!.type === Obj.LITVES || feature!!.type === Obj.BOYINB || hasObject(
-                    Obj.RTPBCN
-                )))
+                        && (feature!!.type === Obj.LITVES || feature!!.type === Obj.BOYINB || hasObject(Obj.RTPBCN)))
             ) {
                 when (feature!!.type) {
-                    Obj.LITVES -> symbol(
-                        Buoys.Super, getScheme(
-                            feature!!.type
-                        )
-                    )
-                    Obj.LITFLT -> symbol(
-                        Buoys.Float, getScheme(
-                            feature!!.type
-                        )
-                    )
-                    Obj.BOYINB -> symbol(
-                        Buoys.Super, getScheme(
-                            feature!!.type
-                        )
-                    )
+                    Obj.LITVES -> symbol(Buoys.Super, getScheme(feature!!.type))
+                    Obj.LITFLT -> symbol(Buoys.Float, getScheme(feature!!.type))
+                    Obj.BOYINB -> symbol(Buoys.Super, getScheme(feature!!.type))
                     else -> {}
                 }
                 if (feature!!.objs.containsKey(Obj.TOPMAR)) {
@@ -802,8 +777,8 @@ open class Rules {
                         symbol(Harbours.Anchor, Scheme(Symbols.Msymb))
                         if (Renderer.zoom >= 15) {
                             labelText(
-                                name ?: "", Font("Arial", PLAIN, 30), Symbols.Msymb,
-                                LabelStyle.RRCT, Symbols.Msymb, Color.white, Delta(Handle.BC)
+                                name ?: "", mkFont(), Symbols.Msymb,
+                                LabelStyle.RRCT, Symbols.Msymb, white, Delta(Handle.BC)
                             )
                         }
                     }
@@ -816,9 +791,7 @@ open class Rules {
                             }
                             Renderer.lineCircle(
                                 LineStyle(Symbols.Mline, 4f, floatArrayOf(10f, 10f), null),
-                                radius,
-                                units
-                            )
+                                radius, units)
                         }
                     }
                 }
@@ -912,7 +885,7 @@ open class Rules {
                     lineVector(LineStyle(Symbols.Mline, 6f, floatArrayOf(20f, 20f)))
                     labelText(
                         name ?: " ", Font("Arial", PLAIN, 40), Symbols.Msymb,
-                        LabelStyle.RRCT, Symbols.Mline, Color.white
+                        LabelStyle.RRCT, Symbols.Mline, white
                     )
                 }
                 Obj.BUISGL -> if (Renderer.zoom >= 16) {
@@ -945,6 +918,8 @@ open class Rules {
                 else -> {}
             }
         }
+
+        private fun mkFont() = Font("Arial", PLAIN, 30)
 
         private fun highways() {
             when (feature!!.type) {
