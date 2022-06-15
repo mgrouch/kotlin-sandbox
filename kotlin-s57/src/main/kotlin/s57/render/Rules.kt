@@ -4,7 +4,6 @@ package s57.render
 import s57.parser.S57att.Att
 import s57.parser.S57map.*
 import s57.parser.S57obj.Obj
-import s57.parser.S57val
 import s57.parser.S57val.AddMRK
 import s57.parser.S57val.BcnSHP
 import s57.parser.S57val.BnkWTW
