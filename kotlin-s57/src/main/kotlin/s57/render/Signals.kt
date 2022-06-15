@@ -92,20 +92,20 @@ object Signals : Rules() {
 
     val df: DecimalFormat = DecimalFormat("#.#")
     fun addSignals() {
-        if (feature!!.objs!!.containsKey(Obj.RADRFL)) reflectors()
-        if (feature!!.objs!!.containsKey(Obj.FOGSIG)) fogSignals()
-        if (feature!!.objs!!.containsKey(Obj.RTPBCN)) radarStations()
-        if (feature!!.objs!!.containsKey(Obj.RADSTA)) radarStations()
-        if (feature!!.objs!!.containsKey(Obj.RDOSTA)) radioStations()
-        if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights()
+        if (feature!!.objs.containsKey(Obj.RADRFL)) reflectors()
+        if (feature!!.objs.containsKey(Obj.FOGSIG)) fogSignals()
+        if (feature!!.objs.containsKey(Obj.RTPBCN)) radarStations()
+        if (feature!!.objs.containsKey(Obj.RADSTA)) radarStations()
+        if (feature!!.objs.containsKey(Obj.RDOSTA)) radioStations()
+        if (feature!!.objs.containsKey(Obj.LIGHTS)) lights()
     }
 
     fun reflectors() {
         if (Renderer.zoom >= 14) {
             when (feature!!.type) {
-                Obj.BCNLAT, Obj.BCNCAR, Obj.BCNISD, Obj.BCNSAW, Obj.BCNSPP -> if (feature!!.objs!!.containsKey(
+                Obj.BCNLAT, Obj.BCNCAR, Obj.BCNISD, Obj.BCNSAW, Obj.BCNSPP -> if (feature!!.objs.containsKey(
                         Obj.TOPMAR
-                    ) || feature!!.objs!!.containsKey(Obj.DAYMAR)
+                    ) || feature!!.objs.containsKey(Obj.DAYMAR)
                 ) {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
@@ -117,9 +117,9 @@ object Signals : Rules() {
                         Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -80.0))
                     )
                 }
-                Obj.LITFLT, Obj.LITVES, Obj.BOYINB -> if (feature!!.objs!!.containsKey(
+                Obj.LITFLT, Obj.LITVES, Obj.BOYINB -> if (feature!!.objs.containsKey(
                         Obj.TOPMAR
-                    ) || feature!!.objs!!.containsKey(Obj.DAYMAR)
+                    ) || feature!!.objs.containsKey(Obj.DAYMAR)
                 ) {
                     Renderer.symbol(
                         Topmarks.RadarReflector,
@@ -131,7 +131,7 @@ object Signals : Rules() {
                         Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -60.0))
                     )
                 }
-                Obj.LITMAJ, Obj.LITMIN -> if (feature!!.objs!!.containsKey(Obj.TOPMAR) || feature!!.objs!!.containsKey(
+                Obj.LITMAJ, Obj.LITMIN -> if (feature!!.objs.containsKey(Obj.TOPMAR) || feature!!.objs.containsKey(
                         Obj.DAYMAR
                     )
                 ) {
@@ -145,9 +145,9 @@ object Signals : Rules() {
                         Symbols.Delta(Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, -30.0))
                     )
                 }
-                Obj.BOYLAT, Obj.BOYCAR, Obj.BOYISD, Obj.BOYSAW, Obj.BOYSPP -> if (feature!!.objs!!.containsKey(
+                Obj.BOYLAT, Obj.BOYCAR, Obj.BOYISD, Obj.BOYSAW, Obj.BOYSPP -> if (feature!!.objs.containsKey(
                         Obj.TOPMAR
-                    ) || feature!!.objs!!.containsKey(Obj.DAYMAR)
+                    ) || feature!!.objs.containsKey(Obj.DAYMAR)
                 ) {
                     if (testAttribute(
                             feature!!.type,
@@ -195,7 +195,7 @@ object Signals : Rules() {
     fun fogSignals() {
         if (Renderer.zoom >= 11) Renderer.symbol(Beacons.FogSignal)
         if (Renderer.zoom >= 15) {
-            val atts: S57map.AttMap? = feature!!.objs!![Obj.FOGSIG]!![0]
+            val atts: S57map.AttMap? = feature!!.objs[Obj.FOGSIG]!![0]
             if (atts != null) {
                 var str: String? = ""
                 if (atts.containsKey(Att.CATFOG)) {
@@ -387,9 +387,9 @@ object Signals : Rules() {
     fun lights() {
         var col: Enum<ColCOL>? = null
         var tcol: Enum<ColCOL>?
-        val lights = feature!!.objs!![Obj.LIGHTS]
+        val lights = feature!!.objs[Obj.LIGHTS]
         for (atts in lights!!.values) {
-            if (atts!!.containsKey(Att.COLOUR)) {
+            if (atts.containsKey(Att.COLOUR)) {
                 val cols = atts[Att.COLOUR]!!.value as ArrayList<Enum<ColCOL>>?
                 if (cols!!.size == 1) {
                     tcol = cols[0]
@@ -419,7 +419,7 @@ object Signals : Rules() {
                     var s1 = 361.0
                     var s2 = 361.0
                     var dir: Double? = null
-                    if (atts!!.containsKey(Att.COLOUR)) {
+                    if (atts.containsKey(Att.COLOUR)) {
                         val cols = atts[Att.COLOUR]!!.value as ArrayList<ColCOL>?
                         col1 = cols!![0]
                         if (cols.size > 1) col2 = cols[1]
@@ -441,7 +441,7 @@ object Signals : Rules() {
                                     if (satts === atts) continue
                                     if (srad == radius) {
                                         val scats =
-                                            (if (satts!!.containsKey(Att.CATLIT)) satts[Att.CATLIT]!!.value as ArrayList<CatLIT?>? else ArrayList<Any?>()) as ArrayList<CatLIT?>?
+                                            (if (satts.containsKey(Att.CATLIT)) satts[Att.CATLIT]!!.value as ArrayList<CatLIT?>? else ArrayList<Any?>()) as ArrayList<CatLIT?>?
                                         if (scats!!.contains(CatLIT.LIT_DIR)) {
                                             if (satts.containsKey(Att.ORIENT)) {
                                                 sdir = satts[Att.ORIENT]!!.value as Double?
@@ -524,7 +524,7 @@ object Signals : Rules() {
                     for (atts in lights.values) {
                         val sect = LitSect()
                         sect.dir =
-                            atts!!.containsKey(Att.CATLIT) && (atts[Att.CATLIT]!!.value as ArrayList<CatLIT?>?)!!.contains(
+                            atts.containsKey(Att.CATLIT) && (atts[Att.CATLIT]!!.value as ArrayList<CatLIT?>?)!!.contains(
                                 CatLIT.LIT_DIR
                             )
                         sect.chr =

@@ -74,7 +74,7 @@ class S57map(private val sea: Boolean) {
         // A polyline segment
         var first: Long = 0 // First CONN node
         var last: Long = 0 // Last CONN node
-        var nodes: ArrayList<Long?>? = ArrayList() // Inner ANON nodes
+        var nodes: ArrayList<Long?> = ArrayList() // Inner ANON nodes
     }
 
     enum class Rflag {
@@ -131,7 +131,7 @@ class S57map(private val sea: Boolean) {
     }
 
     class Geom(  // Geometric structure of feature
-        var prim: Pflag? // Geometry type
+        var prim: Pflag // Geometry type
     ) {
         var elems: ArrayList<Prim?>? = ArrayList() // Ordered list of elements
         var outers: Int // Number of outers
@@ -187,7 +187,7 @@ class S57map(private val sea: Boolean) {
     fun newNode(id: Long, lat: Double, lon: Double, flag: Nflag?) {
         nodes[id] = Snode(deg2rad(lat), deg2rad(lon), flag)
         if (flag == Nflag.ANON) {
-            edge!!.nodes!!.add(id)
+            edge!!.nodes.add(id)
         }
     }
 
@@ -195,7 +195,7 @@ class S57map(private val sea: Boolean) {
         nodes[id] = Snode(deg2rad(lat), deg2rad(lon), depth)
     }
 
-    fun newFeature(id: Long, p: Pflag?, objl: Long) {
+    fun newFeature(id: Long, p: Pflag, objl: Long) {
         feature = Feature()
         val obj = S57obj.decodeType(objl)
         feature.geom = Geom(p)
@@ -313,7 +313,7 @@ class S57map(private val sea: Boolean) {
             nodes[node]!!.flg = Nflag.CONN
         } else {
             if (edge!!.last != 0L) {
-                edge!!.nodes!!.add(edge!!.last)
+                edge!!.nodes.add(edge!!.last)
             }
             edge!!.last = node
         }
@@ -332,9 +332,9 @@ class S57map(private val sea: Boolean) {
         feature.geom.elems!!.add(Prim(id, outer))
     }
 
-    fun addTag(key: String?, value: String?) {
+    fun addTag(key: String, value: String) {
         feature.reln = Rflag.MASTER
-        val subkeys: Array<String?> = key!!.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val subkeys: Array<String?> = key.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         if (subkeys.size > 1 && subkeys[0] == "seamark") {
             var obj = S57obj.enumType(subkeys[1])
             if (subkeys.size > 2 && obj != Obj.UNKOBJ) {
@@ -598,7 +598,7 @@ class S57map(private val sea: Boolean) {
             if (forward) {
                 if (it == null) {
                     ref = edge!!.first
-                    it = edge!!.nodes!!.listIterator()
+                    it = edge!!.nodes.listIterator()
                 } else {
                     if (it!!.hasNext()) {
                         ref = it!!.next()!!
@@ -610,7 +610,7 @@ class S57map(private val sea: Boolean) {
             } else {
                 if (it == null) {
                     ref = edge!!.last
-                    it = edge!!.nodes!!.listIterator(edge!!.nodes!!.size)
+                    it = edge!!.nodes.listIterator(edge!!.nodes.size)
                 } else {
                     if (it!!.hasPrevious()) {
                         ref = it!!.previous()!!

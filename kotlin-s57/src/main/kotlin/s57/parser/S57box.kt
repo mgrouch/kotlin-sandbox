@@ -135,19 +135,19 @@ object S57box {
                 while (bound != land.sbound) {
                     bound = when (bound) {
                         N -> {
-                            nedge.nodes!!.add(1L)
+                            nedge.nodes.add(1L)
                             W
                         }
                         W -> {
-                            nedge.nodes!!.add(2L)
+                            nedge.nodes.add(2L)
                             S
                         }
                         S -> {
-                            nedge.nodes!!.add(3L)
+                            nedge.nodes.add(3L)
                             E
                         }
                         E -> {
-                            nedge.nodes!!.add(4L)
+                            nedge.nodes.add(4L)
                             N
                         }
                         else -> continue

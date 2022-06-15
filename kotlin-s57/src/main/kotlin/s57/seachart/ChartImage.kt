@@ -42,9 +42,9 @@ class ChartImage(val map: S57map, val zoom: Double, val x: Int = 0, val y: Int =
     }
 
     override fun background(map: S57map): Color {
-        return if (map.features!!.containsKey(Obj.COALNE)) {
-            for (feature in map.features!![Obj.COALNE]!!) {
-                if (feature!!.geom!!.prim === S57map.Pflag.POINT) {
+        return if (map.features.containsKey(Obj.COALNE)) {
+            for (feature in map.features[Obj.COALNE]!!) {
+                if (feature!!.geom.prim === S57map.Pflag.POINT) {
                     break
                 }
                 val git = map.GeomIterator(feature!!.geom)
@@ -62,9 +62,9 @@ class ChartImage(val map: S57map, val zoom: Double, val x: Int = 0, val y: Int =
             }
             Symbols.Yland
         } else {
-            if (map.features!!.containsKey(Obj.ROADWY) || map.features!!.containsKey(Obj.RAILWY)
-                || map.features!!.containsKey(Obj.LAKARE) || map.features!!.containsKey(Obj.RIVERS)
-                || map.features!!.containsKey(Obj.CANALS)) {
+            if (map.features.containsKey(Obj.ROADWY) || map.features.containsKey(Obj.RAILWY)
+                || map.features.containsKey(Obj.LAKARE) || map.features.containsKey(Obj.RIVERS)
+                || map.features.containsKey(Obj.CANALS)) {
                 Symbols.Yland
             } else {
                 Symbols.Bwater

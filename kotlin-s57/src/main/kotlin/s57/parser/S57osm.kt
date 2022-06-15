@@ -15,7 +15,7 @@ import java.io.BufferedReader
  */
 object S57osm {
 
-    private val OSMtags: Map<String?, KeyVal<*>?> = mapOf(
+    private val OSMtags: Map<String, KeyVal<*>?> = mapOf(
         "natural=coastline" to KeyVal<Any?>(Obj.COALNE, Att.UNKATT, null, null),
         "natural=water" to KeyVal<Any?>(Obj.LAKARE, Att.UNKATT, null, null),
         "water=river" to KeyVal<Any?>(Obj.RIVERS, Att.UNKATT, null, null),
@@ -46,7 +46,7 @@ object S57osm {
         "landuse=residential" to KeyVal<Any?>(Obj.BUAARE, Att.UNKATT, null, null),
     )
 
-    fun OSMtag(osm: ArrayList<KeyVal<*>?>?, key: String?, value: String?) {
+    fun OSMtag(osm: ArrayList<KeyVal<*>?>?, key: String, value: String) {
         val kv = OSMtags["$key=$value"]
         if (kv != null) {
             if (kv.conv == Conv.E) {

@@ -93,10 +93,10 @@ open class Rules {
 
         val name: String?
             get() {
-                var name = feature!!.atts!![Att.OBJNAM]
+                var name = feature!!.atts[Att.OBJNAM]
                 if (name == null) {
-                    if (feature!!.objs != null && !feature!!.objs!!.isEmpty()) {
-                        val atts = feature!!.objs!![feature!!.type]!![0]
+                    if (feature!!.objs != null && !feature!!.objs.isEmpty()) {
+                        val atts = feature!!.objs[feature!!.type]!![0]
                         if (atts != null) {
                             name = atts[Att.OBJNAM]
                         }
@@ -121,12 +121,12 @@ open class Rules {
         }
 
         fun getAtts(obj: Obj, idx: Int): AttMap? {
-            val objs = feature!!.objs!![obj]
+            val objs = feature!!.objs[obj]
             return objs?.get(idx)
         }
 
         fun getAttVal(obj: Obj?, att: Att): Any? {
-            val objs = feature!!.objs!![obj]
+            val objs = feature!!.objs[obj]
             val atts = if (objs != null) objs[0]
             else return null
             return atts!![att]?.value
@@ -192,14 +192,14 @@ open class Rules {
         }
 
         fun hasObject(obj: Obj): Boolean {
-            return feature!!.objs!!.containsKey(obj)
+            return feature!!.objs.containsKey(obj)
         }
 
         var feature: Feature? = null
         var objects: ArrayList<Feature?>? = null
 
         fun testObject(obj: Obj): Boolean {
-            return Renderer.map!!.features!![obj].also { objects = it } != null
+            return Renderer.map!!.features[obj].also { objects = it } != null
         }
 
         fun testFeature(f: Feature?): Boolean {
@@ -319,7 +319,7 @@ open class Rules {
                         lineVector(LineStyle(Symbols.Gdries))
                     }
                 }
-                Obj.LAKARE -> if (Renderer.zoom >= 12 || feature!!.geom!!.area > 10.0) lineVector(
+                Obj.LAKARE -> if (Renderer.zoom >= 12 || feature!!.geom.area > 10.0) lineVector(
                     LineStyle(Symbols.Bwater)
                 )
                 Obj.DRGARE -> {
@@ -335,7 +335,7 @@ open class Rules {
                     )
                     addName(12, Font("Arial", PLAIN, 100), Delta(Handle.CC, AffineTransform()))
                 }
-                Obj.FAIRWY -> if (feature!!.geom!!.area > 2.0) {
+                Obj.FAIRWY -> if (feature!!.geom.area > 2.0) {
                     if (Renderer.zoom < 16) lineVector(
                         LineStyle(Symbols.Mline, 8f, floatArrayOf(50f, 50f), Color(0x40ffffff, true))
                     ) else lineVector(
@@ -349,7 +349,7 @@ open class Rules {
                 } else {
                     lineVector(LineStyle(Symbols.Bwater))
                 }
-                Obj.HRBFAC -> if (feature!!.objs!![Obj.HRBBSN] != null) {
+                Obj.HRBFAC -> if (feature!!.objs[Obj.HRBBSN] != null) {
                     if (Renderer.zoom >= 12) {
                         lineVector(LineStyle(black, 10f, Symbols.Bwater))
                     } else {
@@ -362,8 +362,8 @@ open class Rules {
                         symbol(Areas.MarineFarm)
                     }
 
-                    if (feature!!.geom!!.area > 0.2 || (feature!!.geom!!.area > 0.05 && Renderer.zoom >= 14) ||
-                        (feature!!.geom!!.area > 0.005 && Renderer.zoom >= 16)
+                    if (feature!!.geom.area > 0.2 || (feature!!.geom.area > 0.05 && Renderer.zoom >= 14) ||
+                        (feature!!.geom.area > 0.005 && Renderer.zoom >= 16)
                     ) {
                         lineVector(LineStyle(black, 4f, floatArrayOf(10f, 10f)))
                     }
@@ -386,7 +386,7 @@ open class Rules {
                     lineVector(LineStyle(Symbols.Mline, 10f, floatArrayOf(40f, 40f)))
                 }
                 Obj.SEAARE -> when (getAttEnum(feature!!.type, Att.CATSEA) as CatSEA) {
-                    CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom!!.prim === Pflag.LINE) {
+                    CatSEA.SEA_RECH -> if (Renderer.zoom >= 10 && name != null) if (feature!!.geom.prim === Pflag.LINE) {
                         lineText(name, Font("Arial", PLAIN, 150), black, -40.0)
                     } else {
                         labelText(
@@ -394,7 +394,7 @@ open class Rules {
                             Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -40.0))
                         )
                     }
-                    CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom!!.prim === Pflag.LINE) {
+                    CatSEA.SEA_BAY -> if (Renderer.zoom >= 12 && name != null) if (feature!!.geom.prim === Pflag.LINE) {
                         lineText(name, Font("Arial", PLAIN, 150), black, -40.0)
                     } else {
                         labelText(
@@ -403,7 +403,7 @@ open class Rules {
                         )
                     }
                     CatSEA.SEA_SHOL -> if (Renderer.zoom >= 14) {
-                        if (feature!!.geom!!.prim === Pflag.AREA) {
+                        if (feature!!.geom.prim === Pflag.AREA) {
                             lineVector(LineStyle(Color(0xc480ff), 4f, floatArrayOf(25f, 25f)))
                             if (name != null) {
                                 labelText(
@@ -415,7 +415,7 @@ open class Rules {
                                     Delta(Handle.BC)
                                 )
                             }
-                        } else if (feature!!.geom!!.prim === Pflag.LINE) {
+                        } else if (feature!!.geom.prim === Pflag.LINE) {
                             if (name != null) {
                                 lineText(name, Font("Arial", Font.ITALIC, 75), black, -40.0)
                                 lineText("(Shoal)", Font("Arial", PLAIN, 60), black, 0.0)
@@ -439,7 +439,7 @@ open class Rules {
                 Obj.SNDWAV -> if (Renderer.zoom >= 12) fillPattern(Areas.Sandwaves)
                 Obj.WEDKLP -> if (Renderer.zoom >= 12) {
                     when (getAttEnum(feature!!.type, Att.CATWED) as CatWED) {
-                        CatWED.WED_KELP -> if (feature!!.geom!!.prim === Pflag.AREA) {
+                        CatWED.WED_KELP -> if (feature!!.geom.prim === Pflag.AREA) {
                             fillPattern(Areas.KelpA)
                         } else {
                             symbol(Areas.KelpS)
@@ -475,7 +475,7 @@ open class Rules {
                         else -> symbol(Beacons.Stake, getScheme(feature!!.type))
                     }
                 } else if (shape === BcnSHP.BCN_PRCH && feature!!.type === Obj.BCNLAT
-                    && !feature!!.objs!!.containsKey(Obj.TOPMAR)
+                    && !feature!!.objs.containsKey(Obj.TOPMAR)
                 ) {
                     when (getAttEnum(feature!!.type, Att.CATLAM) as CatLAM) {
                         CatLAM.LAM_PORT -> symbol(Beacons.PerchPort)
@@ -484,16 +484,16 @@ open class Rules {
                     }
                 } else {
                     symbol(Beacons.Shapes[shape], getScheme(feature!!.type))
-                    if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
-                        val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
+                    if (feature!!.objs.containsKey(Obj.TOPMAR)) {
+                        val topmap = feature!!.objs[Obj.TOPMAR]!![0]
                         if (topmap!!.containsKey(Att.TOPSHP)) {
                             symbol(
                                 Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>)[0]],
                                 getScheme(Obj.TOPMAR), Topmarks.BeaconDelta
                             )
                         }
-                    } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
-                        val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
+                    } else if (feature!!.objs.containsKey(Obj.DAYMAR)) {
+                        val topmap = feature!!.objs[Obj.DAYMAR]!![0]
                         if (topmap!!.containsKey(Att.TOPSHP)) {
                             symbol(
                                 Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>)[0]],
@@ -519,16 +519,16 @@ open class Rules {
                 var shape = getAttEnum(feature!!.type, Att.BOYSHP) as BoySHP
                 if (shape === BoySHP.BOY_UNKN) shape = BoySHP.BOY_PILR
                 symbol(Buoys.Shapes[shape], getScheme(feature!!.type))
-                if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
-                    val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
+                if (feature!!.objs.containsKey(Obj.TOPMAR)) {
+                    val topmap = feature!!.objs[Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>)[0]],
                             getScheme(Obj.TOPMAR), Topmarks.BuoyDeltas[shape]
                         )
                     }
-                } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
-                    val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
+                } else if (feature!!.objs.containsKey(Obj.DAYMAR)) {
+                    val topmap = feature!!.objs[Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>)[0]],
@@ -550,7 +550,7 @@ open class Rules {
                 val verccl: Double
                 val vercop: Double
                 val horclr: Double
-                val objTab = feature!!.objs!![Obj.BRIDGE]
+                val objTab = feature!!.objs[Obj.BRIDGE]
                 val atts = objTab?.let { objTab[0] }
                 var vstr = ""
                 var hstr = ""
@@ -602,11 +602,11 @@ open class Rules {
         }
 
         private fun cables() {
-            if (Renderer.zoom >= 16 && feature!!.geom!!.length < 2) {
+            if (Renderer.zoom >= 16 && feature!!.geom.length < 2) {
                 if (feature!!.type === Obj.CBLSUB) {
                     lineSymbols(Areas.Cable, 0.0, null, null, 0, Symbols.Mline)
                 } else if (feature!!.type === Obj.CBLOHD) {
-                    val objTab = feature!!.objs!![Obj.CBLOHD]
+                    val objTab = feature!!.objs[Obj.CBLOHD]
                     val atts = objTab?.let { objTab[0] }
                     if (atts != null && atts.containsKey(Att.CATCBL) && atts[Att.CATCBL]!!.value === S57val.CatCBL.CBL_POWR) {
                         lineSymbols(Areas.CableDash, 0.0, Areas.CableDot, Areas.CableFlash, 2, black)
@@ -756,16 +756,16 @@ open class Rules {
                     )
                     else -> {}
                 }
-                if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
-                    val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
+                if (feature!!.objs.containsKey(Obj.TOPMAR)) {
+                    val topmap = feature!!.objs[Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), Topmarks.FloatDelta
                         )
                     }
-                } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
-                    val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
+                } else if (feature!!.objs.containsKey(Obj.DAYMAR)) {
+                    val topmap = feature!!.objs[Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>?)!![0]],
@@ -821,7 +821,7 @@ open class Rules {
                     }
                 }
                 Obj.ACHARE -> if (Renderer.zoom >= 12) {
-                    if (feature!!.geom!!.prim !== Pflag.AREA) {
+                    if (feature!!.geom.prim !== Pflag.AREA) {
                         symbol(Harbours.Anchorage, Scheme(black))
                     } else {
                         symbol(Harbours.Anchorage, Scheme(Symbols.Mline))
@@ -919,7 +919,7 @@ open class Rules {
                     for (fnc in fncs) {
                         Landmarks.Funcs[fnc]?.let { symbols.add(it) }
                     }
-                    if (feature!!.objs!!.containsKey(Obj.SMCFAC)) {
+                    if (feature!!.objs.containsKey(Obj.SMCFAC)) {
                         val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
                         for (scf in scfs) {
                             symbols.add(Facilities.Cats[scf]!!)
@@ -1010,25 +1010,25 @@ open class Rules {
             var ok = false
             when (feature!!.type) {
                 Obj.FOGSIG -> if (Renderer.zoom >= 12) {
-                    if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights() else symbol(Harbours.Post)
+                    if (feature!!.objs.containsKey(Obj.LIGHTS)) lights() else symbol(Harbours.Post)
                     ok = true
                 }
                 else -> if (Renderer.zoom >= 14) {
-                    if (feature!!.objs!!.containsKey(Obj.LIGHTS)) lights() else symbol(Harbours.Post)
+                    if (feature!!.objs.containsKey(Obj.LIGHTS)) lights() else symbol(Harbours.Post)
                     ok = true
                 }
             }
             if (ok) {
-                if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
-                    val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
+                if (feature!!.objs.containsKey(Obj.TOPMAR)) {
+                    val topmap = feature!!.objs[Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), null
                         )
                     }
-                } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
-                    val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
+                } else if (feature!!.objs.containsKey(Obj.DAYMAR)) {
+                    val topmap = feature!!.objs[Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>?)!![0]],
@@ -1054,16 +1054,16 @@ open class Rules {
                 else -> {}
             }
             if (ok) {
-                if (feature!!.objs!!.containsKey(Obj.TOPMAR)) {
-                    val topmap = feature!!.objs!![Obj.TOPMAR]!![0]
+                if (feature!!.objs.containsKey(Obj.TOPMAR)) {
+                    val topmap = feature!!.objs[Obj.TOPMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>?)!![0]],
                             getScheme(Obj.TOPMAR), Topmarks.LightDelta
                         )
                     }
-                } else if (feature!!.objs!!.containsKey(Obj.DAYMAR)) {
-                    val topmap = feature!!.objs!![Obj.DAYMAR]!![0]
+                } else if (feature!!.objs.containsKey(Obj.DAYMAR)) {
+                    val topmap = feature!!.objs[Obj.DAYMAR]!![0]
                     if (topmap!!.containsKey(Att.TOPSHP)) {
                         symbol(
                             Topmarks.Shapes[(topmap[Att.TOPSHP]!!.value as ArrayList<TopSHP?>?)!![0]],
@@ -1124,11 +1124,11 @@ open class Rules {
                 }
                 var sys: MarSYS? = MarSYS.SYS_CEVN
                 var bnk: BnkWTW? = BnkWTW.BWW_UNKN
-                var att = feature!!.atts!![Att.MARSYS]
+                var att = feature!!.atts[Att.MARSYS]
                 if (att != null) sys = att.value as MarSYS?
-                att = feature!!.atts!![Att.BNKWTW]
+                att = feature!!.atts[Att.BNKWTW]
                 if (att != null) bnk = att.value as BnkWTW?
-                val objs = feature!!.objs!![Obj.NOTMRK]
+                val objs = feature!!.objs[Obj.NOTMRK]
                 val n = objs!!.size
                 if (n > 5) {
                     symbol(
@@ -1137,7 +1137,7 @@ open class Rules {
                     )
                 } else {
                     for ((i, atts) in objs.values.withIndex()) {
-                        if (atts!![Att.MARSYS] != null) sys = (atts[Att.MARSYS]!!.value as ArrayList<MarSYS>?)!![0]
+                        if (atts[Att.MARSYS] != null) sys = (atts[Att.MARSYS]!!.value as ArrayList<MarSYS>?)!![0]
                         if (atts[Att.BNKWTW] != null) bnk = (atts[Att.BNKWTW]!!.value as ArrayList<BnkWTW>?)!![0]
 
                         var cat: CatNMK? = CatNMK.NMK_UNKN
@@ -1195,7 +1195,7 @@ open class Rules {
         }
 
         private fun pipelines() {
-            if (Renderer.zoom >= 16 && feature!!.geom!!.length < 2) {
+            if (Renderer.zoom >= 16 && feature!!.geom.length < 2) {
                 if (feature!!.type === Obj.PIPSOL) {
                     lineSymbols(Areas.Pipeline, 1.0, null, null, 0, Symbols.Mline)
                 } else if (feature!!.type === Obj.PIPOHD) {
@@ -1306,7 +1306,7 @@ open class Rules {
                         }
                         S57val.CatSLC.SLC_SWAY -> {
                             lineVector(LineStyle(black, 2f, null, Color(0xffe000)))
-                            if (Renderer.zoom >= 16 && feature!!.objs!!.containsKey(Obj.SMCFAC)) {
+                            if (Renderer.zoom >= 16 && feature!!.objs.containsKey(Obj.SMCFAC)) {
                                 val symbols = ArrayList<Symbols.Symbol>()
                                 val scfs = getAttList(Obj.SMCFAC, Att.CATSCF) as ArrayList<CatSCF?>
                                 for (scf in scfs) {
@@ -1387,7 +1387,7 @@ open class Rules {
                     Obj.CGUSTA -> {
                         symbol(Harbours.SignalStation)
                         str = "CG"
-                        if (feature!!.objs!!.containsKey(Obj.RSCSTA)) symbol(
+                        if (feature!!.objs.containsKey(Obj.RSCSTA)) symbol(
                             Harbours.Rescue,
                             Delta(Handle.CC, AffineTransform.getTranslateInstance(130.0, 0.0))
                         )
@@ -1435,7 +1435,7 @@ open class Rules {
                 LineStyle(
                     Symbols.Bwater,
                     20f,
-                    if (feature!!.geom!!.prim === Pflag.AREA) Symbols.Bwater else null
+                    if (feature!!.geom.prim === Pflag.AREA) Symbols.Bwater else null
                 )
             )
         }
