@@ -7,7 +7,6 @@ import s57.parser.S57obj.Obj
 import s57.parser.rad2deg
 import s57.render.ChartContext
 import s57.render.ChartContext.RuleSet
-import s57.symbols.Symbols
 import s57.symbols.Symbols.Bwater
 import s57.symbols.Symbols.Yland
 

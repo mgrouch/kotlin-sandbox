@@ -3,7 +3,6 @@
 package s57.render
 
 import s57.parser.S57att.Att
-import s57.parser.S57map
 import s57.parser.S57map.AttMap
 import s57.parser.S57obj.Obj
 import s57.parser.S57val.BoySHP
