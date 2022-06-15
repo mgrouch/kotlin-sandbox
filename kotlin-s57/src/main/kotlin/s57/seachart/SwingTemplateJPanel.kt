@@ -18,7 +18,7 @@ class SwingTemplateJPanel : JPanel() {
     private var rectangularBounds: Rectangle? = null
     private var zoom = 0
     private var factor = 0.0
-    private var chartImage: ChartImage? = null
+    private lateinit var chartImage: ChartImage
     private lateinit var map: S57map
 
     init {

@@ -207,8 +207,8 @@ open class Rules {
         }
 
         fun rules(): Boolean {
-            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL
-                || Renderer.context!!.ruleset() === ChartContext.RuleSet.BASE
+            if (Renderer.context.ruleset() === ChartContext.RuleSet.ALL
+                || Renderer.context.ruleset() === ChartContext.RuleSet.BASE
             ) {
                 if (testObject(Obj.LNDARE)) for (f in objects!!) if (testFeature(f)) areas()
                 if (testObject(Obj.BUAARE)) for (f in objects!!) if (testFeature(f)) areas()
@@ -224,13 +224,13 @@ open class Rules {
                 if (testObject(Obj.ROADWY)) for (f in objects!!) if (testFeature(f)) highways()
                 if (testObject(Obj.RAILWY)) for (f in objects!!) if (testFeature(f)) highways()
             }
-            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL) {
+            if (Renderer.context.ruleset() === ChartContext.RuleSet.ALL) {
                 if (testObject(Obj.SOUNDG)) for (f in objects!!) if (testFeature(f)) depths()
                 if (testObject(Obj.DEPCNT)) for (f in objects!!) if (testFeature(f)) depths()
             }
             if (testObject(Obj.SLCONS)) for (f in objects!!) if (testFeature(f)) shoreline()
-            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL
-                || Renderer.context!!.ruleset() === ChartContext.RuleSet.SEAMARK
+            if (Renderer.context.ruleset() === ChartContext.RuleSet.ALL
+                || Renderer.context.ruleset() === ChartContext.RuleSet.SEAMARK
             ) {
                 if (testObject(Obj.PIPSOL)) for (f in objects!!) if (testFeature(f)) pipelines()
                 if (testObject(Obj.CBLSUB)) for (f in objects!!) if (testFeature(f)) cables()
@@ -1272,7 +1272,7 @@ open class Rules {
 
         private fun shoreline() {
             val cat = getAttEnum(feature!!.type, Att.CATSLC) as S57val.CatSLC
-            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL || Renderer.context!!.ruleset() === ChartContext.RuleSet.BASE) {
+            if (Renderer.context.ruleset() === ChartContext.RuleSet.ALL || Renderer.context.ruleset() === ChartContext.RuleSet.BASE) {
                 if (cat !== S57val.CatSLC.SLC_SWAY && cat !== S57val.CatSLC.SLC_TWAL) {
                     if (Renderer.zoom >= 12) {
                         lineVector(LineStyle(black, 10f, Symbols.Yland))
@@ -1281,7 +1281,7 @@ open class Rules {
                     }
                 }
             }
-            if (Renderer.context!!.ruleset() === ChartContext.RuleSet.ALL || Renderer.context!!.ruleset() === ChartContext.RuleSet.SEAMARK) {
+            if (Renderer.context.ruleset() === ChartContext.RuleSet.ALL || Renderer.context.ruleset() === ChartContext.RuleSet.SEAMARK) {
                 if (Renderer.zoom >= 12) {
                     when (cat) {
                         S57val.CatSLC.SLC_TWAL -> {
