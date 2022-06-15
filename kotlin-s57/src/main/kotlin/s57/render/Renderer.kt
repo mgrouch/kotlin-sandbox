@@ -18,6 +18,7 @@ import s57.symbols.Symbols.drawSymbol
 import java.awt.*
 import java.awt.BasicStroke.*
 import java.awt.Color.black
+import java.awt.RenderingHints.*
 import java.awt.geom.*
 import java.awt.geom.AffineTransform.getTranslateInstance
 import java.awt.image.AffineTransformOp
@@ -69,12 +70,11 @@ object Renderer {
                 g2!!.clip(Rectangle2D.Double(tl!!.x, tl.y, br!!.x - tl.x, br.y - tl.y))
             }
             g2!!.background = context.background(map!!)
-            //XXX: commented out:
-            //g2.clearRect(rect.x, rect.y, rect.width, rect.height);
-            g2!!.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-            g2!!.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP)
-            g2!!.stroke =
-                BasicStroke(0f, CAP_BUTT, JOIN_MITER)
+            if (rect != null) g2!!.clearRect(rect.x, rect.y, rect.width, rect.height)
+            g2!!.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)
+            g2!!.setRenderingHint(KEY_TEXT_ANTIALIASING, VALUE_TEXT_ANTIALIAS_GASP)
+            g2!!.stroke = BasicStroke(0f, CAP_BUTT, JOIN_MITER)
+
             do {
             } while (!Rules.rules())
         }
@@ -582,7 +582,7 @@ object Renderer {
 
     fun lineText(str: String, font: Font, colour: Color?, dy: Double) {
         if (str.isNotEmpty()) {
-            g2!!.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+            g2!!.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)
             g2!!.paint = colour
             val frc = g2!!.fontRenderContext
             val gv = font.deriveFont(font.size2D * sScale.toFloat()).createGlyphVector(frc, str)
