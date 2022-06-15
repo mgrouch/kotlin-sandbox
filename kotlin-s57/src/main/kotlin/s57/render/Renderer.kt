@@ -2,6 +2,7 @@
 package s57.render
 
 import s57.parser.S57map
+import s57.parser.S57map.Pflag
 import s57.parser.S57val.UniHLU
 import s57.parser.deg2rad
 import s57.symbols.Areas
@@ -359,7 +360,7 @@ object Renderer {
         col: Color?
     ) {
         var ratio = ratioInt
-        if (Rules.feature!!.geom.prim === S57map.Pflag.NOSP || Rules.feature!!.geom.prim === S57map.Pflag.POINT) return
+        if (Rules.feature!!.geom.prim === Pflag.NOSP || Rules.feature!!.geom.prim === Pflag.POINT) return
         val prect = symbolSize(prisymb)
         val srect = symbolSize(secsymb)
         val trect = symbolSize(tersymb)
@@ -473,7 +474,7 @@ object Renderer {
                 }
             }
         }
-        if (style.fill != null && Rules.feature!!.geom.prim === S57map.Pflag.AREA) {
+        if (style.fill != null && Rules.feature!!.geom.prim === Pflag.AREA) {
             g2!!.paint = style.fill
             g2!!.fill(p)
         }
@@ -535,7 +536,7 @@ object Renderer {
         p.windingRule = GeneralPath.WIND_EVEN_ODD
         var point: Point2D?
         when (Rules.feature!!.geom.prim) {
-            S57map.Pflag.POINT -> {
+            Pflag.POINT -> {
                 point = context.getPoint(Rules.feature!!.geom.centre!!)
                 g2!!.drawImage(
                     image,
@@ -547,7 +548,7 @@ object Renderer {
                     (point.y - 50 * sScale).toInt()
                 )
             }
-            S57map.Pflag.AREA -> {
+            Pflag.AREA -> {
                 val git = map!!.GeomIterator(Rules.feature!!.geom)
                 while (git.hasComp()) {
                     git.nextComp()
@@ -902,9 +903,8 @@ object Renderer {
                 )
                 at.rotate(deg2rad(dir + if (hand) 90 else -90))
                 labelText(
-                    str, font, black, if (hand) Delta(Symbols.Handle.BR, at) else Delta(
-                        Symbols.Handle.BL, at
-                    )
+                    str, font, black,
+                    if (hand) Delta(Symbols.Handle.BR, at) else Delta(Symbols.Handle.BL, at)
                 )
             }
         }

@@ -4,6 +4,7 @@ package s57.render
 
 import s57.parser.S57att.Att
 import s57.parser.S57map
+import s57.parser.S57map.AttMap
 import s57.parser.S57obj.Obj
 import s57.parser.S57val.BoySHP
 import s57.parser.S57val.CatFOG
@@ -196,7 +197,7 @@ object Signals : Rules() {
     fun fogSignals() {
         if (Renderer.zoom >= 11) symbol(Beacons.FogSignal)
         if (Renderer.zoom >= 15) {
-            val atts: S57map.AttMap? = feature!!.objs[Obj.FOGSIG]!![0]
+            val atts: AttMap? = feature!!.objs[Obj.FOGSIG]!![0]
             if (atts != null) {
                 var str: String? = ""
                 if (atts.containsKey(Att.CATFOG)) {
