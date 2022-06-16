@@ -12,6 +12,7 @@ import s57.symbols.Symbols.Symbol
 import java.awt.BasicStroke
 import java.awt.Color.*
 import java.awt.geom.*
+import java.awt.geom.AffineTransform.getTranslateInstance
 
 /**
  * @author Malcolm Herring
@@ -1015,15 +1016,15 @@ object Topmarks {
             Handle.BC,
             AffineTransform(0.948324, 0.317305, -0.3173047, 0.948324, 12.7, -37.9)
         ),
-        BoySHP.BOY_SUPR to Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -42.0)),
-        BoySHP.BOY_ICE to Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -25.0)),
+        BoySHP.BOY_SUPR to Delta(Handle.BC, getTranslateInstance(0.0, -42.0)),
+        BoySHP.BOY_ICE to Delta(Handle.BC, getTranslateInstance(0.0, -25.0)),
     )
 
-    val FloatDelta = Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -42.0))
+    val FloatDelta = Delta(Handle.BC, getTranslateInstance(0.0, -42.0))
 
-    val BeaconDelta = Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -70.0))
+    val BeaconDelta = Delta(Handle.BC, getTranslateInstance(0.0, -70.0))
 
-    val LightDelta = Delta(Handle.BC, AffineTransform.getTranslateInstance(0.0, -20.0))
+    val LightDelta = Delta(Handle.BC, getTranslateInstance(0.0, -20.0))
 
     val AllTopmarks: List<Symbol> = listOf(
         RadarReflector,

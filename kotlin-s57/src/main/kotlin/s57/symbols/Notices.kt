@@ -7,6 +7,7 @@ import s57.parser.S57val.MarSYS
 import s57.parser.deg2rad
 import s57.symbols.Symbols.Caption
 import s57.symbols.Symbols.Form.*
+import s57.symbols.Symbols.Handle
 import s57.symbols.Symbols.Instr
 import s57.symbols.Symbols.Scheme
 import s57.symbols.Symbols.SubSymbol
@@ -14,10 +15,10 @@ import s57.symbols.Symbols.Symbol
 
 import java.awt.BasicStroke
 import java.awt.Color
-import java.awt.Color.black
-import java.awt.Color.white
+import java.awt.Color.*
 import java.awt.Font
 import java.awt.geom.*
+import java.awt.geom.AffineTransform.*
 
 
 /**
@@ -431,7 +432,7 @@ object Notices {
         addInstr(
             SYMB, SubSymbol(
                 Harbours.Anchor, 0.4, 0.0, 0.0, Scheme(black),
-                Symbols.Delta(Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0)))
+                Symbols.Delta(Handle.CC, getRotateInstance(deg2rad(180.0)))
             )
         )
     }
@@ -495,7 +496,7 @@ object Notices {
         addInstr(
             SYMB, SubSymbol(
                 NoticeA10a, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                    Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0))
+                    Handle.CC, getRotateInstance(deg2rad(180.0))
                 )
             )
         )
@@ -513,7 +514,7 @@ object Notices {
         addInstr(
             TEXT, Caption(
                 "SPORT", Font("Arial", Font.BOLD, 15), black, Symbols.Delta(
-                    Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, 5.0)
+                    Handle.BC, getTranslateInstance(0.0, 5.0)
                 )
             )
         )
@@ -769,7 +770,7 @@ object Notices {
         addInstr(
             TEXT, Caption(
                 "VHF", Font("Arial", Font.BOLD, 20), black, Symbols.Delta(
-                    Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, 0.0)
+                    Handle.BC, getTranslateInstance(0.0, 0.0)
                 )
             )
         )
@@ -845,7 +846,7 @@ object Notices {
 
     val NoticeD1a = Symbol().apply {
         addInstr(BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0))
-        addInstr(FILL, Color.yellow)
+        addInstr(FILL, yellow)
         val p = Path2D.Double()
         p.moveTo(0.0, -30.0)
         p.lineTo(-30.0, 0.0)
@@ -860,7 +861,7 @@ object Notices {
 
     val NoticeD1b = Symbol().apply {
         addInstr(BBOX, Rectangle2D.Double(-30.0, -30.0, 60.0, 60.0))
-        addInstr(FILL, Color.yellow)
+        addInstr(FILL, yellow)
         val p = Path2D.Double()
         p.moveTo(-30.0, 0.0)
         p.lineTo(-15.0, 25.0)
@@ -907,7 +908,7 @@ object Notices {
         addInstr(
             SYMB, SubSymbol(
                 NoticeD2a, 1.0, 0.0, 0.0, null,
-                Symbols.Delta(Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(180.0)))
+                Symbols.Delta(Handle.CC, getRotateInstance(deg2rad(180.0)))
             )
         )
     }
@@ -1568,7 +1569,7 @@ object Notices {
         addInstr(
             TEXT, Caption(
                 "SPORT", Font("Arial", Font.BOLD, 15), white, Symbols.Delta(
-                    Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, 5.0)
+                    Handle.BC, getTranslateInstance(0.0, 5.0)
                 )
             )
         )
@@ -1616,7 +1617,7 @@ object Notices {
         addInstr(
             TEXT, Caption(
                 "VHF", Font("Arial", Font.BOLD, 20), white, Symbols.Delta(
-                    Symbols.Handle.BC, AffineTransform.getTranslateInstance(0.0, 0.0)
+                    Handle.BC, getTranslateInstance(0.0, 0.0)
                 )
             )
         )
@@ -1980,7 +1981,7 @@ object Notices {
         addInstr(
             TEXT, Caption(
                 "R", Font("Arial", Font.BOLD, 60), null, Symbols.Delta(
-                    Symbols.Handle.CC, null
+                    Handle.CC, null
                 )
             )
         )
@@ -2020,7 +2021,7 @@ object Notices {
         addInstr(
             SYMB, SubSymbol(
                 NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                    Symbols.Handle.CC, AffineTransform.getScaleInstance(-1.0, 1.0)
+                    Handle.CC, getScaleInstance(-1.0, 1.0)
                 )
             )
         )
@@ -2073,7 +2074,7 @@ object Notices {
         addInstr(
             SYMB, SubSymbol(
                 NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                    Symbols.Handle.TC, AffineTransform.getScaleInstance(0.5, 0.5)
+                    Handle.TC, getScaleInstance(0.5, 0.5)
                 )
             )
         )
@@ -2096,7 +2097,7 @@ object Notices {
         addInstr(
             SYMB, SubSymbol(
                 NoticePBwral, 1.0, 0.0, 0.0, null, Symbols.Delta(
-                    Symbols.Handle.TC, AffineTransform.getScaleInstance(-0.5, 0.5)
+                    Handle.TC, getScaleInstance(-0.5, 0.5)
                 )
             )
         )

@@ -11,6 +11,7 @@ import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Color.black
 import java.awt.geom.*
+import java.awt.geom.AffineTransform.getRotateInstance
 import java.awt.image.BufferedImage
 
 /**
@@ -94,7 +95,7 @@ object Areas {
         addInstr(
             SYMB, SubSymbol(
                 Harbours.Anchor, 0.5, 0.0, 0.0, null, Delta(
-                    Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(-90.0))
+                    Symbols.Handle.CC, getRotateInstance(deg2rad(-90.0))
                 )
             )
         )
@@ -106,7 +107,7 @@ object Areas {
         addInstr(
             SYMB, SubSymbol(
                 Plane, 0.5, 0.0, 0.0, null, Delta(
-                    Symbols.Handle.CC, AffineTransform.getRotateInstance(deg2rad(-90.0))
+                    Symbols.Handle.CC, getRotateInstance(deg2rad(-90.0))
                 )
             )
         )
