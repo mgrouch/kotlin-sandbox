@@ -362,7 +362,7 @@ class S57map(private val sea: Boolean) {
                 if (attval!!.value != null) {
                     if (att == Att.VALSOU) {
                         val node = nodes[feature.geom.elems[0]!!.id]
-                        node!!.value = (attval.value as Double)
+                        node!!.value = attval.value as Double
                     }
                     atts[att] = attval
                 }
@@ -589,9 +589,8 @@ class S57map(private val sea: Boolean) {
 
     inner class EdgeIterator(var edge: Edge?, var forward: Boolean) {
         var it: ListIterator<Long?>? = null
-        operator fun hasNext(): Boolean {
-            return edge != null
-        }
+
+        operator fun hasNext(): Boolean = edge != null
 
         fun nextRef(): Long {
             val ref: Long
@@ -623,9 +622,7 @@ class S57map(private val sea: Boolean) {
             return ref
         }
 
-        operator fun next(): Snode? {
-            return nodes[nextRef()]
-        }
+        operator fun next(): Snode? = nodes[nextRef()]
     }
 
     inner class GeomIterator(var geom: Geom?) {
@@ -637,9 +634,7 @@ class S57map(private val sea: Boolean) {
         var ec = 0
         var lastref: Long = 0
 
-        fun hasComp(): Boolean {
-            return itc!!.hasNext()
-        }
+        fun hasComp(): Boolean = itc!!.hasNext()
 
         fun nextComp(): Long {
             comp = itc!!.next()
@@ -648,9 +643,7 @@ class S57map(private val sea: Boolean) {
             return comp!!.ref
         }
 
-        fun hasEdge(): Boolean {
-            return ec > 0 && ite!!.hasNext()
-        }
+        fun hasEdge(): Boolean = ec > 0 && ite!!.hasNext()
 
         fun nextEdge(): Long {
             prim = ite!!.next()
@@ -659,9 +652,7 @@ class S57map(private val sea: Boolean) {
             return prim!!.id
         }
 
-        fun hasNode(): Boolean {
-            return eit!!.hasNext()
-        }
+        fun hasNode(): Boolean = eit!!.hasNext()
 
         fun nextRef(all: Boolean = false): Long {
             var ref = eit!!.nextRef()
@@ -672,9 +663,7 @@ class S57map(private val sea: Boolean) {
             return ref
         }
 
-        operator fun next(): Snode? {
-            return nodes[nextRef()]
-        }
+        operator fun next(): Snode? = nodes[nextRef()]
     }
 
     fun calcArea(geom: Geom?, comp: Int): Double {

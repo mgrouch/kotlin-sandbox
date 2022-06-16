@@ -372,18 +372,14 @@ open class Rules {
                     lineVector(LineStyle(Bwater))
                 }
                 Obj.HRBFAC -> if (feature!!.objs[Obj.HRBBSN] != null) {
-                    if (Renderer.zoom >= 12) {
-                        lineVector(LineStyle(black, 10f, Bwater))
-                    } else {
-                        lineVector(LineStyle(Bwater))
-                    }
+                    if (Renderer.zoom >= 12) lineVector(LineStyle(black, 10f, Bwater))
+                    else lineVector(LineStyle(Bwater))
                 }
                 Obj.LNDARE -> lineVector(LineStyle(Yland))
                 Obj.MARCUL -> if (Renderer.zoom >= 12) {
                     if (Renderer.zoom >= 14) {
                         symbol(Areas.MarineFarm)
                     }
-
                     if (feature!!.geom.area > 0.2 || (feature!!.geom.area > 0.05 && Renderer.zoom >= 14) ||
                         (feature!!.geom.area > 0.005 && Renderer.zoom >= 16)
                     ) {
