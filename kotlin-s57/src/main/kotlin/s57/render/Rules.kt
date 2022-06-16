@@ -233,9 +233,7 @@ open class Rules {
         }
 
         fun rules(): Boolean {
-            if (Renderer.context.ruleset() === RuleSet.ALL
-                || Renderer.context.ruleset() === RuleSet.BASE
-            ) {
+            if (Renderer.context.ruleset() === RuleSet.ALL || Renderer.context.ruleset() === RuleSet.BASE) {
                 if (testObject(Obj.LNDARE)) for (f in objects!!) if (testFeature(f)) areas()
                 if (testObject(Obj.BUAARE)) for (f in objects!!) if (testFeature(f)) areas()
                 if (testObject(Obj.HRBFAC)) for (f in objects!!) if (testFeature(f)) areas()
@@ -255,9 +253,7 @@ open class Rules {
                 if (testObject(Obj.DEPCNT)) for (f in objects!!) if (testFeature(f)) depths()
             }
             if (testObject(Obj.SLCONS)) for (f in objects!!) if (testFeature(f)) shoreline()
-            if (Renderer.context.ruleset() === RuleSet.ALL
-                || Renderer.context.ruleset() === RuleSet.SEAMARK
-            ) {
+            if (Renderer.context.ruleset() === RuleSet.ALL || Renderer.context.ruleset() === RuleSet.SEAMARK) {
                 if (testObject(Obj.PIPSOL)) for (f in objects!!) if (testFeature(f)) pipelines()
                 if (testObject(Obj.CBLSUB)) for (f in objects!!) if (testFeature(f)) cables()
                 if (testObject(Obj.PIPOHD)) for (f in objects!!) if (testFeature(f)) pipelines()

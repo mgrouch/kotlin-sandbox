@@ -3,6 +3,7 @@ package s57.render
 
 import s57.parser.S57map
 import s57.parser.S57map.Pflag
+import s57.parser.S57map.Snode
 import s57.parser.S57val.UniHLU
 import s57.parser.deg2rad
 import s57.symbols.Areas
@@ -66,8 +67,8 @@ object Renderer {
         sScale = symbolScale[zoom] * factor
         if (map != null) {
             if (context.clip()) {
-                val tl = context.getPoint(S57map.Snode(map!!.bounds.maxlat, map!!.bounds.minlon))
-                val br = context.getPoint(S57map.Snode(map!!.bounds.minlat, map!!.bounds.maxlon))
+                val tl = context.getPoint(Snode(map!!.bounds.maxlat, map!!.bounds.minlon))
+                val br = context.getPoint(Snode(map!!.bounds.minlat, map!!.bounds.maxlon))
                 g2!!.clip(Rectangle2D.Double(tl!!.x, tl.y, br!!.x - tl.x, br.y - tl.y))
             }
             g2!!.background = context.background(map!!)
