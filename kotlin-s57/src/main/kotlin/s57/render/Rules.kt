@@ -700,7 +700,9 @@ open class Rules {
                         Delta(Handle.LC, getTranslateInstance(15.0, 10.0))
                     )
                 }
-                Obj.DEPCNT -> {}
+                Obj.DEPCNT -> {
+                    if (Renderer.zoom >= 12) lineVector(LineStyle(gray, 5f))
+                }
                 else -> {}
             }
         }
