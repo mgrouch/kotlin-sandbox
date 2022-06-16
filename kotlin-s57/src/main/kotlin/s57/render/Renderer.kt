@@ -365,10 +365,7 @@ object Renderer {
             circle.addInstr(RSHP, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
         }
         circle.addInstr(FILL, style.line)
-        circle.addInstr(
-            STRK,
-            BasicStroke(style.width, CAP_BUTT, JOIN_MITER, 1f, style.dash, 0f)
-        )
+        circle.addInstr(STRK, BasicStroke(style.width, CAP_BUTT, JOIN_MITER, 1f, style.dash, 0f))
         circle.addInstr(ELPS, Ellipse2D.Double(-radius, -radius, radius * 2, radius * 2))
         val point = context.getPoint(Rules.feature!!.geom.centre!!)
         drawSymbol(g2!!, circle, 1.0, point!!.x, point.y, null, null)
@@ -566,10 +563,7 @@ object Renderer {
                 label.addInstr(BBOX, Rectangle2D.Double(lx, ly, width, height))
             }
         }
-        label.addInstr(
-            TEXT,
-            Caption(str, font, tc, Delta(Handle.TL, getTranslateInstance(tx, ty)))
-        )
+        label.addInstr(TEXT, Caption(str, font, tc, Delta(Handle.TL, getTranslateInstance(tx, ty))))
         val point = context.getPoint(Rules.feature!!.geom.centre!!)
         drawSymbol(g2!!, label, sScale, point!!.x, point.y, null, delta)
     }
