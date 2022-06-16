@@ -20,6 +20,7 @@ import java.awt.BasicStroke.*
 import java.awt.Color.black
 import java.awt.RenderingHints.*
 import java.awt.geom.*
+import java.awt.geom.AffineTransform.getScaleInstance
 import java.awt.geom.AffineTransform.getTranslateInstance
 import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
@@ -382,10 +383,7 @@ object Renderer {
                 point = context.getPoint(Rules.feature!!.geom.centre!!)
                 g2!!.drawImage(
                     image,
-                    AffineTransformOp(
-                        AffineTransform.getScaleInstance(sScale, sScale),
-                        AffineTransformOp.TYPE_NEAREST_NEIGHBOR
-                    ),
+                    AffineTransformOp(getScaleInstance(sScale, sScale), AffineTransformOp.TYPE_NEAREST_NEIGHBOR),
                     (point!!.x - 50 * sScale).toInt(),
                     (point.y - 50 * sScale).toInt()
                 )
@@ -467,11 +465,7 @@ object Renderer {
                 label.addInstr(FILL, bg)
                 label.addInstr(RSHP, RoundRectangle2D.Double(lx, ly, width, height, height, height))
                 label.addInstr(FILL, fg)
-                label.addInstr(
-                    STRK, BasicStroke(
-                        (1 + (height / 10).toInt()).toFloat(), CAP_BUTT, JOIN_MITER
-                    )
-                )
+                label.addInstr(STRK, BasicStroke((1 + (height / 10).toInt()).toFloat(), CAP_BUTT, JOIN_MITER))
                 label.addInstr(RRCT, RoundRectangle2D.Double(lx, ly, width, height, height, height))
             }
             LabelStyle.VCLR -> {
