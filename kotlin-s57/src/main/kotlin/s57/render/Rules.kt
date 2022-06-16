@@ -670,23 +670,7 @@ open class Rules {
             when (feature!!.type) {
                 Obj.SOUNDG -> if (Renderer.zoom >= 14 && hasAttribute(Obj.SOUNDG, Att.VALSOU)) {
                     val depth = getAttVal(Obj.SOUNDG, Att.VALSOU) as Double
-                    val dstr = df.format(depth)
-                    val tok: Array<String?> = dstr!!.split("[-.]".toRegex()).dropLastWhile { it.isEmpty() }
-                        .toTypedArray()
-                    var ul = ""
-                    var id = tok[0]
-                    val dd: String?
-                    if (tok[0] == "") {
-                        var i = 0
-                        while (i < tok[1]!!.length) {
-                            ul += "_"
-                            i++
-                        }
-                        id = tok[1]
-                        dd = if (tok.size == 3) tok[2] else ""
-                    } else {
-                        dd = if (tok.size == 2) tok[1] else ""
-                    }
+                    val (ul, id, dd) = depthTriple(depth)
                     labelText(
                         ul, mkFont(), black,
                         Delta(Handle.RC, getTranslateInstance(10.0, 15.0))
@@ -705,6 +689,26 @@ open class Rules {
                 }
                 else -> {}
             }
+        }
+
+        private fun depthTriple(depth: Double): Triple<String, String?, String?> {
+            val dstr = df.format(depth)
+            val tok: Array<String?> = dstr!!.split("[-.]".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            var ul = ""
+            var id = tok[0]
+            val dd: String?
+            if (tok[0] == "") {
+                var i = 0
+                while (i < tok[1]!!.length) {
+                    ul += "_"
+                    i++
+                }
+                id = tok[1]
+                dd = if (tok.size == 3) tok[2] else ""
+            } else {
+                dd = if (tok.size == 2) tok[1] else ""
+            }
+            return Triple(ul, id, dd)
         }
 
         private fun distances() {
