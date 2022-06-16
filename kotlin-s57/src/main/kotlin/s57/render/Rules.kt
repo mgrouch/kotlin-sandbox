@@ -53,6 +53,7 @@ import s57.render.Renderer.lineSymbols
 import s57.render.Renderer.lineText
 import s57.render.Renderer.lineVector
 import s57.render.Renderer.symbol
+import s57.render.Signals.addSignals
 
 import s57.symbols.*
 import s57.symbols.Notices.getNotice
@@ -71,8 +72,7 @@ import s57.symbols.Symbols.Symbol
 import s57.symbols.Symbols.Yland
 
 import java.awt.Color
-import java.awt.Color.black
-import java.awt.Color.white
+import java.awt.Color.*
 import java.awt.Font
 import java.awt.Font.BOLD
 import java.awt.Font.PLAIN
@@ -92,15 +92,15 @@ open class Rules {
             ColCOL.COL_BLK to Color(0x000000),
             ColCOL.COL_RED to Color(0xd40000),
             ColCOL.COL_GRN to Color(0x00d400),
-            ColCOL.COL_BLU to Color.blue,
+            ColCOL.COL_BLU to blue,
             ColCOL.COL_YEL to Color(0xffd400),
-            ColCOL.COL_GRY to Color.gray,
+            ColCOL.COL_GRY to gray,
             ColCOL.COL_BRN to Color(0x8b4513),
             ColCOL.COL_AMB to Color(0xfbf00f),
             ColCOL.COL_VIO to Color(0xee82ee),
-            ColCOL.COL_ORG to Color.orange,
+            ColCOL.COL_ORG to orange,
             ColCOL.COL_MAG to Color(0xf000f0),
-            ColCOL.COL_PNK to Color.pink,
+            ColCOL.COL_PNK to pink,
         )
 
         val pattMap = mapOf(
@@ -533,7 +533,7 @@ open class Rules {
                     15, Font("Arial", BOLD, 40),
                     Delta(Handle.BL, getTranslateInstance(60.0, -50.0))
                 )
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -566,7 +566,7 @@ open class Rules {
                     15, Font("Arial", BOLD, 40),
                     Delta(Handle.BL, getTranslateInstance(60.0, -50.0))
                 )
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -773,7 +773,7 @@ open class Rules {
                     15, Font("Arial", BOLD, 40),
                     Delta(Handle.BL, getTranslateInstance(20.0, -50.0))
                 )
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -784,7 +784,7 @@ open class Rules {
                     15, Font("Arial", BOLD, 40),
                     Delta(Handle.BL, getTranslateInstance(20.0, -50.0))
                 )
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -939,7 +939,7 @@ open class Rules {
                     }
                 }
                 Obj.RAILWY -> {
-                    lineVector(LineStyle(Color.gray, 10f))
+                    lineVector(LineStyle(gray, 10f))
                     lineVector(LineStyle(black, 10f, floatArrayOf(30f, 30f)))
                 }
                 else -> {}
@@ -978,7 +978,7 @@ open class Rules {
                     15, Font("Arial", BOLD, 40),
                     Delta(Handle.BL, getTranslateInstance(60.0, -50.0))
                 )
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -1012,7 +1012,7 @@ open class Rules {
                         )
                     }
                 }
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -1047,7 +1047,7 @@ open class Rules {
                         )
                     }
                 }
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -1078,7 +1078,7 @@ open class Rules {
                     }
                     else -> {}
                 }
-                Signals.addSignals()
+                addSignals()
             }
         }
 
@@ -1203,7 +1203,7 @@ open class Rules {
                 15, Font("Arial", BOLD, 40),
                 Delta(Handle.BL, getTranslateInstance(20.0, -50.0))
             )
-            Signals.addSignals()
+            addSignals()
         }
 
         private fun ports() {
@@ -1373,7 +1373,7 @@ open class Rules {
                         Delta(Handle.LC, getTranslateInstance(40.0, 0.0))
                     )
                 }
-                Signals.addSignals()
+                addSignals()
             }
         }
 
