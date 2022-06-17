@@ -10,6 +10,7 @@ import java.io.FileInputStream
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
+import kotlin.concurrent.timer
 
 /**
  * GUI Code
@@ -35,6 +36,16 @@ class SwingTemplateJPanel : JPanel() {
             factor = 16.0
             chartImage = ChartImage(map, zoom.toDouble(), 2000, 1500)
             println("ChartImage() done")
+            timer(period = 1000) {
+                if (zoom > 1) {
+                    zoom -= 1
+                    factor /= 2
+                } else {
+                    zoom = 18
+                    factor = 16.0
+                }
+                repaint()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
