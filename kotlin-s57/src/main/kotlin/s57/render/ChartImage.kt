@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package s57.seachart
+package s57.render
 
 import s57.parser.S57map
 import s57.parser.S57map.*

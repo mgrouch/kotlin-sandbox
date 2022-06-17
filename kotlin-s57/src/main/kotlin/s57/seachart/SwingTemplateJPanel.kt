@@ -2,6 +2,7 @@ package s57.seachart
 
 import s57.parser.S57dec.decodeChart
 import s57.parser.S57map
+import s57.render.ChartImage
 import s57.render.Renderer.reRender
 
 import java.awt.*
