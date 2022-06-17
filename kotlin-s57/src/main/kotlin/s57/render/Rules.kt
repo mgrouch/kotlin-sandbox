@@ -664,8 +664,8 @@ open class Rules {
 
         private fun depths() {
             when (feature!!.type) {
-                Obj.SOUNDG -> if (Renderer.zoom >= 14 && hasAttribute(Obj.SOUNDG, Att.VALSOU)) {
-                    val depth = getAttVal(Obj.SOUNDG, Att.VALSOU) as Double
+                Obj.SOUNDG -> if (Renderer.zoom >= 14 && feature!!.geom.centre!!.flg == Nflag.DPTH) {
+                    val depth = feature!!.geom.centre!!.value
                     val (ul, id, dd) = depthTriple(depth)
                     labelText(
                         ul, mkFont(), black,
