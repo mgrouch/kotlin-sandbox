@@ -5,13 +5,13 @@ import s57.parser.S57map
 import s57.parser.S57map.*
 import s57.parser.S57obj.Obj
 import s57.parser.rad2deg
-import s57.render.ChartContext
 import s57.render.ChartContext.RuleSet
 import s57.symbols.Symbols.Bwater
 import s57.symbols.Symbols.Yland
 
 import java.awt.Color
 import java.awt.geom.Point2D
+
 import kotlin.math.*
 
 /**
