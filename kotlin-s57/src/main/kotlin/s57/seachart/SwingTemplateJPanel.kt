@@ -26,25 +26,26 @@ class SwingTemplateJPanel : JPanel() {
     init {
         val screenSize = Toolkit.getDefaultToolkit().screenSize
         preferredSize = Dimension(screenSize.width - 40, screenSize.height - 40)
-        val input: FileInputStream
         try {
-            input = FileInputStream("D:\\ENC_ROOT\\US5NYCDF\\US5NYCDF.000")
-            map = S57map(true)
-            decodeChart(input, map)
-            rectangularBounds = this.bounds
-            zoom = 16
-            factor = 20.0
-            chartImage = ChartImage(map, zoom.toDouble(), 2000, 1500)
-            println("ChartImage() done")
-            timer(period = 200) {
-                if (chartImage.x > 1 && chartImage.y > 1) {
-                    chartImage.x -= 5
-                    chartImage.y += 5
-                } else {
-                    chartImage.x = 2000
-                    chartImage.y = 1500
+            val input = FileInputStream("./kotlin-s57/ENC_ROOT/US5NYCDF/US5NYCDF.000")
+            input.use {
+                map = S57map(true)
+                decodeChart(input, map)
+                rectangularBounds = this.bounds
+                zoom = 16
+                factor = 20.0
+                chartImage = ChartImage(map, zoom.toDouble(), 2000, 1500)
+                println("ChartImage() done")
+                timer(period = 200) {
+                    if (chartImage.x > 1 && chartImage.y > 1) {
+                        chartImage.x -= 5
+                        chartImage.y += 5
+                    } else {
+                        chartImage.x = 2000
+                        chartImage.y = 1500
+                    }
+                    repaint()
                 }
-                repaint()
             }
         } catch (e: Exception) {
             e.printStackTrace()
