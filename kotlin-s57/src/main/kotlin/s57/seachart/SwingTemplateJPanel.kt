@@ -41,7 +41,7 @@ class SwingTemplateJPanel : JPanel() {
                     zoom -= 1
                     factor /= 2
                 } else {
-                    zoom = 18
+                    zoom = 16
                     factor = 16.0
                 }
                 repaint()
