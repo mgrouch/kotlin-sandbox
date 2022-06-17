@@ -17,7 +17,7 @@ import kotlin.math.*
 /**
  * contains code from Malcolm Herring
  */
-class ChartImage(val map: S57map, val zoom: Double, val x: Int = 0, val y: Int = 0) : ChartContext {
+class ChartImage(val map: S57map, val zoom: Double, var x: Int = 0, var y: Int = 0) : ChartContext {
 
     val top = (1.0 - ln(tan(map.bounds.maxlat) + 1.0 / cos(map.bounds.maxlat)) / PI) / 2.0 * 256.0 * 4096.0 *
             2.0.pow((zoom - 12))

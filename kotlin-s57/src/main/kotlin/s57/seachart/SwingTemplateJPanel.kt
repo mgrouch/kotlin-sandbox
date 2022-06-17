@@ -33,16 +33,16 @@ class SwingTemplateJPanel : JPanel() {
             decodeChart(input, map)
             rectangularBounds = this.bounds
             zoom = 16
-            factor = 16.0
+            factor = 20.0
             chartImage = ChartImage(map, zoom.toDouble(), 2000, 1500)
             println("ChartImage() done")
-            timer(period = 1000) {
-                if (zoom > 1) {
-                    zoom -= 1
-                    factor /= 2
+            timer(period = 200) {
+                if (chartImage.x > 1 && chartImage.y > 1) {
+                    chartImage.x -= 5
+                    chartImage.y += 5
                 } else {
-                    zoom = 16
-                    factor = 16.0
+                    chartImage.x = 2000
+                    chartImage.y = 1500
                 }
                 repaint()
             }
